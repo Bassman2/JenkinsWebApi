@@ -1,0 +1,51 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2010
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "JenkinsWebApiDoc", "JenkinsWebApiDoc\JenkinsWebApiDoc.shfbproj", "{E5B1175A-CC6F-4899-8496-9412C872F3CA}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BE64FA67-2D2E-4405-BE62-168159B2640E} = {BE64FA67-2D2E-4405-BE62-168159B2640E}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JenkinsTest", "JenkinsTest\JenkinsTest.csproj", "{2229B804-CF79-4426-8AAF-DE086406DE3B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Generator", "Generator\Generator.csproj", "{15C4CA4F-748A-4934-B0E3-49A5009E9C96}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JenkinsWebApiStd", "JenkinsWebApiStd\JenkinsWebApiStd.csproj", "{89F04F3E-78DB-4DD3-8116-3B50407FEB06}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JenkinsWebApi", "JenkinsWebApi\JenkinsWebApi.csproj", "{BE64FA67-2D2E-4405-BE62-168159B2640E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E5B1175A-CC6F-4899-8496-9412C872F3CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5B1175A-CC6F-4899-8496-9412C872F3CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5B1175A-CC6F-4899-8496-9412C872F3CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2229B804-CF79-4426-8AAF-DE086406DE3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2229B804-CF79-4426-8AAF-DE086406DE3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2229B804-CF79-4426-8AAF-DE086406DE3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2229B804-CF79-4426-8AAF-DE086406DE3B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15C4CA4F-748A-4934-B0E3-49A5009E9C96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15C4CA4F-748A-4934-B0E3-49A5009E9C96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15C4CA4F-748A-4934-B0E3-49A5009E9C96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15C4CA4F-748A-4934-B0E3-49A5009E9C96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89F04F3E-78DB-4DD3-8116-3B50407FEB06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89F04F3E-78DB-4DD3-8116-3B50407FEB06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89F04F3E-78DB-4DD3-8116-3B50407FEB06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89F04F3E-78DB-4DD3-8116-3B50407FEB06}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE64FA67-2D2E-4405-BE62-168159B2640E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE64FA67-2D2E-4405-BE62-168159B2640E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE64FA67-2D2E-4405-BE62-168159B2640E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE64FA67-2D2E-4405-BE62-168159B2640E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {27120C5C-0E2D-48C4-97B5-3B04F4D7C011}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="localPluginManager" type="hudson.LocalPluginManager"/>
+  <xsd:complexType name="hudson.LocalPluginManager">
+    <xsd:complexContent>
+      <xsd:extension base="hudson.PluginManager">
+        <xsd:sequence/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="hudson.PluginManager">
+    <xsd:sequence>
+      <xsd:element name="plugin" type="hudson.PluginWrapper" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+    <xsd:attribute name="_class" type="xsd:string" use="optional"/>
+  </xsd:complexType>
+  <xsd:complexType name="hudson.PluginWrapper">
+    <xsd:sequence>
+      <xsd:element name="active" type="xsd:boolean"/>
+      <xsd:element name="backupVersion" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="bundled" type="xsd:boolean"/>
+      <xsd:element name="deleted" type="xsd:boolean"/>
+      <xsd:element name="dependency" type="hudson.PluginWrapper-Dependency" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="downgradable" type="xsd:boolean"/>
+      <xsd:element name="enabled" type="xsd:boolean"/>
+      <xsd:element name="hasUpdate" type="xsd:boolean"/>
+      <xsd:element name="longName" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="pinned" type="xsd:boolean"/>
+      <xsd:element name="requiredCoreVersion" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="shortName" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="supportsDynamicLoad" type="jenkins.YesNoMaybe" minOccurs="0"/>
+      <xsd:element name="url" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="version" type="xsd:string" minOccurs="0"/>
+    </xsd:sequence>
+    <xsd:attribute name="_class" type="xsd:string" use="optional"/>
+  </xsd:complexType>
+  <xsd:complexType name="hudson.PluginWrapper-Dependency">
+    <xsd:sequence>
+      <xsd:element name="optional" type="xsd:boolean"/>
+      <xsd:element name="shortName" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="version" type="xsd:string" minOccurs="0"/>
+    </xsd:sequence>
+    <xsd:attribute name="_class" type="xsd:string" use="optional"/>
+  </xsd:complexType>
+  <xsd:simpleType name="jenkins.YesNoMaybe">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="YES"/>
+      <xsd:enumeration value="NO"/>
+      <xsd:enumeration value="MAYBE"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+</xsd:schema>
+

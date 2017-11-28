@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{BE64FA67-2D2E-4405-BE62-168159B2640E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>JenkinsWebApi</RootNamespace>
+    <AssemblyName>JenkinsWebApi</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\JenkinsWebApi.xml</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Code\Internal\MessageEnsure.cs" />
+    <Compile Include="Code\Internal\XmlConverter.cs" />
+    <Compile Include="Code\Jenkins.cs" />
+    <Compile Include="Code\JenkinsBuildParameters.cs" />
+    <Compile Include="Code\JenkinsExtensions.cs" />
+    <Compile Include="Code\JenkinsInstance.cs" />
+    <Compile Include="Code\JenkinsParameterType.cs" />
+    <Compile Include="Code\Model\JenkinsAbstractBuild.cs" />
+    <Compile Include="Code\Model\JenkinsAbstractCIBase.cs" />
+    <Compile Include="Code\Model\JenkinsAbstractFolder.cs" />
+    <Compile Include="Code\Model\JenkinsAbstractItem.cs" />
+    <Compile Include="Code\Model\JenkinsAbstractProject.cs" />
+    <Compile Include="Code\Model\JenkinsActionable.cs" />
+    <Compile Include="Code\Model\JenkinsBallColor.cs" />
+    <Compile Include="Code\Model\JenkinsBuild.cs" />
+    <Compile Include="Code\Model\JenkinsCaseResult.cs" />
+    <Compile Include="Code\Model\JenkinsCaseResultStatus.cs" />
+    <Compile Include="Code\Model\JenkinsCategorizedJobsView.cs" />
+    <Compile Include="Code\Model\JenkinsChangeLogSet.cs" />
+    <Compile Include="Code\Model\JenkinsComputedFolder.cs" />
+    <Compile Include="Code\Model\JenkinsCrumbIssuer.cs" />
+    <Compile Include="Code\Model\JenkinsDefaultCrumbIssuer.cs" />
+    <Compile Include="Code\Model\JenkinsExecutor.cs" />
+    <Compile Include="Code\Model\JenkinsExternalJob.cs" />
+    <Compile Include="Code\Model\JenkinsFingerprint.cs" />
+    <Compile Include="Code\Model\JenkinsFingerprintBuildPtr.cs" />
+    <Compile Include="Code\Model\JenkinsFingerprintRange.cs" />
+    <Compile Include="Code\Model\JenkinsFingerprintRangeItem.cs" />
+    <Compile Include="Code\Model\JenkinsFingerprintRangeSet.cs" />
+    <Compile Include="Code\Model\JenkinsFolder.cs" />
+    <Compile Include="Code\Model\JenkinsFreeStyleBuild.cs" />
+    <Compile Include="Code\Model\JenkinsFreeStyleProject.cs" />
+    <Compile Include="Code\Model\JenkinsHealthReport.cs" />
+    <Compile Include="Code\Model\JenkinsHudson.cs" />
+    <Compile Include="Code\Model\JenkinsJenkins.cs" />
+    <Compile Include="Code\Model\JenkinsJob.cs" />
+    <Compile Include="Code\Model\JenkinsJobProperty.cs" />
+    <Compile Include="Code\Model\JenkinsLabel.cs" />
+    <Compile Include="Code\Model\JenkinsLabelAtom.cs" />
+    <Compile Include="Code\Model\JenkinsLabelAtomProperty.cs" />
+    <Compile Include="Code\Model\JenkinsListView.cs" />
+    <Compile Include="Code\Model\JenkinsLoadStatistics.cs" />
+    <Compile Include="Code\Model\JenkinsLocalPluginManager.cs" />
+    <Compile Include="Code\Model\JenkinsMatrixBuild.cs" />
+    <Compile Include="Code\Model\JenkinsMatrixConfiguration.cs" />
+    <Compile Include="Code\Model\JenkinsMatrixProject.cs" />
+    <Compile Include="Code\Model\JenkinsMatrixRun.cs" />
+    <Compile Include="Code\Model\JenkinsMetaTabulatedResult.cs" />
+    <Compile Include="Code\Model\JenkinsMultiBranchProject.cs" />
+    <Compile Include="Code\Model\JenkinsMultiStageTimeSeries.cs" />
+    <Compile Include="Code\Model\JenkinsMyView.cs" />
+    <Compile Include="Code\Model\JenkinsNode.cs" />
+    <Compile Include="Code\Model\JenkinsNodeMode.cs" />
+    <Compile Include="Code\Model\JenkinsOrganizationFolder.cs" />
+    <Compile Include="Code\Model\JenkinsOverallLoadStatistics.cs" />
+    <Compile Include="Code\Model\JenkinsPluginManager.cs" />
+    <Compile Include="Code\Model\JenkinsPluginWrapper.cs" />
+    <Compile Include="Code\Model\JenkinsPluginWrapperDependency.cs" />
+    <Compile Include="Code\Model\JenkinsProject.cs" />
+    <Compile Include="Code\Model\JenkinsQueue.cs" />
+    <Compile Include="Code\Model\JenkinsQueueItem.cs" />
+    <Compile Include="Code\Model\JenkinsQueueLeftItem.cs" />
+    <Compile Include="Code\Model\JenkinsQueueStubItem.cs" />
+    <Compile Include="Code\Model\JenkinsQueueStubTask.cs" />
+    <Compile Include="Code\Model\JenkinsRepositoryBrowser.cs" />
+    <Compile Include="Code\Model\JenkinsRun.cs" />
+    <Compile Include="Code\Model\JenkinsRunArtifact.cs" />
+    <Compile Include="Code\Model\JenkinsSCM.cs" />
+    <Compile Include="Code\Model\JenkinsSuiteResult.cs" />
+    <Compile Include="Code\Model\JenkinsTabulatedResult.cs" />
+    <Compile Include="Code\Model\JenkinsTestAction.cs" />
+    <Compile Include="Code\Model\JenkinsTestObject.cs" />
+    <Compile Include="Code\Model\JenkinsTestResult.cs" />
+    <Compile Include="Code\Model\JenkinsTimeSeries.cs" />
+    <Compile Include="Code\Model\JenkinsUpdateCenter.cs" />
+    <Compile Include="Code\Model\JenkinsUpdateCenterUpdateCenterJob.cs" />
+    <Compile Include="Code\Model\JenkinsUpdateSite.cs" />
+    <Compile Include="Code\Model\JenkinsUpdateSiteEntry.cs" />
+    <Compile Include="Code\Model\JenkinsUpdateSitePlugin.cs" />
+    <Compile Include="Code\Model\JenkinsUser.cs" />
+    <Compile Include="Code\Model\JenkinsUserProperty.cs" />
+    <Compile Include="Code\Model\JenkinsView.cs" />
+    <Compile Include="Code\Model\JenkinsViewAsynchPeoplePeople.cs" />
+    <Compile Include="Code\Model\JenkinsViewCredentialsAction.cs" />
+    <Compile Include="Code\Model\JenkinsViewCredentialsActionRootActionImpl.cs" />
+    <Compile Include="Code\Model\JenkinsViewJob.cs" />
+    <Compile Include="Code\Model\JenkinsViewPeople.cs" />
+    <Compile Include="Code\Model\JenkinsViewUserInfo.cs" />
+    <Compile Include="Code\Model\JenkinsWorkflowJob.cs" />
+    <Compile Include="Code\Model\JenkinsWorkflowMultiBranchProject.cs" />
+    <Compile Include="Code\Model\JenkinsWorkflowRun.cs" />
+    <Compile Include="Code\Model\JenkinsWorkUnit.cs" />
+    <Compile Include="Code\Model\JenkinsYesNoMaybe.cs" />
+    <Compile Include="Code\Partials\JenkinsCaseResult.cs" />
+    <Compile Include="Code\Partials\JenkinsResult.cs" />
+    <Compile Include="Code\Partials\JenkinsRun.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

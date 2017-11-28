@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+	<PackageId>JenkinsWebApi</PackageId>
+    <PackageVersion>1.1.0</PackageVersion>
+    <Authors>Ralf Beckers</Authors>
+    <Description>API to communicate with Jenkins</Description>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageReleaseNotes>Initial release</PackageReleaseNotes>
+    <Copyright>Copyright 2017 (c) Ralf Beckers. All rights reserved.</Copyright>
+    <PackageTags>Jenkins Web API</PackageTags>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <AssemblyVersion>1.1.0.0</AssemblyVersion>
+    <FileVersion>1.1.0.0</FileVersion>
+    <Version>1.1.5</Version>
+
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>bin\Release\netstandard2.0\JenkinsWebApi.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Internal\" />
+    <Folder Include="Model\" />
+    <Folder Include="Schema\" />
+  </ItemGroup>
+
+</Project>
