@@ -1,6 +1,6 @@
 # JenkinsWebApi
 
-Jenkins Web API is a API to interact with a Jenkins sercer..
+Jenkins Web API is a API to interact with a Jenkins server.
 
 ## Download
 
