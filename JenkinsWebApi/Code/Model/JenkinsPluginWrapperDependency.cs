@@ -9,10 +9,10 @@ namespace JenkinsWebApi.Model
         public bool IsOptional { get; set; }
 
         [XmlElement("shortName")]
-        public string[] ShortNames { get; set; }
+        public string ShortName { get; set; }
 
         [XmlElement("version")]
-        public string[] Versions { get; set; }
+        public string Version { get; set; }
 
         /// <summary>
         /// Jenkins Java class name.

@@ -33,7 +33,7 @@ namespace JenkinsTest
         [TestMethod]
         public void InstancesTest()
         {
-            List<JenkinsInstance> list = Jenkins.GetJenkinsInstances().Result.ToList();
+            List<JenkinsInstance> list = Jenkins.GetJenkinsInstances().Result?.ToList();
 
             Assert.IsNotNull(list, "list");
             Assert.IsTrue(list.Count > 0, "list.Count");
@@ -55,7 +55,7 @@ namespace JenkinsTest
             //Assert.AreEqual(this.serverMode, server.Mode, "mode");
             Assert.AreEqual("the master Jenkins node", server.NodeDescription, "nodeDescription");
             Assert.AreEqual("", server.NodeName, "nodeName");
-            Assert.AreEqual(2, server.NumExecutors, "numExecutors");
+            Assert.AreEqual(4, server.NumExecutors, "numExecutors");
             Assert.AreEqual(null, server.Description, "description");
 
             Assert.IsNotNull(server.Jobs, "jobs");

@@ -7,7 +7,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>e5b1175a-cc6f-4899-8496-9412c872f3ca</ProjectGuid>
-    <SHFBSchemaVersion>2015.6.5.0</SHFBSchemaVersion>
+    <SHFBSchemaVersion>2017.9.26.0</SHFBSchemaVersion>
     <!-- AssemblyName, Name, and RootNamespace are not used by SHFB but Visual Studio adds them anyway -->
     <AssemblyName>JenkinsWebApiDoc</AssemblyName>
     <RootNamespace>JenkinsWebApiDoc</RootNamespace>
@@ -39,7 +39,8 @@
     <CleanIntermediates>True</CleanIntermediates>
     <NamespaceSummaries>
       <NamespaceSummaryItem name="JenkinsWebApi" isDocumented="True">Jenkins Web API  base classes</NamespaceSummaryItem>
-<NamespaceSummaryItem name="JenkinsWebApi.Model" isDocumented="True">Jenkins Web API  model classes</NamespaceSummaryItem></NamespaceSummaries>
+      <NamespaceSummaryItem name="JenkinsWebApi.Model" isDocumented="True">Jenkins Web API  model classes</NamespaceSummaryItem>
+    </NamespaceSummaries>
     <HelpFileVersion>1.0.0.0</HelpFileVersion>
     <MaximumGroupParts>2</MaximumGroupParts>
     <NamespaceGrouping>False</NamespaceGrouping>

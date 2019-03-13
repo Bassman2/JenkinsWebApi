@@ -131,7 +131,7 @@ namespace JenkinsWebApi
             var res = PostLoginAsync("j_acegi_security_check", new FormUrlEncodedContent(list)).Result;
             if (res)
             {
-            Crumb();
+                Crumb();
             }
             return res;
         }
@@ -297,25 +297,51 @@ namespace JenkinsWebApi
             return report;
         }
 
+        /*
         public async Task<JenkinsQueue> GetQueueAsync()
         {
             JenkinsQueue queue = await GetAsync<JenkinsQueue>("queue/api/xml");
             return queue;
         }
+        */
 
         public async Task<JenkinsOverallLoadStatistics> GetOverallLoadStatisticsAsync()
         {
             JenkinsOverallLoadStatistics statistics = await GetAsync<JenkinsOverallLoadStatistics>("overallLoad/api/xml");
             return statistics;
         }
-                
+
+        public async Task<JenkinsComputerSet> GetComputerSetAsync()
+        {
+            JenkinsComputerSet computerSet = await GetAsync<JenkinsComputerSet>("computer/api/xml");
+            return computerSet;
+        }
+
+        public async Task<JenkinsHudsonMasterComputer> GetMasterComputerAsync()
+        {
+            JenkinsHudsonMasterComputer computer = await GetAsync<JenkinsHudsonMasterComputer>("computer/(master)/api/xml");
+            return computer;
+        }
+
+        public async Task<JenkinsSlaveComputer> GetComputerAsync(string computerName)
+        {
+            JenkinsSlaveComputer computer = await GetAsync<JenkinsSlaveComputer>($"computer/{computerName}/api/xml");
+            return computer;
+        }
+
+        public async Task<JenkinsLabelAtom> GetLabelAsync(string labelName)
+        {
+            JenkinsLabelAtom label = await GetAsync<JenkinsLabelAtom>($"label/{labelName}/api/xml");
+            return label;
+        }
+
         /// <summary>
         /// Run a Jenkins job.
         /// </summary>
         /// <param name="name">Name of the Jenkins job</param>
         /// <param name="parameters">Parameters for the Jenkins job</param>
         /// <returns>Result and number of the Jenkins build</returns>
-        public async Task<JenkinsQueueLeftItem> RunJobAsync(string name, JenkinsBuildParameters parameters = null)
+        public async Task<object> RunJobAsync(string name, JenkinsBuildParameters parameters = null)
         {
             if (string.IsNullOrEmpty(name))
             {
@@ -341,8 +367,9 @@ namespace JenkinsWebApi
             {
                 // if no delay item.Executable will be null
                 await Task.Delay(100);
-                JenkinsQueueLeftItem item = await GetAsync<JenkinsQueueLeftItem>(new Uri(location, "api/xml/").ToString());
-                return item;
+                string schema = await GetStringAsync(new Uri(location, "api/Schema").ToString());
+                //object item = await GetAsync<>(new Uri(location, "api/xml/").ToString());
+                //return item;
             }
 
             return null;            
@@ -428,7 +455,7 @@ namespace JenkinsWebApi
 
         public static async Task<IEnumerable<JenkinsInstance>> GetJenkinsInstances(long timeout = 2000)
         {
-            List<JenkinsInstance> list = null; 
+            List<JenkinsInstance> list = null;
             using (UdpClient client = new UdpClient())
             {
                 await client.SendAsync(new byte[0], 0, new IPEndPoint(IPAddress.Broadcast, udpPort));
@@ -436,9 +463,9 @@ namespace JenkinsWebApi
                 while (true)
                 {
                     while (client.Available > 0)
-                {
+                    {
                         UdpReceiveResult res = await client.ReceiveAsync();
-                    string result = Encoding.ASCII.GetString(res.Buffer);
+                        string result = Encoding.ASCII.GetString(res.Buffer);
                         Trace.TraceInformation(result);
                         using (XmlTextReader reader = new XmlTextReader(new StringReader(result)))
                         {
@@ -452,16 +479,16 @@ namespace JenkinsWebApi
                             else
                             {
                                 Trace.TraceError($"Unknown broadcast response: {result}");
-                }
-            }
+                            }
+                        }
                     }
                     if (Environment.TickCount > start + timeout)
-            {
+                    {
                         break;
                     }
                     await Task.Delay(100);
+                }
             }
-        }
 
             return list;
         }

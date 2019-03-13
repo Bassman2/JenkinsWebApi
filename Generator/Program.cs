@@ -58,7 +58,7 @@ namespace Generator
             public List<string> Values { get; set; }
         }
 
-        private List<ComplexType> complexTypes = new List<ComplexType>();
+        private Dictionary<string, ComplexType> complexTypes = new Dictionary<string, ComplexType>();
         private List<SimpleType> simpleTypes = new List<SimpleType>();
 
         public void Parse(string dir)
@@ -83,34 +83,29 @@ namespace Generator
                     string elementName = element.GetAttribute("name");
                     string elementType = element.GetAttribute("type");
 
-                    //this.complexType = root.GetElementsByTagName("complexType", ns).Cast<XmlElement>().Select(c =>
-                    //    new ComplexType()
-                    //    {
-                    //        Name = c.GetAttribute("name"),
-                    //        Root = (elementType == ct.Name) ? elementName : null,
-                    //        Base = (c.SelectSingleNode("xsd:complexContent/xsd:extension", nsm) as XmlElement)?.GetAttribute("base"),
-                    //        Elements = c.SelectNodes("element", nsm).Cast<XmlElement>().Select(e =>
-                    //            new Element()
-                    //            {
-                    //                Name = e.GetAttribute("name"),
-                    //                Type = e.GetAttribute("type"),
-                    //                IsList = e.HasAttribute("maxOccurs"),
-                    //                Description = e.SelectSingleNode("documentation")?.InnerText
-                    //            }).ToList(),
-                    //        HasClassAttribut = c.SelectSingleNode("attribute") != null ? true : false
-                    //    }
-                    //).ToList();
-
                     var cts = root.GetElementsByTagName("complexType", ns);
                     foreach (XmlElement c in cts)
                     {
-                        ComplexType ct = new ComplexType();
-                        ct.Name = c.GetAttribute("name");
-                        ct.Root = (elementType == ct.Name) ? elementName : null;
+                        string name = c.GetAttribute("name");
+
+                        //ComplexType ct = new ComplexType();
+                        if (!complexTypes.TryGetValue(name, out ComplexType ct))
+                        {
+                            ct = new ComplexType();
+                            ct.Name = name;
+                            complexTypes.Add(name, ct);
+                        }
+
+                        if (elementType == ct.Name)
+                        {
+                            ct.Root = elementName;
+                        }
+
+                        //ct.Name = c.GetAttribute("name");
+                        //ct.Root = (elementType == ct.Name) ? elementName : null;
                         var x = c.SelectSingleNode("xsd:complexContent/xsd:extension", nsm) as XmlElement;
                         var y = c.GetElementsByTagName("extension", ns).Cast<XmlElement>().FirstOrDefault();
                         ct.Base = x?.GetAttribute("base");
-                        //ct.Elements = c.SelectNodes("xsd:element", nsm).Cast<XmlElement>().Select(e =>
                         ct.Elements = c.GetElementsByTagName("element", ns).Cast<XmlElement>().Select(e =>
                             new Element()
                             {
@@ -120,25 +115,8 @@ namespace Generator
                                 Description = e.SelectSingleNode("xsd:documentation", nsm)?.InnerText
                             }).ToList();
                         ct.HasClassAttribut = c.SelectSingleNode("xsd:attribute", nsm) != null ? true : false;
-                        this.complexTypes.Add(ct);
                     }
-                    //this.complexType = root.GetElementsByTagName("complexType", ns).Cast<XmlElement>().Select(c =>
-                    //    new ComplexType()
-                    //    {
-                    //        Name = c.GetAttribute("name"),
-                    //        Base = (c.SelectSingleNode("extension", nsm) as XmlElement).GetAttribute("base"),
-                    //        Elements = c.SelectNodes("element", nsm).Cast<XmlElement>().Select(e =>
-                    //            new Element()
-                    //            {
-                    //                Name = e.GetAttribute("name"),
-                    //                Type = e.GetAttribute("type"),
-                    //                IsList = e.HasAttribute("maxOccurs"),
-                    //                Description = e.SelectSingleNode("documentation")?.InnerText
-                    //            }).ToList(),
-                    //        HasClassAttribut = c.SelectSingleNode("attribute") != null ? true : false
-                    //    }
-                    //).ToList();
-
+                    
                     var sts = root.GetElementsByTagName("simpleType", ns);
                     foreach (XmlElement s in sts)
                     {
@@ -204,12 +182,13 @@ namespace Generator
                 case "duration": res = "object"; break;
                 case "dependencies": res = "object"; break;
                 case "optionalDependencies": res = "object"; break;
+                case "monitorData": res = "object"; break;
                 default:
                     Debug.WriteLine($"##### {name}");
                     res = "object"; break;
                 }
                 break;
-            default: res = "Jenkins" + LastItem(xmlType);
+            default: res = CreateClassName(xmlType);
 
                 break;
             }
@@ -218,14 +197,57 @@ namespace Generator
 
         }
 
+        public string CreateClassName(string name)
+        {
+            if (name.StartsWith("hudson."))
+            {
+                name = name.Substring(7);
+            }
+            
+            StringBuilder sb = new StringBuilder(name);
+            
+            sb.Replace(".a", "A");
+            sb.Replace(".b", "B");
+            sb.Replace(".c", "C");
+            sb.Replace(".d", "D");
+            sb.Replace(".e", "E");
+            sb.Replace(".f", "F");
+            sb.Replace(".g", "G");
+            sb.Replace(".h", "H");
+            sb.Replace(".i", "I");
+            sb.Replace(".j", "J");
+            sb.Replace(".k", "K");
+            sb.Replace(".l", "L");
+            sb.Replace(".m", "M");
+            sb.Replace(".n", "N");
+            sb.Replace(".o", "O");
+            sb.Replace(".p", "P");
+            sb.Replace(".q", "Q");
+            sb.Replace(".r", "R");
+            sb.Replace(".s", "S");
+            sb.Replace(".t", "T");
+            sb.Replace(".u", "U");
+            sb.Replace(".v", "V");
+            sb.Replace(".w", "W");
+            sb.Replace(".x", "X");
+            sb.Replace(".y", "Y");
+            sb.Replace(".z", "Z");
+            sb.Replace(".", "");
+            sb.Replace("-", "");
+
+            sb[0] = char.ToUpper(sb[0]);
+
+            return "Jenkins" + sb.ToString();
+        }
+
         public void Create(string dir)
         {
             dir = Path.Combine(dir, "Model");
             new DirectoryInfo(dir).GetFiles().ToList().ForEach(f => f.Delete());
             
-            foreach(var ct in complexTypes)
+            foreach(var ct in complexTypes.Values)
             {
-                string className = "Jenkins" + LastItem(ct.Name);
+                string className = CreateClassName(ct.Name);
                 using (StreamWriter writer = File.CreateText(Path.Combine(dir, $"{className}.cs")))
                 {
                     writer.WriteLine("using System.Xml.Serialization;");
@@ -241,30 +263,33 @@ namespace Generator
                     }
                     
                     writer.Write($"    public partial class {className}");
-                    writer.WriteLine(ct.Base != null ? $" : Jenkins{LastItem(ct.Base)}" : "");
+                    writer.WriteLine(ct.Base != null ? $" : {CreateClassName(ct.Base)}" : "");
                     writer.WriteLine("    {");
                     foreach (var e in ct.Elements)
                     {
-                        if (!string.IsNullOrEmpty(e.Description))
+                        if (e.Name != "monitorData")
                         {
-                            writer.WriteLine("        /// <summary>");
-                            writer.WriteLine($"        /// {e.Description}");
-                            writer.WriteLine("        /// </summary>");
+                            if (!string.IsNullOrEmpty(e.Description))
+                            {
+                                writer.WriteLine("        /// <summary>");
+                                writer.WriteLine($"        /// {e.Description}");
+                                writer.WriteLine("        /// </summary>");
+                            }
+                            writer.WriteLine($"        [XmlElement(\"{e.Name}\")]");
+                            if (e.IsList)
+                            {
+                                writer.WriteLine($"        public {GetDataType(e.Type, e.Name)}[] {UpperFirstChar(e.Name)}s {{ get; set; }}");
+                            }
+                            else if (e.Type == "xsd:boolean" && !e.Name.StartsWith("use"))
+                            {
+                                writer.WriteLine($"        public {GetDataType(e.Type, e.Name)} Is{UpperFirstChar(e.Name)} {{ get; set; }}");
+                            }
+                            else
+                            {
+                                writer.WriteLine($"        public {GetDataType(e.Type, e.Name)} {UpperFirstChar(e.Name)} {{ get; set; }}");
+                            }
+                            writer.WriteLine();
                         }
-                        writer.WriteLine($"        [XmlElement(\"{e.Name}\")]");
-                        if (e.IsList)
-                        {
-                            writer.WriteLine($"        public {GetDataType(e.Type, e.Name)}[] {UpperFirstChar(e.Name)}s {{ get; set; }}");
-                        }
-                        else if (e.Type == "xsd:boolean" && !e.Name.StartsWith("use"))
-                        {
-                            writer.WriteLine($"        public {GetDataType(e.Type, e.Name)} Is{UpperFirstChar(e.Name)} {{ get; set; }}");
-                        }
-                        else
-                        {
-                            writer.WriteLine($"        public {GetDataType(e.Type, e.Name)} {UpperFirstChar(e.Name)} {{ get; set; }}");
-                        }
-                        writer.WriteLine();
                     }
                     if (ct.Elements.Count == 0 && !ct.HasClassAttribut)
                     {
