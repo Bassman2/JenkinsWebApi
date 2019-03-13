@@ -1,19 +1,60 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <xsd:element name="externalJob" type="hudson.model.ExternalJob"/>
-  <xsd:complexType name="hudson.model.ExternalJob">
+  <xsd:element name="labelAtom" type="hudson.model.labels.LabelAtom"/>
+  <xsd:complexType name="hudson.model.labels.LabelAtom">
     <xsd:complexContent>
-      <xsd:extension base="hudson.model.ViewJob">
-        <xsd:sequence/>
+      <xsd:extension base="hudson.model.Label">
+        <xsd:sequence>
+          <xsd:element name="propertiesList" type="hudson.model.labels.LabelAtomProperty" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
       </xsd:extension>
     </xsd:complexContent>
   </xsd:complexType>
-  <xsd:complexType name="hudson.model.ViewJob">
+  <xsd:complexType name="hudson.model.labels.LabelAtomProperty">
+    <xsd:sequence/>
+    <xsd:attribute name="_class" type="xsd:string" use="optional"/>
+  </xsd:complexType>
+  <xsd:complexType name="hudson.model.Label">
     <xsd:complexContent>
-      <xsd:extension base="hudson.model.Job">
-        <xsd:sequence/>
+      <xsd:extension base="hudson.model.Actionable">
+        <xsd:sequence>
+          <xsd:element name="busyExecutors" type="xsd:int"/>
+          <xsd:element name="cloud" type="hudson.slaves.Cloud" minOccurs="0" maxOccurs="unbounded"/>
+          <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="idleExecutors" type="xsd:int"/>
+          <xsd:element name="loadStatistics" type="hudson.model.LoadStatistics" minOccurs="0"/>
+          <xsd:element name="name" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="node" type="hudson.model.Node" minOccurs="0" maxOccurs="unbounded"/>
+          <xsd:element name="offline" type="xsd:boolean"/>
+          <xsd:element name="tiedJob" type="hudson.model.AbstractProject" minOccurs="0" maxOccurs="unbounded"/>
+          <xsd:element name="totalExecutors" type="xsd:int"/>
+        </xsd:sequence>
       </xsd:extension>
     </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="hudson.model.AbstractProject">
+    <xsd:complexContent>
+      <xsd:extension base="hudson.model.Job">
+        <xsd:sequence>
+          <xsd:element name="concurrentBuild" type="xsd:boolean"/>
+          <xsd:element name="downstreamProject" type="hudson.model.AbstractProject" minOccurs="0" maxOccurs="unbounded"/>
+          <xsd:element name="labelExpression" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="scm" type="hudson.scm.SCM" minOccurs="0"/>
+          <xsd:element name="upstreamProject" type="hudson.model.AbstractProject" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="hudson.scm.SCM">
+    <xsd:sequence>
+      <xsd:element name="browser" type="hudson.scm.RepositoryBrowser" minOccurs="0"/>
+      <xsd:element name="type" type="xsd:string" minOccurs="0"/>
+    </xsd:sequence>
+    <xsd:attribute name="_class" type="xsd:string" use="optional"/>
+  </xsd:complexType>
+  <xsd:complexType name="hudson.scm.RepositoryBrowser">
+    <xsd:sequence/>
+    <xsd:attribute name="_class" type="xsd:string" use="optional"/>
   </xsd:complexType>
   <xsd:complexType name="hudson.model.Job">
     <xsd:complexContent>
@@ -62,12 +103,6 @@
         </xsd:sequence>
       </xsd:extension>
     </xsd:complexContent>
-  </xsd:complexType>
-  <xsd:complexType name="hudson.model.Actionable">
-    <xsd:sequence>
-      <xsd:element name="action" type="xsd:anyType" minOccurs="0" maxOccurs="unbounded"/>
-    </xsd:sequence>
-    <xsd:attribute name="_class" type="xsd:string" use="optional"/>
   </xsd:complexType>
   <xsd:complexType name="hudson.model.JobProperty">
     <xsd:sequence/>
@@ -181,6 +216,126 @@
       </xsd:extension>
     </xsd:complexContent>
   </xsd:complexType>
+  <xsd:complexType name="hudson.model.Node">
+    <xsd:sequence>
+      <xsd:element name="assignedLabel" type="hudson.model.labels.LabelAtom" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="mode" type="hudson.model.Node-Mode" minOccurs="0"/>
+      <xsd:element name="nodeDescription" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="nodeName" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="numExecutors" type="xsd:int"/>
+    </xsd:sequence>
+    <xsd:attribute name="_class" type="xsd:string" use="optional"/>
+  </xsd:complexType>
+  <xsd:complexType name="hudson.model.LoadStatistics">
+    <xsd:sequence>
+      <xsd:element name="availableExecutors" type="hudson.model.MultiStageTimeSeries" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation> Number of executors not executing and available to take work and how it changes over time.
+ @since 1.607
+</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="busyExecutors" type="hudson.model.MultiStageTimeSeries" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation> Number of busy executors and how it changes over time.
+</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="connectingExecutors" type="hudson.model.MultiStageTimeSeries" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation> Number of executors in the process of coming on-line and how it changes over time.
+ @since 1.607
+</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="definedExecutors" type="hudson.model.MultiStageTimeSeries" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation> Number of executors defined for Jenkins and how it changes over time.
+ @since 1.607
+</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="idleExecutors" type="hudson.model.MultiStageTimeSeries" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation> Number of executors not executing and how it changes over time. Note the these executors may not be able to
+ take work, see {@link #availableExecutors}.
+ @since 1.607
+</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="onlineExecutors" type="hudson.model.MultiStageTimeSeries" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation> Number of executors on-line and how it changes over time. Replaces {@link #totalExecutors}
+ @since 1.607
+</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="queueLength" type="hudson.model.MultiStageTimeSeries" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation> Number of {@link hudson.model.Queue.BuildableItem}s that can run on any node in this node set but blocked.
+</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="totalExecutors" type="hudson.model.MultiStageTimeSeries" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation> Number of total executors and how it changes over time.
+ @deprecated use {@link #onlineExecutors}. Note {@code totalExecutors==onlineExecutors} for backward
+ compatibility support.
+</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="_class" type="xsd:string" use="optional"/>
+  </xsd:complexType>
+  <xsd:complexType name="hudson.model.MultiStageTimeSeries">
+    <xsd:sequence>
+      <xsd:element name="hour" type="hudson.model.TimeSeries" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation> Updated every 1 hour. Keep data up to 4 weeks.
+</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="min" type="hudson.model.TimeSeries" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation> Updated every 1 min. Keep data up to 1 day.
+</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="sec10" type="hudson.model.TimeSeries" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation> Updated every 10 seconds. Keep data up to 1 hour.
+</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="_class" type="xsd:string" use="optional"/>
+  </xsd:complexType>
+  <xsd:complexType name="hudson.model.TimeSeries">
+    <xsd:sequence>
+      <xsd:element name="history" type="xsd:anyType" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="latest" type="xsd:anyType"/>
+    </xsd:sequence>
+    <xsd:attribute name="_class" type="xsd:string" use="optional"/>
+  </xsd:complexType>
+  <xsd:complexType name="hudson.slaves.Cloud">
+    <xsd:complexContent>
+      <xsd:extension base="hudson.model.Actionable">
+        <xsd:sequence/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="hudson.model.Actionable">
+    <xsd:sequence>
+      <xsd:element name="action" type="xsd:anyType" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+    <xsd:attribute name="_class" type="xsd:string" use="optional"/>
+  </xsd:complexType>
+  <xsd:simpleType name="hudson.model.Node-Mode">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="NORMAL"/>
+      <xsd:enumeration value="EXCLUSIVE"/>
+    </xsd:restriction>
+  </xsd:simpleType>
   <xsd:simpleType name="hudson.model.BallColor">
     <xsd:restriction base="xsd:string">
       <xsd:enumeration value="red"/>

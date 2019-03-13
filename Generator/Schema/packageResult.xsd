@@ -1,34 +1,31 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <xsd:element name="testResult" type="hudson.tasks.junit.TestResult"/>
-  <xsd:complexType name="hudson.tasks.junit.TestResult">
+  <xsd:element name="packageResult" type="hudson.tasks.junit.PackageResult"/>
+  <xsd:complexType name="hudson.tasks.junit.PackageResult">
     <xsd:complexContent>
       <xsd:extension base="hudson.tasks.test.MetaTabulatedResult">
         <xsd:sequence>
-          <xsd:element name="duration" type="xsd:anyType"/>
-          <xsd:element name="empty" type="xsd:boolean"/>
+          <xsd:element name="child" type="hudson.tasks.junit.ClassResult" minOccurs="0" maxOccurs="unbounded"/>
           <xsd:element name="failCount" type="xsd:int"/>
+          <xsd:element name="name" type="xsd:string" minOccurs="0"/>
           <xsd:element name="passCount" type="xsd:int"/>
           <xsd:element name="skipCount" type="xsd:int"/>
-          <xsd:element name="suite" type="hudson.tasks.junit.SuiteResult" minOccurs="0" maxOccurs="unbounded"/>
         </xsd:sequence>
       </xsd:extension>
     </xsd:complexContent>
   </xsd:complexType>
-  <xsd:complexType name="hudson.tasks.junit.SuiteResult">
-    <xsd:sequence>
-      <xsd:element name="case" type="hudson.tasks.junit.CaseResult" minOccurs="0" maxOccurs="unbounded"/>
-      <xsd:element name="duration" type="xsd:anyType"/>
-      <xsd:element name="enclosingBlockName" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
-      <xsd:element name="enclosingBlock" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
-      <xsd:element name="id" type="xsd:string" minOccurs="0"/>
-      <xsd:element name="name" type="xsd:string" minOccurs="0"/>
-      <xsd:element name="nodeId" type="xsd:string" minOccurs="0"/>
-      <xsd:element name="stderr" type="xsd:string" minOccurs="0"/>
-      <xsd:element name="stdout" type="xsd:string" minOccurs="0"/>
-      <xsd:element name="timestamp" type="xsd:string" minOccurs="0"/>
-    </xsd:sequence>
-    <xsd:attribute name="_class" type="xsd:string" use="optional"/>
+  <xsd:complexType name="hudson.tasks.junit.ClassResult">
+    <xsd:complexContent>
+      <xsd:extension base="hudson.tasks.test.TabulatedResult">
+        <xsd:sequence>
+          <xsd:element name="child" type="hudson.tasks.junit.CaseResult" minOccurs="0" maxOccurs="unbounded"/>
+          <xsd:element name="failCount" type="xsd:int"/>
+          <xsd:element name="name" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="passCount" type="xsd:int"/>
+          <xsd:element name="skipCount" type="xsd:int"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
   </xsd:complexType>
   <xsd:complexType name="hudson.tasks.junit.CaseResult">
     <xsd:complexContent>
@@ -74,16 +71,16 @@
     <xsd:sequence/>
     <xsd:attribute name="_class" type="xsd:string" use="optional"/>
   </xsd:complexType>
-  <xsd:complexType name="hudson.tasks.test.MetaTabulatedResult">
+  <xsd:complexType name="hudson.tasks.test.TabulatedResult">
     <xsd:complexContent>
-      <xsd:extension base="hudson.tasks.test.TabulatedResult">
+      <xsd:extension base="hudson.tasks.test.TestResult">
         <xsd:sequence/>
       </xsd:extension>
     </xsd:complexContent>
   </xsd:complexType>
-  <xsd:complexType name="hudson.tasks.test.TabulatedResult">
+  <xsd:complexType name="hudson.tasks.test.MetaTabulatedResult">
     <xsd:complexContent>
-      <xsd:extension base="hudson.tasks.test.TestResult">
+      <xsd:extension base="hudson.tasks.test.TabulatedResult">
         <xsd:sequence/>
       </xsd:extension>
     </xsd:complexContent>
