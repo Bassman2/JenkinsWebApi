@@ -2,14 +2,11 @@ using System.Xml.Serialization;
 
 namespace JenkinsWebApi.Model
 {
-    // hudson.scm.SCM
-    public partial class JenkinsSCM
+    // com.cloudbees.plugins.credentials.CredentialsStoreAction
+    public partial class JenkinsCredentialsStoreAction
     {
-        [XmlElement("browser")]
-        public JenkinsRepositoryBrowser[] Browsers { get; set; }
-
-        [XmlElement("type")]
-        public string[] Types { get; set; }
+        [XmlElement("domains")]
+        public object[] Domainss { get; set; }
 
         /// <summary>
         /// Jenkins Java class name.

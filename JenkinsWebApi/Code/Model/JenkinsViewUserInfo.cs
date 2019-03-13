@@ -6,13 +6,13 @@ namespace JenkinsWebApi.Model
     public partial class JenkinsViewUserInfo
     {
         [XmlElement("lastChange")]
-        public long LastChange { get; set; }
+        public long[] LastChanges { get; set; }
 
         [XmlElement("project")]
-        public JenkinsJob Project { get; set; }
+        public JenkinsJob[] Projects { get; set; }
 
         [XmlElement("user")]
-        public JenkinsUser User { get; set; }
+        public JenkinsUser[] Users { get; set; }
 
         /// <summary>
         /// Jenkins Java class name.

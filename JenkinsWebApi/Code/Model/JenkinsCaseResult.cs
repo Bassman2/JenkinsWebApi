@@ -9,37 +9,37 @@ namespace JenkinsWebApi.Model
         public int Age { get; set; }
 
         [XmlElement("className")]
-        public string ClassName { get; set; }
+        public string[] ClassNames { get; set; }
 
         [XmlElement("duration")]
         public object Duration { get; set; }
 
         [XmlElement("errorDetails")]
-        public string ErrorDetails { get; set; }
+        public string[] ErrorDetailss { get; set; }
 
         [XmlElement("errorStackTrace")]
-        public string ErrorStackTrace { get; set; }
+        public string[] ErrorStackTraces { get; set; }
 
         [XmlElement("failedSince")]
         public int FailedSince { get; set; }
 
         [XmlElement("name")]
-        public string Name { get; set; }
+        public string[] Names { get; set; }
 
         [XmlElement("skipped")]
         public bool IsSkipped { get; set; }
 
         [XmlElement("skippedMessage")]
-        public string SkippedMessage { get; set; }
+        public string[] SkippedMessages { get; set; }
 
         [XmlElement("status")]
-        public JenkinsCaseResultStatus Status { get; set; }
+        public JenkinsCaseResultStatus[] Statuss { get; set; }
 
         [XmlElement("stderr")]
-        public string Stderr { get; set; }
+        public string[] Stderrs { get; set; }
 
         [XmlElement("stdout")]
-        public string Stdout { get; set; }
+        public string[] Stdouts { get; set; }
 
     }
 }

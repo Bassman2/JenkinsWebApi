@@ -6,10 +6,10 @@ namespace JenkinsWebApi.Model
     public partial class JenkinsCrumbIssuer
     {
         [XmlElement("crumb")]
-        public string Crumb { get; set; }
+        public string[] Crumbs { get; set; }
 
         [XmlElement("crumbRequestField")]
-        public string CrumbRequestField { get; set; }
+        public string[] CrumbRequestFields { get; set; }
 
         /// <summary>
         /// Jenkins Java class name.

@@ -6,10 +6,7 @@ namespace JenkinsWebApi.Model
     public partial class JenkinsExecutor
     {
         [XmlElement("currentExecutable")]
-        public object CurrentExecutable { get; set; }
-
-        [XmlElement("currentWorkUnit")]
-        public JenkinsWorkUnit CurrentWorkUnit { get; set; }
+        public object[] CurrentExecutables { get; set; }
 
         [XmlElement("idle")]
         public bool IsIdle { get; set; }

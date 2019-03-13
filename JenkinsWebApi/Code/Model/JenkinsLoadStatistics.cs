@@ -6,28 +6,28 @@ namespace JenkinsWebApi.Model
     public partial class JenkinsLoadStatistics
     {
         [XmlElement("availableExecutors")]
-        public JenkinsMultiStageTimeSeries AvailableExecutors { get; set; }
+        public JenkinsMultiStageTimeSeries[] AvailableExecutorss { get; set; }
 
         [XmlElement("busyExecutors")]
-        public JenkinsMultiStageTimeSeries BusyExecutors { get; set; }
+        public JenkinsMultiStageTimeSeries[] BusyExecutorss { get; set; }
 
         [XmlElement("connectingExecutors")]
-        public JenkinsMultiStageTimeSeries ConnectingExecutors { get; set; }
+        public JenkinsMultiStageTimeSeries[] ConnectingExecutorss { get; set; }
 
         [XmlElement("definedExecutors")]
-        public JenkinsMultiStageTimeSeries DefinedExecutors { get; set; }
+        public JenkinsMultiStageTimeSeries[] DefinedExecutorss { get; set; }
 
         [XmlElement("idleExecutors")]
-        public JenkinsMultiStageTimeSeries IdleExecutors { get; set; }
+        public JenkinsMultiStageTimeSeries[] IdleExecutorss { get; set; }
 
         [XmlElement("onlineExecutors")]
-        public JenkinsMultiStageTimeSeries OnlineExecutors { get; set; }
+        public JenkinsMultiStageTimeSeries[] OnlineExecutorss { get; set; }
 
         [XmlElement("queueLength")]
-        public JenkinsMultiStageTimeSeries QueueLength { get; set; }
+        public JenkinsMultiStageTimeSeries[] QueueLengths { get; set; }
 
         [XmlElement("totalExecutors")]
-        public JenkinsMultiStageTimeSeries TotalExecutors { get; set; }
+        public JenkinsMultiStageTimeSeries[] TotalExecutorss { get; set; }
 
         /// <summary>
         /// Jenkins Java class name.

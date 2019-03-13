@@ -12,7 +12,7 @@ namespace JenkinsWebApi.Model
         public JenkinsJob[] Jobs { get; set; }
 
         [XmlElement("primaryView")]
-        public JenkinsView PrimaryView { get; set; }
+        public JenkinsView[] PrimaryViews { get; set; }
 
         [XmlElement("view")]
         public JenkinsView[] Views { get; set; }

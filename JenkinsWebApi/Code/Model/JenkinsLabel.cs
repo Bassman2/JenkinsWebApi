@@ -9,19 +9,19 @@ namespace JenkinsWebApi.Model
         public int BusyExecutors { get; set; }
 
         [XmlElement("cloud")]
-        public object[] Clouds { get; set; }
+        public JenkinsCloud[] Clouds { get; set; }
 
         [XmlElement("description")]
-        public string Description { get; set; }
+        public string[] Descriptions { get; set; }
 
         [XmlElement("idleExecutors")]
         public int IdleExecutors { get; set; }
 
         [XmlElement("loadStatistics")]
-        public JenkinsLoadStatistics LoadStatistics { get; set; }
+        public JenkinsLoadStatistics[] LoadStatisticss { get; set; }
 
         [XmlElement("name")]
-        public string Name { get; set; }
+        public string[] Names { get; set; }
 
         [XmlElement("node")]
         public JenkinsNode[] Nodes { get; set; }

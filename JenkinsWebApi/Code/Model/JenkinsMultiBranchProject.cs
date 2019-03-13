@@ -5,6 +5,8 @@ namespace JenkinsWebApi.Model
     // jenkins.branch.MultiBranchProject
     public partial class JenkinsMultiBranchProject : JenkinsComputedFolder
     {
-        // empty
+        [XmlElement("source")]
+        public JenkinsBranchSource[] Sources { get; set; }
+
     }
 }

@@ -6,25 +6,25 @@ namespace JenkinsWebApi.Model
     public partial class JenkinsAbstractItem : JenkinsActionable
     {
         [XmlElement("description")]
-        public string Description { get; set; }
+        public string[] Descriptions { get; set; }
 
         [XmlElement("displayName")]
-        public string DisplayName { get; set; }
+        public string[] DisplayNames { get; set; }
 
         [XmlElement("displayNameOrNull")]
-        public string DisplayNameOrNull { get; set; }
+        public string[] DisplayNameOrNulls { get; set; }
 
         [XmlElement("fullDisplayName")]
-        public string FullDisplayName { get; set; }
+        public string[] FullDisplayNames { get; set; }
 
         [XmlElement("fullName")]
-        public string FullName { get; set; }
+        public string[] FullNames { get; set; }
 
         [XmlElement("name")]
-        public string Name { get; set; }
+        public string[] Names { get; set; }
 
         [XmlElement("url")]
-        public string Url { get; set; }
+        public string[] Urls { get; set; }
 
     }
 }

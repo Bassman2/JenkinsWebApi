@@ -9,7 +9,7 @@ namespace JenkinsWebApi.Model
         public bool IsActive { get; set; }
 
         [XmlElement("backupVersion")]
-        public string BackupVersion { get; set; }
+        public string[] BackupVersions { get; set; }
 
         [XmlElement("bundled")]
         public bool IsBundled { get; set; }
@@ -30,25 +30,25 @@ namespace JenkinsWebApi.Model
         public bool IsHasUpdate { get; set; }
 
         [XmlElement("longName")]
-        public string LongName { get; set; }
+        public string[] LongNames { get; set; }
 
         [XmlElement("pinned")]
         public bool IsPinned { get; set; }
 
         [XmlElement("requiredCoreVersion")]
-        public string RequiredCoreVersion { get; set; }
+        public string[] RequiredCoreVersions { get; set; }
 
         [XmlElement("shortName")]
-        public string ShortName { get; set; }
+        public string[] ShortNames { get; set; }
 
         [XmlElement("supportsDynamicLoad")]
-        public JenkinsYesNoMaybe SupportsDynamicLoad { get; set; }
+        public JenkinsYesNoMaybe[] SupportsDynamicLoads { get; set; }
 
         [XmlElement("url")]
-        public string Url { get; set; }
+        public string[] Urls { get; set; }
 
         [XmlElement("version")]
-        public string Version { get; set; }
+        public string[] Versions { get; set; }
 
         /// <summary>
         /// Jenkins Java class name.

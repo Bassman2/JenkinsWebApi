@@ -6,10 +6,10 @@ namespace JenkinsWebApi.Model
     public partial class JenkinsFingerprintRangeItem
     {
         [XmlElement("name")]
-        public string Name { get; set; }
+        public string[] Names { get; set; }
 
         [XmlElement("ranges")]
-        public JenkinsFingerprintRangeSet Ranges { get; set; }
+        public JenkinsFingerprintRangeSet[] Rangess { get; set; }
 
         /// <summary>
         /// Jenkins Java class name.

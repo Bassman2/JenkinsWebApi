@@ -6,7 +6,7 @@ namespace JenkinsWebApi.Model
     public partial class JenkinsFingerprintBuildPtr
     {
         [XmlElement("name")]
-        public string Name { get; set; }
+        public string[] Names { get; set; }
 
         [XmlElement("number")]
         public int Number { get; set; }

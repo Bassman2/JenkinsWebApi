@@ -6,13 +6,13 @@ namespace JenkinsWebApi.Model
     public partial class JenkinsRunArtifact
     {
         [XmlElement("displayPath")]
-        public string DisplayPath { get; set; }
+        public string[] DisplayPaths { get; set; }
 
         [XmlElement("fileName")]
-        public string FileName { get; set; }
+        public string[] FileNames { get; set; }
 
         [XmlElement("relativePath")]
-        public string RelativePath { get; set; }
+        public string[] RelativePaths { get; set; }
 
         /// <summary>
         /// Jenkins Java class name.

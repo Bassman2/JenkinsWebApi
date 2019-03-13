@@ -6,13 +6,13 @@ namespace JenkinsWebApi.Model
     public partial class JenkinsHealthReport
     {
         [XmlElement("description")]
-        public string Description { get; set; }
+        public string[] Descriptions { get; set; }
 
         [XmlElement("iconClassName")]
-        public string IconClassName { get; set; }
+        public string[] IconClassNames { get; set; }
 
         [XmlElement("iconUrl")]
-        public string IconUrl { get; set; }
+        public string[] IconUrls { get; set; }
 
         [XmlElement("score")]
         public int Score { get; set; }

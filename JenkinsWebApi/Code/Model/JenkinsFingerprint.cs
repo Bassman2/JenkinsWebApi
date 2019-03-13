@@ -6,16 +6,16 @@ namespace JenkinsWebApi.Model
     public partial class JenkinsFingerprint
     {
         [XmlElement("fileName")]
-        public string FileName { get; set; }
+        public string[] FileNames { get; set; }
 
         [XmlElement("hash")]
-        public string Hash { get; set; }
+        public string[] Hashs { get; set; }
 
         [XmlElement("original")]
-        public JenkinsFingerprintBuildPtr Original { get; set; }
+        public JenkinsFingerprintBuildPtr[] Originals { get; set; }
 
         [XmlElement("timestamp")]
-        public object Timestamp { get; set; }
+        public object[] Timestamps { get; set; }
 
         [XmlElement("usage")]
         public JenkinsFingerprintRangeItem[] Usages { get; set; }

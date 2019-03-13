@@ -15,10 +15,10 @@ namespace JenkinsWebApi.Model
         public JenkinsRun[] Builds { get; set; }
 
         [XmlElement("color")]
-        public JenkinsBallColor Color { get; set; }
+        public JenkinsBallColor[] Colors { get; set; }
 
         [XmlElement("firstBuild")]
-        public JenkinsRun FirstBuild { get; set; }
+        public JenkinsRun[] FirstBuilds { get; set; }
 
         [XmlElement("healthReport")]
         public JenkinsHealthReport[] HealthReports { get; set; }
@@ -30,25 +30,25 @@ namespace JenkinsWebApi.Model
         public bool IsKeepDependencies { get; set; }
 
         [XmlElement("lastBuild")]
-        public JenkinsRun LastBuild { get; set; }
+        public JenkinsRun[] LastBuilds { get; set; }
 
         [XmlElement("lastCompletedBuild")]
-        public JenkinsRun LastCompletedBuild { get; set; }
+        public JenkinsRun[] LastCompletedBuilds { get; set; }
 
         [XmlElement("lastFailedBuild")]
-        public JenkinsRun LastFailedBuild { get; set; }
+        public JenkinsRun[] LastFailedBuilds { get; set; }
 
         [XmlElement("lastStableBuild")]
-        public JenkinsRun LastStableBuild { get; set; }
+        public JenkinsRun[] LastStableBuilds { get; set; }
 
         [XmlElement("lastSuccessfulBuild")]
-        public JenkinsRun LastSuccessfulBuild { get; set; }
+        public JenkinsRun[] LastSuccessfulBuilds { get; set; }
 
         [XmlElement("lastUnstableBuild")]
-        public JenkinsRun LastUnstableBuild { get; set; }
+        public JenkinsRun[] LastUnstableBuilds { get; set; }
 
         [XmlElement("lastUnsuccessfulBuild")]
-        public JenkinsRun LastUnsuccessfulBuild { get; set; }
+        public JenkinsRun[] LastUnsuccessfulBuilds { get; set; }
 
         [XmlElement("nextBuildNumber")]
         public int NextBuildNumber { get; set; }
@@ -57,7 +57,7 @@ namespace JenkinsWebApi.Model
         public JenkinsJobProperty[] Propertys { get; set; }
 
         [XmlElement("queueItem")]
-        public JenkinsQueueItem QueueItem { get; set; }
+        public JenkinsQueueItem[] QueueItems { get; set; }
 
     }
 }

@@ -12,10 +12,10 @@ namespace JenkinsWebApi.Model
         public bool IsBuilding { get; set; }
 
         [XmlElement("description")]
-        public string Description { get; set; }
+        public string[] Descriptions { get; set; }
 
         [XmlElement("displayName")]
-        public string DisplayName { get; set; }
+        public string[] DisplayNames { get; set; }
 
         [XmlElement("duration")]
         public long Duration { get; set; }
@@ -24,13 +24,16 @@ namespace JenkinsWebApi.Model
         public long EstimatedDuration { get; set; }
 
         [XmlElement("executor")]
-        public JenkinsExecutor Executor { get; set; }
+        public JenkinsExecutor[] Executors { get; set; }
+
+        [XmlElement("fingerprint")]
+        public JenkinsFingerprint[] Fingerprints { get; set; }
 
         [XmlElement("fullDisplayName")]
-        public string FullDisplayName { get; set; }
+        public string[] FullDisplayNames { get; set; }
 
         [XmlElement("id")]
-        public string Id { get; set; }
+        public string[] Ids { get; set; }
 
         [XmlElement("keepLog")]
         public bool IsKeepLog { get; set; }
@@ -42,13 +45,13 @@ namespace JenkinsWebApi.Model
         public long QueueId { get; set; }
 
         [XmlElement("result")]
-        public JenkinsResult Result { get; set; }
+        public JenkinsResult[] Results { get; set; }
 
         [XmlElement("timestamp")]
-        public long Timestamp { get; set; }
+        public long[] Timestamps { get; set; }
 
         [XmlElement("url")]
-        public string Url { get; set; }
+        public string[] Urls { get; set; }
 
     }
 }

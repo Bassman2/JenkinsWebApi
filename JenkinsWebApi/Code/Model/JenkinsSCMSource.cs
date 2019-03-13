@@ -2,12 +2,9 @@ using System.Xml.Serialization;
 
 namespace JenkinsWebApi.Model
 {
-    // hudson.model.Queue-StubItem
-    public partial class JenkinsQueueStubItem
+    // jenkins.scm.api.SCMSource
+    public partial class JenkinsSCMSource
     {
-        [XmlElement("task")]
-        public JenkinsQueueStubTask Task { get; set; }
-
         /// <summary>
         /// Jenkins Java class name.
         /// </summary>

@@ -6,7 +6,7 @@ namespace JenkinsWebApi.Model
     public partial class JenkinsViewCredentialsAction
     {
         [XmlElement("stores")]
-        public object Stores { get; set; }
+        public object[] Storess { get; set; }
 
         /// <summary>
         /// Jenkins Java class name.

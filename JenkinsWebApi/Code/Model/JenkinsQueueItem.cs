@@ -18,19 +18,19 @@ namespace JenkinsWebApi.Model
         public long InQueueSince { get; set; }
 
         [XmlElement("params")]
-        public string Params { get; set; }
+        public string[] Paramss { get; set; }
 
         [XmlElement("stuck")]
         public bool IsStuck { get; set; }
 
         [XmlElement("task")]
-        public object Task { get; set; }
+        public object[] Tasks { get; set; }
 
         [XmlElement("url")]
-        public string Url { get; set; }
+        public string[] Urls { get; set; }
 
         [XmlElement("why")]
-        public string Why { get; set; }
+        public string[] Whys { get; set; }
 
     }
 }

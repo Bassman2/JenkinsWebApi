@@ -6,19 +6,19 @@ namespace JenkinsWebApi.Model
     public partial class JenkinsView
     {
         [XmlElement("description")]
-        public string Description { get; set; }
+        public string[] Descriptions { get; set; }
 
         [XmlElement("job")]
         public JenkinsJob[] Jobs { get; set; }
 
         [XmlElement("name")]
-        public string Name { get; set; }
+        public string[] Names { get; set; }
 
         [XmlElement("property")]
         public object[] Propertys { get; set; }
 
         [XmlElement("url")]
-        public string Url { get; set; }
+        public string[] Urls { get; set; }
 
         /// <summary>
         /// Jenkins Java class name.

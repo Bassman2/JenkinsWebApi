@@ -9,5 +9,8 @@ namespace JenkinsWebApi.Model
         [XmlElement("concurrentBuild")]
         public bool IsConcurrentBuild { get; set; }
 
+        [XmlElement("resumeBlocked")]
+        public bool IsResumeBlocked { get; set; }
+
     }
 }

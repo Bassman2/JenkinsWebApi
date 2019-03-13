@@ -6,13 +6,13 @@ namespace JenkinsWebApi.Model
     public partial class JenkinsAbstractBuild : JenkinsRun
     {
         [XmlElement("builtOn")]
-        public string BuiltOn { get; set; }
+        public string[] BuiltOns { get; set; }
 
         [XmlElement("changeSet")]
-        public JenkinsChangeLogSet ChangeSet { get; set; }
+        public JenkinsChangeLogSet[] ChangeSets { get; set; }
 
-        [XmlElement("fingerprint")]
-        public JenkinsFingerprint[] Fingerprints { get; set; }
+        [XmlElement("culprit")]
+        public JenkinsUser[] Culprits { get; set; }
 
     }
 }

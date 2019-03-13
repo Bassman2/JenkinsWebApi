@@ -9,13 +9,13 @@ namespace JenkinsWebApi.Model
         public JenkinsLabelAtom[] AssignedLabels { get; set; }
 
         [XmlElement("mode")]
-        public JenkinsNodeMode Mode { get; set; }
+        public JenkinsNodeMode[] Modes { get; set; }
 
         [XmlElement("nodeDescription")]
-        public string NodeDescription { get; set; }
+        public string[] NodeDescriptions { get; set; }
 
         [XmlElement("nodeName")]
-        public string NodeName { get; set; }
+        public string[] NodeNames { get; set; }
 
         [XmlElement("numExecutors")]
         public int NumExecutors { get; set; }

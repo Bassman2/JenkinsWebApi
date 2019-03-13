@@ -11,8 +11,11 @@ namespace JenkinsWebApi.Model
         [XmlElement("downstreamProject")]
         public JenkinsAbstractProject[] DownstreamProjects { get; set; }
 
+        [XmlElement("labelExpression")]
+        public string[] LabelExpressions { get; set; }
+
         [XmlElement("scm")]
-        public JenkinsSCM Scm { get; set; }
+        public JenkinsSCM[] Scms { get; set; }
 
         [XmlElement("upstreamProject")]
         public JenkinsAbstractProject[] UpstreamProjects { get; set; }

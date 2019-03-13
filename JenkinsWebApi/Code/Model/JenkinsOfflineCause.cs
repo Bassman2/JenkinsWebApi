@@ -2,11 +2,11 @@ using System.Xml.Serialization;
 
 namespace JenkinsWebApi.Model
 {
-    // hudson.model.Queue-StubTask
-    public partial class JenkinsQueueStubTask
+    // hudson.slaves.OfflineCause
+    public partial class JenkinsOfflineCause
     {
-        [XmlElement("name")]
-        public string Name { get; set; }
+        [XmlElement("timestamp")]
+        public long Timestamp { get; set; }
 
         /// <summary>
         /// Jenkins Java class name.

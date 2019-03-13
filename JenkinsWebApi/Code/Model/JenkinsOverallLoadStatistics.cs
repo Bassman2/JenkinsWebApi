@@ -6,7 +6,7 @@ namespace JenkinsWebApi.Model
     public partial class JenkinsOverallLoadStatistics : JenkinsLoadStatistics
     {
         [XmlElement("totalQueueLength")]
-        public JenkinsMultiStageTimeSeries TotalQueueLength { get; set; }
+        public JenkinsMultiStageTimeSeries[] TotalQueueLengths { get; set; }
 
     }
 }

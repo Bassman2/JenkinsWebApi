@@ -11,20 +11,29 @@ namespace JenkinsWebApi.Model
         [XmlElement("duration")]
         public object Duration { get; set; }
 
+        [XmlElement("enclosingBlockName")]
+        public string[] EnclosingBlockNames { get; set; }
+
+        [XmlElement("enclosingBlock")]
+        public string[] EnclosingBlocks { get; set; }
+
         [XmlElement("id")]
-        public string Id { get; set; }
+        public string[] Ids { get; set; }
 
         [XmlElement("name")]
-        public string Name { get; set; }
+        public string[] Names { get; set; }
+
+        [XmlElement("nodeId")]
+        public string[] NodeIds { get; set; }
 
         [XmlElement("stderr")]
-        public string Stderr { get; set; }
+        public string[] Stderrs { get; set; }
 
         [XmlElement("stdout")]
-        public string Stdout { get; set; }
+        public string[] Stdouts { get; set; }
 
         [XmlElement("timestamp")]
-        public string Timestamp { get; set; }
+        public string[] Timestamps { get; set; }
 
         /// <summary>
         /// Jenkins Java class name.

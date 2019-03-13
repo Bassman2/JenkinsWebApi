@@ -3,20 +3,19 @@ using System.Xml.Serialization;
 namespace JenkinsWebApi.Model
 {
     // hudson.model.User
-    [XmlRoot("user")]
     public partial class JenkinsUser
     {
         [XmlElement("absoluteUrl")]
-        public string AbsoluteUrl { get; set; }
+        public string[] AbsoluteUrls { get; set; }
 
         [XmlElement("description")]
-        public string Description { get; set; }
+        public string[] Descriptions { get; set; }
 
         [XmlElement("fullName")]
-        public string FullName { get; set; }
+        public string[] FullNames { get; set; }
 
         [XmlElement("id")]
-        public string Id { get; set; }
+        public string[] Ids { get; set; }
 
         [XmlElement("property")]
         public JenkinsUserProperty[] Propertys { get; set; }

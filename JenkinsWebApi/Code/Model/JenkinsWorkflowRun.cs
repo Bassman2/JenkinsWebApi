@@ -9,11 +9,14 @@ namespace JenkinsWebApi.Model
         [XmlElement("changeSet")]
         public JenkinsChangeLogSet[] ChangeSets { get; set; }
 
+        [XmlElement("culprit")]
+        public JenkinsUser[] Culprits { get; set; }
+
         [XmlElement("nextBuild")]
-        public JenkinsWorkflowRun NextBuild { get; set; }
+        public JenkinsWorkflowRun[] NextBuilds { get; set; }
 
         [XmlElement("previousBuild")]
-        public JenkinsWorkflowRun PreviousBuild { get; set; }
+        public JenkinsWorkflowRun[] PreviousBuilds { get; set; }
 
     }
 }

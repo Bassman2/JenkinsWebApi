@@ -9,7 +9,7 @@ namespace JenkinsWebApi.Model
         public object[] Items { get; set; }
 
         [XmlElement("kind")]
-        public string Kind { get; set; }
+        public string[] Kinds { get; set; }
 
         /// <summary>
         /// Jenkins Java class name.
