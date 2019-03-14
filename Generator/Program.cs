@@ -167,7 +167,7 @@ namespace Generator
                 switch (name)
                 {
                 case "executable": res = "JenkinsExecutor"; break;
-                case "job": res = "JenkinsJob"; break;
+                case "job": res = "JenkinsModelJob"; break;
                 case "task": res = "object"; break;
                 case "action": res = "object"; break;
                 case "result": res = "JenkinsResult"; break;

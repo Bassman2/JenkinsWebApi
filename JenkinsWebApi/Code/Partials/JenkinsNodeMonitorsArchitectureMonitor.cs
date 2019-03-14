@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 
 namespace JenkinsWebApi.Model
 {
-    public class JenkinsArchitectureMonitor
+    public class JenkinsNodeMonitorsArchitectureMonitor
     {
         [XmlText]
         public string Architecture { get; set; }

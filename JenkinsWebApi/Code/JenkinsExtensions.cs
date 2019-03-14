@@ -17,7 +17,7 @@ namespace JenkinsWebApi
         /// <param name="parameters">Parameter list for the Jenkins job.</param>
         /// <param name="pollingTime">Polling time in milliseconds. The default value is 5 seconds.</param>
         /// <returns>Finished build</returns>
-        public static JenkinsRun RunJobComplete(this Jenkins jenkins, string name, JenkinsBuildParameters parameters = null, int pollingTime = 5000)
+        public static JenkinsModelRun RunJobComplete(this Jenkins jenkins, string name, JenkinsBuildParameters parameters = null, int pollingTime = 5000)
         {
             //    int num = -1;
             //    JenkinsRun build = null;

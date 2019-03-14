@@ -2,7 +2,7 @@
 
 namespace JenkinsWebApi.Model
 {
-    public class JenkinsSwapSpaceMonitor
+    public class JenkinsNodeMonitorsSwapSpaceMonitor
     {
         [XmlElement("availablePhysicalMemory")]
         public ulong AvailablePhysicalMemory { get; set; }

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace JenkinsWebApi.Model
 {
-    public partial class JenkinsRun
+    public partial class JenkinsModelRun
     {
         public TimeSpan? DurationTimeSpan { get { return XmlConverter.ToTimeSpan(this.Duration); } }
 

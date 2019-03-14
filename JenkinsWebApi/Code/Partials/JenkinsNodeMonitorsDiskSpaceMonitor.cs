@@ -2,7 +2,7 @@
 
 namespace JenkinsWebApi.Model
 {
-    public class JenkinsTemporarySpaceMonitor
+    public class JenkinsNodeMonitorsDiskSpaceMonitor
     {
         [XmlElement("timestamp")]
         public ulong Timestamp { get; set; }

@@ -9,7 +9,7 @@ namespace JenkinsWebApi.Model
         public JenkinsModelHealthReport[] HealthReports { get; set; }
 
         [XmlElement("job")]
-        public JenkinsJob[] Jobs { get; set; }
+        public JenkinsModelJob[] Jobs { get; set; }
 
         [XmlElement("primaryView")]
         public JenkinsModelView PrimaryView { get; set; }

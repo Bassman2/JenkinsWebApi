@@ -9,7 +9,7 @@ namespace JenkinsWebApi.Model
         public string Description { get; set; }
 
         [XmlElement("job")]
-        public JenkinsJob[] Jobs { get; set; }
+        public JenkinsModelJob[] Jobs { get; set; }
 
         [XmlElement("overallLoad")]
         public JenkinsModelOverallLoadStatistics OverallLoad { get; set; }

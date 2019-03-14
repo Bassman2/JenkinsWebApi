@@ -4,7 +4,7 @@ using System.Text;
 
 namespace JenkinsWebApi.Model
 {
-    public partial class JenkinsCaseResult
+    public partial class JenkinsTasksJunitCaseResult
     {
         
         //public object Duration { get; set; }

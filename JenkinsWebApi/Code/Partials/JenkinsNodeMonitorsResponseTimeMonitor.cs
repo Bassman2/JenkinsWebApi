@@ -2,7 +2,7 @@
 
 namespace JenkinsWebApi.Model
 {
-    public class JenkinsResponseTimeMonitor
+    public class JenkinsNodeMonitorsResponseTimeMonitor
     {
         [XmlElement("timestamp")]
         public ulong Timestamp { get; set; }

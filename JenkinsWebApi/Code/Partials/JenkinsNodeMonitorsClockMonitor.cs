@@ -2,7 +2,7 @@
 
 namespace JenkinsWebApi.Model
 {
-    public class JenkinsClockMonitor
+    public class JenkinsNodeMonitorsClockMonitor
     {
         [XmlElement("diff")]
         public ulong Diff { get; set; }

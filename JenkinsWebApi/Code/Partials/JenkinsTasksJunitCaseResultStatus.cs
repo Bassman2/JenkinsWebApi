@@ -2,7 +2,7 @@
 
 namespace JenkinsWebApi.Model
 {
-    public enum JenkinsResult
+    public enum JenkinsTasksJunitCaseResultStatus
     {
         /// <summary>
         /// Build was successfully completed.

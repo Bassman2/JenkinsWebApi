@@ -45,7 +45,7 @@ namespace JenkinsWebApi.Model
         public long QueueId { get; set; }
 
         [XmlElement("result")]
-        public JenkinsResult Result { get; set; }
+        public JenkinsTasksTestTestResult Result { get; set; }
 
         [XmlElement("timestamp")]
         public long Timestamp { get; set; }
