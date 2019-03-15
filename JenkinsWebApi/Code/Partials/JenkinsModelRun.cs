@@ -11,6 +11,6 @@ namespace JenkinsWebApi.Model
 
         public TimeSpan? EstimatedDurationTimeSpan { get { return XmlConverter.ToTimeSpan(this.EstimatedDuration); } }
 
-        //public long Timestamp { get; set; }
+        public DateTime? TimestampDateTime {  get { return XmlConverter.ToDateTime(this.Timestamp); } }
     }
 }
