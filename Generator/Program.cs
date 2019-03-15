@@ -170,7 +170,7 @@ namespace Generator
                 case "job": res = "JenkinsModelJob"; break;
                 case "task": res = "object"; break;
                 case "action": res = "object"; break;
-                case "result": res = "JenkinsResult"; break;
+                case "result": res = "JenkinsTasksTestTestResult"; break;
                 case "currentExecutable": res = "object"; break;
                 case "property": res = "object"; break;
                 case "timestamp": res = "object"; break;

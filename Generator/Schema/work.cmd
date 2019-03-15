@@ -14,6 +14,7 @@ rem views
 dl -u bs -p ente51 -o categorizedJobsView.xsd  http://localhost:8080/view/Categorization/api/schema
 dl -u bs -p ente51 -o listView.xsd http://localhost:8080/view/Test/api/schema
 dl -u bs -p ente51 -o myView.xsd "http://localhost:8080/view/my view/api/schema"
+dl -u bs -p ente51 -o dashboard.xsd "http://localhost:8080/view/Dashboard/api/schema"
 
 rem jobs & builds
 dl -u bs -p ente51 -o externalJob.xsd "http://localhost:8080/job/External Job/api/schema"
@@ -32,6 +33,9 @@ dl -u bs -p ente51 -o matrixBuild.xsd http://localhost:8080/job/Multiconfigurati
 
 dl -u bs -p ente51 -o workflowJob.xsd http://localhost:8080/job/Pipeline/api/schema
 dl -u bs -p ente51 -o workflowRun.xsd http://localhost:8080/job/Pipeline/1/api/schema
+
+dl -u bs -p ente51 -o multijobJob.xsd http://localhost:8080/job/MultiJob/api/schema
+dl -u bs -p ente51 -o multijobRun.xsd http://localhost:8080/job/MultiJob/1/api/schema
 
 rem test result
 dl -u bs -p ente51 -o testResult.xsd "http://localhost:8080/job/Freestyle Test Doc/9/testReport/api/schema"
