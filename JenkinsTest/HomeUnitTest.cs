@@ -17,8 +17,8 @@ namespace JenkinsTest
         public HomeUnitTest()
         {
             this.host = "http://localhost:8080";
-            this.login = "bs";
-            this.password = "ente51";
+            this.login = "";
+            this.password = "";
 
             //this.serverMode = JenkinsNodeMode.Normal;
         }
