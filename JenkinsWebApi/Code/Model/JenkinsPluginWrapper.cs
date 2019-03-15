@@ -42,7 +42,7 @@ namespace JenkinsWebApi.Model
         public string ShortName { get; set; }
 
         [XmlElement("supportsDynamicLoad")]
-        public JenkinsJenkinsYesNoMaybe SupportsDynamicLoad { get; set; }
+        public JenkinsYesNoMaybe SupportsDynamicLoad { get; set; }
 
         [XmlElement("url")]
         public string Url { get; set; }
