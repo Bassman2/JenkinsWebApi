@@ -37,9 +37,13 @@
         </para>
 
         <para>
-          See the <legacyBold>Jenkins</legacyBold> topics for more information.
+          See the <legacyBold>JenkinsWebApi</legacyBold> topics for more information.
         </para>
 
+        <para>
+          The <legacyBold>JenkinsWebApi.Model</legacyBold> classes are generated and have no comments.
+        </para>
+        
         <para>
           Feel free to contact me if you need additional features or find bugs.
         </para>

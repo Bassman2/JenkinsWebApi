@@ -1,60 +1,21 @@
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
+#pragma warning disable CS1591
 
 namespace JenkinsWebApi.Model
 {
-    // hudson.model.Computer
-    public partial class JenkinsModelComputer : JenkinsModelActionable
+    
+    public partial class JenkinsModelComputer
     {
-        [XmlElement("assignedLabel")]
-        public JenkinsModelLabelsLabelAtom[] AssignedLabels { get; set; }
-
-        [XmlElement("description")]
-        public string Description { get; set; }
-
-        [XmlElement("displayName")]
-        public string DisplayName { get; set; }
-
-        [XmlElement("executor")]
-        public JenkinsModelExecutor[] Executors { get; set; }
-
-        [XmlElement("icon")]
-        public string Icon { get; set; }
-
-        [XmlElement("iconClassName")]
-        public string IconClassName { get; set; }
-
-        [XmlElement("idle")]
-        public bool IsIdle { get; set; }
-
-        [XmlElement("jnlpAgent")]
-        public bool IsJnlpAgent { get; set; }
-
-        [XmlElement("launchSupported")]
-        public bool IsLaunchSupported { get; set; }
-
-        [XmlElement("loadStatistics")]
-        public JenkinsModelLoadStatistics LoadStatistics { get; set; }
-
-        [XmlElement("manualLaunchAllowed")]
-        public bool IsManualLaunchAllowed { get; set; }
-
-        [XmlElement("numExecutors")]
-        public int NumExecutors { get; set; }
-
-        [XmlElement("offline")]
-        public bool IsOffline { get; set; }
-
-        [XmlElement("offlineCause")]
-        public JenkinsSlavesOfflineCause OfflineCause { get; set; }
-
-        [XmlElement("offlineCauseReason")]
-        public string OfflineCauseReason { get; set; }
-
-        [XmlElement("oneOffExecutor")]
-        public JenkinsModelOneOffExecutor[] OneOffExecutors { get; set; }
-
-        [XmlElement("temporarilyOffline")]
-        public bool IsTemporarilyOffline { get; set; }
-
+        /// <summary>
+        /// Access to moitors.
+        /// </summary>
+        [XmlArray("monitorData")]
+        [XmlArrayItem("hudson.node_monitors.SwapSpaceMonitor", typeof(JenkinsNodeMonitorsSwapSpaceMonitor))]
+        [XmlArrayItem("hudson.node_monitors.TemporarySpaceMonitor ", typeof(JenkinsNodeMonitorsTemporarySpaceMonitor))]
+        [XmlArrayItem("hudson.node_monitors.DiskSpaceMonitor", typeof(JenkinsNodeMonitorsDiskSpaceMonitor))]
+        [XmlArrayItem("hudson.node_monitors.ArchitectureMonitor", typeof(JenkinsNodeMonitorsArchitectureMonitor))]
+        [XmlArrayItem("hudson.node_monitors.ResponseTimeMonitor ", typeof(JenkinsNodeMonitorsResponseTimeMonitor))]
+        [XmlArrayItem("hudson.node_monitors.ClockMonitor ", typeof(JenkinsNodeMonitorsClockMonitor))]
+        public object[] MonitorData { get; set; }
     }
 }

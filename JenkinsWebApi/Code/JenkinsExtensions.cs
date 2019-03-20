@@ -42,14 +42,14 @@ namespace JenkinsWebApi
             return null;
         }
 
-        /// <summary>
-        /// Run Jenkins job complete asynchron.
-        /// </summary>
-        /// <param name="jenkins">Jenkins this parameter</param>
-        /// <param name="name">Name of the Jenkins job.</param>
-        /// <param name="parameters">Parameter list for the Jenkins job.</param>
-        /// <param name="pollingTime">Polling time in milliseconds. The default value is 5 seconds.</param>
-        /// <returns>Finished build</returns>
+        ///// <summary>
+        ///// Run Jenkins job complete asynchron.
+        ///// </summary>
+        ///// <param name="jenkins">Jenkins this parameter</param>
+        ///// <param name="name">Name of the Jenkins job.</param>
+        ///// <param name="parameters">Parameter list for the Jenkins job.</param>
+        ///// <param name="pollingTime">Polling time in milliseconds. The default value is 5 seconds.</param>
+        ///// <returns>Finished build</returns>
         //public async static Task<JenkinsRun> RunJobCompleteAsync(this Jenkins jenkins, string name, JenkinsBuildParameters parameters = null, int pollingTime = 5000)
         //{
         //    int num = -1;

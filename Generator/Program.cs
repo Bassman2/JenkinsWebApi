@@ -203,7 +203,11 @@ namespace Generator
             {
                 name = name.Substring(7);
             }
-            
+            if (name.StartsWith("jenkins."))
+            {
+                name = name.Substring(8);
+            }
+
             StringBuilder sb = new StringBuilder(name);
             
             sb.Replace(".a", "A");
@@ -251,6 +255,8 @@ namespace Generator
                 using (StreamWriter writer = File.CreateText(Path.Combine(dir, $"{className}.cs")))
                 {
                     writer.WriteLine("using System.Xml.Serialization;");
+                    writer.WriteLine();
+                    writer.WriteLine("#pragma warning disable CS1591");
                     writer.WriteLine();
                     writer.WriteLine("namespace JenkinsWebApi.Model");
                     writer.WriteLine("{");
@@ -312,10 +318,12 @@ namespace Generator
 
             foreach (var st in simpleTypes)
             {
-                string className = "Jenkins" + LastItem(st.Name);
+                string className = CreateClassName(st.Name);
                 using (StreamWriter writer = File.CreateText(Path.Combine(dir, $"{className}.cs")))
                 {
                     writer.WriteLine("using System.Xml.Serialization;");
+                    writer.WriteLine();
+                    writer.WriteLine("#pragma warning disable CS1591");
                     writer.WriteLine();
                     writer.WriteLine("namespace JenkinsWebApi.Model");
                     writer.WriteLine("{");
