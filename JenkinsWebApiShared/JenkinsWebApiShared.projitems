@@ -86,7 +86,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsModelViewJob.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsModelViewPeople.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsModelViewUserInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsOrgJenkinsciPluginsBuildgraphviewBuildGraph.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsOrgJenkinsciPluginsCategorizedviewCategorizedJobsView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsOrgJenkinsciPluginsEnvinjectEnvInjectVarList.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsOrgJenkinsciPluginsWorkflowJobWorkflowJob.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsOrgJenkinsciPluginsWorkflowJobWorkflowRun.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsOrgJenkinsciPluginsWorkflowMultibranchWorkflowMultiBranchProject.cs" />

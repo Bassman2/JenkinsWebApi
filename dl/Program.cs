@@ -60,7 +60,6 @@ namespace dl
                 list.Add("remember_me", "on");
                 list.Add("Submit", "Anmelden");
                 var content = new FormUrlEncodedContent(list);
-                //var content = new StringContent("j_username=bs&j_password=ente51");
 
                 using (HttpResponseMessage response = client.PostAsync("http://localhost:8080/j_acegi_security_check", content).Result)
                 {
@@ -97,7 +96,7 @@ namespace dl
 
         public static void Help()
         {
-            Console.WriteLine("Download a file.");
+            Console.WriteLine("Download a schema file from Jenkins.");
             Console.WriteLine();
             Console.WriteLine("dl [-o path] [-u username] [-p password] [-h] url");
             Console.WriteLine();

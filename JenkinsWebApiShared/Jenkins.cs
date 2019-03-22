@@ -204,11 +204,11 @@ namespace JenkinsWebApi
         /// <summary>
         /// Get the data of one Jenkins user.
         /// </summary>
-        /// <param name="name">Name of the Jenkins user</param>
+        /// <param name="userName">Name of the Jenkins user</param>
         /// <returns>Jenkins user data</returns>
-        public async Task<JenkinsModelUser> GetUserAsync(string name)
+        public async Task<JenkinsModelUser> GetUserAsync(string userName)
         {
-            JenkinsModelUser user = await GetAsync<JenkinsModelUser>($"user/{name}/api/xml");
+            JenkinsModelUser user = await GetAsync<JenkinsModelUser>($"user/{userName}/api/xml");
             return user;
         }
 
@@ -227,16 +227,16 @@ namespace JenkinsWebApi
         /// <summary>
         /// Get the Jenkins job data.
         /// </summary>
-        /// <param name="name">Name of the job</param>
+        /// <param name="jobName">Name of the job</param>
         /// <returns>Jenkins job data</returns>
-        public async Task<JenkinsModelAbstractItem> GetJobAsync(string name)
+        public async Task<JenkinsModelAbstractItem> GetJobAsync(string jobName)
         {
-            if (string.IsNullOrEmpty(name))
+            if (string.IsNullOrEmpty(jobName))
             {
-                throw new ArgumentNullException(nameof(name));
+                throw new ArgumentNullException(nameof(jobName));
             }
             
-            string str = await GetStringAsync($"job/{name}/api/xml");
+            string str = await GetStringAsync($"job/{jobName}/api/xml");
             JenkinsModelAbstractItem job = Deserialize<JenkinsModelAbstractItem>(str, jobTypes);
             return job;
         }
@@ -244,16 +244,16 @@ namespace JenkinsWebApi
         /// <summary>
         /// Get the Jenkins view data.
         /// </summary>
-        /// <param name="name">Name of the view</param>
+        /// <param name="viewName">Name of the view</param>
         /// <returns></returns>
-        public async Task<JenkinsModelView> GetViewAsync(string name)
+        public async Task<JenkinsModelView> GetViewAsync(string viewName)
         {
-            if (string.IsNullOrEmpty(name))
+            if (string.IsNullOrEmpty(viewName))
             {
-                throw new ArgumentNullException(nameof(name));
+                throw new ArgumentNullException(nameof(viewName));
             }
 
-            string str = await GetStringAsync($"view/{name}/api/xml");
+            string str = await GetStringAsync($"view/{viewName}/api/xml");
             JenkinsModelView view = Deserialize<JenkinsModelView>(str, viewTypes);
             return view;
         }
@@ -261,17 +261,17 @@ namespace JenkinsWebApi
         /// <summary>
         /// Get the Jenkins build data.
         /// </summary>
-        /// <param name="name">Name of the Jenkins job</param>
-        /// <param name="number">Number of the Jenkins build</param>
+        /// <param name="jobName">Name of the Jenkins job</param>
+        /// <param name="buildNum">Number of the Jenkins build</param>
         /// <returns>Jenkins build data</returns>
-        public async Task<JenkinsModelRun> GetBuildAsync(string name, int number)
+        public async Task<JenkinsModelRun> GetBuildAsync(string jobName, int buildNum)
         {
-            if (string.IsNullOrEmpty(name))
+            if (string.IsNullOrEmpty(jobName))
             {
-                throw new ArgumentException(nameof(name));
+                throw new ArgumentException(nameof(jobName));
             }
 
-            string str = await GetStringAsync($"job/{name}/{number}/api/xml");
+            string str = await GetStringAsync($"job/{jobName}/{buildNum}/api/xml");
             JenkinsModelRun build = Deserialize<JenkinsModelRun>(str, buildTypes);
             return build;
         }
@@ -279,16 +279,16 @@ namespace JenkinsWebApi
         /// <summary>
         /// Get the last build
         /// </summary>
-        /// <param name="name">Name of the Jenkins job</param>
+        /// <param name="jobName">Name of the Jenkins job</param>
         /// <returns>Jenkins build data</returns>
-        public async Task<JenkinsModelRun> GetLastBuildAsync(string name)
+        public async Task<JenkinsModelRun> GetLastBuildAsync(string jobName)
         {
-            if (string.IsNullOrEmpty(name))
+            if (string.IsNullOrEmpty(jobName))
             {
-                throw new ArgumentException(nameof(name));
+                throw new ArgumentException(nameof(jobName));
             }
 
-            string str = await GetStringAsync($"job/{name}/lastBuild/api/xml");
+            string str = await GetStringAsync($"job/{jobName}/lastBuild/api/xml");
             JenkinsModelRun build = Deserialize<JenkinsModelRun>(str, buildTypes);
             return build;
         }
@@ -296,17 +296,17 @@ namespace JenkinsWebApi
         /// <summary>
         /// Get the Jenkins build test report.
         /// </summary>
-        /// <param name="name">Name of the Jenkins job</param>
-        /// <param name="number">Number of the Jenkins build</param>
+        /// <param name="jobName">Name of the Jenkins job</param>
+        /// <param name="buildNum">Number of the Jenkins build</param>
         /// <returns>Jenkins build test report if available; null if not</returns>
-        public async Task<JenkinsTasksJunitTestResult> GetTestReportAsync(string name, int number)
+        public async Task<JenkinsTasksJunitTestResult> GetTestReportAsync(string jobName, int buildNum)
         {
-            if (string.IsNullOrEmpty(name))
+            if (string.IsNullOrEmpty(jobName))
             {
-                throw new ArgumentNullException(nameof(name));
+                throw new ArgumentNullException(nameof(jobName));
             }
 
-            JenkinsTasksJunitTestResult report = await GetAsync<JenkinsTasksJunitTestResult>($"/job/{name}/{number}/testReport/api/xml");
+            JenkinsTasksJunitTestResult report = await GetAsync<JenkinsTasksJunitTestResult>($"/job/{jobName}/{buildNum}/testReport/api/xml");
             return report;
         }
 
@@ -373,26 +373,52 @@ namespace JenkinsWebApi
         }
 
         /// <summary>
+        /// Get environment variable list
+        /// </summary>
+        /// <param name="jobName">Name of the Jenkins job</param>
+        /// <param name="buildNum">Number of the Jenkins build</param>
+        /// <returns>Get environment variables</returns>
+        /// <remarks>Plugin &quot;Environment Injector Plugin&quot; must be installed </remarks>
+        public async Task<JenkinsOrgJenkinsciPluginsEnvinjectEnvInjectVarList> GetEnvInjectVarListAsync(string jobName, int buildNum)
+        {
+            JenkinsOrgJenkinsciPluginsEnvinjectEnvInjectVarList label = await GetAsync<JenkinsOrgJenkinsciPluginsEnvinjectEnvInjectVarList>($"job/{jobName}/{buildNum}/injectedEnvVars/api/xml");
+            return label;
+        }
+
+        /// <summary>
+        /// Get build graph
+        /// </summary>
+        /// <param name="jobName">Name of the Jenkins job</param>
+        /// <param name="buildNum">Number of the Jenkins build</param>
+        /// <returns>Get graph information</returns>
+        /// <remarks>Plugin &quot;buildgraph-view&quot; must be installed </remarks>
+        public async Task<JenkinsOrgJenkinsciPluginsBuildgraphviewBuildGraph> GetBuildGraph(string jobName, int buildNum)
+        {
+            JenkinsOrgJenkinsciPluginsBuildgraphviewBuildGraph label = await GetAsync<JenkinsOrgJenkinsciPluginsBuildgraphviewBuildGraph>($"job/{jobName}/{buildNum}/BuildGraph/api/xml");
+            return label;
+        }
+
+        /// <summary>
         /// Run a Jenkins job.
         /// </summary>
-        /// <param name="name">Name of the Jenkins job</param>
+        /// <param name="jobName">Name of the Jenkins job</param>
         /// <param name="parameters">Parameters for the Jenkins job</param>
         /// <returns>Result and number of the Jenkins build</returns>
-        public async Task<object> RunJobAsync(string name, JenkinsBuildParameters parameters = null)
+        public async Task<object> RunJobAsync(string jobName, JenkinsBuildParameters parameters = null)
         {
-            if (string.IsNullOrEmpty(name))
+            if (string.IsNullOrEmpty(jobName))
             {
-                throw new ArgumentNullException(nameof(name));
+                throw new ArgumentNullException(nameof(jobName));
             }
 
             Uri location = null;
             if (parameters == null || parameters.IsEmpty)
             {
-                location = await PostRunAsync($"/job/{name}/build?delay=0sec", null);
+                location = await PostRunAsync($"/job/{jobName}/build?delay=0sec", null);
             }
             else 
             {
-                location = await PostRunAsync($"/job/{name}/build?delay=0sec", parameters);
+                location = await PostRunAsync($"/job/{jobName}/build?delay=0sec", parameters);
             }
 
 
@@ -415,16 +441,16 @@ namespace JenkinsWebApi
         /// <summary>
         /// Stop a running Jenkins build
         /// </summary>
-        /// <param name="name">Name of the Jenkins job</param>
-        /// <param name="number">Number of the Jenkins build</param>
-        public async Task StopJobAsync(string name, int number)
+        /// <param name="jobName">Name of the Jenkins job</param>
+        /// <param name="buildNum">Number of the Jenkins build</param>
+        public async Task StopJobAsync(string jobName, int buildNum)
         {
-            if (string.IsNullOrEmpty(name))
+            if (string.IsNullOrEmpty(jobName))
             {
-                throw new ArgumentNullException(nameof(name));
+                throw new ArgumentNullException(nameof(jobName));
             }
 
-            await PostRunAsync($"/job/{name}/{number}/stop", null);
+            await PostRunAsync($"/job/{jobName}/{buildNum}/stop", null);
         }
 
 
