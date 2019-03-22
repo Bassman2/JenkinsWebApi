@@ -11,9 +11,21 @@
   <xsd:complexType name="jenkins.branch.MultiBranchProject">
     <xsd:complexContent>
       <xsd:extension base="com.cloudbees.hudson.plugins.folder.computed.ComputedFolder">
-        <xsd:sequence/>
+        <xsd:sequence>
+          <xsd:element name="source" type="jenkins.branch.BranchSource" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
       </xsd:extension>
     </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="jenkins.branch.BranchSource">
+    <xsd:sequence>
+      <xsd:element name="source" type="jenkins.scm.api.SCMSource" minOccurs="0"/>
+    </xsd:sequence>
+    <xsd:attribute name="_class" type="xsd:string" use="optional"/>
+  </xsd:complexType>
+  <xsd:complexType name="jenkins.scm.api.SCMSource">
+    <xsd:sequence/>
+    <xsd:attribute name="_class" type="xsd:string" use="optional"/>
   </xsd:complexType>
   <xsd:complexType name="com.cloudbees.hudson.plugins.folder.computed.ComputedFolder">
     <xsd:complexContent>

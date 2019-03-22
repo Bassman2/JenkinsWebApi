@@ -56,11 +56,11 @@ namespace JenkinsTest
         [TestMethod]
         public void RunTest()
         {
-            JenkinsRun build;
+            //JenkinsRun build;
 
             using (Jenkins jenkins = new Jenkins(host, this.login, this.password))
             {
-                build = jenkins.RunJobComplete("Freestyle Test Pure");
+                /*build =*/var x= jenkins.RunJobAsync("Freestyle Test Pure").Result;
             }
 
             //Assert.AreEqual(JenkinsResult.Success, build.Result, "build.Result");

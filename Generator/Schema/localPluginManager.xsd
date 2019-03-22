@@ -25,6 +25,7 @@
       <xsd:element name="enabled" type="xsd:boolean"/>
       <xsd:element name="hasUpdate" type="xsd:boolean"/>
       <xsd:element name="longName" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="minimumJavaVersion" type="xsd:string" minOccurs="0"/>
       <xsd:element name="pinned" type="xsd:boolean"/>
       <xsd:element name="requiredCoreVersion" type="xsd:string" minOccurs="0"/>
       <xsd:element name="shortName" type="xsd:string" minOccurs="0"/>

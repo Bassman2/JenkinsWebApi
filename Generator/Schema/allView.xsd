@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="allView" type="hudson.model.AllView"/>
+  <xsd:complexType name="hudson.model.AllView">
+    <xsd:complexContent>
+      <xsd:extension base="hudson.model.View">
+        <xsd:sequence/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="hudson.model.View">
+    <xsd:sequence>
+      <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="job" type="xsd:anyType" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="name" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="property" type="xsd:anyType" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="url" type="xsd:string" minOccurs="0"/>
+    </xsd:sequence>
+    <xsd:attribute name="_class" type="xsd:string" use="optional"/>
+  </xsd:complexType>
+</xsd:schema>
+

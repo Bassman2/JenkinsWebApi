@@ -19,8 +19,11 @@
     <xsd:sequence>
       <xsd:element name="case" type="hudson.tasks.junit.CaseResult" minOccurs="0" maxOccurs="unbounded"/>
       <xsd:element name="duration" type="xsd:anyType"/>
+      <xsd:element name="enclosingBlockName" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="enclosingBlock" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
       <xsd:element name="id" type="xsd:string" minOccurs="0"/>
       <xsd:element name="name" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="nodeId" type="xsd:string" minOccurs="0"/>
       <xsd:element name="stderr" type="xsd:string" minOccurs="0"/>
       <xsd:element name="stdout" type="xsd:string" minOccurs="0"/>
       <xsd:element name="timestamp" type="xsd:string" minOccurs="0"/>

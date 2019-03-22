@@ -28,17 +28,17 @@ namespace JenkinsWebApi
 
         private static Type[] viewTypes = AppDomain.CurrentDomain.GetAssemblies()
                                         .SelectMany(s => s.GetTypes())
-                                        .Where(t => typeof(JenkinsView).IsAssignableFrom(t) && t.IsClass && !t.IsGenericType && !t.IsAbstract)
+                                        .Where(t => typeof(JenkinsModelView).IsAssignableFrom(t) && t.IsClass && !t.IsGenericType && !t.IsAbstract)
                                         .ToArray();
 
         private static Type[] jobTypes = AppDomain.CurrentDomain.GetAssemblies()
                                         .SelectMany(s => s.GetTypes())
-                                        .Where(t => typeof(JenkinsJob).IsAssignableFrom(t) && t.IsClass && !t.IsGenericType && !t.IsAbstract)
+                                        .Where(t => typeof(JenkinsModelJob).IsAssignableFrom(t) && t.IsClass && !t.IsGenericType && !t.IsAbstract)
                                         .ToArray();
 
         private static Type[] buildTypes = AppDomain.CurrentDomain.GetAssemblies()
                                         .SelectMany(s => s.GetTypes())
-                                        .Where(t => typeof(JenkinsAbstractBuild).IsAssignableFrom(t) && t.IsClass && !t.IsGenericType && !t.IsAbstract)
+                                        .Where(t => typeof(JenkinsModelAbstractBuild).IsAssignableFrom(t) && t.IsClass && !t.IsGenericType && !t.IsAbstract)
                                         .ToArray();
 
         /// <summary>
@@ -62,6 +62,10 @@ namespace JenkinsWebApi
             this.client.BaseAddress = host;
         }
 
+        /// <summary>
+        /// Initializes a new instance of the Jenkins class.
+        /// </summary>
+        /// <param name="host">Host URL of the Jenkins server</param>
         public Jenkins(string host) : this(new Uri(host))
         { }
 
@@ -80,6 +84,12 @@ namespace JenkinsWebApi
             }
         }
 
+        /// <summary>
+        /// Initializes a new instance of the Jenkins class.
+        /// </summary>
+        /// <param name="host">Host URL of the Jenkins server</param>
+        /// <param name="login">Login for the Jenkins server</param>
+        /// <param name="password">Password for the Jenkins server</param>
         public Jenkins(string host, string login, string password) : this(new Uri(host), login, password)
         { }
         
@@ -124,14 +134,12 @@ namespace JenkinsWebApi
             list.Add("j_username", login);
             list.Add("j_password", password);
             list.Add("remember_me", "on");
-            //list.Add("from", "%2F");
-            //list.Add("xml", "%7B%22j_username%22%3A+%22bs%22%2C+%22j_password%22%3A+%22VisualEnte6.1Sp0%22%2C+%22remember_me%22%3A+true%2C+%22from%22%3A+%22%2F%22%7D");
             list.Add("Submit", "Anmelden");
             
             var res = PostLoginAsync("j_acegi_security_check", new FormUrlEncodedContent(list)).Result;
             if (res)
             {
-            Crumb();
+                Crumb();
             }
             return res;
         }
@@ -142,7 +150,7 @@ namespace JenkinsWebApi
             // handle CSRF Protection
             try
             {
-                JenkinsDefaultCrumbIssuer crumb = GetAsync<JenkinsDefaultCrumbIssuer>("crumbIssuer/api/xml").Result;
+                JenkinsSecurityCsrfDefaultCrumbIssuer crumb = GetAsync<JenkinsSecurityCsrfDefaultCrumbIssuer>("crumbIssuer/api/xml").Result;
                 this.client.DefaultRequestHeaders.Add(crumb.CrumbRequestField, crumb.Crumb);
             }
             catch (Exception ex)
@@ -155,9 +163,9 @@ namespace JenkinsWebApi
         /// Get the Jenkins server configuration.
         /// </summary>
         /// <returns>Jenkins server configuration</returns>
-        public async Task<JenkinsHudson> GetServerAsync()
+        public async Task<JenkinsModelHudson> GetServerAsync()
         {
-            JenkinsHudson server = await GetAsync<JenkinsHudson>("api/xml");
+            JenkinsModelHudson server = await GetAsync<JenkinsModelHudson>("api/xml");
             return server;
         }
 
@@ -166,41 +174,41 @@ namespace JenkinsWebApi
         /// </summary>
         /// <returns>Jenkins server credentials</returns>
         /// <remark>Only in V2 or above</remark>
-        public async Task<JenkinsViewCredentialsActionRootActionImpl> GetCredentialsAsync()
+        public async Task<JenkinsComCloudbeesPluginsCredentialsViewCredentialsActionRootActionImpl> GetCredentialsAsync()
         {
-            JenkinsViewCredentialsActionRootActionImpl credentials = await GetAsync<JenkinsViewCredentialsActionRootActionImpl>("credentials/api/xml");
+            JenkinsComCloudbeesPluginsCredentialsViewCredentialsActionRootActionImpl credentials = await GetAsync<JenkinsComCloudbeesPluginsCredentialsViewCredentialsActionRootActionImpl>("credentials/api/xml");
             return credentials;
-        }        
+        }
 
         /// <summary>
         /// Get a list of all Jenkins users.
         /// </summary>
         /// <returns>List of all Jenkins users</returns>
         /// <remarks>For compatibility to old Jenkins version. For new version use GetAsyncPeopleAsync instead.</remarks>
-        public async Task<JenkinsViewPeople> GetPeopleAsync()
+        public async Task<JenkinsModelViewPeople> GetPeopleAsync()
         {
-            JenkinsViewPeople people = await GetAsync<JenkinsViewPeople>("people/api/xml");
-                return people;
-            }
+            JenkinsModelViewPeople people = await GetAsync<JenkinsModelViewPeople>("people/api/xml");
+            return people;
+        }
 
         /// <summary>
         /// Get a list of all Jenkins users.
         /// </summary>
         /// <returns>List of all Jenkins users</returns>
-        public async Task<JenkinsViewAsynchPeoplePeople> GetAsyncPeopleAsync()
-            {
-           JenkinsViewAsynchPeoplePeople people = await GetAsync<JenkinsViewAsynchPeoplePeople>("asynchPeople/api/xml");
-                return people;
-            }
+        public async Task<JenkinsModelViewAsynchPeoplePeople> GetAsyncPeopleAsync()
+        {
+            JenkinsModelViewAsynchPeoplePeople people = await GetAsync<JenkinsModelViewAsynchPeoplePeople>("asynchPeople/api/xml");
+            return people;
+        }
 
         /// <summary>
         /// Get the data of one Jenkins user.
         /// </summary>
         /// <param name="name">Name of the Jenkins user</param>
         /// <returns>Jenkins user data</returns>
-        public async Task<JenkinsUser> GetUserAsync(string name)
+        public async Task<JenkinsModelUser> GetUserAsync(string name)
         {
-            JenkinsUser user = await GetAsync<JenkinsUser>($"user/{name}/api/xml");
+            JenkinsModelUser user = await GetAsync<JenkinsModelUser>($"user/{name}/api/xml");
             return user;
         }
 
@@ -208,9 +216,9 @@ namespace JenkinsWebApi
         /// Get the data of the current login user.
         /// </summary>
         /// <returns>Jenkins user data</returns>
-        public async Task<JenkinsUser> GetCurrentUserAsync()
+        public async Task<JenkinsModelUser> GetCurrentUserAsync()
         {
-            JenkinsUser user = await GetAsync<JenkinsUser>("me/api/xml");
+            JenkinsModelUser user = await GetAsync<JenkinsModelUser>("me/api/xml");
             return user;
         }
 
@@ -221,7 +229,7 @@ namespace JenkinsWebApi
         /// </summary>
         /// <param name="name">Name of the job</param>
         /// <returns>Jenkins job data</returns>
-        public async Task<JenkinsAbstractItem> GetJobAsync(string name)
+        public async Task<JenkinsModelAbstractItem> GetJobAsync(string name)
         {
             if (string.IsNullOrEmpty(name))
             {
@@ -229,7 +237,7 @@ namespace JenkinsWebApi
             }
             
             string str = await GetStringAsync($"job/{name}/api/xml");
-            JenkinsAbstractItem job = Deserialize<JenkinsAbstractItem>(str, jobTypes);
+            JenkinsModelAbstractItem job = Deserialize<JenkinsModelAbstractItem>(str, jobTypes);
             return job;
         }
         
@@ -238,7 +246,7 @@ namespace JenkinsWebApi
         /// </summary>
         /// <param name="name">Name of the view</param>
         /// <returns></returns>
-        public async Task<JenkinsView> GetViewAsync(string name)
+        public async Task<JenkinsModelView> GetViewAsync(string name)
         {
             if (string.IsNullOrEmpty(name))
             {
@@ -246,7 +254,7 @@ namespace JenkinsWebApi
             }
 
             string str = await GetStringAsync($"view/{name}/api/xml");
-            JenkinsView view = Deserialize<JenkinsView>(str, viewTypes);
+            JenkinsModelView view = Deserialize<JenkinsModelView>(str, viewTypes);
             return view;
         }
 
@@ -256,7 +264,7 @@ namespace JenkinsWebApi
         /// <param name="name">Name of the Jenkins job</param>
         /// <param name="number">Number of the Jenkins build</param>
         /// <returns>Jenkins build data</returns>
-        public async Task<JenkinsRun> GetBuildAsync(string name, int number)
+        public async Task<JenkinsModelRun> GetBuildAsync(string name, int number)
         {
             if (string.IsNullOrEmpty(name))
             {
@@ -264,11 +272,16 @@ namespace JenkinsWebApi
             }
 
             string str = await GetStringAsync($"job/{name}/{number}/api/xml");
-            JenkinsRun build = Deserialize<JenkinsRun>(str, buildTypes);
+            JenkinsModelRun build = Deserialize<JenkinsModelRun>(str, buildTypes);
             return build;
-            }
+        }
 
-        public async Task<JenkinsRun> GetLastBuildAsync(string name)
+        /// <summary>
+        /// Get the last build
+        /// </summary>
+        /// <param name="name">Name of the Jenkins job</param>
+        /// <returns>Jenkins build data</returns>
+        public async Task<JenkinsModelRun> GetLastBuildAsync(string name)
         {
             if (string.IsNullOrEmpty(name))
             {
@@ -276,7 +289,7 @@ namespace JenkinsWebApi
             }
 
             string str = await GetStringAsync($"job/{name}/lastBuild/api/xml");
-            JenkinsRun build = Deserialize<JenkinsRun>(str, buildTypes);
+            JenkinsModelRun build = Deserialize<JenkinsModelRun>(str, buildTypes);
             return build;
         }
 
@@ -286,36 +299,86 @@ namespace JenkinsWebApi
         /// <param name="name">Name of the Jenkins job</param>
         /// <param name="number">Number of the Jenkins build</param>
         /// <returns>Jenkins build test report if available; null if not</returns>
-        public async Task<JenkinsTestResult> GetTestReportAsync(string name, int number)
+        public async Task<JenkinsTasksJunitTestResult> GetTestReportAsync(string name, int number)
         {
             if (string.IsNullOrEmpty(name))
             {
                 throw new ArgumentNullException(nameof(name));
             }
-            
-            JenkinsTestResult report = await GetAsync<JenkinsTestResult>($"/job/{name}/{number}/testReport/api/xml");
+
+            JenkinsTasksJunitTestResult report = await GetAsync<JenkinsTasksJunitTestResult>($"/job/{name}/{number}/testReport/api/xml");
             return report;
         }
 
-        public async Task<JenkinsQueue> GetQueueAsync()
+        /// <summary>
+        /// Get the Jenkins queue.
+        /// </summary>
+        /// <returns>Jenkins queue</returns>
+        public async Task<JenkinsModelQueue> GetQueueAsync()
         {
-            JenkinsQueue queue = await GetAsync<JenkinsQueue>("queue/api/xml");
+            JenkinsModelQueue queue = await GetAsync<JenkinsModelQueue>("queue/api/xml");
             return queue;
         }
-
-        public async Task<JenkinsOverallLoadStatistics> GetOverallLoadStatisticsAsync()
+        
+        /// <summary>
+        /// Get overall load statistics
+        /// </summary>
+        /// <returns>Statistics result</returns>
+        public async Task<JenkinsModelOverallLoadStatistics> GetOverallLoadStatisticsAsync()
         {
-            JenkinsOverallLoadStatistics statistics = await GetAsync<JenkinsOverallLoadStatistics>("overallLoad/api/xml");
+            JenkinsModelOverallLoadStatistics statistics = await GetAsync<JenkinsModelOverallLoadStatistics>("overallLoad/api/xml");
             return statistics;
         }
-                
+
+        /// <summary>
+        /// Get infos about all Jenkins nodes.
+        /// </summary>
+        /// <returns>Nodes infos</returns>
+        public async Task<JenkinsModelComputerSet> GetComputerSetAsync()
+        {
+            JenkinsModelComputerSet computerSet = await GetAsync<JenkinsModelComputerSet>("computer/api/xml");
+            return computerSet;
+        }
+
+        /// <summary>
+        /// Get infos about the Jenkins master node
+        /// </summary>
+        /// <returns>Master node infos</returns>
+        public async Task<JenkinsModelHudsonMasterComputer> GetMasterComputerAsync()
+        {
+            JenkinsModelHudsonMasterComputer computer = await GetAsync<JenkinsModelHudsonMasterComputer>("computer/(master)/api/xml");
+            return computer;
+        }
+
+        /// <summary>
+        /// Get infos of a Jenkins slave node.
+        /// </summary>
+        /// <param name="computerName">Name of the node.</param>
+        /// <returns>Node infos</returns>
+        public async Task<JenkinsSlavesSlaveComputer> GetComputerAsync(string computerName)
+        {
+            JenkinsSlavesSlaveComputer computer = await GetAsync<JenkinsSlavesSlaveComputer>($"computer/{computerName}/api/xml");
+            return computer;
+        }
+
+        /// <summary>
+        /// Get infos of a Jenkins slave node label.
+        /// </summary>
+        /// <param name="labelName">Name of the label</param>
+        /// <returns>Label info</returns>
+        public async Task<JenkinsModelLabelsLabelAtom> GetLabelAsync(string labelName)
+        {
+            JenkinsModelLabelsLabelAtom label = await GetAsync<JenkinsModelLabelsLabelAtom>($"label/{labelName}/api/xml");
+            return label;
+        }
+
         /// <summary>
         /// Run a Jenkins job.
         /// </summary>
         /// <param name="name">Name of the Jenkins job</param>
         /// <param name="parameters">Parameters for the Jenkins job</param>
         /// <returns>Result and number of the Jenkins build</returns>
-        public async Task<JenkinsQueueLeftItem> RunJobAsync(string name, JenkinsBuildParameters parameters = null)
+        public async Task<object> RunJobAsync(string name, JenkinsBuildParameters parameters = null)
         {
             if (string.IsNullOrEmpty(name))
             {
@@ -341,8 +404,9 @@ namespace JenkinsWebApi
             {
                 // if no delay item.Executable will be null
                 await Task.Delay(100);
-                JenkinsQueueLeftItem item = await GetAsync<JenkinsQueueLeftItem>(new Uri(location, "api/xml/").ToString());
-                return item;
+                string schema = await GetStringAsync(new Uri(location, "api/Schema").ToString());
+                //object item = await GetAsync<>(new Uri(location, "api/xml/").ToString());
+                //return item;
             }
 
             return null;            
@@ -363,13 +427,15 @@ namespace JenkinsWebApi
             await PostRunAsync($"/job/{name}/{number}/stop", null);
         }
 
-        
+
         /// <summary>
         /// Create a new job from an XML file.
         /// </summary>
-        /// <param name="stream"></param>
-        /// <returns></returns>        
-        public async Task CreateJob(string jobName, Stream stream, string fileName)
+        /// <param name="jobName">Name of the job</param>
+        /// <param name="stream">XML data of the new job.</param>
+        /// <param name="fileName">File name of the data</param>
+        /// <returns>Task handle</returns>        
+        public async Task CreateJobAsync(string jobName, Stream stream, string fileName)
         {
             MultipartFormDataContent content = new MultipartFormDataContent();
             content.Add(new StringContent(jobName), "name");
@@ -377,14 +443,19 @@ namespace JenkinsWebApi
             await PostRunAsync("createItem", content);
         }
 
-        public async Task CopyJob(string fromJobName, string newJobName)
+        /// <summary>
+        /// Clone a new job from an existing.
+        /// </summary>
+        /// <param name="fromJobName">Existing job name.</param>
+        /// <param name="newJobName">Name of the new job.</param>
+        /// <returns>Task handle</returns>
+        public async Task CloneJobAsync(string fromJobName, string newJobName)
         {
             List<KeyValuePair<string, string>> param = new List<KeyValuePair<string, string>>();
             param.Add(new KeyValuePair<string, string>("name", newJobName));
             param.Add(new KeyValuePair<string, string>("mode", "Build"));
             param.Add(new KeyValuePair<string, string>("from", fromJobName));
             FormUrlEncodedContent content = new FormUrlEncodedContent(param);
-
             await PostRunAsync("createItem", content);
         }
 
@@ -411,7 +482,7 @@ namespace JenkinsWebApi
         /// Restart the Jenkins Server
         /// </summary>
         /// <returns></returns>
-        public async Task Restart()
+        public async Task RestartAsync()
         {
             await PostRunAsync("restart", null);
         }
@@ -420,15 +491,19 @@ namespace JenkinsWebApi
         /// Save restart the Jenkins Server if no job is running
         /// </summary>
         /// <returns></returns>
-        public async Task SaveRestart()
+        public async Task SaveRestartAsync()
         {
             await PostRunAsync("safeRestart", null);
         }
 
-
-        public static async Task<IEnumerable<JenkinsInstance>> GetJenkinsInstances(long timeout = 2000)
+        /// <summary>
+        /// Get a list with all Jenkins servers in the local subnet.
+        /// </summary>
+        /// <param name="timeout">Timeout of the search.</param>
+        /// <returns>List with Jenkins servers</returns>
+        public static async Task<IEnumerable<JenkinsInstance>> GetJenkinsInstancesAsync(long timeout = 2000)
         {
-            List<JenkinsInstance> list = null; 
+            List<JenkinsInstance> list = null;
             using (UdpClient client = new UdpClient())
             {
                 await client.SendAsync(new byte[0], 0, new IPEndPoint(IPAddress.Broadcast, udpPort));
@@ -436,9 +511,9 @@ namespace JenkinsWebApi
                 while (true)
                 {
                     while (client.Available > 0)
-                {
+                    {
                         UdpReceiveResult res = await client.ReceiveAsync();
-                    string result = Encoding.ASCII.GetString(res.Buffer);
+                        string result = Encoding.ASCII.GetString(res.Buffer);
                         Trace.TraceInformation(result);
                         using (XmlTextReader reader = new XmlTextReader(new StringReader(result)))
                         {
@@ -452,16 +527,16 @@ namespace JenkinsWebApi
                             else
                             {
                                 Trace.TraceError($"Unknown broadcast response: {result}");
-                }
-            }
+                            }
+                        }
                     }
                     if (Environment.TickCount > start + timeout)
-            {
+                    {
                         break;
                     }
                     await Task.Delay(100);
+                }
             }
-        }
 
             return list;
         }
@@ -472,11 +547,6 @@ namespace JenkinsWebApi
             using (HttpResponseMessage response = await this.client.GetAsync(path))
             {
                 response.EnsureSuccess();
-
-                //Stream stream = await response.Content.ReadAsStreamAsync();
-                //XmlSerializer serializer = new XmlSerializer(typeof(T));
-                //value = (T)serializer.Deserialize(stream);
-
                 string str = await response.Content.ReadAsStringAsync();
                 XmlSerializer serializer = new XmlSerializer(typeof(T));
                 value = (T)serializer.Deserialize(new StringReader(str));

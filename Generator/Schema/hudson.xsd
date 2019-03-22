@@ -195,7 +195,7 @@
       <xsd:extension base="hudson.model.Actionable">
         <xsd:sequence>
           <xsd:element name="busyExecutors" type="xsd:int"/>
-          <xsd:element name="cloud" type="xsd:anyType" minOccurs="0" maxOccurs="unbounded"/>
+          <xsd:element name="cloud" type="hudson.slaves.Cloud" minOccurs="0" maxOccurs="unbounded"/>
           <xsd:element name="description" type="xsd:string" minOccurs="0"/>
           <xsd:element name="idleExecutors" type="xsd:int"/>
           <xsd:element name="loadStatistics" type="hudson.model.LoadStatistics" minOccurs="0"/>
@@ -214,6 +214,7 @@
         <xsd:sequence>
           <xsd:element name="concurrentBuild" type="xsd:boolean"/>
           <xsd:element name="downstreamProject" type="hudson.model.AbstractProject" minOccurs="0" maxOccurs="unbounded"/>
+          <xsd:element name="labelExpression" type="xsd:string" minOccurs="0"/>
           <xsd:element name="scm" type="hudson.scm.SCM" minOccurs="0"/>
           <xsd:element name="upstreamProject" type="hudson.model.AbstractProject" minOccurs="0" maxOccurs="unbounded"/>
         </xsd:sequence>
@@ -303,6 +304,7 @@
           <xsd:element name="duration" type="xsd:long"/>
           <xsd:element name="estimatedDuration" type="xsd:long"/>
           <xsd:element name="executor" type="hudson.model.Executor" minOccurs="0"/>
+          <xsd:element name="fingerprint" type="hudson.model.Fingerprint" minOccurs="0" maxOccurs="unbounded"/>
           <xsd:element name="fullDisplayName" type="xsd:string" minOccurs="0"/>
           <xsd:element name="id" type="xsd:string" minOccurs="0"/>
           <xsd:element name="keepLog" type="xsd:boolean"/>
@@ -315,19 +317,51 @@
       </xsd:extension>
     </xsd:complexContent>
   </xsd:complexType>
+  <xsd:complexType name="hudson.model.Fingerprint">
+    <xsd:sequence>
+      <xsd:element name="fileName" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="hash" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="original" type="hudson.model.Fingerprint-BuildPtr" minOccurs="0"/>
+      <xsd:element name="timestamp" type="xsd:anyType" minOccurs="0"/>
+      <xsd:element name="usage" type="hudson.model.Fingerprint-RangeItem" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+    <xsd:attribute name="_class" type="xsd:string" use="optional"/>
+  </xsd:complexType>
+  <xsd:complexType name="hudson.model.Fingerprint-RangeItem">
+    <xsd:sequence>
+      <xsd:element name="name" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="ranges" type="hudson.model.Fingerprint-RangeSet" minOccurs="0"/>
+    </xsd:sequence>
+    <xsd:attribute name="_class" type="xsd:string" use="optional"/>
+  </xsd:complexType>
+  <xsd:complexType name="hudson.model.Fingerprint-RangeSet">
+    <xsd:sequence>
+      <xsd:element name="range" type="hudson.model.Fingerprint-Range" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+    <xsd:attribute name="_class" type="xsd:string" use="optional"/>
+  </xsd:complexType>
+  <xsd:complexType name="hudson.model.Fingerprint-Range">
+    <xsd:sequence>
+      <xsd:element name="end" type="xsd:int"/>
+      <xsd:element name="start" type="xsd:int"/>
+    </xsd:sequence>
+    <xsd:attribute name="_class" type="xsd:string" use="optional"/>
+  </xsd:complexType>
+  <xsd:complexType name="hudson.model.Fingerprint-BuildPtr">
+    <xsd:sequence>
+      <xsd:element name="name" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="number" type="xsd:int"/>
+    </xsd:sequence>
+    <xsd:attribute name="_class" type="xsd:string" use="optional"/>
+  </xsd:complexType>
   <xsd:complexType name="hudson.model.Executor">
     <xsd:sequence>
       <xsd:element name="currentExecutable" type="xsd:anyType" minOccurs="0"/>
-      <xsd:element name="currentWorkUnit" type="hudson.model.queue.WorkUnit" minOccurs="0"/>
       <xsd:element name="idle" type="xsd:boolean"/>
       <xsd:element name="likelyStuck" type="xsd:boolean"/>
       <xsd:element name="number" type="xsd:int"/>
       <xsd:element name="progress" type="xsd:int"/>
     </xsd:sequence>
-    <xsd:attribute name="_class" type="xsd:string" use="optional"/>
-  </xsd:complexType>
-  <xsd:complexType name="hudson.model.queue.WorkUnit">
-    <xsd:sequence/>
     <xsd:attribute name="_class" type="xsd:string" use="optional"/>
   </xsd:complexType>
   <xsd:complexType name="hudson.model.Run-Artifact">
@@ -355,6 +389,13 @@
           <xsd:element name="name" type="xsd:string" minOccurs="0"/>
           <xsd:element name="url" type="xsd:string" minOccurs="0"/>
         </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="hudson.slaves.Cloud">
+    <xsd:complexContent>
+      <xsd:extension base="hudson.model.Actionable">
+        <xsd:sequence/>
       </xsd:extension>
     </xsd:complexContent>
   </xsd:complexType>
@@ -389,3 +430,4 @@
     </xsd:restriction>
   </xsd:simpleType>
 </xsd:schema>
+

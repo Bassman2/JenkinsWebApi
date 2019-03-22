@@ -158,7 +158,7 @@ namespace JenkinsWebApi
             return param.GetContent();
         }
 
-        protected class JenkinsParameter
+        private class JenkinsParameter
         {
             internal JenkinsParameterType Type { get; set; }
 

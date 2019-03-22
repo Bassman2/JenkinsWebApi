@@ -5,6 +5,20 @@
 			<para>The topics in this section describe the various changes made to the Jenkins Web API over the life of the project.</para>
 		</introduction>
 
+    <section>
+      <title>Version 2.0 was released on Mar. 20th, 2019</title>
+      <content>
+        <list class="bullet">
+          <listItem>
+            <para>Add java namespaces to class and enum names.</para>
+          </listItem>
+          <listItem>
+            <para>Update to Jenkins ver. 2.164.1</para>
+          </listItem>
+        </list>
+      </content>
+    </section>
+    
 		<section>
 			<title>Version 1.3 was released on Nov. 28th, 2017</title>
 			<content>

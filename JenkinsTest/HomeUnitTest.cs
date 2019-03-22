@@ -16,7 +16,7 @@ namespace JenkinsTest
 
         public HomeUnitTest()
         {
-            this.host = "http://localhost:8081";
+            this.host = "http://localhost:8080";
             this.login = "";
             this.password = "";
 
@@ -89,7 +89,7 @@ namespace JenkinsTest
 
             var user = people.Users.Single(u => u.User.FullName == "User");
             Assert.IsNotNull(user, "user");
-            Assert.AreEqual("http://localhost:8081/user/xx", user.User.AbsoluteUrl, "user.User.AbsoluteUrl");
+            Assert.AreEqual($"{this.host}/user/xx", user.User.AbsoluteUrl, "user.User.AbsoluteUrl");
             Assert.AreEqual("xx", user.User.FullName, "user.User.FullName");
         }
 
@@ -104,7 +104,7 @@ namespace JenkinsTest
             }
 
             Assert.IsNotNull(user, "user");
-            Assert.AreEqual("http://localhost:8081/user/xx", user.AbsoluteUrl, "user.AbsoluteUrl");
+            Assert.AreEqual($"{this.host}/user/xx", user.AbsoluteUrl, "user.AbsoluteUrl");
             Assert.AreEqual(null, user.Description, "user.Description");
             Assert.AreEqual("User", user.FullName, "user.FullName");
             Assert.AreEqual("User", user.Id, "user.Id");
@@ -123,7 +123,7 @@ namespace JenkinsTest
             }
             
             Assert.IsNotNull(user, "user");
-            Assert.AreEqual("http://localhost:8081/user/xx", user.AbsoluteUrl, "user.AbsoluteUrl");
+            Assert.AreEqual($"{this.host}/user/xx", user.AbsoluteUrl, "user.AbsoluteUrl");
             Assert.AreEqual(null, user.Description, "user.Description");
             Assert.AreEqual("xxx", user.FullName, "user.FullName");
             Assert.AreEqual("xx", user.Id, "user.Id");
@@ -185,7 +185,7 @@ namespace JenkinsTest
             Assert.AreEqual("Test with Parameters", freeStyleJob.Description, "description");
             Assert.AreEqual(jobName, freeStyleJob.DisplayName, "job.DisplayName");
             Assert.AreEqual(jobName, freeStyleJob.Name, "job.Name");
-            Assert.AreEqual("http://localhost:8081/job/Freestyle%20Test%20Parameter/", freeStyleJob.Url, "job.Url");
+            Assert.AreEqual($"{this.host}/job/Freestyle%20Test%20Parameter/", freeStyleJob.Url, "job.Url");
             Assert.AreEqual(true, freeStyleJob.IsBuildable, "job.IsBuildable");
 
             Assert.IsNotNull(freeStyleJob.Builds, "builds");
