@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <RootNamespace>JenkinsWebApi</RootNamespace>
+    <Version>2.0.0</Version>
+    <PackageId>JenkinsWebApi</PackageId>
+    <Authors>Ralf Beckers</Authors>
+    <Company />
+    <Product>JenkinsWebApi</Product>
+    <Description>API to communicate with Jenkins</Description>
+    <Copyright>Copyright © Ralf Beckers 2017 - 2019</Copyright>
+    <RepositoryUrl>https://github.com/Bassman2/JenkinsWebApi</RepositoryUrl>
+    <RepositoryType>Github</RepositoryType>
+    <PackageProjectUrl>https://www.nuget.org/packages/JenkinsWebApi/</PackageProjectUrl>
+    <PackageLicenseUrl>https://licenses.nuget.org/MIT</PackageLicenseUrl>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <Import Project="..\JenkinsWebApiShared\JenkinsWebApiShared.projitems" Label="Shared" />
+
+</Project>
