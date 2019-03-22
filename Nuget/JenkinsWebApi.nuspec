@@ -2,24 +2,31 @@
 <package >
   <metadata>
     <id>JenkinsWebApi</id>
-    <version>1.3.1</version>
+    <version>2.0</version>
     <title>JenkinsWebApi</title>
     <authors>Ralf Beckers</authors>
     <owners>Ralf Beckers</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
+	<license type="expression">MIT</license>
+    <projectUrl>https://www.nuget.org/packages/JenkinsWebApi/</projectUrl>
     <description>API to communicate with Jenkins</description>
-    <releaseNotes>Creation</releaseNotes>
-    <copyright>Copyright 2017 (c) Ralf Beckers. All rights reserved.</copyright>
+    <releaseNotes>Support for multiple platforms and API update</releaseNotes>
+    <copyright>Copyright 2017 - 2019 (c) Ralf Beckers. All rights reserved.</copyright>
+	<repository type="Github" url="https://github.com/Bassman2/JenkinsWebApi" />
     <tags>Jenkins API</tags>
 	<dependencies>
       <group targetFramework=".NETFramework4.5" />
+	  <group targetFramework=".NETCoreApp2.0" />
       <group targetFramework=".NETStandard2.0" />
+      <group targetFramework="uap10" />	  
     </dependencies>
   </metadata>
   <files>
     <file src="JenkinsWebApiLicense.txt" target="content" />
     <file src="..\JenkinsWebApiDoc\Help\JenkinsWebApiDoc.chm" target="content" />
-	<file src="..\JenkinsWebApi\bin\Release\**" target="lib/net45" />
+	<file src="..\JenkinsWebApi\bin\Release\**" target="lib/net45" />	
+	<file src="..\JenkinsWebApiCore\bin\Release\netcoreapp2.0\**" target="lib/netcoreapp2.0" />
 	<file src="..\JenkinsWebApiStd\bin\Release\netstandard2.0\**" target="lib/netstandard2.0" />
+	<file src="..\JenkinsWebApiUwp\bin\Release\**" target="lib/uap10" />
   </files>
 </package>
