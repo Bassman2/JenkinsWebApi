@@ -51,4 +51,7 @@ dl -u dl -p dl -o label.xsd http://localhost:8080/label/XXX_LABEL/api/schema
 dl -u dl -p dl -o userFacingAction.xsd http://localhost:8080/credentials/store/system/api/schema
 dl -u dl -p dl -o queue.xsd http://localhost:8080/queue/api/schema
 
+rem plugins
+dl -u dl -p dl -o injectedEnvVars.xsd http://localhost:8080/job/Downstream_A_Test/2/injectedEnvVars/api/schema
+dl -u dl -p dl -o buildGraph.xsd http://localhost:8080/job/Downstream_A_Test/2/BuildGraph/api/schema
 pause
