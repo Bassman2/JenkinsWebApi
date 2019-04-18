@@ -48,9 +48,24 @@
           Feel free to contact me if you need additional features or find bugs.
         </para>
 				
+				
 			</content>
 		</section>
 
+		<section>
+			<title>Donate</title>
+			<content>
+				<para>You are welcome to support this project.</para>
+				<para>
+					<markup>
+						<a href="https://www.paypal.me/GBassman" target="_blank">
+							<img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" alt="Donate" />
+						</a>
+						</markup>
+				</para>
+			</content>
+		</section>
+		
 		<relatedTopics>
 			<link xlink:href="4604a306-7bc7-48b2-99f5-a09ba19e4f82" />
 		</relatedTopics>
