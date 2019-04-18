@@ -362,6 +362,37 @@ namespace JenkinsWebApi
         }
 
         /// <summary>
+        /// Get the log of the computer
+        /// </summary>
+        /// <param name="computerName">Name of the node.</param>
+        /// <returns>Log text</returns>
+        public async Task<string> GetComputerLogAsync(string computerName)
+        {
+            using (HttpResponseMessage response = await this.client.GetAsync($"computer/{computerName}/log"))
+            {
+                response.EnsureSuccess();
+                return await response.Content.ReadAsStringAsync();
+            }
+        }
+
+        /// <summary>
+        /// Run node script
+        /// </summary>
+        /// <param name="computerName">Name of the computer</param>
+        /// <param name="script">Script to run</param>
+        /// <returns>Result html page</returns>
+        public async Task<string> GetComputerScriptAsync(string computerName, string script)
+        {
+            MultipartFormDataContent content = new MultipartFormDataContent();
+            content.Add(new StringContent(script), "script");
+            using (HttpResponseMessage response = await this.client.PostAsync($"computer/{computerName}/script", content))
+            {
+                response.EnsureSuccess();
+                return await response.Content.ReadAsStringAsync(); 
+            }
+        }
+
+        /// <summary>
         /// Get infos of a Jenkins slave node label.
         /// </summary>
         /// <param name="labelName">Name of the label</param>
@@ -521,6 +552,17 @@ namespace JenkinsWebApi
         {
             await PostRunAsync("safeRestart", null);
         }
+
+        /// <summary>
+        /// Launch slave agent
+        /// </summary>
+        /// <param name="hostName">Name of the slave host</param>
+        /// <returns></returns>
+        public async Task LaunchSlaveAgent(string hostName)
+        {
+            await GetStringAsync($"computer/{hostName}/launchSlaveAgent");
+        }
+        
 
         /// <summary>
         /// Get a list with all Jenkins servers in the local subnet.
