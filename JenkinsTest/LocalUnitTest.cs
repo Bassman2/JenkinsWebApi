@@ -69,7 +69,7 @@ namespace JenkinsTest
         [TestMethod]
         public void RunParamTest()
         {
-            JenkinsRun build;
+            JenkinsModelRun build;
             using (Jenkins jenkins = new Jenkins(host, this.login, this.password))
             {
                 JenkinsBuildParameters par = new JenkinsBuildParameters();

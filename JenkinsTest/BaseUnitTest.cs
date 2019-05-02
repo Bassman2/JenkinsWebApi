@@ -33,7 +33,7 @@ namespace JenkinsTest
         [TestMethod]
         public void InstancesTest()
         {
-            List<JenkinsInstance> list = Jenkins.GetJenkinsInstances().Result?.ToList();
+            List<JenkinsInstance> list = Jenkins.GetJenkinsInstancesAsync().Result?.ToList();
 
             Assert.IsNotNull(list, "list");
             Assert.IsTrue(list.Count > 0, "list.Count");
@@ -42,7 +42,7 @@ namespace JenkinsTest
         [TestMethod]
         public void ServerTest()
         {
-            JenkinsHudson server = null;
+            JenkinsModelHudson server = null;
 
             using (Jenkins jenkins = new Jenkins(this.host, this.login, this.password))
             {

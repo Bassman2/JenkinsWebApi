@@ -368,7 +368,7 @@ namespace JenkinsWebApi
         /// <returns>Log text</returns>
         public async Task<string> GetComputerLogAsync(string computerName)
         {
-            using (HttpResponseMessage response = await this.client.GetAsync($"computer/{computerName}/log"))
+            using (HttpResponseMessage response = await this.client.GetAsync($"computer/{computerName}/logText/progressiveHtml"))
             {
                 response.EnsureSuccess();
                 return await response.Content.ReadAsStringAsync();
@@ -380,16 +380,81 @@ namespace JenkinsWebApi
         /// </summary>
         /// <param name="computerName">Name of the computer</param>
         /// <param name="script">Script to run</param>
-        /// <returns>Result html page</returns>
-        public async Task<string> GetComputerScriptAsync(string computerName, string script)
+        /// <returns>Result</returns>
+        /// <example>
+        /// println "hostname".execute().text
+        /// println InetAddress.localHost
+        /// println InetAddress.localHost.hostAddress 
+        /// println InetAddress.localHost.hostName
+        /// println InetAddress.localHost.canonicalHostName
+        /// </example>
+        public async Task<string> RunComputerScriptAsync(string computerName, string script)
         {
-            MultipartFormDataContent content = new MultipartFormDataContent();
-            content.Add(new StringContent(script), "script");
+            var parms = new Dictionary<string, string>();
+            parms.Add("script", script);
+            var content = new FormUrlEncodedContent(parms);
             using (HttpResponseMessage response = await this.client.PostAsync($"computer/{computerName}/script", content))
             {
                 response.EnsureSuccess();
-                return await response.Content.ReadAsStringAsync(); 
+                string str = await response.Content.ReadAsStringAsync();
+                return TrimScript(str);
             }
+        }
+
+        /// <summary>
+        /// Run node script on master
+        /// </summary>
+        /// <param name="script">Script to run</param>
+        /// <returns>Result</returns>
+        /// <example>
+        /// println "hostname".execute().text
+        /// println InetAddress.localHost
+        /// println InetAddress.localHost.hostAddress 
+        /// println InetAddress.localHost.hostName
+        /// println InetAddress.localHost.canonicalHostName
+        /// </example>
+        public async Task<string> RunMasterComputerScriptAsync(string script)
+        {
+            var parms = new Dictionary<string, string>();
+            //parms.Add("Jenkins-Crumb", crumb);
+            parms.Add("script", script);
+            var content = new FormUrlEncodedContent(parms);
+            using (HttpResponseMessage response = await this.client.PostAsync("computer/(master)/script", content))
+            {
+                response.EnsureSuccess();
+                string str = await response.Content.ReadAsStringAsync();
+                return TrimScript(str);
+            }
+        }
+
+        /// <summary>
+        /// Get IP of a node
+        /// </summary>
+        /// <param name="computerName">Name of the node.</param>
+        /// <returns>IP address</returns>
+        public async Task<string> GetComputerHostAddressAsync(string computerName)
+        {
+            return await RunComputerScriptAsync(computerName, "println InetAddress.localHost.hostAddress");
+        }
+
+        /// <summary>
+        /// Get host name of a node
+        /// </summary>
+        /// <param name="computerName">Name of the node.</param>
+        /// <returns>Host name</returns>
+        public async Task<string> GetComputerHostNameAsync(string computerName)
+        {
+            return await RunComputerScriptAsync(computerName, "println InetAddress.localHost.hostName");
+        }
+
+        /// <summary>
+        /// Get canonical host name of a node
+        /// </summary>
+        /// <param name="computerName">Name of the node.</param>
+        /// <returns>Canonical host name</returns>
+        public async Task<string> GetComputerCanonicalHostNameAsync(string computerName)
+        {
+            return await RunComputerScriptAsync(computerName, "println InetAddress.localHost.canonicalHostName");
         }
 
         /// <summary>
@@ -672,6 +737,18 @@ namespace JenkinsWebApi
                 }
             }
             throw new Exception($"Not class found for this type: {xmlText.Substring(1, xmlText.IndexOf(' '))}");
+        }
+
+        private string TrimScript(string str)
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(str);
+            var el = doc.SelectSingleNode("//*[@id='main-panel']/pre[last()]");        // Jenkins ver. 1.424.6
+            if (el != null)
+            {
+                return el.InnerText.Trim();
+            }
+            return null;
         }
     }
 }

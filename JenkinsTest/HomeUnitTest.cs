@@ -61,7 +61,7 @@ namespace JenkinsTest
         [TestMethod]
         public void CredentialsTest()
         {
-            JenkinsViewCredentialsActionRootActionImpl credentials;
+            JenkinsComCloudbeesPluginsCredentialsViewCredentialsActionRootActionImpl credentials;
 
             using (Jenkins jenkins = new Jenkins(this.host, this.login, this.password))
             {
@@ -75,7 +75,7 @@ namespace JenkinsTest
         [TestMethod]
         public void PeopleTest()
         {
-            JenkinsViewPeople people = null;
+            JenkinsModelViewPeople people = null;
 
             using (Jenkins jenkins = new Jenkins(this.host, this.login, this.password))
             {
@@ -96,7 +96,7 @@ namespace JenkinsTest
         [TestMethod]
         public void UserTest()
         {
-            JenkinsUser user = null;
+            JenkinsModelUser user = null;
 
             using (Jenkins jenkins = new Jenkins(this.host, this.login, this.password))
             {
@@ -115,7 +115,7 @@ namespace JenkinsTest
         [TestMethod]
         public void CurrentUserTest()
         {
-            JenkinsUser user = null;
+            JenkinsModelUser user = null;
 
             using (Jenkins jenkins = new Jenkins(this.host, this.login, this.password))
             {
@@ -135,7 +135,7 @@ namespace JenkinsTest
         public void ViewTest()
         {
             string viewName = "View 2";
-            JenkinsView view = null;
+            JenkinsModelView view = null;
 
             using (Jenkins jenkins = new Jenkins(this.host, this.login, this.password))
             {
@@ -151,23 +151,23 @@ namespace JenkinsTest
         {
             string jobName = "Freestyle Test Parameter";
             
-            JenkinsFreeStyleProject freeStyleJob = null;
-            JenkinsExternalJob externalJob = null;
-            JenkinsMatrixProject matrixJob = null;
-            JenkinsWorkflowJob workflowJob = null;
-            JenkinsWorkflowMultiBranchProject multiBranchJob = null;
-            JenkinsFolder folderJob = null;
-            JenkinsOrganizationFolder organizationFolderJob = null;
+            JenkinsModelFreeStyleProject freeStyleJob = null;
+            JenkinsModelExternalJob externalJob = null;
+            JenkinsMatrixMatrixProject matrixJob = null;
+            JenkinsOrgJenkinsciPluginsWorkflowJobWorkflowJob workflowJob = null;
+            JenkinsOrgJenkinsciPluginsWorkflowMultibranchWorkflowMultiBranchProject multiBranchJob = null;
+            JenkinsComCloudbeesHudsonPluginsFolderFolder folderJob = null;
+            JenkinsBranchOrganizationFolder organizationFolderJob = null;
 
             using (Jenkins jenkins = new Jenkins(this.host, this.login, this.password))
             {
-                freeStyleJob = jenkins.GetJobAsync("Freestyle Test Pure").Result as JenkinsFreeStyleProject;
-                externalJob = jenkins.GetJobAsync("External Job").Result as JenkinsExternalJob;
-                matrixJob = jenkins.GetJobAsync("Multiconfiguration").Result as JenkinsMatrixProject;
-                workflowJob = jenkins.GetJobAsync("Pipeline").Result as JenkinsWorkflowJob;
-                multiBranchJob = jenkins.GetJobAsync("Multibranch").Result as JenkinsWorkflowMultiBranchProject;
-                folderJob = jenkins.GetJobAsync("Folder").Result as JenkinsFolder;
-                organizationFolderJob = jenkins.GetJobAsync("GitHub").Result as JenkinsOrganizationFolder;
+                freeStyleJob = jenkins.GetJobAsync("Freestyle Test Pure").Result as JenkinsModelFreeStyleProject;
+                externalJob = jenkins.GetJobAsync("External Job").Result as JenkinsModelExternalJob;
+                matrixJob = jenkins.GetJobAsync("Multiconfiguration").Result as JenkinsMatrixMatrixProject;
+                workflowJob = jenkins.GetJobAsync("Pipeline").Result as JenkinsOrgJenkinsciPluginsWorkflowJobWorkflowJob;
+                multiBranchJob = jenkins.GetJobAsync("Multibranch").Result as JenkinsOrgJenkinsciPluginsWorkflowMultibranchWorkflowMultiBranchProject;
+                folderJob = jenkins.GetJobAsync("Folder").Result as JenkinsComCloudbeesHudsonPluginsFolderFolder;
+                organizationFolderJob = jenkins.GetJobAsync("GitHub").Result as JenkinsBranchOrganizationFolder;
             }
 
             Assert.IsNotNull(freeStyleJob);
@@ -200,20 +200,20 @@ namespace JenkinsTest
         [TestMethod]
         public void BuildTest()
         {
-            JenkinsFreeStyleBuild freeStyleBuild = null;
+            JenkinsModelFreeStyleBuild freeStyleBuild = null;
             //JenkinsBuildExternal externalBuild = null;
-            JenkinsMatrixBuild matrixBuild = null;
-            JenkinsWorkflowRun workflowBuild = null;
+            JenkinsMatrixMatrixBuild matrixBuild = null;
+            JenkinsOrgJenkinsciPluginsWorkflowJobWorkflowRun workflowBuild = null;
             //JenkinsBuildWorkflowMultiBranch multiBranchBuild = null;
             //JenkinsBuildFolder folderBuild = null;
             //JenkinsBuildOrganizationFolder organizationFolderBuild = null;
 
             using (Jenkins jenkins = new Jenkins(this.host, this.login, this.password))
             {
-                freeStyleBuild = jenkins.GetLastBuildAsync("Freestyle Test Pure").Result as JenkinsFreeStyleBuild;
+                freeStyleBuild = jenkins.GetLastBuildAsync("Freestyle Test Pure").Result as JenkinsModelFreeStyleBuild;
                 //externalBuild = jenkins.GetBuildAsync("External Job", 1).Result as JenkinsBuildExternal;
-                matrixBuild = jenkins.GetBuildAsync("Multiconfiguration", 1).Result as JenkinsMatrixBuild;
-                workflowBuild = jenkins.GetBuildAsync("Pipeline", 1).Result as JenkinsWorkflowRun;
+                matrixBuild = jenkins.GetBuildAsync("Multiconfiguration", 1).Result as JenkinsMatrixMatrixBuild;
+                workflowBuild = jenkins.GetBuildAsync("Pipeline", 1).Result as JenkinsOrgJenkinsciPluginsWorkflowJobWorkflowRun;
                 //multiBranchBuild = jenkins.GetBuildAsync("Multibranch", 1).Result as JenkinsBuildWorkflowMultiBranch;
                 //folderBuild = jenkins.GetBuildAsync("Folder", 1).Result as JenkinsBuildFolder;
                 //organizationFolderBuild = jenkins.GetBuildAsync("GitHub", 1).Result as JenkinsBuildOrganizationFolder;
@@ -232,7 +232,7 @@ namespace JenkinsTest
         [TestMethod]
         public void RunTest()
         {
-            JenkinsRun build;
+            JenkinsModelRun build;
 
             using (Jenkins jenkins = new Jenkins(this.host, this.login, this.password))
             {
@@ -245,7 +245,7 @@ namespace JenkinsTest
         [TestMethod]
         public void RunParamTest()
         {
-            JenkinsRun build;
+            JenkinsModelRun build;
             using (Jenkins jenkins = new Jenkins(this.host, this.login, this.password))
             {
                 JenkinsBuildParameters par = new JenkinsBuildParameters();
