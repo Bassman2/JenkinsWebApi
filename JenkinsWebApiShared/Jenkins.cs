@@ -361,6 +361,18 @@ namespace JenkinsWebApi
             return computer;
         }
 
+        public async Task<JenkinsComputerExt> GetComputerExtAsync(string computerName)
+        {
+            using (HttpResponseMessage response = await this.client.GetAsync($"computer/{computerName}/configure"))
+            {
+                string str = await response.Content.ReadAsStringAsync();
+                JenkinsComputerExt computerExt = new JenkinsComputerExt();
+                computerExt.Description = TrimDescription(str);
+                computerExt.Label = TrimLabel(str);
+                return computerExt;
+            }
+        }
+
         /// <summary>
         /// Get the log of the computer
         /// </summary>
@@ -747,6 +759,32 @@ namespace JenkinsWebApi
             if (el != null)
             {
                 return el.InnerText.Trim();
+            }
+            return null;
+        }
+
+        private string TrimDescription(string str)
+        {
+            str = str.Replace("&&", "");
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(str);
+            var el = doc.SelectSingleNode("//input[@name='_.nodeDescription']");        // Jenkins ver. 1.424.6
+            if (el != null)
+            {
+                return el.Attributes["value"].Value.Trim();
+            }
+            return null;
+        }
+
+        private string TrimLabel(string str)
+        {
+            str = str.Replace("&&", "");
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(str);
+            var el = doc.SelectSingleNode("//input[@name='_.labelString']");        // Jenkins ver. 1.424.6
+            if (el != null)
+            {
+                return el.Attributes["value"].Value.Trim();
             }
             return null;
         }

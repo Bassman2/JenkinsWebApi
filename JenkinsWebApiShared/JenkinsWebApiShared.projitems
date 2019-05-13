@@ -118,6 +118,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsTasksTestTestObject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsTasksTestTestResult.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsYesNoMaybe.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\JenkinsComputerExt.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\JenkinsModelComputer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\JenkinsModelRun.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\JenkinsNodeMonitorsArchitectureMonitor.cs" />
