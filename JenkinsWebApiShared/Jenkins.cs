@@ -1,4 +1,5 @@
-﻿using JenkinsWebApi.Internal;
+﻿using HtmlAgilityPack;
+using JenkinsWebApi.Internal;
 using JenkinsWebApi.Model;
 using System;
 using System.Collections.Generic;
@@ -383,7 +384,8 @@ namespace JenkinsWebApi
             using (HttpResponseMessage response = await this.client.GetAsync($"computer/{computerName}/logText/progressiveHtml"))
             {
                 response.EnsureSuccess();
-                return await response.Content.ReadAsStringAsync();
+                string str = await response.Content.ReadAsStringAsync();
+                return HtmlEntity.DeEntitize(str);
             }
         }
 
@@ -753,12 +755,12 @@ namespace JenkinsWebApi
 
         private string TrimScript(string str)
         {
-            XmlDocument doc = new XmlDocument();
-            doc.LoadXml(str);
-            var el = doc.SelectSingleNode("//*[@id='main-panel']/pre[last()]");        // Jenkins ver. 1.424.6
+            HtmlDocument doc = new HtmlDocument();
+            doc.LoadHtml(str);
+            var el = doc.DocumentNode.SelectSingleNode("//*[@id='main-panel']/pre[last()]");        // Jenkins ver. 1.424.6
             if (el != null)
             {
-                return el.InnerText.Trim();
+                return HtmlEntity.DeEntitize(el.InnerText).Trim();
             }
             return null;
         }
@@ -766,12 +768,14 @@ namespace JenkinsWebApi
         private string TrimDescription(string str)
         {
             str = str.Replace("&&", "");
-            XmlDocument doc = new XmlDocument();
-            doc.LoadXml(str);
-            var el = doc.SelectSingleNode("//input[@name='_.nodeDescription']");        // Jenkins ver. 1.424.6
+            HtmlDocument doc = new HtmlDocument();
+            doc.LoadHtml(str);
+            var el = doc.DocumentNode.SelectSingleNode("//input[@name='_.nodeDescription']");        // Jenkins ver. 1.424.6
             if (el != null)
             {
-                return el.Attributes["value"].Value.Trim();
+                HtmlAttribute attr = el.Attributes["value"];
+                string res = HtmlEntity.DeEntitize(attr.Value);
+                return res.Trim();
             }
             return null;
         }
@@ -779,12 +783,14 @@ namespace JenkinsWebApi
         private string TrimLabel(string str)
         {
             str = str.Replace("&&", "");
-            XmlDocument doc = new XmlDocument();
-            doc.LoadXml(str);
-            var el = doc.SelectSingleNode("//input[@name='_.labelString']");        // Jenkins ver. 1.424.6
+            HtmlDocument doc = new HtmlDocument();
+            doc.LoadHtml(str);
+            var el = doc.DocumentNode.SelectSingleNode("//input[@name='_.labelString']");        // Jenkins ver. 1.424.6
             if (el != null)
             {
-                return el.Attributes["value"].Value.Trim();
+                HtmlAttribute attr = el.Attributes["value"];
+                string res = HtmlEntity.DeEntitize(attr.Value);
+                return res.Trim();
             }
             return null;
         }
