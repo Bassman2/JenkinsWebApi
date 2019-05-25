@@ -21,7 +21,7 @@ install:
 
 build_script:
     - cd "%APPVEYOR_BUILD_FOLDER%"
-    - msbuild Jenkins.sln /m /t:Generator;JenkinsWebApi;JenkinsTest /p:configuration="%configuration%" /p:platform="%platform%" /p:PlatformToolset="%PlatformToolset%" /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+    - msbuild JenkinsWebApi.sln /m /t:Generator;JenkinsWebApi;dl;JenkinsWebApiUwp;JenkinsWebApiCore;JenkinsWebApiStd;JenkinsTest /p:configuration="%configuration%" /p:platform="%platform%" /p:PlatformToolset="%PlatformToolset%" /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 
 after_build:
     - cd "%APPVEYOR_BUILD_FOLDER%"
