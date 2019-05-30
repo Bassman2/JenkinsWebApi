@@ -1,11 +1,6 @@
-version: 1.0.{build}
+version: 2.0.{build}
 image: Visual Studio 2017
 
-
-environment:
-  matrix:
-    #- PlatformToolset: v140
-    - PlatformToolset: v141
 
 platform:
     - Any CPU
@@ -17,18 +12,39 @@ configuration:
 
 install:
     - nuget restore "%APPVEYOR_BUILD_FOLDER%"\JenkinsTest\packages.config -PackagesDirectory "%APPVEYOR_BUILD_FOLDER%"\packages
+    - nuget restore "%APPVEYOR_BUILD_FOLDER%"\JenkinsWebApi\packages.config -PackagesDirectory "%APPVEYOR_BUILD_FOLDER%"\packages
+        
+    - ps: >-
+        Start-FileDownload 'https://github.com/EWSoftware/SHFB/releases/download/v2019.9.15.0/SHFBInstaller_v2019.9.15.0.zip'
+
+        7z x -y SHFBInstaller_v2019.9.15.0.zip | Out-Null
+
+        Write-Host "Installing MSI..."
+
+        cmd /c start /wait msiexec /i InstallResources\SandcastleHelpFileBuilder.msi /quiet
+
+        Write-Host "Installing VSIX..."
+
+        . "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VSIXInstaller.exe" /q /a InstallResources\SHFBVisualStudioPackage_VS2015AndLater.vsix
+
+        Write-Host "Sandcastle installed" -ForegroundColor Green
+
+    - set SHFBROOT=C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\
 
 
 build_script:
     - cd "%APPVEYOR_BUILD_FOLDER%"
-    - msbuild JenkinsWebApi.sln /m /t:Generator;JenkinsWebApi;dl;JenkinsWebApiUwp;JenkinsWebApiCore;JenkinsWebApiStd;JenkinsTest /p:configuration="%configuration%" /p:platform="%platform%" /p:PlatformToolset="%PlatformToolset%" /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+    - msbuild JenkinsWebApi.sln /m /verbosity:minimal /t:restore /p:configuration="%configuration%" /p:platform="%platform%" /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+    - msbuild JenkinsWebApi.sln /m /verbosity:minimal /p:configuration="%configuration%" /p:platform="%platform%" /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+    - cd "%APPVEYOR_BUILD_FOLDER%"\Nuget
+    - pack.cmd
 
 after_build:
     - cd "%APPVEYOR_BUILD_FOLDER%"
     - ps: >-
         Push-AppveyorArtifact "JenkinsWebApi\bin\$env:CONFIGURATION\JenkinsWebApi.dll" -FileName JenkinsWebApi.dll
 
-        if ($($env:APPVEYOR_REPO_TAG) -eq "true" -and $env:CONFIGURATION -eq "Release" -and $env:PLATFORMTOOLSET -eq "v141") {
+        if ($($env:APPVEYOR_REPO_TAG) -eq "true" -and $env:CONFIGURATION -eq "Release") {
             $ZipFileName = "JenkinsWebApi_$($env:APPVEYOR_REPO_TAG_NAME).zip"
             7z a $ZipFileName JenkinsWebApi\bin\$env:CONFIGURATION\JenkinsWebApi.dll
         }
@@ -47,5 +63,4 @@ deploy:
     force_update: true
     on:
         appveyor_repo_tag: true
-        PlatformToolset: v141
         configuration: Release
