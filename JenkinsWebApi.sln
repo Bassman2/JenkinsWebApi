@@ -3,11 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27004.2010
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "JenkinsWebApiDoc", "JenkinsWebApiDoc\JenkinsWebApiDoc.shfbproj", "{E5B1175A-CC6F-4899-8496-9412C872F3CA}"
-	ProjectSection(ProjectDependencies) = postProject
-		{BE64FA67-2D2E-4405-BE62-168159B2640E} = {BE64FA67-2D2E-4405-BE62-168159B2640E}
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JenkinsTest", "JenkinsTest\JenkinsTest.csproj", "{2229B804-CF79-4426-8AAF-DE086406DE3B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Generator", "Generator\Generator.csproj", "{15C4CA4F-748A-4934-B0E3-49A5009E9C96}"
@@ -23,6 +18,11 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JenkinsWebApiCore", "JenkinsWebApiCore\JenkinsWebApiCore.csproj", "{A9E094E5-5F84-4FD0-BA56-11A321E0937D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JenkinsWebApiStd", "JenkinsWebApiStd\JenkinsWebApiStd.csproj", "{7DB0CF9C-8D6B-456F-8FC8-32BC9C35339F}"
+EndProject
+Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "JenkinsWebApiDoc", "JenkinsWebApiDoc\JenkinsWebApiDoc.shfbproj", "{E5B1175A-CC6F-4899-8496-9412C872F3CA}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BE64FA67-2D2E-4405-BE62-168159B2640E} = {BE64FA67-2D2E-4405-BE62-168159B2640E}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
