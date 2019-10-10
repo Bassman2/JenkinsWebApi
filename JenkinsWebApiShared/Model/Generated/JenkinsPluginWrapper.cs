@@ -22,6 +22,9 @@ namespace JenkinsWebApi.Model
         [XmlElement("dependency")]
         public JenkinsPluginWrapperDependency[] Dependencys { get; set; }
 
+        [XmlElement("detached")]
+        public bool IsDetached { get; set; }
+
         [XmlElement("downgradable")]
         public bool IsDowngradable { get; set; }
 

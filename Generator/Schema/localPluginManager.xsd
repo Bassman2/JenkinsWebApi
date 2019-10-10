@@ -21,6 +21,7 @@
       <xsd:element name="bundled" type="xsd:boolean"/>
       <xsd:element name="deleted" type="xsd:boolean"/>
       <xsd:element name="dependency" type="hudson.PluginWrapper-Dependency" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="detached" type="xsd:boolean"/>
       <xsd:element name="downgradable" type="xsd:boolean"/>
       <xsd:element name="enabled" type="xsd:boolean"/>
       <xsd:element name="hasUpdate" type="xsd:boolean"/>
