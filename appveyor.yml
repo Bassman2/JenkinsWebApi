@@ -1,5 +1,5 @@
 version: 2.0.{build}
-image: Visual Studio 2017
+image: Visual Studio 2019
 
 
 platform:
@@ -7,10 +7,13 @@ platform:
 
 configuration:
     - Release
-    #- Debug
+    - Debug
 
 
 install:
+    #empty dummy file, not available at github due to passwords in it
+    - echo //dummy  > %APPVEYOR_BUILD_FOLDER%\JenkinsTest\FuncUnitTests.cs
+
     - nuget restore "%APPVEYOR_BUILD_FOLDER%"\JenkinsTest\packages.config -PackagesDirectory "%APPVEYOR_BUILD_FOLDER%"\packages
     - nuget restore "%APPVEYOR_BUILD_FOLDER%"\JenkinsWebApi\packages.config -PackagesDirectory "%APPVEYOR_BUILD_FOLDER%"\packages
         
@@ -25,12 +28,11 @@ install:
 
         Write-Host "Installing VSIX..."
 
-        . "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VSIXInstaller.exe" /q /a InstallResources\SHFBVisualStudioPackage_VS2015AndLater.vsix
+        . "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\VSIXInstaller.exe" /q /a InstallResources\SHFBVisualStudioPackage_VS2015AndLater.vsix
 
         Write-Host "Sandcastle installed" -ForegroundColor Green
 
     - set SHFBROOT=C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\
-
 
 build_script:
     - cd "%APPVEYOR_BUILD_FOLDER%"
@@ -42,15 +44,16 @@ build_script:
 after_build:
     - cd "%APPVEYOR_BUILD_FOLDER%"
     - ps: >-
-        Push-AppveyorArtifact "JenkinsWebApi\bin\$env:CONFIGURATION\JenkinsWebApi.dll" -FileName JenkinsWebApi.dll
-
+        if ($env:CONFIGURATION -eq "Release") {
+            Push-AppveyorArtifact "Nuget\JenkinsWebApi.2.1.0.nupkg" -FileName JenkinsWebApi.2.1.0.nupkg
+        }
+        
         if ($($env:APPVEYOR_REPO_TAG) -eq "true" -and $env:CONFIGURATION -eq "Release") {
-            $ZipFileName = "JenkinsWebApi_$($env:APPVEYOR_REPO_TAG_NAME).zip"
-            7z a $ZipFileName JenkinsWebApi\bin\$env:CONFIGURATION\JenkinsWebApi.dll
+            Push-AppveyorArtifact "Nuget\JenkinsWebApi.2.1.0.nupkg" -FileName JenkinsWebApi.2.1.0.nupkg
         }
 
 artifacts:
-  - path: JenkinsWebApi_*.zip
+  - path: Nuget\JenkinsWebApi_*.nupkg
     name: releases
 
 deploy:
