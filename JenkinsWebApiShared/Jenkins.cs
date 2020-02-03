@@ -22,23 +22,23 @@ namespace JenkinsWebApi
     /// </summary>
     public sealed class Jenkins : IDisposable
     {
-        private Uri host;
+        private readonly Uri host;
         private HttpClientHandler handler;
         private HttpClient client;
         private bool disposed = false;
         private const int udpPort = 33848;
 
-        private static Type[] viewTypes = AppDomain.CurrentDomain.GetAssemblies()
+        private readonly static Type[] viewTypes = AppDomain.CurrentDomain.GetAssemblies()
                                         .SelectMany(s => s.GetTypes())
                                         .Where(t => typeof(JenkinsModelView).IsAssignableFrom(t) && t.IsClass && !t.IsGenericType && !t.IsAbstract)
                                         .ToArray();
 
-        private static Type[] jobTypes = AppDomain.CurrentDomain.GetAssemblies()
+        private readonly static Type[] jobTypes = AppDomain.CurrentDomain.GetAssemblies()
                                         .SelectMany(s => s.GetTypes())
                                         .Where(t => typeof(JenkinsModelJob).IsAssignableFrom(t) && t.IsClass && !t.IsGenericType && !t.IsAbstract)
                                         .ToArray();
 
-        private static Type[] buildTypes = AppDomain.CurrentDomain.GetAssemblies()
+        private readonly static Type[] buildTypes = AppDomain.CurrentDomain.GetAssemblies()
                                         .SelectMany(s => s.GetTypes())
                                         .Where(t => typeof(JenkinsModelAbstractBuild).IsAssignableFrom(t) && t.IsClass && !t.IsGenericType && !t.IsAbstract)
                                         .ToArray();
@@ -49,19 +49,18 @@ namespace JenkinsWebApi
         /// <param name="host">Host URL of the Jenkins server</param>
         public Jenkins(Uri host)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException("host");
-            }
+            this.host = host ?? throw new ArgumentNullException("host");
 
-            this.host = host;
-            
             // connect
-            this.handler = new HttpClientHandler();
-            this.handler.CookieContainer = new System.Net.CookieContainer();
-            this.handler.UseCookies = true;
-            this.client = new HttpClient(this.handler);
-            this.client.BaseAddress = host;
+            this.handler = new HttpClientHandler
+            {
+                CookieContainer = new System.Net.CookieContainer(),
+                UseCookies = true
+            };
+            this.client = new HttpClient(this.handler)
+            {
+                BaseAddress = host
+            };
         }
 
         /// <summary>
@@ -138,12 +137,14 @@ namespace JenkinsWebApi
                 throw new ArgumentNullException(nameof(password));
             }
 
-            var list = new Dictionary<string, string>();
-            list.Add("j_username", login);
-            list.Add("j_password", password);
-            list.Add("remember_me", "on");
-            list.Add("Submit", "Anmelden");
-            
+            var list = new Dictionary<string, string>
+            {
+                { "j_username", login },
+                { "j_password", password },
+                { "remember_me", "on" },
+                { "Submit", "Anmelden" }
+            };
+
             var res = PostLoginAsync("j_acegi_security_check", new FormUrlEncodedContent(list), CancellationToken.None).Result;
             if (res)
             {
@@ -558,9 +559,11 @@ namespace JenkinsWebApi
         public async Task<JenkinsComputerExt> GetComputerExtAsync(string computerName, CancellationToken cancellationToken)
         {
             string str = await GetStringAsync($"computer/{computerName}/configure", cancellationToken);
-            JenkinsComputerExt computerExt = new JenkinsComputerExt();
-            computerExt.Description = TrimDescription(str);
-            computerExt.Label = TrimLabel(str);
+            JenkinsComputerExt computerExt = new JenkinsComputerExt
+            {
+                Description = TrimDescription(str),
+                Label = TrimLabel(str)
+            };
             return computerExt;
         }
 
@@ -620,8 +623,10 @@ namespace JenkinsWebApi
         /// </example>
         public async Task<string> RunComputerScriptAsync(string computerName, string script, CancellationToken cancellationToken)
         {
-            var parms = new Dictionary<string, string>();
-            parms.Add("script", script);
+            var parms = new Dictionary<string, string>
+            {
+                { "script", script }
+            };
             var content = new FormUrlEncodedContent(parms);
             using (HttpResponseMessage response = await this.client.PostAsync($"computer/{computerName}/script", content, cancellationToken))
             {
@@ -663,9 +668,11 @@ namespace JenkinsWebApi
         /// </example>
         public async Task<string> RunMasterComputerScriptAsync(string script, CancellationToken cancellationToken)
         {
-            var parms = new Dictionary<string, string>();
-            //parms.Add("Jenkins-Crumb", crumb);
-            parms.Add("script", script);
+            var parms = new Dictionary<string, string>
+            {
+                //parms.Add("Jenkins-Crumb", crumb);
+                { "script", script }
+            };
             var content = new FormUrlEncodedContent(parms);
             using (HttpResponseMessage response = await this.client.PostAsync("computer/(master)/script", content, cancellationToken))
             {
@@ -933,9 +940,11 @@ namespace JenkinsWebApi
         /// <returns>Task handle</returns>        
         public async Task CreateJobAsync(string jobName, Stream stream, string fileName, CancellationToken cancellationToken)
         {
-            MultipartFormDataContent content = new MultipartFormDataContent();
-            content.Add(new StringContent(jobName), "name");
-            content.Add(new StreamContent(stream), "file0", fileName);
+            MultipartFormDataContent content = new MultipartFormDataContent
+            {
+                { new StringContent(jobName), "name" },
+                { new StreamContent(stream), "file0", fileName }
+            };
             await PostRunAsync("createItem", content, cancellationToken);
         }
 
@@ -959,10 +968,12 @@ namespace JenkinsWebApi
         /// <returns>Task handle</returns>
         public async Task CloneJobAsync(string fromJobName, string newJobName, CancellationToken cancellationToken)
         {
-            List<KeyValuePair<string, string>> param = new List<KeyValuePair<string, string>>();
-            param.Add(new KeyValuePair<string, string>("name", newJobName));
-            param.Add(new KeyValuePair<string, string>("mode", "Build"));
-            param.Add(new KeyValuePair<string, string>("from", fromJobName));
+            List<KeyValuePair<string, string>> param = new List<KeyValuePair<string, string>>
+            {
+                new KeyValuePair<string, string>("name", newJobName),
+                new KeyValuePair<string, string>("mode", "Build"),
+                new KeyValuePair<string, string>("from", fromJobName)
+            };
             FormUrlEncodedContent content = new FormUrlEncodedContent(param);
             await PostRunAsync("createItem", content, cancellationToken);
         }
