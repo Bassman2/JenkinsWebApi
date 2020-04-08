@@ -289,3 +289,7 @@ __pycache__/
 
 # Subversion
 .svn/
+
+# Generates
+Generator/Model/
+*.chm
