@@ -20,6 +20,7 @@
       <xsd:extension base="hudson.model.Job">
         <xsd:sequence>
           <xsd:element name="concurrentBuild" type="xsd:boolean"/>
+          <xsd:element name="disabled" type="xsd:boolean"/>
           <xsd:element name="downstreamProject" type="hudson.model.AbstractProject" minOccurs="0" maxOccurs="unbounded"/>
           <xsd:element name="labelExpression" type="xsd:string" minOccurs="0"/>
           <xsd:element name="scm" type="hudson.scm.SCM" minOccurs="0"/>

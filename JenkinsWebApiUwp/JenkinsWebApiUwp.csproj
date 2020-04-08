@@ -7,8 +7,8 @@
     <ProjectGuid>{97089ECF-1501-46C6-983B-3364E8D9855C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>JenkinsWebApiUwp</RootNamespace>
-    <AssemblyName>JenkinsWebApiUwp</AssemblyName>
+    <RootNamespace>JenkinsWebApi</RootNamespace>
+    <AssemblyName>JenkinsWebApi</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.18362.0</TargetPlatformVersion>
@@ -124,8 +124,8 @@
     <EmbeddedResource Include="Properties\JenkinsWebApiUwp.rd.xml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="HtmlAgilityPack.NetCore">
-      <Version>1.5.0.1</Version>
+    <PackageReference Include="HtmlAgilityPack">
+      <Version>1.11.23</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.9</Version>

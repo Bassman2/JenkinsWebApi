@@ -37,6 +37,7 @@
       <xsd:extension base="hudson.model.Job">
         <xsd:sequence>
           <xsd:element name="concurrentBuild" type="xsd:boolean"/>
+          <xsd:element name="disabled" type="xsd:boolean"/>
           <xsd:element name="downstreamProject" type="hudson.model.AbstractProject" minOccurs="0" maxOccurs="unbounded"/>
           <xsd:element name="labelExpression" type="xsd:string" minOccurs="0"/>
           <xsd:element name="scm" type="hudson.scm.SCM" minOccurs="0"/>
@@ -330,12 +331,6 @@
     </xsd:sequence>
     <xsd:attribute name="_class" type="xsd:string" use="optional"/>
   </xsd:complexType>
-  <xsd:simpleType name="hudson.model.Node-Mode">
-    <xsd:restriction base="xsd:string">
-      <xsd:enumeration value="NORMAL"/>
-      <xsd:enumeration value="EXCLUSIVE"/>
-    </xsd:restriction>
-  </xsd:simpleType>
   <xsd:simpleType name="hudson.model.BallColor">
     <xsd:restriction base="xsd:string">
       <xsd:enumeration value="red"/>
@@ -352,6 +347,12 @@
       <xsd:enumeration value="aborted_anime"/>
       <xsd:enumeration value="notbuilt"/>
       <xsd:enumeration value="notbuilt_anime"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="hudson.model.Node-Mode">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="NORMAL"/>
+      <xsd:enumeration value="EXCLUSIVE"/>
     </xsd:restriction>
   </xsd:simpleType>
 </xsd:schema>

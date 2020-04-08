@@ -26,11 +26,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JenkinsWebApiCore30", "Jenk
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JenkinsWebApiCore20", "JenkinsWebApiCore20\JenkinsWebApiCore20.csproj", "{0678056B-2E1E-43B3-A4D7-53DDB3A120C9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JenkinsWebApiCore31", "JenkinsWebApiCore31\JenkinsWebApiCore31.csproj", "{C4D02F67-D388-45EA-9201-F36620D0966B}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		JenkinsWebApiShared\JenkinsWebApiShared.projitems*{019188a5-fa33-42bd-ba63-162cc7349c2d}*SharedItemsImports = 13
+		JenkinsWebApiShared\JenkinsWebApiShared.projitems*{0678056b-2e1e-43b3-a4d7-53ddb3a120c9}*SharedItemsImports = 5
+		JenkinsWebApiShared\JenkinsWebApiShared.projitems*{2f29faf5-926e-465f-8570-8ae8a96619b3}*SharedItemsImports = 5
+		JenkinsWebApiShared\JenkinsWebApiShared.projitems*{7db0cf9c-8d6b-456f-8fc8-32bc9c35339f}*SharedItemsImports = 5
 		JenkinsWebApiShared\JenkinsWebApiShared.projitems*{97089ecf-1501-46c6-983b-3364e8d9855c}*SharedItemsImports = 4
 		JenkinsWebApiShared\JenkinsWebApiShared.projitems*{be64fa67-2d2e-4405-be62-168159b2640e}*SharedItemsImports = 4
+		JenkinsWebApiShared\JenkinsWebApiShared.projitems*{c4d02f67-d388-45ea-9201-f36620d0966b}*SharedItemsImports = 5
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -216,6 +222,26 @@ Global
 		{0678056B-2E1E-43B3-A4D7-53DDB3A120C9}.Release|x64.Build.0 = Release|Any CPU
 		{0678056B-2E1E-43B3-A4D7-53DDB3A120C9}.Release|x86.ActiveCfg = Release|Any CPU
 		{0678056B-2E1E-43B3-A4D7-53DDB3A120C9}.Release|x86.Build.0 = Release|Any CPU
+		{C4D02F67-D388-45EA-9201-F36620D0966B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4D02F67-D388-45EA-9201-F36620D0966B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4D02F67-D388-45EA-9201-F36620D0966B}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{C4D02F67-D388-45EA-9201-F36620D0966B}.Debug|ARM.Build.0 = Debug|Any CPU
+		{C4D02F67-D388-45EA-9201-F36620D0966B}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{C4D02F67-D388-45EA-9201-F36620D0966B}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{C4D02F67-D388-45EA-9201-F36620D0966B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{C4D02F67-D388-45EA-9201-F36620D0966B}.Debug|x64.Build.0 = Debug|Any CPU
+		{C4D02F67-D388-45EA-9201-F36620D0966B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C4D02F67-D388-45EA-9201-F36620D0966B}.Debug|x86.Build.0 = Debug|Any CPU
+		{C4D02F67-D388-45EA-9201-F36620D0966B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4D02F67-D388-45EA-9201-F36620D0966B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4D02F67-D388-45EA-9201-F36620D0966B}.Release|ARM.ActiveCfg = Release|Any CPU
+		{C4D02F67-D388-45EA-9201-F36620D0966B}.Release|ARM.Build.0 = Release|Any CPU
+		{C4D02F67-D388-45EA-9201-F36620D0966B}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{C4D02F67-D388-45EA-9201-F36620D0966B}.Release|ARM64.Build.0 = Release|Any CPU
+		{C4D02F67-D388-45EA-9201-F36620D0966B}.Release|x64.ActiveCfg = Release|Any CPU
+		{C4D02F67-D388-45EA-9201-F36620D0966B}.Release|x64.Build.0 = Release|Any CPU
+		{C4D02F67-D388-45EA-9201-F36620D0966B}.Release|x86.ActiveCfg = Release|Any CPU
+		{C4D02F67-D388-45EA-9201-F36620D0966B}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
