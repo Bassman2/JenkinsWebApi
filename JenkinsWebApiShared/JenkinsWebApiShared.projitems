@@ -12,6 +12,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)Internal\MessageEnsure.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internal\XmlConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Jenkins.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Jenkins.Groovy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Jenkins.Helper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Jenkins.Info.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Jenkins.Job.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Jenkins.System.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JenkinsBuildParameters.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JenkinsExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JenkinsInstance.cs" />

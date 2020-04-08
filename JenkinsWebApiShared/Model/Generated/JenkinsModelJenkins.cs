@@ -28,6 +28,9 @@ namespace JenkinsWebApi.Model
         [XmlElement("unlabeledLoad")]
         public JenkinsModelLoadStatistics UnlabeledLoad { get; set; }
 
+        [XmlElement("url")]
+        public string Url { get; set; }
+
         [XmlElement("useCrumbs")]
         public bool UseCrumbs { get; set; }
 

@@ -10,6 +10,9 @@ namespace JenkinsWebApi.Model
         [XmlElement("concurrentBuild")]
         public bool IsConcurrentBuild { get; set; }
 
+        [XmlElement("disabled")]
+        public bool IsDisabled { get; set; }
+
         [XmlElement("downstreamProject")]
         public JenkinsModelAbstractProject[] DownstreamProjects { get; set; }
 

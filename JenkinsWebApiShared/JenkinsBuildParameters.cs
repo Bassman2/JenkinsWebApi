@@ -11,7 +11,7 @@ namespace JenkinsWebApi
     /// </summary>
     public class JenkinsBuildParameters
     {
-        private List<JenkinsParameter> list;
+        private readonly List<JenkinsParameter> list;
 
         /// <summary>
         /// Constructor
