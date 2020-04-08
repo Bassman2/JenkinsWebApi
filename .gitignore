@@ -292,4 +292,5 @@ __pycache__/
 
 # Generates
 Generator/Model/
+JenkinsTest/FuncUnitTests.cs
 *.chm
