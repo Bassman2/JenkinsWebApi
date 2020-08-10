@@ -6,9 +6,9 @@ namespace JenkinsWebApi.Model
     public class JenkinsNodeMonitorsResponseTimeMonitor
     {
         [XmlElement("timestamp")]
-        public ulong Timestamp { get; set; }
+        public long Timestamp { get; set; }
 
         [XmlElement("average")]
-        public ulong Average { get; set; }
+        public long Average { get; set; }
     }
 }

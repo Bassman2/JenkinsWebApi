@@ -17,8 +17,8 @@ namespace JenkinsTest
         public HomeUnitTest()
         {
             this.host = "http://localhost:8080";
-            this.login = "";
-            this.password = "";
+            this.login = "xx";
+            this.password = "xx";
 
             //this.serverMode = JenkinsNodeMode.Normal;
         }
@@ -299,5 +299,29 @@ namespace JenkinsTest
             //Assert.AreEqual(number, report..Number, "Number");
             //Assert.AreEqual($"{jobName} #{number}", report.DisplayName, "DisplayName");
         }
+
+        [TestMethod]
+        public void RunUserTest()
+        {
+            
+            using (Jenkins jenkins = new Jenkins(this.host, this.login, this.password))
+            {
+                string user = jenkins.GetComputerUserAsync("(master)").Result;
+            }
+
+            //Assert.AreEqual(JenkinsResult.Success, build.Result, "build.Result");
+        }
+
+        [TestMethod]
+        public void GetComputerSetTest()
+        {
+            using (Jenkins jenkins = new Jenkins(this.host, this.login, this.password))
+            {
+                JenkinsModelComputerSet set = jenkins.GetComputerSetAsync().Result;
+            }
+
+            
+        }
+        
     }
 }

@@ -6,12 +6,12 @@ namespace JenkinsWebApi.Model
     public class JenkinsNodeMonitorsDiskSpaceMonitor
     {
         [XmlElement("timestamp")]
-        public ulong Timestamp { get; set; }
+        public long Timestamp { get; set; }
 
         [XmlElement("path")]
         public string Path { get; set; }
 
         [XmlElement("size")]
-        public ulong Size { get; set; }
+        public long Size { get; set; }
     }
 }
