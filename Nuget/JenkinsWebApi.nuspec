@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>JenkinsWebApi</id>
-    <version>2.1</version>
+    <version>2.2</version>
     <title>JenkinsWebApi</title>
     <authors>Ralf Beckers</authors>
     <owners>Ralf Beckers</owners>
@@ -11,7 +11,7 @@
     <projectUrl>https://www.nuget.org/packages/JenkinsWebApi/</projectUrl>
     <description>API to communicate with Jenkins</description>
     <releaseNotes>New features</releaseNotes>
-    <copyright>Copyright 2017 - 2019 (c) Ralf Beckers. All rights reserved.</copyright>
+    <copyright>Copyright 2017 - 2020 (c) Ralf Beckers. All rights reserved.</copyright>
 	<repository type="Github" url="https://github.com/Bassman2/JenkinsWebApi" />
     <tags>Jenkins API</tags>
 	<dependencies>
