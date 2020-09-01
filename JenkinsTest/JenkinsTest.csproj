@@ -55,7 +55,6 @@
     <Compile Include="HomeUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="LocalUnitTest.cs" />
-    <Compile Include="FuncUnitTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
