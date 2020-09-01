@@ -27,7 +27,7 @@
       <Argument Key="maxVersionParts" Value="" xmlns="" />
     </TransformComponentArguments>
     <DocumentationSources>
-      <DocumentationSource sourceFile="..\JenkinsWebApi\JenkinsWebApi.csproj" />
+      <DocumentationSource sourceFile="..\JenkinsWebApiFwk45\JenkinsWebApiFwk45.csproj" />
     </DocumentationSources>
     <SaveComponentCacheCapacity>100</SaveComponentCacheCapacity>
     <BuildAssemblerVerbosity>OnlyWarningsAndErrors</BuildAssemblerVerbosity>
@@ -40,7 +40,7 @@
       <NamespaceSummaryItem name="JenkinsWebApi" isDocumented="True">Jenkins Web API  base classes</NamespaceSummaryItem>
       <NamespaceSummaryItem name="JenkinsWebApi.Model" isDocumented="True">Jenkins Web API  model classes</NamespaceSummaryItem>
     </NamespaceSummaries>
-    <HelpFileVersion>2.2.0.0</HelpFileVersion>
+    <HelpFileVersion>2.3.0.0</HelpFileVersion>
     <MaximumGroupParts>2</MaximumGroupParts>
     <NamespaceGrouping>False</NamespaceGrouping>
     <SyntaxFilters>Standard</SyntaxFilters>

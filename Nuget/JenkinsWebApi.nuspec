@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>JenkinsWebApi</id>
-    <version>2.2</version>
+    <version>2.3</version>
     <title>JenkinsWebApi</title>
     <authors>Ralf Beckers</authors>
     <owners>Ralf Beckers</owners>
@@ -15,20 +15,28 @@
 	<repository type="Github" url="https://github.com/Bassman2/JenkinsWebApi" />
     <tags>Jenkins API</tags>
 	<dependencies>
+      <group targetFramework=".NET5.0" />
       <group targetFramework=".NETFramework4.5" />
 	  <group targetFramework=".NETCoreApp2.0" />
+	  <group targetFramework=".NETCoreApp2.1" />
 	  <group targetFramework=".NETCoreApp3.0" />
+	  <group targetFramework=".NETCoreApp3.1" />
       <group targetFramework=".NETStandard2.0" />
+      <group targetFramework=".NETStandard2.1" />
       <group targetFramework="uap10" />	  
     </dependencies>
   </metadata>
   <files>
     <file src="JenkinsWebApiLicense.txt" target="content" />
     <file src="..\JenkinsWebApiDoc\Help\JenkinsWebApiDoc.chm" target="content" />
-	<file src="..\JenkinsWebApi\bin\Release\**" target="lib/net45" />	
+	<file src="..\JenkinsWebApi50\bin\Release\net5.0\**" target="lib/net5.0" />	
+	<file src="..\JenkinsWebApiFwk45\bin\Release\**" target="lib/net45" />	
 	<file src="..\JenkinsWebApiCore20\bin\Release\netcoreapp2.0\**" target="lib/netcoreapp2.0" />
+	<file src="..\JenkinsWebApiCore21\bin\Release\netcoreapp2.1\**" target="lib/netcoreapp2.1" />
 	<file src="..\JenkinsWebApiCore30\bin\Release\netcoreapp3.0\**" target="lib/netcoreapp3.0" />
-	<file src="..\JenkinsWebApiStd\bin\Release\netstandard2.0\**" target="lib/netstandard2.0" />
+	<file src="..\JenkinsWebApiCore31\bin\Release\netcoreapp3.1\**" target="lib/netcoreapp3.1" />
+	<file src="..\JenkinsWebApiStd20\bin\Release\netstandard2.0\**" target="lib/netstandard2.0" />
+	<file src="..\JenkinsWebApiStd21\bin\Release\netstandard2.1\**" target="lib/netstandard2.1" />
 	<file src="..\JenkinsWebApiUwp\bin\Release\**" target="lib/uap10" />
   </files>
 </package>

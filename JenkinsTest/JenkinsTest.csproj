@@ -62,9 +62,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\JenkinsWebApi\JenkinsWebApi.csproj">
-      <Project>{597f8df3-0006-4e53-850b-34e1b6e9ac18}</Project>
-      <Name>JenkinsWebApi</Name>
+    <ProjectReference Include="..\JenkinsWebApiFwk45\JenkinsWebApiFwk45.csproj">
+      <Project>{BE64FA67-2D2E-4405-BE62-168159B2640E}</Project>
+      <Name>JenkinsWebApiFwk45</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

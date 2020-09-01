@@ -65,6 +65,7 @@ namespace JenkinsWebApi
                 StringBuilder json = new StringBuilder();
                 json.Append("{\"parameter\": [");
 
+                int fileIndex = 0;
                 foreach (var para in this.list)
                 {
                     switch (para.Type)
@@ -77,8 +78,9 @@ namespace JenkinsWebApi
 
                     case JenkinsParameterType.Stream:
                         content.Add(new StringContent(para.Name), "name");
-                        content.Add(new StreamContent(para.FileStream), "file0", para.FileName);
-                        json.Append($"{{\"name\": \"{para.Name}\", \"file\": \"file0\"}}, ");
+                        content.Add(new StreamContent(para.FileStream), $"file{fileIndex}", para.FileName);
+                        json.Append($"{{\"name\": \"{para.Name}\", \"file\": \"file{fileIndex}\"}}, ");
+                        fileIndex++;
                         break;
 
                     case JenkinsParameterType.Boolean:

@@ -6,6 +6,20 @@
 		</introduction>
 
     <section>
+      <title>Version 2.3 was released on Sep. 1st, 2020</title>
+      <content>
+        <list class="bullet">
+          <listItem>
+            <para>Support for more frameworks.</para>
+          </listItem>
+          <listItem>
+            <para>Fix issues.</para>
+          </listItem>
+        </list>
+      </content>
+    </section>
+    
+    <section>
       <title>Version 2.2 was released on Aug. 10th, 2020</title>
       <content>
         <list class="bullet">
