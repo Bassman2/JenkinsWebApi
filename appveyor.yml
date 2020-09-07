@@ -1,4 +1,4 @@
-version: 2.0.{build}
+version: 2.3.{build}
 image: Visual Studio 2019
 
 
@@ -15,12 +15,12 @@ install:
     - echo //dummy  > %APPVEYOR_BUILD_FOLDER%\JenkinsTest\FuncUnitTests.cs
 
     - nuget restore "%APPVEYOR_BUILD_FOLDER%"\JenkinsTest\packages.config -PackagesDirectory "%APPVEYOR_BUILD_FOLDER%"\packages
-    - nuget restore "%APPVEYOR_BUILD_FOLDER%"\JenkinsWebApi\packages.config -PackagesDirectory "%APPVEYOR_BUILD_FOLDER%"\packages
+    - nuget restore "%APPVEYOR_BUILD_FOLDER%"\JenkinsWebApiFwk45\packages.config -PackagesDirectory "%APPVEYOR_BUILD_FOLDER%"\packages
         
     - ps: >-
-        Start-FileDownload 'https://github.com/EWSoftware/SHFB/releases/download/v2019.9.15.0/SHFBInstaller_v2019.9.15.0.zip'
+        Start-FileDownload 'https://github.com/EWSoftware/SHFB/releases/download/v2020.3.6.0/SHFBInstaller_v2020.3.6.0.zip'
 
-        7z x -y SHFBInstaller_v2019.9.15.0.zip | Out-Null
+        7z x -y SHFBInstaller_v2020.3.6.0.zip | Out-Null
 
         Write-Host "Installing MSI..."
 
@@ -28,7 +28,7 @@ install:
 
         Write-Host "Installing VSIX..."
 
-        . "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\VSIXInstaller.exe" /q /a InstallResources\SHFBVisualStudioPackage_VS2015AndLater.vsix
+        . "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\VSIXInstaller.exe" /q /a InstallResources\SHFBVisualStudioPackage_VS2017AndLater.vsix
 
         Write-Host "Sandcastle installed" -ForegroundColor Green
 
@@ -39,17 +39,17 @@ build_script:
     - msbuild JenkinsWebApi.sln /m /verbosity:minimal /t:restore /p:configuration="%configuration%" /p:platform="%platform%" /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
     - msbuild JenkinsWebApi.sln /m /verbosity:minimal /p:configuration="%configuration%" /p:platform="%platform%" /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
     - cd "%APPVEYOR_BUILD_FOLDER%"\Nuget
-    - pack.cmd
+    - if "%configuration%"=="Release" pack.cmd
 
 after_build:
     - cd "%APPVEYOR_BUILD_FOLDER%"
     - ps: >-
         if ($env:CONFIGURATION -eq "Release") {
-            Push-AppveyorArtifact "Nuget\JenkinsWebApi.2.1.0.nupkg" -FileName JenkinsWebApi.2.1.0.nupkg
+            Push-AppveyorArtifact "Nuget\JenkinsWebApi.2.3.0.nupkg" -FileName JenkinsWebApi.2.3.0.nupkg
         }
         
         if ($($env:APPVEYOR_REPO_TAG) -eq "true" -and $env:CONFIGURATION -eq "Release") {
-            Push-AppveyorArtifact "Nuget\JenkinsWebApi.2.1.0.nupkg" -FileName JenkinsWebApi.2.1.0.nupkg
+            Push-AppveyorArtifact "Nuget\JenkinsWebApi.2.3.0.nupkg" -FileName JenkinsWebApi.2.3.0.nupkg
         }
 
 artifacts:
