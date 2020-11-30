@@ -11,16 +11,13 @@ configuration:
 
 
 install:
-    #empty dummy file, not available at github due to passwords in it
-    - echo //dummy  > %APPVEYOR_BUILD_FOLDER%\JenkinsTest\FuncUnitTests.cs
+    - nuget restore "%APPVEYOR_BUILD_FOLDER%"\Test\JenkinsWebApiUnitTestFramework461\packages.config -PackagesDirectory "%APPVEYOR_BUILD_FOLDER%"\packages
+    - nuget restore "%APPVEYOR_BUILD_FOLDER%"\Src\JenkinsWebApiFwk45\packages.config -PackagesDirectory "%APPVEYOR_BUILD_FOLDER%"\packages
 
-    - nuget restore "%APPVEYOR_BUILD_FOLDER%"\JenkinsTest\packages.config -PackagesDirectory "%APPVEYOR_BUILD_FOLDER%"\packages
-    - nuget restore "%APPVEYOR_BUILD_FOLDER%"\JenkinsWebApiFwk45\packages.config -PackagesDirectory "%APPVEYOR_BUILD_FOLDER%"\packages
-        
     - ps: >-
-        Start-FileDownload 'https://github.com/EWSoftware/SHFB/releases/download/v2020.3.6.0/SHFBInstaller_v2020.3.6.0.zip'
+        Start-FileDownload 'https://github.com/EWSoftware/SHFB/releases/download/v2021.4.9.0/SHFBInstaller_v2021.4.9.0.zip'
 
-        7z x -y SHFBInstaller_v2020.3.6.0.zip | Out-Null
+        7z x -y SHFBInstaller_v2021.4.9.0.zip | Out-Null
 
         Write-Host "Installing MSI..."
 
