@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <Import Project="..\JenkinsWebApiShared\JenkinsWebApiShared.projitems" Label="Shared" />
+
+  <ItemGroup>
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.33" />
+  </ItemGroup>
+
+</Project>
