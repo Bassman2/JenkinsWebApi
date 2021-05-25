@@ -13,9 +13,9 @@
     <RootNamespace>JenkinsWebApiDoc</RootNamespace>
     <Name>JenkinsWebApiDoc</Name>
     <!-- SHFB properties -->
-    <FrameworkVersion>.NET Framework 4.5</FrameworkVersion>
+    <FrameworkVersion>.NET Framework 4.6.2</FrameworkVersion>
     <OutputPath>.\Help\</OutputPath>
-    <HtmlHelpName>JenkinsWebApiDoc</HtmlHelpName>
+    <HtmlHelpName>JenkinsWebApi</HtmlHelpName>
     <Language>en-US</Language>
     <TransformComponentArguments>
       <Argument Key="logoFile" Value="Help.png" xmlns="" />

@@ -12,8 +12,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Serialization;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.Net.Http.Json;
 
-#pragma warning disable IDE0063 // Use simple 'using' statement
+//#pragma warning disable IDE0063 // Use simple 'using' statement
 
 namespace JenkinsWebApi
 {
@@ -49,10 +52,9 @@ namespace JenkinsWebApi
         /// <param name="host">Host URL of the Jenkins server</param>
         public Jenkins(Uri host)
         {
-            //this.host = 
             if (host == null)
             {
-                throw new ArgumentNullException("host");
+                throw new ArgumentNullException(nameof(host));
             }
 
             // connect
