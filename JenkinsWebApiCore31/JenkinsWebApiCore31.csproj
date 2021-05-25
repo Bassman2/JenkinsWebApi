@@ -4,7 +4,7 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <AssemblyName>JenkinsWebApi</AssemblyName>
     <RootNamespace>JenkinsWebApi</RootNamespace>
-    <Version>2.3.0</Version>
+    <Version>3.0.0</Version>
     <Authors>Ralf Beckers</Authors>
     <Description>API to communicate with Jenkins</Description>
     <Copyright>Copyright © Ralf Beckers 2017 - 2020</Copyright>

@@ -4,6 +4,22 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
 
     <IsPackable>false</IsPackable>
+
+    <PackageId>JenkinsWebApiUnitTest</PackageId>
+
+    <Authors>Ralf Beckers</Authors>
+
+    <Product>JenkinsWebApi</Product>
+
+    <Copyright>Copyright © Ralf Beckers 2017 - 2021</Copyright>
+
+    <Version>3.0.0</Version>
+
+    <PackageProjectUrl>https://www.nuget.org/packages/JenkinsWebApi/</PackageProjectUrl>
+
+    <RepositoryUrl>https://github.com/Bassman2/JenkinsWebApi</RepositoryUrl>
+
+    <RepositoryType>Github</RepositoryType>
   </PropertyGroup>
 
   <ItemGroup>

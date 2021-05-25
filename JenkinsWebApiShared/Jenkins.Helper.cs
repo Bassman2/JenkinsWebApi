@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Serialization;
 using System.Net.Http.Json;
+using System.Text.Json;
 
 namespace JenkinsWebApi
 {
@@ -23,7 +24,7 @@ namespace JenkinsWebApi
                 //string str = await response.Content.ReadAsStringAsync();
                 //XmlSerializer serializer = new XmlSerializer(typeof(T));
                 //value = (T)serializer.Deserialize(new StringReader(str));
-                value = await response.Content.ReadFromJsonAsync<T>(null, cancellationToken);
+                value = await response.Content.ReadFromJsonAsync<T>((JsonSerializerOptions)null, cancellationToken);
             }
             return value;
         }

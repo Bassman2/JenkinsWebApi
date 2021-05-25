@@ -6,6 +6,23 @@
 		</introduction>
 
     <section>
+      <title>Version 3.0 was released on , 2021</title>
+      <content>
+        <list class="bullet">
+          <listItem>
+            <para>Change to JSON.</para>
+          </listItem>
+          <listItem>
+            <para>Remove obsolete frameworks.</para>
+          </listItem>
+          <listItem>
+            <para>Add .NET 6.0.</para>
+          </listItem>
+        </list>
+      </content>
+    </section>
+    
+    <section>
       <title>Version 2.3 was released on Sep. 1st, 2020</title>
       <content>
         <list class="bullet">
