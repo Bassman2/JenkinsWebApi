@@ -7,57 +7,57 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Generator", "Generator\Gene
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dl", "dl\dl.csproj", "{ED18FA9E-318F-4F99-95D2-7AF89F5A27D7}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "JenkinsWebApiShared", "JenkinsWebApiShared\JenkinsWebApiShared.shproj", "{019188A5-FA33-42BD-BA63-162CC7349C2D}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "JenkinsWebApiShared", "Src\JenkinsWebApiShared\JenkinsWebApiShared.shproj", "{019188A5-FA33-42BD-BA63-162CC7349C2D}"
 EndProject
-Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "JenkinsWebApiDoc", "JenkinsWebApiDoc\JenkinsWebApiDoc.shfbproj", "{E5B1175A-CC6F-4899-8496-9412C872F3CA}"
+Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "JenkinsWebApiDoc", "Doc\JenkinsWebApiDoc\JenkinsWebApiDoc.shfbproj", "{E5B1175A-CC6F-4899-8496-9412C872F3CA}"
 	ProjectSection(ProjectDependencies) = postProject
 		{BE64FA67-2D2E-4405-BE62-168159B2640E} = {BE64FA67-2D2E-4405-BE62-168159B2640E}
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JenkinsWebApiCore31", "JenkinsWebApiCore31\JenkinsWebApiCore31.csproj", "{C4D02F67-D388-45EA-9201-F36620D0966B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JenkinsWebApiCore31", "Src\JenkinsWebApiCore31\JenkinsWebApiCore31.csproj", "{C4D02F67-D388-45EA-9201-F36620D0966B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JenkinsWebApiCore21", "JenkinsWebApiCore21\JenkinsWebApiCore21.csproj", "{D26F2074-1AAA-4D45-99FA-915594FB4F35}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JenkinsWebApiCore21", "Src\JenkinsWebApiCore21\JenkinsWebApiCore21.csproj", "{D26F2074-1AAA-4D45-99FA-915594FB4F35}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JenkinsWebApi50", "JenkinsWebApi50\JenkinsWebApi50.csproj", "{332049C4-63E9-45AE-9546-80F2108614D4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JenkinsWebApi50", "Src\JenkinsWebApi50\JenkinsWebApi50.csproj", "{332049C4-63E9-45AE-9546-80F2108614D4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JenkinsWebApi60", "JenkinsWebApi60\JenkinsWebApi60.csproj", "{0EBE6C7A-53FA-4E2E-B9FD-6CA84447BF1A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JenkinsWebApi60", "Src\JenkinsWebApi60\JenkinsWebApi60.csproj", "{0EBE6C7A-53FA-4E2E-B9FD-6CA84447BF1A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "JenkinsWebApi", "JenkinsWebApi", "{58878F22-2CED-4362-896A-D6D32E0E2359}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Doc", "Doc", "{E7E3EC57-16D6-4373-811E-14544C007C21}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{E7E3EC57-16D6-4373-811E-14544C007C21}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JenkinsWebApiFramework461", "Src\JenkinsWebApiFramework461\JenkinsWebApiFramework461.csproj", "{BE64FA67-2D2E-4405-BE62-168159B2640E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JenkinsWebApiFramework461", "JenkinsWebApiFramework461\JenkinsWebApiFramework461.csproj", "{BE64FA67-2D2E-4405-BE62-168159B2640E}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "JenkinsWebApiUnitTestShare", "Test\JenkinsWebApiUnitTestShare\JenkinsWebApiUnitTestShare.shproj", "{641DBFCA-95FE-4B32-8C2C-F18B5B7DD01E}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTest", "UnitTest", "{B123AF2E-8B0B-4177-B00B-901665EC6AD2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JenkinsWebApiUnitTest50", "Test\JenkinsWebApiUnitTest50\JenkinsWebApiUnitTest50.csproj", "{2D0F21F8-AFCB-4583-B516-49813428F43D}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "JenkinsWebApiUnitTestShare", "JenkinsWebApiUnitTestShare\JenkinsWebApiUnitTestShare.shproj", "{641DBFCA-95FE-4B32-8C2C-F18B5B7DD01E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JenkinsWebApiUnitTest60", "Test\JenkinsWebApiUnitTest60\JenkinsWebApiUnitTest60.csproj", "{7AAFB2DE-FC2C-4583-BE4D-24D5430AFA19}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JenkinsWebApiUnitTest50", "JenkinsWebApiUnitTest50\JenkinsWebApiUnitTest50.csproj", "{2D0F21F8-AFCB-4583-B516-49813428F43D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JenkinsWebApiUnitTestCore21", "Test\JenkinsWebApiUnitTestCore21\JenkinsWebApiUnitTestCore21.csproj", "{575D83FA-D389-4D73-A542-0FEA83176774}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JenkinsWebApiUnitTest60", "JenkinsWebApiUnitTest60\JenkinsWebApiUnitTest60.csproj", "{7AAFB2DE-FC2C-4583-BE4D-24D5430AFA19}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JenkinsWebApiUnitTestCore31", "Test\JenkinsWebApiUnitTestCore31\JenkinsWebApiUnitTestCore31.csproj", "{F69AC71D-89D6-4026-BDC5-B75D21C9DD5B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JenkinsWebApiUnitTestCore21", "JenkinsWebApiUnitTestCore21\JenkinsWebApiUnitTestCore21.csproj", "{575D83FA-D389-4D73-A542-0FEA83176774}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JenkinsWebApiUnitTestCore31", "JenkinsWebApiUnitTestCore31\JenkinsWebApiUnitTestCore31.csproj", "{F69AC71D-89D6-4026-BDC5-B75D21C9DD5B}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JenkinsWebApiUnitTestFramework461", "JenkinsWebApiUnitTestFramework461\JenkinsWebApiUnitTestFramework461.csproj", "{7D37B929-A2CD-4275-8582-526ACC834A64}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JenkinsWebApiUnitTestFramework461", "Test\JenkinsWebApiUnitTestFramework461\JenkinsWebApiUnitTestFramework461.csproj", "{7D37B929-A2CD-4275-8582-526ACC834A64}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CodeGenerator", "CodeGenerator", "{53B37FBC-40CC-4133-80FF-0AD1FE0D0FE3}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{4EDB69B2-B2D6-4DCC-8E80-D4F6A869F441}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Src", "Src", "{9FC201FF-8877-40F8-8582-7C3B0F210936}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		JenkinsWebApiShared\JenkinsWebApiShared.projitems*{019188a5-fa33-42bd-ba63-162cc7349c2d}*SharedItemsImports = 13
-		JenkinsWebApiShared\JenkinsWebApiShared.projitems*{0ebe6c7a-53fa-4e2e-b9fd-6ca84447bf1a}*SharedItemsImports = 5
-		JenkinsWebApiUnitTestShare\JenkinsWebApiUnitTestShare.projitems*{2d0f21f8-afcb-4583-b516-49813428f43d}*SharedItemsImports = 5
-		JenkinsWebApiShared\JenkinsWebApiShared.projitems*{332049c4-63e9-45ae-9546-80f2108614d4}*SharedItemsImports = 5
-		JenkinsWebApiUnitTestShare\JenkinsWebApiUnitTestShare.projitems*{575d83fa-d389-4d73-a542-0fea83176774}*SharedItemsImports = 5
-		JenkinsWebApiUnitTestShare\JenkinsWebApiUnitTestShare.projitems*{641dbfca-95fe-4b32-8c2c-f18b5b7dd01e}*SharedItemsImports = 13
-		JenkinsWebApiUnitTestShare\JenkinsWebApiUnitTestShare.projitems*{7aafb2de-fc2c-4583-be4d-24d5430afa19}*SharedItemsImports = 5
-		JenkinsWebApiUnitTestShare\JenkinsWebApiUnitTestShare.projitems*{7d37b929-a2cd-4275-8582-526acc834a64}*SharedItemsImports = 4
-		JenkinsWebApiShared\JenkinsWebApiShared.projitems*{be64fa67-2d2e-4405-be62-168159b2640e}*SharedItemsImports = 4
-		JenkinsWebApiShared\JenkinsWebApiShared.projitems*{c4d02f67-d388-45ea-9201-f36620d0966b}*SharedItemsImports = 5
-		JenkinsWebApiShared\JenkinsWebApiShared.projitems*{d26f2074-1aaa-4d45-99fa-915594fb4f35}*SharedItemsImports = 5
-		JenkinsWebApiUnitTestShare\JenkinsWebApiUnitTestShare.projitems*{f69ac71d-89d6-4026-bdc5-b75d21c9dd5b}*SharedItemsImports = 5
+		Src\JenkinsWebApiShared\JenkinsWebApiShared.projitems*{019188a5-fa33-42bd-ba63-162cc7349c2d}*SharedItemsImports = 13
+		Src\JenkinsWebApiShared\JenkinsWebApiShared.projitems*{0ebe6c7a-53fa-4e2e-b9fd-6ca84447bf1a}*SharedItemsImports = 5
+		Test\JenkinsWebApiUnitTestShare\JenkinsWebApiUnitTestShare.projitems*{2d0f21f8-afcb-4583-b516-49813428f43d}*SharedItemsImports = 5
+		Src\JenkinsWebApiShared\JenkinsWebApiShared.projitems*{332049c4-63e9-45ae-9546-80f2108614d4}*SharedItemsImports = 5
+		Test\JenkinsWebApiUnitTestShare\JenkinsWebApiUnitTestShare.projitems*{575d83fa-d389-4d73-a542-0fea83176774}*SharedItemsImports = 5
+		Test\JenkinsWebApiUnitTestShare\JenkinsWebApiUnitTestShare.projitems*{641dbfca-95fe-4b32-8c2c-f18b5b7dd01e}*SharedItemsImports = 13
+		Test\JenkinsWebApiUnitTestShare\JenkinsWebApiUnitTestShare.projitems*{7aafb2de-fc2c-4583-be4d-24d5430afa19}*SharedItemsImports = 5
+		Test\JenkinsWebApiUnitTestShare\JenkinsWebApiUnitTestShare.projitems*{7d37b929-a2cd-4275-8582-526acc834a64}*SharedItemsImports = 4
+		Src\JenkinsWebApiShared\JenkinsWebApiShared.projitems*{be64fa67-2d2e-4405-be62-168159b2640e}*SharedItemsImports = 4
+		Src\JenkinsWebApiShared\JenkinsWebApiShared.projitems*{c4d02f67-d388-45ea-9201-f36620d0966b}*SharedItemsImports = 5
+		Src\JenkinsWebApiShared\JenkinsWebApiShared.projitems*{d26f2074-1aaa-4d45-99fa-915594fb4f35}*SharedItemsImports = 5
+		Test\JenkinsWebApiUnitTestShare\JenkinsWebApiUnitTestShare.projitems*{f69ac71d-89d6-4026-bdc5-b75d21c9dd5b}*SharedItemsImports = 5
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -338,19 +338,19 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{15C4CA4F-748A-4934-B0E3-49A5009E9C96} = {53B37FBC-40CC-4133-80FF-0AD1FE0D0FE3}
 		{ED18FA9E-318F-4F99-95D2-7AF89F5A27D7} = {53B37FBC-40CC-4133-80FF-0AD1FE0D0FE3}
-		{019188A5-FA33-42BD-BA63-162CC7349C2D} = {58878F22-2CED-4362-896A-D6D32E0E2359}
+		{019188A5-FA33-42BD-BA63-162CC7349C2D} = {9FC201FF-8877-40F8-8582-7C3B0F210936}
 		{E5B1175A-CC6F-4899-8496-9412C872F3CA} = {E7E3EC57-16D6-4373-811E-14544C007C21}
-		{C4D02F67-D388-45EA-9201-F36620D0966B} = {58878F22-2CED-4362-896A-D6D32E0E2359}
-		{D26F2074-1AAA-4D45-99FA-915594FB4F35} = {58878F22-2CED-4362-896A-D6D32E0E2359}
-		{332049C4-63E9-45AE-9546-80F2108614D4} = {58878F22-2CED-4362-896A-D6D32E0E2359}
-		{0EBE6C7A-53FA-4E2E-B9FD-6CA84447BF1A} = {58878F22-2CED-4362-896A-D6D32E0E2359}
-		{BE64FA67-2D2E-4405-BE62-168159B2640E} = {58878F22-2CED-4362-896A-D6D32E0E2359}
-		{641DBFCA-95FE-4B32-8C2C-F18B5B7DD01E} = {B123AF2E-8B0B-4177-B00B-901665EC6AD2}
-		{2D0F21F8-AFCB-4583-B516-49813428F43D} = {B123AF2E-8B0B-4177-B00B-901665EC6AD2}
-		{7AAFB2DE-FC2C-4583-BE4D-24D5430AFA19} = {B123AF2E-8B0B-4177-B00B-901665EC6AD2}
-		{575D83FA-D389-4D73-A542-0FEA83176774} = {B123AF2E-8B0B-4177-B00B-901665EC6AD2}
-		{F69AC71D-89D6-4026-BDC5-B75D21C9DD5B} = {B123AF2E-8B0B-4177-B00B-901665EC6AD2}
-		{7D37B929-A2CD-4275-8582-526ACC834A64} = {B123AF2E-8B0B-4177-B00B-901665EC6AD2}
+		{C4D02F67-D388-45EA-9201-F36620D0966B} = {9FC201FF-8877-40F8-8582-7C3B0F210936}
+		{D26F2074-1AAA-4D45-99FA-915594FB4F35} = {9FC201FF-8877-40F8-8582-7C3B0F210936}
+		{332049C4-63E9-45AE-9546-80F2108614D4} = {9FC201FF-8877-40F8-8582-7C3B0F210936}
+		{0EBE6C7A-53FA-4E2E-B9FD-6CA84447BF1A} = {9FC201FF-8877-40F8-8582-7C3B0F210936}
+		{BE64FA67-2D2E-4405-BE62-168159B2640E} = {9FC201FF-8877-40F8-8582-7C3B0F210936}
+		{641DBFCA-95FE-4B32-8C2C-F18B5B7DD01E} = {4EDB69B2-B2D6-4DCC-8E80-D4F6A869F441}
+		{2D0F21F8-AFCB-4583-B516-49813428F43D} = {4EDB69B2-B2D6-4DCC-8E80-D4F6A869F441}
+		{7AAFB2DE-FC2C-4583-BE4D-24D5430AFA19} = {4EDB69B2-B2D6-4DCC-8E80-D4F6A869F441}
+		{575D83FA-D389-4D73-A542-0FEA83176774} = {4EDB69B2-B2D6-4DCC-8E80-D4F6A869F441}
+		{F69AC71D-89D6-4026-BDC5-B75D21C9DD5B} = {4EDB69B2-B2D6-4DCC-8E80-D4F6A869F441}
+		{7D37B929-A2CD-4275-8582-526ACC834A64} = {4EDB69B2-B2D6-4DCC-8E80-D4F6A869F441}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {27120C5C-0E2D-48C4-97B5-3B04F4D7C011}
