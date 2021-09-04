@@ -1,40 +1,38 @@
-using System.Xml.Serialization;
-
-#pragma warning disable CS1591
+using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
     // hudson.model.LoadStatistics
     public partial class JenkinsModelLoadStatistics
     {
-        [XmlElement("availableExecutors")]
+        [JsonPropertyName("availableExecutors")]
         public JenkinsModelMultiStageTimeSeries AvailableExecutors { get; set; }
 
-        [XmlElement("busyExecutors")]
+        [JsonPropertyName("busyExecutors")]
         public JenkinsModelMultiStageTimeSeries BusyExecutors { get; set; }
 
-        [XmlElement("connectingExecutors")]
+        [JsonPropertyName("connectingExecutors")]
         public JenkinsModelMultiStageTimeSeries ConnectingExecutors { get; set; }
 
-        [XmlElement("definedExecutors")]
+        [JsonPropertyName("definedExecutors")]
         public JenkinsModelMultiStageTimeSeries DefinedExecutors { get; set; }
 
-        [XmlElement("idleExecutors")]
+        [JsonPropertyName("idleExecutors")]
         public JenkinsModelMultiStageTimeSeries IdleExecutors { get; set; }
 
-        [XmlElement("onlineExecutors")]
+        [JsonPropertyName("onlineExecutors")]
         public JenkinsModelMultiStageTimeSeries OnlineExecutors { get; set; }
 
-        [XmlElement("queueLength")]
+        [JsonPropertyName("queueLength")]
         public JenkinsModelMultiStageTimeSeries QueueLength { get; set; }
 
-        [XmlElement("totalExecutors")]
+        [JsonPropertyName("totalExecutors")]
         public JenkinsModelMultiStageTimeSeries TotalExecutors { get; set; }
 
         /// <summary>
         /// Jenkins Java class name.
         /// </summary>
-        [XmlAttribute("_class")]
+        [JsonPropertyName("_class")]
         public string Class { get; set; }
     }
 }

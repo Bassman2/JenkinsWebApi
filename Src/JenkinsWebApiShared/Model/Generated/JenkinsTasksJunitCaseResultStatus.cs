@@ -1,25 +1,25 @@
-using System.Xml.Serialization;
-
-#pragma warning disable CS1591
+using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
     // hudson.tasks.junit.CaseResult-Status
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum JenkinsTasksJunitCaseResultStatus
     {
-        [XmlEnum("PASSED")]
+        [EnumMember(Value = "PASSED")]
         Passed,
 
-        [XmlEnum("SKIPPED")]
+        [EnumMember(Value = "SKIPPED")]
         Skipped,
 
-        [XmlEnum("FAILED")]
+        [EnumMember(Value = "FAILED")]
         Failed,
 
-        [XmlEnum("FIXED")]
+        [EnumMember(Value = "FIXED")]
         Fixed,
 
-        [XmlEnum("REGRESSION")]
+        [EnumMember(Value = "REGRESSION")]
         Regression,
 
     }

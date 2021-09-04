@@ -67,7 +67,6 @@ namespace JenkinsWebApi
             // connect
             this.handler = new HttpClientHandler
             {
-                AllowAutoRedirect = true,  // for start job response /queue/item/x
                 CookieContainer = new System.Net.CookieContainer(),
                 UseCookies = true
             };
@@ -93,23 +92,17 @@ namespace JenkinsWebApi
         /// </summary>
         /// <param name="host">Host URL of the Jenkins server</param>
         /// <param name="login">Login for the Jenkins server</param>
-        /// <param name="password">Password for the Jenkins server</param>
-        public Jenkins(Uri host, string login, string password) 
+        /// <param name="passwordOrToken">Password or API token for the Jenkins server</param>
+        public Jenkins(Uri host, string login, string passwordOrToken) 
         {
             if (host == null)
             {
                 throw new ArgumentNullException(nameof(host));
             }
 
-            //CredentialCache credentialCache = new CredentialCache();
-            //credentialCache.Add(host, "Basic", new NetworkCredential(login, password));
-
             // connect
             this.handler = new HttpClientHandler
             {
-                //PreAuthenticate = true,
-                //Credentials = credentialCache, //new NetworkCredential(login, password),
-
                 UseCookies = true,
                 CookieContainer = new System.Net.CookieContainer()
             };
@@ -117,59 +110,10 @@ namespace JenkinsWebApi
             {
                 BaseAddress = host
             };
-            
-            this.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.ASCII.GetBytes($"{login}:{password}")));
-            //this.client.DefaultRequestHeaders.Add("Authorization", "Basic " + credentials);
+            this.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.ASCII.GetBytes($"{login}:{passwordOrToken}")));
 
             Crumb();
         }
-
-        /// <summary>
-        /// Initializes a new instance of the Jenkins class.
-        /// </summary>
-        /// <param name="host">Host URL of the Jenkins server</param>
-        /// <param name="accessToken">Access Token for the Jenkins server</param>
-        public Jenkins(string host, string accessToken) : this(new Uri(host), accessToken)
-        { }
-
-        /// <summary>
-        /// Initializes a new instance of the Jenkins class.
-        /// </summary>
-        /// <param name="host">Host URL of the Jenkins server</param>
-        /// <param name="accessToken">Access Token for the Jenkins server</param>
-        public Jenkins(Uri host, string accessToken)
-        {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
-
-            // connect
-            this.handler = new HttpClientHandler
-            {
-                
-                PreAuthenticate = true,
-                CookieContainer = new System.Net.CookieContainer(),
-                UseCookies = true
-            };
-            this.client = new HttpClient(this.handler)
-            {
-                BaseAddress = host,
-                
-            };
-            this.client.DefaultRequestHeaders.Add("Authentication-Token", accessToken);
-            
-            Crumb();
-
-            //this.client.
-
-            //if (!Login(login, password))
-            //{
-            //    throw new Exception("Login failed!");
-            //}
-        }
-
-
 
         /// <summary>
         /// Release allocated resources.
@@ -188,41 +132,7 @@ namespace JenkinsWebApi
             }   
         }
 
-        ///////// <summary>
-        ///////// Login to the Jenkins server.
-        ///////// </summary>
-        ///////// <param name="login">User login name</param>
-        ///////// <param name="password">User login password</param>
-        ///////// <returns>true if login success; false if failed</returns>
-        //////public bool Login(string login, string password)
-        //////{
-        //////    if (string.IsNullOrEmpty(login))
-        //////    {
-        //////        throw new ArgumentNullException(nameof(login));
-        //////    }
-
-        //////    if (string.IsNullOrEmpty(password))
-        //////    {
-        //////        throw new ArgumentNullException(nameof(password));
-        //////    }
-
-        //////    var list = new Dictionary<string, string>
-        //////    {
-        //////        { "j_username", login },
-        //////        { "j_password", password },
-        //////        { "remember_me", "on" },
-        //////        { "Submit", "Anmelden" }
-        //////    };
-
-        //////    var res = PostLoginAsync("j_acegi_security_check", new FormUrlEncodedContent(list), CancellationToken.None).Result;
-        //////    //if (res)
-        //////    //{
-        //////    //    Crumb();
-        //////    //}
-        //////    return res;
-        //////}
-
-        public void Crumb()
+        private void Crumb()
         {
             // only on newer Jenkins versions
             // handle CSRF Protection

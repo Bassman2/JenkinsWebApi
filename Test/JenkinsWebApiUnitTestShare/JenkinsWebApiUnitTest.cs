@@ -43,7 +43,7 @@ namespace JenkinsTest
             JenkinsModelHudson server = null;
 
             // Act
-            using (Jenkins jenkins = new Jenkins(this.host, this.token))
+            using (Jenkins jenkins = new Jenkins(this.host, this.login, this.token))
             {
                 server = jenkins.GetServerAsync().Result;
             }

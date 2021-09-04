@@ -1,64 +1,62 @@
-using System.Xml.Serialization;
-
-#pragma warning disable CS1591
+using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
     // hudson.model.Job
     public partial class JenkinsModelJob : JenkinsModelAbstractItem
     {
-        [XmlElement("allBuild")]
+        [JsonPropertyName("allBuild")]
         public JenkinsModelRun[] AllBuilds { get; set; }
 
-        [XmlElement("buildable")]
+        [JsonPropertyName("buildable")]
         public bool IsBuildable { get; set; }
 
-        [XmlElement("build")]
+        [JsonPropertyName("build")]
         public JenkinsModelRun[] Builds { get; set; }
 
-        [XmlElement("color")]
+        [JsonPropertyName("color")]
         public JenkinsModelBallColor Color { get; set; }
 
-        [XmlElement("firstBuild")]
+        [JsonPropertyName("firstBuild")]
         public JenkinsModelRun FirstBuild { get; set; }
 
-        [XmlElement("healthReport")]
+        [JsonPropertyName("healthReport")]
         public JenkinsModelHealthReport[] HealthReports { get; set; }
 
-        [XmlElement("inQueue")]
+        [JsonPropertyName("inQueue")]
         public bool IsInQueue { get; set; }
 
-        [XmlElement("keepDependencies")]
+        [JsonPropertyName("keepDependencies")]
         public bool IsKeepDependencies { get; set; }
 
-        [XmlElement("lastBuild")]
+        [JsonPropertyName("lastBuild")]
         public JenkinsModelRun LastBuild { get; set; }
 
-        [XmlElement("lastCompletedBuild")]
+        [JsonPropertyName("lastCompletedBuild")]
         public JenkinsModelRun LastCompletedBuild { get; set; }
 
-        [XmlElement("lastFailedBuild")]
+        [JsonPropertyName("lastFailedBuild")]
         public JenkinsModelRun LastFailedBuild { get; set; }
 
-        [XmlElement("lastStableBuild")]
+        [JsonPropertyName("lastStableBuild")]
         public JenkinsModelRun LastStableBuild { get; set; }
 
-        [XmlElement("lastSuccessfulBuild")]
+        [JsonPropertyName("lastSuccessfulBuild")]
         public JenkinsModelRun LastSuccessfulBuild { get; set; }
 
-        [XmlElement("lastUnstableBuild")]
+        [JsonPropertyName("lastUnstableBuild")]
         public JenkinsModelRun LastUnstableBuild { get; set; }
 
-        [XmlElement("lastUnsuccessfulBuild")]
+        [JsonPropertyName("lastUnsuccessfulBuild")]
         public JenkinsModelRun LastUnsuccessfulBuild { get; set; }
 
-        [XmlElement("nextBuildNumber")]
+        [JsonPropertyName("nextBuildNumber")]
         public int NextBuildNumber { get; set; }
 
-        [XmlElement("property")]
+        [JsonPropertyName("property")]
         public JenkinsModelJobProperty[] Propertys { get; set; }
 
-        [XmlElement("queueItem")]
+        [JsonPropertyName("queueItem")]
         public JenkinsModelQueueItem QueueItem { get; set; }
 
     }

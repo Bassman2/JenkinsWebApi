@@ -35,21 +35,7 @@
             </summary>
             <param name="host">Host URL of the Jenkins server</param>
             <param name="login">Login for the Jenkins server</param>
-            <param name="password">Password for the Jenkins server</param>
-        </member>
-        <member name="M:JenkinsWebApi.Jenkins.#ctor(System.String,System.String)">
-            <summary>
-            Initializes a new instance of the Jenkins class.
-            </summary>
-            <param name="host">Host URL of the Jenkins server</param>
-            <param name="accessToken">Access Token for the Jenkins server</param>
-        </member>
-        <member name="M:JenkinsWebApi.Jenkins.#ctor(System.Uri,System.String)">
-            <summary>
-            Initializes a new instance of the Jenkins class.
-            </summary>
-            <param name="host">Host URL of the Jenkins server</param>
-            <param name="accessToken">Access Token for the Jenkins server</param>
+            <param name="passwordOrToken">Password or API token for the Jenkins server</param>
         </member>
         <member name="M:JenkinsWebApi.Jenkins.Dispose">
             <summary>

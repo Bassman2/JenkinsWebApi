@@ -1,20 +1,19 @@
-﻿using System.Xml.Serialization;
-#pragma warning disable CS1591
+﻿using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
     public class JenkinsNodeMonitorsSwapSpaceMonitor
     {
-        [XmlElement("availablePhysicalMemory")]
+        [JsonPropertyName("availablePhysicalMemory")]
         public ulong AvailablePhysicalMemory { get; set; }
 
-        [XmlElement("availableSwapSpace")]
+        [JsonPropertyName("availableSwapSpace")]
         public ulong AvailableSwapSpace { get; set; }
 
-        [XmlElement("totalPhysicalMemory")]
+        [JsonPropertyName("totalPhysicalMemory")]
         public ulong TotalPhysicalMemory { get; set; }
 
-        [XmlElement("totalSwapSpace")]
+        [JsonPropertyName("totalSwapSpace")]
         public ulong TotalSwapSpace { get; set; }
     }
 }

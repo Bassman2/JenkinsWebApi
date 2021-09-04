@@ -1,19 +1,19 @@
-using System.Xml.Serialization;
-
-#pragma warning disable CS1591
+using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
     // jenkins.YesNoMaybe
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum JenkinsYesNoMaybe
     {
-        [XmlEnum("YES")]
+        [EnumMember(Value = "YES")]
         Yes,
 
-        [XmlEnum("NO")]
+        [EnumMember(Value = "NO")]
         No,
 
-        [XmlEnum("MAYBE")]
+        [EnumMember(Value = "MAYBE")]
         Maybe,
 
     }

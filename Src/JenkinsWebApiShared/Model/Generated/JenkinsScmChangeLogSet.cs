@@ -1,22 +1,20 @@
-using System.Xml.Serialization;
-
-#pragma warning disable CS1591
+using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
     // hudson.scm.ChangeLogSet
     public partial class JenkinsScmChangeLogSet
     {
-        [XmlElement("item")]
+        [JsonPropertyName("item")]
         public object[] Items { get; set; }
 
-        [XmlElement("kind")]
+        [JsonPropertyName("kind")]
         public string Kind { get; set; }
 
         /// <summary>
         /// Jenkins Java class name.
         /// </summary>
-        [XmlAttribute("_class")]
+        [JsonPropertyName("_class")]
         public string Class { get; set; }
     }
 }

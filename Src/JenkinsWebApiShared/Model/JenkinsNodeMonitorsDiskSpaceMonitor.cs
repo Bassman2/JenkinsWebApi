@@ -1,17 +1,16 @@
-﻿using System.Xml.Serialization;
-#pragma warning disable CS1591
+﻿using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
     public class JenkinsNodeMonitorsDiskSpaceMonitor
     {
-        [XmlElement("timestamp")]
+        [JsonPropertyName("timestamp")]
         public long Timestamp { get; set; }
 
-        [XmlElement("path")]
+        [JsonPropertyName("path")]
         public string Path { get; set; }
 
-        [XmlElement("size")]
+        [JsonPropertyName("size")]
         public long Size { get; set; }
     }
 }

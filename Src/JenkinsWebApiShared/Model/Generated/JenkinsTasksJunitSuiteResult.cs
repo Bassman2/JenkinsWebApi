@@ -1,46 +1,44 @@
-using System.Xml.Serialization;
-
-#pragma warning disable CS1591
+using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
     // hudson.tasks.junit.SuiteResult
     public partial class JenkinsTasksJunitSuiteResult
     {
-        [XmlElement("case")]
+        [JsonPropertyName("case")]
         public JenkinsTasksJunitCaseResult[] Cases { get; set; }
 
-        [XmlElement("duration")]
+        [JsonPropertyName("duration")]
         public object Duration { get; set; }
 
-        [XmlElement("enclosingBlockName")]
+        [JsonPropertyName("enclosingBlockName")]
         public string[] EnclosingBlockNames { get; set; }
 
-        [XmlElement("enclosingBlock")]
+        [JsonPropertyName("enclosingBlock")]
         public string[] EnclosingBlocks { get; set; }
 
-        [XmlElement("id")]
+        [JsonPropertyName("id")]
         public string Id { get; set; }
 
-        [XmlElement("name")]
+        [JsonPropertyName("name")]
         public string Name { get; set; }
 
-        [XmlElement("nodeId")]
+        [JsonPropertyName("nodeId")]
         public string NodeId { get; set; }
 
-        [XmlElement("stderr")]
+        [JsonPropertyName("stderr")]
         public string Stderr { get; set; }
 
-        [XmlElement("stdout")]
+        [JsonPropertyName("stdout")]
         public string Stdout { get; set; }
 
-        [XmlElement("timestamp")]
+        [JsonPropertyName("timestamp")]
         public string Timestamp { get; set; }
 
         /// <summary>
         /// Jenkins Java class name.
         /// </summary>
-        [XmlAttribute("_class")]
+        [JsonPropertyName("_class")]
         public string Class { get; set; }
     }
 }

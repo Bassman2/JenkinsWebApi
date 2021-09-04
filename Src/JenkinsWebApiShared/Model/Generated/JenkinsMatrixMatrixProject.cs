@@ -1,14 +1,11 @@
-using System.Xml.Serialization;
-
-#pragma warning disable CS1591
+using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
     // hudson.matrix.MatrixProject
-    [XmlRoot("matrixProject")]
     public partial class JenkinsMatrixMatrixProject : JenkinsModelAbstractProject
     {
-        [XmlElement("activeConfiguration")]
+        [JsonPropertyName("activeConfiguration")]
         public JenkinsMatrixMatrixConfiguration[] ActiveConfigurations { get; set; }
 
     }

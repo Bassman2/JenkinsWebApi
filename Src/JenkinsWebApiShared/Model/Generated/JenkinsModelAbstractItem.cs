@@ -1,31 +1,29 @@
-using System.Xml.Serialization;
-
-#pragma warning disable CS1591
+using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
     // hudson.model.AbstractItem
     public partial class JenkinsModelAbstractItem : JenkinsModelActionable
     {
-        [XmlElement("description")]
+        [JsonPropertyName("description")]
         public string Description { get; set; }
 
-        [XmlElement("displayName")]
+        [JsonPropertyName("displayName")]
         public string DisplayName { get; set; }
 
-        [XmlElement("displayNameOrNull")]
+        [JsonPropertyName("displayNameOrNull")]
         public string DisplayNameOrNull { get; set; }
 
-        [XmlElement("fullDisplayName")]
+        [JsonPropertyName("fullDisplayName")]
         public string FullDisplayName { get; set; }
 
-        [XmlElement("fullName")]
+        [JsonPropertyName("fullName")]
         public string FullName { get; set; }
 
-        [XmlElement("name")]
+        [JsonPropertyName("name")]
         public string Name { get; set; }
 
-        [XmlElement("url")]
+        [JsonPropertyName("url")]
         public string Url { get; set; }
 
     }

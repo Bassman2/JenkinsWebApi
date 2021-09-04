@@ -1,25 +1,23 @@
-using System.Xml.Serialization;
-
-#pragma warning disable CS1591
+using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
     // hudson.model.View-UserInfo
     public partial class JenkinsModelViewUserInfo
     {
-        [XmlElement("lastChange")]
+        [JsonPropertyName("lastChange")]
         public long LastChange { get; set; }
 
-        [XmlElement("project")]
+        [JsonPropertyName("project")]
         public JenkinsModelJob Project { get; set; }
 
-        [XmlElement("user")]
+        [JsonPropertyName("user")]
         public JenkinsModelUser User { get; set; }
 
         /// <summary>
         /// Jenkins Java class name.
         /// </summary>
-        [XmlAttribute("_class")]
+        [JsonPropertyName("_class")]
         public string Class { get; set; }
     }
 }

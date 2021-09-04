@@ -1,52 +1,52 @@
-using System.Xml.Serialization;
-
-#pragma warning disable CS1591
+using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
     // hudson.model.BallColor
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum JenkinsModelBallColor
     {
-        [XmlEnum("red")]
+        [EnumMember(Value = "red")]
         Red,
 
-        [XmlEnum("red_anime")]
+        [EnumMember(Value = "red_anime")]
         RedAnime,
 
-        [XmlEnum("yellow")]
+        [EnumMember(Value = "yellow")]
         Yellow,
 
-        [XmlEnum("yellow_anime")]
+        [EnumMember(Value = "yellow_anime")]
         YellowAnime,
 
-        [XmlEnum("blue")]
+        [EnumMember(Value = "blue")]
         Blue,
 
-        [XmlEnum("blue_anime")]
+        [EnumMember(Value = "blue_anime")]
         BlueAnime,
 
-        [XmlEnum("grey")]
+        [EnumMember(Value = "grey")]
         Grey,
 
-        [XmlEnum("grey_anime")]
+        [EnumMember(Value = "grey_anime")]
         GreyAnime,
 
-        [XmlEnum("disabled")]
+        [EnumMember(Value = "disabled")]
         Disabled,
 
-        [XmlEnum("disabled_anime")]
+        [EnumMember(Value = "disabled_anime")]
         DisabledAnime,
 
-        [XmlEnum("aborted")]
+        [EnumMember(Value = "aborted")]
         Aborted,
 
-        [XmlEnum("aborted_anime")]
+        [EnumMember(Value = "aborted_anime")]
         AbortedAnime,
 
-        [XmlEnum("notbuilt")]
+        [EnumMember(Value = "notbuilt")]
         Notbuilt,
 
-        [XmlEnum("notbuilt_anime")]
+        [EnumMember(Value = "notbuilt_anime")]
         NotbuiltAnime,
 
     }

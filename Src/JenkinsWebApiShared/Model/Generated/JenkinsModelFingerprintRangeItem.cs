@@ -1,22 +1,20 @@
-using System.Xml.Serialization;
-
-#pragma warning disable CS1591
+using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
     // hudson.model.Fingerprint-RangeItem
     public partial class JenkinsModelFingerprintRangeItem
     {
-        [XmlElement("name")]
+        [JsonPropertyName("name")]
         public string Name { get; set; }
 
-        [XmlElement("ranges")]
+        [JsonPropertyName("ranges")]
         public JenkinsModelFingerprintRangeSet Ranges { get; set; }
 
         /// <summary>
         /// Jenkins Java class name.
         /// </summary>
-        [XmlAttribute("_class")]
+        [JsonPropertyName("_class")]
         public string Class { get; set; }
     }
 }

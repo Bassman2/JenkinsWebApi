@@ -1,23 +1,20 @@
-using System.Xml.Serialization;
-
-#pragma warning disable CS1591
+using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
     // org.jenkinsci.plugins.workflow.job.WorkflowRun
-    [XmlRoot("workflowRun")]
     public partial class JenkinsOrgJenkinsciPluginsWorkflowJobWorkflowRun : JenkinsModelRun
     {
-        [XmlElement("changeSet")]
+        [JsonPropertyName("changeSet")]
         public JenkinsScmChangeLogSet[] ChangeSets { get; set; }
 
-        [XmlElement("culprit")]
+        [JsonPropertyName("culprit")]
         public JenkinsModelUser[] Culprits { get; set; }
 
-        [XmlElement("nextBuild")]
+        [JsonPropertyName("nextBuild")]
         public JenkinsOrgJenkinsciPluginsWorkflowJobWorkflowRun NextBuild { get; set; }
 
-        [XmlElement("previousBuild")]
+        [JsonPropertyName("previousBuild")]
         public JenkinsOrgJenkinsciPluginsWorkflowJobWorkflowRun PreviousBuild { get; set; }
 
     }

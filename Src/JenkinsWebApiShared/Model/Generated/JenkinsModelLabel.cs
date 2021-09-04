@@ -1,40 +1,38 @@
-using System.Xml.Serialization;
-
-#pragma warning disable CS1591
+using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
     // hudson.model.Label
     public partial class JenkinsModelLabel : JenkinsModelActionable
     {
-        [XmlElement("busyExecutors")]
+        [JsonPropertyName("busyExecutors")]
         public int BusyExecutors { get; set; }
 
-        [XmlElement("cloud")]
+        [JsonPropertyName("cloud")]
         public JenkinsSlavesCloud[] Clouds { get; set; }
 
-        [XmlElement("description")]
+        [JsonPropertyName("description")]
         public string Description { get; set; }
 
-        [XmlElement("idleExecutors")]
+        [JsonPropertyName("idleExecutors")]
         public int IdleExecutors { get; set; }
 
-        [XmlElement("loadStatistics")]
+        [JsonPropertyName("loadStatistics")]
         public JenkinsModelLoadStatistics LoadStatistics { get; set; }
 
-        [XmlElement("name")]
+        [JsonPropertyName("name")]
         public string Name { get; set; }
 
-        [XmlElement("node")]
+        [JsonPropertyName("node")]
         public JenkinsModelNode[] Nodes { get; set; }
 
-        [XmlElement("offline")]
+        [JsonPropertyName("offline")]
         public bool IsOffline { get; set; }
 
-        [XmlElement("tiedJob")]
+        [JsonPropertyName("tiedJob")]
         public JenkinsModelAbstractProject[] TiedJobs { get; set; }
 
-        [XmlElement("totalExecutors")]
+        [JsonPropertyName("totalExecutors")]
         public int TotalExecutors { get; set; }
 
     }

@@ -1,19 +1,17 @@
-using System.Xml.Serialization;
-
-#pragma warning disable CS1591
+using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
     // hudson.model.AbstractBuild
     public partial class JenkinsModelAbstractBuild : JenkinsModelRun
     {
-        [XmlElement("builtOn")]
+        [JsonPropertyName("builtOn")]
         public string BuiltOn { get; set; }
 
-        [XmlElement("changeSet")]
+        [JsonPropertyName("changeSet")]
         public JenkinsScmChangeLogSet ChangeSet { get; set; }
 
-        [XmlElement("culprit")]
+        [JsonPropertyName("culprit")]
         public JenkinsModelUser[] Culprits { get; set; }
 
     }

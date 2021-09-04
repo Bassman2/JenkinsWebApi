@@ -1,22 +1,20 @@
-using System.Xml.Serialization;
-
-#pragma warning disable CS1591
+using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
     // com.cloudbees.hudson.plugins.folder.AbstractFolder
     public partial class JenkinsComCloudbeesHudsonPluginsFolderAbstractFolder : JenkinsModelAbstractItem
     {
-        [XmlElement("healthReport")]
+        [JsonPropertyName("healthReport")]
         public JenkinsModelHealthReport[] HealthReports { get; set; }
 
-        [XmlElement("job")]
+        [JsonPropertyName("job")]
         public JenkinsModelJob[] Jobs { get; set; }
 
-        [XmlElement("primaryView")]
+        [JsonPropertyName("primaryView")]
         public JenkinsModelView PrimaryView { get; set; }
 
-        [XmlElement("view")]
+        [JsonPropertyName("view")]
         public JenkinsModelView[] Views { get; set; }
 
     }

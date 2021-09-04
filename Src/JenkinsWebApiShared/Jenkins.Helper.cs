@@ -22,7 +22,14 @@ namespace JenkinsWebApi
             {
                 //string str = await response.Content.ReadAsStringAsync();
                 response.EnsureSuccess();
-                value = await response.Content.ReadFromJsonAsync<T>((JsonSerializerOptions)null, cancellationToken);
+                try
+                {
+                    value = await response.Content.ReadFromJsonAsync<T>((JsonSerializerOptions)null, cancellationToken);
+                }
+                catch (Exception ex)
+                {
+
+                }
             }
             return value;
         }
@@ -81,7 +88,7 @@ namespace JenkinsWebApi
         //    throw new Exception($"Not class found for this type: {xmlText.Substring(1, xmlText.IndexOf(' '))}");
         //}
 
-        private string TrimScript(string str)
+        private static string TrimScript(string str)
         {
             HtmlDocument doc = new HtmlDocument();
             doc.LoadHtml(str);
@@ -93,7 +100,7 @@ namespace JenkinsWebApi
             return null;
         }
 
-        private string TrimDescription(string str)
+        private static string TrimDescription(string str)
         {
             str = str.Replace("&&", "");
             HtmlDocument doc = new HtmlDocument();
@@ -108,7 +115,7 @@ namespace JenkinsWebApi
             return null;
         }
 
-        private string TrimLabel(string str)
+        private static string TrimLabel(string str)
         {
             str = str.Replace("&&", "");
             HtmlDocument doc = new HtmlDocument();

@@ -1,16 +1,16 @@
-using System.Xml.Serialization;
-
-#pragma warning disable CS1591
+using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
     // hudson.model.Node-Mode
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum JenkinsModelNodeMode
     {
-        [XmlEnum("NORMAL")]
+        [EnumMember(Value = "NORMAL")]
         Normal,
 
-        [XmlEnum("EXCLUSIVE")]
+        [EnumMember(Value = "EXCLUSIVE")]
         Exclusive,
 
     }

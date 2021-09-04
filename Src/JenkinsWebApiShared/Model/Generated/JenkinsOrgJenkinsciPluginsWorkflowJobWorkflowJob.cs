@@ -1,17 +1,14 @@
-using System.Xml.Serialization;
-
-#pragma warning disable CS1591
+using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
     // org.jenkinsci.plugins.workflow.job.WorkflowJob
-    [XmlRoot("workflowJob")]
     public partial class JenkinsOrgJenkinsciPluginsWorkflowJobWorkflowJob : JenkinsModelJob
     {
-        [XmlElement("concurrentBuild")]
+        [JsonPropertyName("concurrentBuild")]
         public bool IsConcurrentBuild { get; set; }
 
-        [XmlElement("resumeBlocked")]
+        [JsonPropertyName("resumeBlocked")]
         public bool IsResumeBlocked { get; set; }
 
     }

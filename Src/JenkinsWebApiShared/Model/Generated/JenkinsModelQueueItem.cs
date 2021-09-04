@@ -1,37 +1,35 @@
-using System.Xml.Serialization;
-
-#pragma warning disable CS1591
+using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
     // hudson.model.Queue-Item
     public partial class JenkinsModelQueueItem : JenkinsModelActionable
     {
-        [XmlElement("blocked")]
+        [JsonPropertyName("blocked")]
         public bool IsBlocked { get; set; }
 
-        [XmlElement("buildable")]
+        [JsonPropertyName("buildable")]
         public bool IsBuildable { get; set; }
 
-        [XmlElement("id")]
+        [JsonPropertyName("id")]
         public long Id { get; set; }
 
-        [XmlElement("inQueueSince")]
+        [JsonPropertyName("inQueueSince")]
         public long InQueueSince { get; set; }
 
-        [XmlElement("params")]
+        [JsonPropertyName("params")]
         public string Params { get; set; }
 
-        [XmlElement("stuck")]
+        [JsonPropertyName("stuck")]
         public bool IsStuck { get; set; }
 
-        [XmlElement("task")]
+        [JsonPropertyName("task")]
         public object Task { get; set; }
 
-        [XmlElement("url")]
+        [JsonPropertyName("url")]
         public string Url { get; set; }
 
-        [XmlElement("why")]
+        [JsonPropertyName("why")]
         public string Why { get; set; }
 
     }

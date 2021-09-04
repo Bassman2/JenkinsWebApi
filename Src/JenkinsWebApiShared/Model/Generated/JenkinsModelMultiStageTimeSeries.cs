@@ -1,25 +1,23 @@
-using System.Xml.Serialization;
-
-#pragma warning disable CS1591
+using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
     // hudson.model.MultiStageTimeSeries
     public partial class JenkinsModelMultiStageTimeSeries
     {
-        [XmlElement("hour")]
+        [JsonPropertyName("hour")]
         public JenkinsModelTimeSeries Hour { get; set; }
 
-        [XmlElement("min")]
+        [JsonPropertyName("min")]
         public JenkinsModelTimeSeries Min { get; set; }
 
-        [XmlElement("sec10")]
+        [JsonPropertyName("sec10")]
         public JenkinsModelTimeSeries Sec10 { get; set; }
 
         /// <summary>
         /// Jenkins Java class name.
         /// </summary>
-        [XmlAttribute("_class")]
+        [JsonPropertyName("_class")]
         public string Class { get; set; }
     }
 }

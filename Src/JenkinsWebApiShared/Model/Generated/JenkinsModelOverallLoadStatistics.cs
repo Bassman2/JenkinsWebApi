@@ -1,13 +1,11 @@
-using System.Xml.Serialization;
-
-#pragma warning disable CS1591
+using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
     // hudson.model.OverallLoadStatistics
     public partial class JenkinsModelOverallLoadStatistics : JenkinsModelLoadStatistics
     {
-        [XmlElement("totalQueueLength")]
+        [JsonPropertyName("totalQueueLength")]
         public JenkinsModelMultiStageTimeSeries TotalQueueLength { get; set; }
 
     }

@@ -1,29 +1,26 @@
-using System.Xml.Serialization;
-
-#pragma warning disable CS1591
+using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
     // hudson.tasks.junit.TestResult
-    [XmlRoot("testResult")]
     public partial class JenkinsTasksJunitTestResult : JenkinsTasksTestMetaTabulatedResult
     {
-        [XmlElement("duration")]
+        [JsonPropertyName("duration")]
         public object Duration { get; set; }
 
-        [XmlElement("empty")]
+        [JsonPropertyName("empty")]
         public bool IsEmpty { get; set; }
 
-        [XmlElement("failCount")]
+        [JsonPropertyName("failCount")]
         public int FailCount { get; set; }
 
-        [XmlElement("passCount")]
+        [JsonPropertyName("passCount")]
         public int PassCount { get; set; }
 
-        [XmlElement("skipCount")]
+        [JsonPropertyName("skipCount")]
         public int SkipCount { get; set; }
 
-        [XmlElement("suite")]
+        [JsonPropertyName("suite")]
         public JenkinsTasksJunitSuiteResult[] Suites { get; set; }
 
     }

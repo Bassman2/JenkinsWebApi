@@ -1,61 +1,59 @@
-using System.Xml.Serialization;
-
-#pragma warning disable CS1591
+using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
     // hudson.model.Computer
     public partial class JenkinsModelComputer : JenkinsModelActionable
     {
-        [XmlElement("assignedLabel")]
+        [JsonPropertyName("assignedLabel")]
         public JenkinsModelLabelsLabelAtom[] AssignedLabels { get; set; }
 
-        [XmlElement("description")]
+        [JsonPropertyName("description")]
         public string Description { get; set; }
 
-        [XmlElement("displayName")]
+        [JsonPropertyName("displayName")]
         public string DisplayName { get; set; }
 
-        [XmlElement("executor")]
+        [JsonPropertyName("executor")]
         public JenkinsModelExecutor[] Executors { get; set; }
 
-        [XmlElement("icon")]
+        [JsonPropertyName("icon")]
         public string Icon { get; set; }
 
-        [XmlElement("iconClassName")]
+        [JsonPropertyName("iconClassName")]
         public string IconClassName { get; set; }
 
-        [XmlElement("idle")]
+        [JsonPropertyName("idle")]
         public bool IsIdle { get; set; }
 
-        [XmlElement("jnlpAgent")]
+        [JsonPropertyName("jnlpAgent")]
         public bool IsJnlpAgent { get; set; }
 
-        [XmlElement("launchSupported")]
+        [JsonPropertyName("launchSupported")]
         public bool IsLaunchSupported { get; set; }
 
-        [XmlElement("loadStatistics")]
+        [JsonPropertyName("loadStatistics")]
         public JenkinsModelLoadStatistics LoadStatistics { get; set; }
 
-        [XmlElement("manualLaunchAllowed")]
+        [JsonPropertyName("manualLaunchAllowed")]
         public bool IsManualLaunchAllowed { get; set; }
 
-        [XmlElement("numExecutors")]
+        [JsonPropertyName("numExecutors")]
         public int NumExecutors { get; set; }
 
-        [XmlElement("offline")]
+        [JsonPropertyName("offline")]
         public bool IsOffline { get; set; }
 
-        [XmlElement("offlineCause")]
+        [JsonPropertyName("offlineCause")]
         public JenkinsSlavesOfflineCause OfflineCause { get; set; }
 
-        [XmlElement("offlineCauseReason")]
+        [JsonPropertyName("offlineCauseReason")]
         public string OfflineCauseReason { get; set; }
 
-        [XmlElement("oneOffExecutor")]
+        [JsonPropertyName("oneOffExecutor")]
         public JenkinsModelOneOffExecutor[] OneOffExecutors { get; set; }
 
-        [XmlElement("temporarilyOffline")]
+        [JsonPropertyName("temporarilyOffline")]
         public bool IsTemporarilyOffline { get; set; }
 
     }

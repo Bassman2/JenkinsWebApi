@@ -1,58 +1,56 @@
-using System.Xml.Serialization;
-
-#pragma warning disable CS1591
+using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
     // hudson.model.Run
     public partial class JenkinsModelRun : JenkinsModelActionable
     {
-        [XmlElement("artifact")]
+        [JsonPropertyName("artifact")]
         public JenkinsModelRunArtifact[] Artifacts { get; set; }
 
-        [XmlElement("building")]
+        [JsonPropertyName("building")]
         public bool IsBuilding { get; set; }
 
-        [XmlElement("description")]
+        [JsonPropertyName("description")]
         public string Description { get; set; }
 
-        [XmlElement("displayName")]
+        [JsonPropertyName("displayName")]
         public string DisplayName { get; set; }
 
-        [XmlElement("duration")]
+        [JsonPropertyName("duration")]
         public long Duration { get; set; }
 
-        [XmlElement("estimatedDuration")]
+        [JsonPropertyName("estimatedDuration")]
         public long EstimatedDuration { get; set; }
 
-        [XmlElement("executor")]
+        [JsonPropertyName("executor")]
         public JenkinsModelExecutor Executor { get; set; }
 
-        [XmlElement("fingerprint")]
+        [JsonPropertyName("fingerprint")]
         public JenkinsModelFingerprint[] Fingerprints { get; set; }
 
-        [XmlElement("fullDisplayName")]
+        [JsonPropertyName("fullDisplayName")]
         public string FullDisplayName { get; set; }
 
-        [XmlElement("id")]
+        [JsonPropertyName("id")]
         public string Id { get; set; }
 
-        [XmlElement("keepLog")]
+        [JsonPropertyName("keepLog")]
         public bool IsKeepLog { get; set; }
 
-        [XmlElement("number")]
+        [JsonPropertyName("number")]
         public int Number { get; set; }
 
-        [XmlElement("queueId")]
+        [JsonPropertyName("queueId")]
         public long QueueId { get; set; }
 
-        [XmlElement("result")]
+        [JsonPropertyName("result")]
         public JenkinsTasksTestTestResult Result { get; set; }
 
-        [XmlElement("timestamp")]
+        [JsonPropertyName("timestamp")]
         public long Timestamp { get; set; }
 
-        [XmlElement("url")]
+        [JsonPropertyName("url")]
         public string Url { get; set; }
 
     }

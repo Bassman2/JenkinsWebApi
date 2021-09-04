@@ -1,11 +1,8 @@
-using System.Xml.Serialization;
-
-#pragma warning disable CS1591
+using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
     // jenkins.branch.OrganizationFolder
-    [XmlRoot("organizationFolder")]
     public partial class JenkinsBranchOrganizationFolder : JenkinsComCloudbeesHudsonPluginsFolderComputedComputedFolder
     {
         // empty

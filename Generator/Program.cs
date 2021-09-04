@@ -247,6 +247,7 @@ namespace Generator
         public void Create(string dir)
         {
             dir = Path.Combine(dir, "Model");
+            Directory.CreateDirectory(dir);
             new DirectoryInfo(dir).GetFiles().ToList().ForEach(f => f.Delete());
             
             foreach(var ct in complexTypes.Values)
@@ -254,19 +255,21 @@ namespace Generator
                 string className = CreateClassName(ct.Name);
                 using (StreamWriter writer = File.CreateText(Path.Combine(dir, $"{className}.cs")))
                 {
-                    writer.WriteLine("using System.Xml.Serialization;");
-                    writer.WriteLine();
-                    writer.WriteLine("#pragma warning disable CS1591");
+                    //writer.WriteLine("using System.Xml.Serialization;");
+                    //writer.WriteLine();
+                    //writer.WriteLine("#pragma warning disable CS1591");
+
+                    writer.WriteLine("using System.Text.Json.Serialization;");
                     writer.WriteLine();
                     writer.WriteLine("namespace JenkinsWebApi.Model");
                     writer.WriteLine("{");
 
                     writer.WriteLine($"    // {ct.Name}");
 
-                    if (!string.IsNullOrEmpty(ct.Root))
-                    {
-                        writer.WriteLine($"    [XmlRoot(\"{ct.Root}\")]");
-                    }
+                    //if (!string.IsNullOrEmpty(ct.Root))
+                    //{
+                    //    writer.WriteLine($"    [XmlRoot(\"{ct.Root}\")]");
+                    //}
                     
                     writer.Write($"    public partial class {className}");
                     writer.WriteLine(ct.Base != null ? $" : {CreateClassName(ct.Base)}" : "");
@@ -281,7 +284,7 @@ namespace Generator
                                 writer.WriteLine($"        /// {e.Description}");
                                 writer.WriteLine("        /// </summary>");
                             }
-                            writer.WriteLine($"        [XmlElement(\"{e.Name}\")]");
+                            writer.WriteLine($"        [JsonPropertyName(\"{e.Name}\")]");
                             if (e.IsList)
                             {
                                 writer.WriteLine($"        public {GetDataType(e.Type, e.Name)}[] {UpperFirstChar(e.Name)}s {{ get; set; }}");
@@ -307,7 +310,7 @@ namespace Generator
                         writer.WriteLine("        /// <summary>");
                         writer.WriteLine("        /// Jenkins Java class name.");
                         writer.WriteLine("        /// </summary>");
-                        writer.WriteLine("        [XmlAttribute(\"_class\")]");
+                        writer.WriteLine("        [JsonPropertyName(\"_class\")]");
                         writer.WriteLine("        public string Class { get; set; }");
                     }
 
@@ -321,19 +324,23 @@ namespace Generator
                 string className = CreateClassName(st.Name);
                 using (StreamWriter writer = File.CreateText(Path.Combine(dir, $"{className}.cs")))
                 {
-                    writer.WriteLine("using System.Xml.Serialization;");
-                    writer.WriteLine();
-                    writer.WriteLine("#pragma warning disable CS1591");
+                    //writer.WriteLine("using System.Xml.Serialization;");
+                    //writer.WriteLine();
+                    //writer.WriteLine("#pragma warning disable CS1591");
+
+                    writer.WriteLine("using System.Runtime.Serialization;");
+                    writer.WriteLine("using System.Text.Json.Serialization;");
                     writer.WriteLine();
                     writer.WriteLine("namespace JenkinsWebApi.Model");
                     writer.WriteLine("{");
 
                     writer.WriteLine($"    // {st.Name}");
+                    writer.WriteLine("    [JsonConverter(typeof(JsonStringEnumConverter))]");
                     writer.WriteLine($"    public enum {className}");
                     writer.WriteLine("    {");
                     foreach (var e in st.Values)
                     {
-                        writer.WriteLine($"        [XmlEnum(\"{e}\")]");
+                        writer.WriteLine($"        [EnumMember(Value = \"{e}\")]");
                         writer.WriteLine($"        {Format(e)},");
                         writer.WriteLine();
                     }

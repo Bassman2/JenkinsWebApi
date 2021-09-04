@@ -1,31 +1,29 @@
-using System.Xml.Serialization;
-
-#pragma warning disable CS1591
+using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
     // hudson.model.Node
     public partial class JenkinsModelNode
     {
-        [XmlElement("assignedLabel")]
+        [JsonPropertyName("assignedLabel")]
         public JenkinsModelLabelsLabelAtom[] AssignedLabels { get; set; }
 
-        [XmlElement("mode")]
+        [JsonPropertyName("mode")]
         public JenkinsModelNodeMode Mode { get; set; }
 
-        [XmlElement("nodeDescription")]
+        [JsonPropertyName("nodeDescription")]
         public string NodeDescription { get; set; }
 
-        [XmlElement("nodeName")]
+        [JsonPropertyName("nodeName")]
         public string NodeName { get; set; }
 
-        [XmlElement("numExecutors")]
+        [JsonPropertyName("numExecutors")]
         public int NumExecutors { get; set; }
 
         /// <summary>
         /// Jenkins Java class name.
         /// </summary>
-        [XmlAttribute("_class")]
+        [JsonPropertyName("_class")]
         public string Class { get; set; }
     }
 }

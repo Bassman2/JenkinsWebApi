@@ -1,47 +1,44 @@
-using System.Xml.Serialization;
-
-#pragma warning disable CS1591
+using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
     // hudson.tasks.junit.CaseResult
-    [XmlRoot("caseResult")]
     public partial class JenkinsTasksJunitCaseResult : JenkinsTasksTestTestResult
     {
-        [XmlElement("age")]
+        [JsonPropertyName("age")]
         public int Age { get; set; }
 
-        [XmlElement("className")]
+        [JsonPropertyName("className")]
         public string ClassName { get; set; }
 
-        [XmlElement("duration")]
+        [JsonPropertyName("duration")]
         public object Duration { get; set; }
 
-        [XmlElement("errorDetails")]
+        [JsonPropertyName("errorDetails")]
         public string ErrorDetails { get; set; }
 
-        [XmlElement("errorStackTrace")]
+        [JsonPropertyName("errorStackTrace")]
         public string ErrorStackTrace { get; set; }
 
-        [XmlElement("failedSince")]
+        [JsonPropertyName("failedSince")]
         public int FailedSince { get; set; }
 
-        [XmlElement("name")]
+        [JsonPropertyName("name")]
         public string Name { get; set; }
 
-        [XmlElement("skipped")]
+        [JsonPropertyName("skipped")]
         public bool IsSkipped { get; set; }
 
-        [XmlElement("skippedMessage")]
+        [JsonPropertyName("skippedMessage")]
         public string SkippedMessage { get; set; }
 
-        [XmlElement("status")]
+        [JsonPropertyName("status")]
         public JenkinsTasksJunitCaseResultStatus Status { get; set; }
 
-        [XmlElement("stderr")]
+        [JsonPropertyName("stderr")]
         public string Stderr { get; set; }
 
-        [XmlElement("stdout")]
+        [JsonPropertyName("stdout")]
         public string Stdout { get; set; }
 
     }

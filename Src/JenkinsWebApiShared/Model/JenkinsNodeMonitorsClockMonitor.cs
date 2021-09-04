@@ -1,11 +1,10 @@
-﻿using System.Xml.Serialization;
-#pragma warning disable CS1591
+﻿using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
     public class JenkinsNodeMonitorsClockMonitor
     {
-        [XmlElement("diff")]
+        [JsonPropertyName("diff")]
         public long Diff { get; set; }
     }
 }

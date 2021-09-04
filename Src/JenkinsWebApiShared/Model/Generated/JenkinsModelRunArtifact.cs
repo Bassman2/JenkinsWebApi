@@ -1,25 +1,23 @@
-using System.Xml.Serialization;
-
-#pragma warning disable CS1591
+using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
     // hudson.model.Run-Artifact
     public partial class JenkinsModelRunArtifact
     {
-        [XmlElement("displayPath")]
+        [JsonPropertyName("displayPath")]
         public string DisplayPath { get; set; }
 
-        [XmlElement("fileName")]
+        [JsonPropertyName("fileName")]
         public string FileName { get; set; }
 
-        [XmlElement("relativePath")]
+        [JsonPropertyName("relativePath")]
         public string RelativePath { get; set; }
 
         /// <summary>
         /// Jenkins Java class name.
         /// </summary>
-        [XmlAttribute("_class")]
+        [JsonPropertyName("_class")]
         public string Class { get; set; }
     }
 }

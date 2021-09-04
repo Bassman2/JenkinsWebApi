@@ -1,14 +1,11 @@
-using System.Xml.Serialization;
-
-#pragma warning disable CS1591
+using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
     // com.tikal.jenkins.plugins.multijob.MultiJobBuild
-    [XmlRoot("multiJobBuild")]
     public partial class JenkinsComTikalJenkinsPluginsMultijobMultiJobBuild : JenkinsModelBuild
     {
-        [XmlElement("subBuild")]
+        [JsonPropertyName("subBuild")]
         public JenkinsComTikalJenkinsPluginsMultijobMultiJobBuildSubBuild[] SubBuilds { get; set; }
 
     }

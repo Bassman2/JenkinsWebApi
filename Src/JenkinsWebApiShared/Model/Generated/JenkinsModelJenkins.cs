@@ -1,43 +1,41 @@
-using System.Xml.Serialization;
-
-#pragma warning disable CS1591
+using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
     // jenkins.model.Jenkins
     public partial class JenkinsModelJenkins : JenkinsModelAbstractCIBase
     {
-        [XmlElement("description")]
+        [JsonPropertyName("description")]
         public string Description { get; set; }
 
-        [XmlElement("job")]
+        [JsonPropertyName("job")]
         public JenkinsModelJob[] Jobs { get; set; }
 
-        [XmlElement("overallLoad")]
+        [JsonPropertyName("overallLoad")]
         public JenkinsModelOverallLoadStatistics OverallLoad { get; set; }
 
-        [XmlElement("primaryView")]
+        [JsonPropertyName("primaryView")]
         public JenkinsModelView PrimaryView { get; set; }
 
-        [XmlElement("quietingDown")]
+        [JsonPropertyName("quietingDown")]
         public bool IsQuietingDown { get; set; }
 
-        [XmlElement("slaveAgentPort")]
+        [JsonPropertyName("slaveAgentPort")]
         public int SlaveAgentPort { get; set; }
 
-        [XmlElement("unlabeledLoad")]
+        [JsonPropertyName("unlabeledLoad")]
         public JenkinsModelLoadStatistics UnlabeledLoad { get; set; }
 
-        [XmlElement("url")]
+        [JsonPropertyName("url")]
         public string Url { get; set; }
 
-        [XmlElement("useCrumbs")]
+        [JsonPropertyName("useCrumbs")]
         public bool UseCrumbs { get; set; }
 
-        [XmlElement("useSecurity")]
+        [JsonPropertyName("useSecurity")]
         public bool UseSecurity { get; set; }
 
-        [XmlElement("view")]
+        [JsonPropertyName("view")]
         public JenkinsModelView[] Views { get; set; }
 
     }

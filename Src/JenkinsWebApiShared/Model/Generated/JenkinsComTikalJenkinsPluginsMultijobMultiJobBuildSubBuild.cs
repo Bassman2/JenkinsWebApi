@@ -1,58 +1,56 @@
-using System.Xml.Serialization;
-
-#pragma warning disable CS1591
+using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
     // com.tikal.jenkins.plugins.multijob.MultiJobBuild-SubBuild
     public partial class JenkinsComTikalJenkinsPluginsMultijobMultiJobBuildSubBuild
     {
-        [XmlElement("abort")]
+        [JsonPropertyName("abort")]
         public bool IsAbort { get; set; }
 
-        [XmlElement("build")]
+        [JsonPropertyName("build")]
         public JenkinsModelRun Build { get; set; }
 
-        [XmlElement("buildNumber")]
+        [JsonPropertyName("buildNumber")]
         public int BuildNumber { get; set; }
 
-        [XmlElement("duration")]
+        [JsonPropertyName("duration")]
         public string Duration { get; set; }
 
-        [XmlElement("icon")]
+        [JsonPropertyName("icon")]
         public string Icon { get; set; }
 
-        [XmlElement("jobAlias")]
+        [JsonPropertyName("jobAlias")]
         public string JobAlias { get; set; }
 
-        [XmlElement("jobName")]
+        [JsonPropertyName("jobName")]
         public string JobName { get; set; }
 
-        [XmlElement("multiJobBuild")]
+        [JsonPropertyName("multiJobBuild")]
         public bool IsMultiJobBuild { get; set; }
 
-        [XmlElement("parentBuildNumber")]
+        [JsonPropertyName("parentBuildNumber")]
         public int ParentBuildNumber { get; set; }
 
-        [XmlElement("parentJobName")]
+        [JsonPropertyName("parentJobName")]
         public string ParentJobName { get; set; }
 
-        [XmlElement("phaseName")]
+        [JsonPropertyName("phaseName")]
         public string PhaseName { get; set; }
 
-        [XmlElement("result")]
+        [JsonPropertyName("result")]
         public JenkinsTasksTestTestResult Result { get; set; }
 
-        [XmlElement("retry")]
+        [JsonPropertyName("retry")]
         public bool IsRetry { get; set; }
 
-        [XmlElement("url")]
+        [JsonPropertyName("url")]
         public string Url { get; set; }
 
         /// <summary>
         /// Jenkins Java class name.
         /// </summary>
-        [XmlAttribute("_class")]
+        [JsonPropertyName("_class")]
         public string Class { get; set; }
     }
 }

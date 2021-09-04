@@ -1,67 +1,65 @@
-using System.Xml.Serialization;
-
-#pragma warning disable CS1591
+using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
     // hudson.PluginWrapper
     public partial class JenkinsPluginWrapper
     {
-        [XmlElement("active")]
+        [JsonPropertyName("active")]
         public bool IsActive { get; set; }
 
-        [XmlElement("backupVersion")]
+        [JsonPropertyName("backupVersion")]
         public string BackupVersion { get; set; }
 
-        [XmlElement("bundled")]
+        [JsonPropertyName("bundled")]
         public bool IsBundled { get; set; }
 
-        [XmlElement("deleted")]
+        [JsonPropertyName("deleted")]
         public bool IsDeleted { get; set; }
 
-        [XmlElement("dependency")]
+        [JsonPropertyName("dependency")]
         public JenkinsPluginWrapperDependency[] Dependencys { get; set; }
 
-        [XmlElement("detached")]
+        [JsonPropertyName("detached")]
         public bool IsDetached { get; set; }
 
-        [XmlElement("downgradable")]
+        [JsonPropertyName("downgradable")]
         public bool IsDowngradable { get; set; }
 
-        [XmlElement("enabled")]
+        [JsonPropertyName("enabled")]
         public bool IsEnabled { get; set; }
 
-        [XmlElement("hasUpdate")]
+        [JsonPropertyName("hasUpdate")]
         public bool IsHasUpdate { get; set; }
 
-        [XmlElement("longName")]
+        [JsonPropertyName("longName")]
         public string LongName { get; set; }
 
-        [XmlElement("minimumJavaVersion")]
+        [JsonPropertyName("minimumJavaVersion")]
         public string MinimumJavaVersion { get; set; }
 
-        [XmlElement("pinned")]
+        [JsonPropertyName("pinned")]
         public bool IsPinned { get; set; }
 
-        [XmlElement("requiredCoreVersion")]
+        [JsonPropertyName("requiredCoreVersion")]
         public string RequiredCoreVersion { get; set; }
 
-        [XmlElement("shortName")]
+        [JsonPropertyName("shortName")]
         public string ShortName { get; set; }
 
-        [XmlElement("supportsDynamicLoad")]
+        [JsonPropertyName("supportsDynamicLoad")]
         public JenkinsYesNoMaybe SupportsDynamicLoad { get; set; }
 
-        [XmlElement("url")]
+        [JsonPropertyName("url")]
         public string Url { get; set; }
 
-        [XmlElement("version")]
+        [JsonPropertyName("version")]
         public string Version { get; set; }
 
         /// <summary>
         /// Jenkins Java class name.
         /// </summary>
-        [XmlAttribute("_class")]
+        [JsonPropertyName("_class")]
         public string Class { get; set; }
     }
 }
