@@ -9,25 +9,17 @@
             Main class of the Jenkins server API
             </summary>
         </member>
-        <member name="M:JenkinsWebApi.Jenkins.#ctor(System.String)">
-            <summary>
-            Initializes a new instance of the Jenkins class.
-            </summary>
-            <param name="host">Host URL of the Jenkins server</param>
-        </member>
         <member name="M:JenkinsWebApi.Jenkins.#ctor(System.Uri)">
             <summary>
             Initializes a new instance of the Jenkins class.
             </summary>
             <param name="host">Host URL of the Jenkins server</param>
         </member>
-        <member name="M:JenkinsWebApi.Jenkins.#ctor(System.String,System.String,System.String)">
+        <member name="M:JenkinsWebApi.Jenkins.#ctor(System.String)">
             <summary>
             Initializes a new instance of the Jenkins class.
             </summary>
             <param name="host">Host URL of the Jenkins server</param>
-            <param name="login">Login for the Jenkins server</param>
-            <param name="password">Password for the Jenkins server</param>
         </member>
         <member name="M:JenkinsWebApi.Jenkins.#ctor(System.Uri,System.String,System.String)">
             <summary>
@@ -37,24 +29,26 @@
             <param name="login">Login for the Jenkins server</param>
             <param name="password">Password for the Jenkins server</param>
         </member>
-        <member name="M:JenkinsWebApi.Jenkins.#ctor(System.String,System.String)">
+        <member name="M:JenkinsWebApi.Jenkins.#ctor(System.String,System.String,System.String)">
             <summary>
             Initializes a new instance of the Jenkins class.
             </summary>
             <param name="host">Host URL of the Jenkins server</param>
-            <param name="accessToken">Access Token for the Jenkins server</param>
-        </member>
-        <member name="M:JenkinsWebApi.Jenkins.#ctor(System.Uri,System.String)">
-            <summary>
-            Initializes a new instance of the Jenkins class.
-            </summary>
-            <param name="host">Host URL of the Jenkins server</param>
-            <param name="accessToken">Access Token for the Jenkins server</param>
+            <param name="login">Login for the Jenkins server</param>
+            <param name="password">Password for the Jenkins server</param>
         </member>
         <member name="M:JenkinsWebApi.Jenkins.Dispose">
             <summary>
             Release allocated resources.
             </summary>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.Login(System.String,System.String)">
+            <summary>
+            Login to the Jenkins server.
+            </summary>
+            <param name="login">User login name</param>
+            <param name="password">User login password</param>
+            <returns>true if login success; false if failed</returns>
         </member>
         <member name="M:JenkinsWebApi.Jenkins.GetJenkinsInstancesAsync">
             <summary>
