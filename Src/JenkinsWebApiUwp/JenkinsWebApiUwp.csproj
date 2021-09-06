@@ -128,7 +128,7 @@
       <Version>1.11.36</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
-      <Version>6.2.10</Version>
+      <Version>6.2.12</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="..\JenkinsWebApiShared\JenkinsWebApiShared.projitems" Label="Shared" />
