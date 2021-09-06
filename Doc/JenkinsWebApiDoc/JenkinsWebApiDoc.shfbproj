@@ -13,7 +13,7 @@
     <RootNamespace>JenkinsWebApiDoc</RootNamespace>
     <Name>JenkinsWebApiDoc</Name>
     <!-- SHFB properties -->
-    <FrameworkVersion>.NET Framework 4.5</FrameworkVersion>
+    <FrameworkVersion>.NET Core/.NET Standard/.NET 5.0+</FrameworkVersion>
     <OutputPath>.\Help\</OutputPath>
     <HtmlHelpName>JenkinsWebApiDoc</HtmlHelpName>
     <Language>en-US</Language>
@@ -27,7 +27,7 @@
       <Argument Key="maxVersionParts" Value="" xmlns="" />
     </TransformComponentArguments>
     <DocumentationSources>
-      <DocumentationSource sourceFile="..\JenkinsWebApiFwk45\JenkinsWebApiFwk45.csproj" />
+      <DocumentationSource sourceFile="..\..\Src\JenkinsWebApi50\JenkinsWebApi50.csproj" />
     </DocumentationSources>
     <SaveComponentCacheCapacity>100</SaveComponentCacheCapacity>
     <BuildAssemblerVerbosity>OnlyWarningsAndErrors</BuildAssemblerVerbosity>
