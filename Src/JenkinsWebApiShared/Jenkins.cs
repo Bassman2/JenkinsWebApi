@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
@@ -25,7 +26,6 @@ namespace JenkinsWebApi
         //private readonly Uri host;
         private HttpClientHandler handler;
         private HttpClient client;
-        private bool disposed = false;
         private const int udpPort = 33848;
 
         private readonly static Type[] viewTypes = AppDomain.CurrentDomain.GetAssemblies()
@@ -47,12 +47,18 @@ namespace JenkinsWebApi
         /// Initializes a new instance of the Jenkins class.
         /// </summary>
         /// <param name="host">Host URL of the Jenkins server</param>
+        public Jenkins(string host) : this(new Uri(host))
+        { }
+
+        /// <summary>
+        /// Initializes a new instance of the Jenkins class.
+        /// </summary>
+        /// <param name="host">Host URL of the Jenkins server</param>
         public Jenkins(Uri host)
         {
-            //this.host = 
             if (host == null)
             {
-                throw new ArgumentNullException("host");
+                throw new ArgumentNullException(nameof(host));
             }
 
             // connect
@@ -65,96 +71,92 @@ namespace JenkinsWebApi
             {
                 BaseAddress = host
             };
+
+            Crumb();
         }
 
         /// <summary>
         /// Initializes a new instance of the Jenkins class.
         /// </summary>
         /// <param name="host">Host URL of the Jenkins server</param>
-        public Jenkins(string host) : this(new Uri(host))
-        { }
-
+        /// <param name="login">Login for the Jenkins server</param>
+        /// <param name="passwordOrToken">Password or API token for the Jenkins server</param>
+        public Jenkins(string host, string login, string passwordOrToken) : this(new Uri(host), login, passwordOrToken)
+        { }        
 
         /// <summary>
         /// Initializes a new instance of the Jenkins class.
         /// </summary>
         /// <param name="host">Host URL of the Jenkins server</param>
         /// <param name="login">Login for the Jenkins server</param>
-        /// <param name="password">Password for the Jenkins server</param>
-        public Jenkins(Uri host, string login, string password) : this(host)
+        /// <param name="passwordOrToken">Password or API token for the Jenkins server</param>
+        public Jenkins(Uri host, string login, string passwordOrToken) 
         {
-            if (string.IsNullOrEmpty(login) || string.IsNullOrEmpty(password))
+            if (host == null)
             {
-                // open without login
-                return;
+                throw new ArgumentNullException(nameof(host));
             }
-            
-            if (!Login(login, password))
+
+            // connect
+            this.handler = new HttpClientHandler
             {
-                throw new Exception("Login failed!");
-            }
+                UseCookies = true,
+                CookieContainer = new System.Net.CookieContainer()
+            };
+            this.client = new HttpClient(this.handler)
+            {
+                BaseAddress = host
+            };
+
+            // set authorization
+            this.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.ASCII.GetBytes($"{login}:{passwordOrToken}")));
+
+            Crumb();
         }
 
-        /// <summary>
-        /// Initializes a new instance of the Jenkins class.
-        /// </summary>
-        /// <param name="host">Host URL of the Jenkins server</param>
-        /// <param name="login">Login for the Jenkins server</param>
-        /// <param name="password">Password for the Jenkins server</param>
-        public Jenkins(string host, string login, string password) : this(new Uri(host), login, password)
-        { }
-        
         /// <summary>
         /// Release allocated resources.
         /// </summary>
         public void Dispose()
         {
-            if (!this.disposed)
+            if (this.client != null)
             {
-                this.client?.Dispose();
+                this.client.Dispose();
                 this.client = null;
-                
-                this.handler?.Dispose();
-                this.handler = null;
-                
-                // note disposing has been done.
-                this.disposed = true;
             }
-            GC.SuppressFinalize(this);
+            if (this.handler != null)
+            {
+                this.handler.Dispose();
+                this.handler = null;
+            } 
         }
 
         /// <summary>
         /// Login to the Jenkins server.
         /// </summary>
-        /// <param name="login">User login name</param>
-        /// <param name="password">User login password</param>
+        /// <param name="login">Login for the Jenkins server</param>
+        /// <param name="passwordOrToken">Password or API token for the Jenkins server</param>
         /// <returns>true if login success; false if failed</returns>
-        public bool Login(string login, string password)
+        public bool Login(string login, string passwordOrToken)
         {
             if (string.IsNullOrEmpty(login))
             {
                 throw new ArgumentNullException(nameof(login));
             }
 
-            if (string.IsNullOrEmpty(password))
+            if (string.IsNullOrEmpty(passwordOrToken))
             {
-                throw new ArgumentNullException(nameof(password));
+                throw new ArgumentNullException(nameof(passwordOrToken));
             }
 
-            var list = new Dictionary<string, string>
-            {
-                { "j_username", login },
-                { "j_password", password },
-                { "remember_me", "on" },
-                { "Submit", "Anmelden" }
-            };
+            // set authorization
+            this.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.ASCII.GetBytes($"{login}:{passwordOrToken}")));
 
-            var res = PostLoginAsync("j_acegi_security_check", new FormUrlEncodedContent(list), CancellationToken.None).Result;
-            if (res)
-            {
-                Crumb();
-            }
-            return res;
+            // set crumb
+            Crumb();
+
+            // check if login success            
+            return GetCurrentUserAsync().Result != null;
         }
 
         private void Crumb()
@@ -175,18 +177,10 @@ namespace JenkinsWebApi
         /// <summary>
         /// Get a list with all Jenkins servers in the local subnet.
         /// </summary>
-        /// <returns>List with Jenkins servers</returns>
-        public static async Task<IEnumerable<JenkinsInstance>> GetJenkinsInstancesAsync()
-        {
-            return await GetJenkinsInstancesAsync(2000);
-        }
-        
-        /// <summary>
-        /// Get a list with all Jenkins servers in the local subnet.
-        /// </summary>
         /// <param name="timeout">Timeout of the search.</param>
         /// <returns>List with Jenkins servers</returns>
-        public static async Task<IEnumerable<JenkinsInstance>> GetJenkinsInstancesAsync(long timeout)
+        /// <remarks>From Jenkins 2.219 und LTS 2.204.2 this feature is deactivated by default.</remarks>
+        public static async Task<IEnumerable<JenkinsInstance>> GetJenkinsInstancesAsync(long timeout = 2000)
         {
             List<JenkinsInstance> list = null;
             using (UdpClient client = new UdpClient())
