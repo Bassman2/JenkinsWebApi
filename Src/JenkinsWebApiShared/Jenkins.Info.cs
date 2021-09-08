@@ -169,7 +169,7 @@ namespace JenkinsWebApi
         /// <returns></returns>
         public async Task<JenkinsModelView> GetViewAsync(string viewName)
         {
-            return await GetViewAsync(viewName);
+            return await GetViewAsync(viewName, CancellationToken.None);
         }
 
         /// <summary>

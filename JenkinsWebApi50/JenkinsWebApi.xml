@@ -27,7 +27,7 @@
             </summary>
             <param name="host">Host URL of the Jenkins server</param>
             <param name="login">Login for the Jenkins server</param>
-            <param name="password">Password for the Jenkins server</param>
+            <param name="passwordOrToken">Password or API token  for the Jenkins server</param>
         </member>
         <member name="M:JenkinsWebApi.Jenkins.#ctor(System.Uri,System.String,System.String)">
             <summary>
@@ -42,11 +42,13 @@
             Release allocated resources.
             </summary>
         </member>
-        <member name="M:JenkinsWebApi.Jenkins.GetJenkinsInstancesAsync">
+        <member name="M:JenkinsWebApi.Jenkins.Login(System.String,System.String)">
             <summary>
-            Get a list with all Jenkins servers in the local subnet.
+            Login to the Jenkins server.
             </summary>
-            <returns>List with Jenkins servers</returns>
+            <param name="login">Login for the Jenkins server</param>
+            <param name="passwordOrToken">Password or API token for the Jenkins server</param>
+            <returns>true if login success; false if failed</returns>
         </member>
         <member name="M:JenkinsWebApi.Jenkins.GetJenkinsInstancesAsync(System.Int64)">
             <summary>
@@ -54,6 +56,7 @@
             </summary>
             <param name="timeout">Timeout of the search.</param>
             <returns>List with Jenkins servers</returns>
+            <remarks>From Jenkins 2.219 und LTS 2.204.2 this feature is deactivated by default.</remarks>
         </member>
         <member name="M:JenkinsWebApi.Jenkins.RunComputerScriptAsync(System.String,System.String)">
             <summary>

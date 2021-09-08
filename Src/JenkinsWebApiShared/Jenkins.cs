@@ -83,8 +83,8 @@ namespace JenkinsWebApi
         /// </summary>
         /// <param name="host">Host URL of the Jenkins server</param>
         /// <param name="login">Login for the Jenkins server</param>
-        /// <param name="password">Password for the Jenkins server</param>
-        public Jenkins(string host, string login, string password) : this(new Uri(host), login, password)
+        /// <param name="passwordOrToken">Password or API token  for the Jenkins server</param>
+        public Jenkins(string host, string login, string passwordOrToken) : this(new Uri(host), login, passwordOrToken)
         { }
 
         /// <summary>
@@ -110,6 +110,8 @@ namespace JenkinsWebApi
             {
                 BaseAddress = host
             };
+
+            // set authorization
             this.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.ASCII.GetBytes($"{login}:{passwordOrToken}")));
 
             Crumb();
@@ -132,6 +134,34 @@ namespace JenkinsWebApi
             }   
         }
 
+        /// <summary>
+        /// Login to the Jenkins server.
+        /// </summary>
+        /// <param name="login">Login for the Jenkins server</param>
+        /// <param name="passwordOrToken">Password or API token for the Jenkins server</param>
+        /// <returns>true if login success; false if failed</returns>
+        public bool Login(string login, string passwordOrToken)
+        {
+            if (string.IsNullOrEmpty(login))
+            {
+                throw new ArgumentNullException(nameof(login));
+            }
+
+            if (string.IsNullOrEmpty(passwordOrToken))
+            {
+                throw new ArgumentNullException(nameof(passwordOrToken));
+            }
+
+            // set authorization
+            this.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.ASCII.GetBytes($"{login}:{passwordOrToken}")));
+
+            // set crumb
+            Crumb();
+            
+            // check if login success            
+            return GetCurrentUserAsync().Result != null;
+        }
+
         private void Crumb()
         {
             // only on newer Jenkins versions
@@ -146,22 +176,14 @@ namespace JenkinsWebApi
                 Debug.WriteLine(ex.Message);
             }
         }
-    
-        /// <summary>
-        /// Get a list with all Jenkins servers in the local subnet.
-        /// </summary>
-        /// <returns>List with Jenkins servers</returns>
-        public static async Task<IEnumerable<JenkinsInstance>> GetJenkinsInstancesAsync()
-        {
-            return await GetJenkinsInstancesAsync(2000);
-        }
-        
+
         /// <summary>
         /// Get a list with all Jenkins servers in the local subnet.
         /// </summary>
         /// <param name="timeout">Timeout of the search.</param>
         /// <returns>List with Jenkins servers</returns>
-        public static async Task<IEnumerable<JenkinsInstance>> GetJenkinsInstancesAsync(long timeout)
+        /// <remarks>From Jenkins 2.219 und LTS 2.204.2 this feature is deactivated by default.</remarks>
+        public static async Task<IEnumerable<JenkinsInstance>> GetJenkinsInstancesAsync(long timeout = 2000)
         {
             List<JenkinsInstance> list = null;
             using (UdpClient client = new UdpClient())
