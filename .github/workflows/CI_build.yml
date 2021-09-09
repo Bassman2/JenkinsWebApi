@@ -37,11 +37,16 @@ jobs:
 
     - name: Copy dummy key for signing
       run: |
-           Copy-Item  DummySignKey.snk -Destination Src\WpfClipboardMonitor60\Bassman.snk
-           Copy-Item  DummySignKey.snk -Destination Src\WpfClipboardMonitor50\Bassman.snk
-           Copy-Item  DummySignKey.snk -Destination Src\WpfClipboardMonitorCore31\Bassman.snk
-           Copy-Item  DummySignKey.snk -Destination Src\WpfClipboardMonitorFramework40\Bassman.snk
-
+           Copy-Item  DummySignKey.snk -Destination Src\JenkinsWebApi50\Bassman.snk
+           Copy-Item  DummySignKey.snk -Destination Src\JenkinsWebApiCore20\Bassman.snk
+           Copy-Item  DummySignKey.snk -Destination Src\JenkinsWebApiCore21\Bassman.snk
+           Copy-Item  DummySignKey.snk -Destination Src\JenkinsWebApiCore30\Bassman.snk
+           Copy-Item  DummySignKey.snk -Destination Src\JenkinsWebApiCore31\Bassman.snk
+           Copy-Item  DummySignKey.snk -Destination Src\JenkinsWebApiFwk45\Bassman.snk
+           Copy-Item  DummySignKey.snk -Destination Src\JenkinsWebApiStd20\Bassman.snk
+           Copy-Item  DummySignKey.snk -Destination Src\JenkinsWebApiStd21\Bassman.snk
+           Copy-Item  DummySignKey.snk -Destination Src\JenkinsWebApiUwp\Bassman.snk
+ 
     - name: Nuget restore solution
       run: nuget restore JenkinsWebApi.sln
 
