@@ -9,18 +9,124 @@ using System.Linq;
 namespace JenkinsTest
 {
     [TestClass]
-    public class HomeUnitTest : BaseUnitTest
+    public class JenkinsWebApiUnitTest 
     {
+        protected readonly Uri host = new Uri("http://tiny:8080");
+        //protected readonly string login = "Admin";
+        //protected readonly string password = "admin";
+        protected readonly string login = "Tester";
+        protected readonly string password = "tester";
+        //token name = TesterAPIToken
+        protected readonly string token = "11096e7fa3b687e849ee95908b869058bc";
+        // legacy token d65e88e40bb2bf5f72029713dce48243
 
-        
-
-        public HomeUnitTest()
+        [TestMethod]
+        public void LoginTest()
         {
-            this.host = "http://localhost:8080";
-            this.login = "xx";
-            this.password = "xx";
+            // Arrange
+            JenkinsModelHudson server = null;
 
-            //this.serverMode = JenkinsNodeMode.Normal;
+            // Act
+            using (Jenkins jenkins = new Jenkins(this.host, this.login, this.password))
+            {
+                server = jenkins.GetServerAsync().Result;
+            }
+
+            // Assert
+            Assert.IsNotNull(server);
+        }
+
+        [TestMethod]
+        public void TokenTest()
+        {
+            // Arrange
+            JenkinsModelHudson server = null;
+
+            // Act
+            using (Jenkins jenkins = new Jenkins(this.host, this.login, this.token))
+            {
+                server = jenkins.GetServerAsync().Result;
+            }
+
+            // Assert
+            Assert.IsNotNull(server);
+        }
+
+        [TestMethod]
+        public void RunTest()
+        {
+            //JenkinsRun build;
+
+            using (Jenkins jenkins = new Jenkins(host, this.login, this.password))
+            {
+                /*build =*/
+                var x = jenkins.RunJobAsync("Freestyle Test Pure").Result;
+            }
+
+            //Assert.AreEqual(JenkinsResult.Success, build.Result, "build.Result");
+        }
+
+        [TestMethod]
+        public void RunParamTest()
+        {
+            JenkinsModelRun build;
+            using (Jenkins jenkins = new Jenkins(host, this.login, this.password))
+            {
+                JenkinsBuildParameters par = new JenkinsBuildParameters();
+                par.Add("ParamA", "");
+                par.Add("ParamB", "");
+                par.Add("ParamC", "");
+                par.Add("CheckD", true);
+                par.Add("CheckE", false);
+                par.Add("TextBoxF", "Dies ist ein\r\nkleines Beispiel");
+
+                build = jenkins.RunJobComplete("Freestyle Test Parameter", par);
+            }
+
+            //Assert.AreEqual(JenkinsResult.Failure, build.Result, "build.Result");
+        }
+
+        [TestMethod]
+        public void InstancesTest()
+        {
+            List<JenkinsInstance> list = Jenkins.GetJenkinsInstancesAsync().Result?.ToList();
+
+            Assert.IsNotNull(list, "list");
+            Assert.IsTrue(list.Count > 0, "list.Count");
+        }
+
+        [TestMethod]
+        public void ServerTest()
+        {
+            JenkinsModelHudson server = null;
+
+            using (Jenkins jenkins = new Jenkins(this.host, this.login, this.password))
+            {
+                server = jenkins.GetServerAsync().Result;
+            }
+
+            Assert.IsNotNull(server);
+            Assert.IsNotNull(server.AssignedLabels, "assignedLabels");
+
+            //Assert.AreEqual(this.serverMode, server.Mode, "mode");
+            Assert.AreEqual("the master Jenkins node", server.NodeDescription, "nodeDescription");
+            Assert.AreEqual("", server.NodeName, "nodeName");
+            Assert.AreEqual(4, server.NumExecutors, "numExecutors");
+            Assert.AreEqual(null, server.Description, "description");
+
+            Assert.IsNotNull(server.Jobs, "jobs");
+
+            Assert.IsNotNull(server.OverallLoad, "overallLoad");
+
+            Assert.IsNotNull(server.PrimaryView, "primaryView");
+
+            Assert.AreEqual(-1, server.SlaveAgentPort, "slaveAgentPort");
+            Assert.AreEqual(true, server.UseCrumbs, "useCrumbs");
+            Assert.AreEqual(true, server.UseSecurity, "useSecurity");
+
+            Assert.IsNotNull(server.Views, "views");
+
+            Assert.AreEqual("", server.NodeName, "nodeName");
         }
 
 
@@ -230,7 +336,7 @@ namespace JenkinsTest
         }
 
         [TestMethod]
-        public void RunTest()
+        public void RunTestXXXXX()
         {
             JenkinsModelRun build;
 
@@ -243,7 +349,7 @@ namespace JenkinsTest
         }
 
         [TestMethod]
-        public void RunParamTest()
+        public void RunParamTestXXXXX()
         {
             JenkinsModelRun build;
             using (Jenkins jenkins = new Jenkins(this.host, this.login, this.password))
