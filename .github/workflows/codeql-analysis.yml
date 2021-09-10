@@ -13,6 +13,9 @@ jobs:
   analyze:
     name: Analyze
     runs-on: windows-latest
+    
+    env:
+      SHFBROOT: C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\
 
     steps:
     - name: Checkout repository
@@ -78,15 +81,15 @@ jobs:
 
     - name: restore
       working-directory: .
-      run: |
-           $env:SHFBROOT="C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\"
-           nuget restore JenkinsWebApi.sln
+      run: nuget restore JenkinsWebApi.sln
+           #$env:SHFBROOT="C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\"
+           
 
     - name: MSBuild of solution
       working-directory: .
-      run: |
-           $env:SHFBROOT = "C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\"
-           msbuild JenkinsWebApi.sln /p:configuration="Release" /verbosity:minimal
+      run: msbuild JenkinsWebApi.sln /p:configuration="Release" /verbosity:minimal
+           #$env:SHFBROOT = "C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\"
+           
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v1
