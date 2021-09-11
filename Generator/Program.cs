@@ -247,6 +247,7 @@ namespace Generator
         public void Create(string dir)
         {
             dir = Path.Combine(dir, "Model");
+            Directory.CreateDirectory(dir);
             new DirectoryInfo(dir).GetFiles().ToList().ForEach(f => f.Delete());
             
             foreach(var ct in complexTypes.Values)

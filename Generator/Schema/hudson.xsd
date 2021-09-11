@@ -23,6 +23,7 @@
             </xsd:annotation>
           </xsd:element>
           <xsd:element name="primaryView" type="hudson.model.View" minOccurs="0"/>
+          <xsd:element name="quietDownReason" type="xsd:string" minOccurs="0"/>
           <xsd:element name="quietingDown" type="xsd:boolean"/>
           <xsd:element name="slaveAgentPort" type="xsd:int"/>
           <xsd:element name="unlabeledLoad" type="hudson.model.LoadStatistics" minOccurs="0">

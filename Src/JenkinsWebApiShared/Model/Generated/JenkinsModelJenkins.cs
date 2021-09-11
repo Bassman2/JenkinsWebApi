@@ -19,6 +19,9 @@ namespace JenkinsWebApi.Model
         [XmlElement("primaryView")]
         public JenkinsModelView PrimaryView { get; set; }
 
+        [XmlElement("quietDownReason")]
+        public string QuietDownReason { get; set; }
+
         [XmlElement("quietingDown")]
         public bool IsQuietingDown { get; set; }
 
