@@ -34,6 +34,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsComTikalJenkinsPluginsMultijobMultiJobBuild.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsComTikalJenkinsPluginsMultijobMultiJobBuildSubBuild.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsComTikalJenkinsPluginsMultijobMultiJobProject.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsComTikalJenkinsPluginsMultijobViewsMultiJobView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsLocalPluginManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsMatrixMatrixBuild.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsMatrixMatrixConfiguration.cs" />

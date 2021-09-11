@@ -63,7 +63,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Src\JenkinsWebApiFwk45\JenkinsWebApiFwk45.csproj">
       <Project>{be64fa67-2d2e-4405-be62-168159b2640e}</Project>
-      <Name>JenkinsWebApiFramework461</Name>
+      <Name>JenkinsWebApiFwk45</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="..\JenkinsWebApiUnitTestShare\JenkinsWebApiUnitTestShare.projitems" Label="Shared" />
