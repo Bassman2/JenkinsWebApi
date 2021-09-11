@@ -40,6 +40,15 @@
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsMatrixMatrixConfiguration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsMatrixMatrixProject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsMatrixMatrixRun.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsMavenAbstractMavenBuild.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsMavenAbstractMavenProject.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsMavenMavenBuild.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsMavenMavenModule.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsMavenMavenModuleSet.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsMavenMavenModuleSetBuild.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsMavenReportersMavenAggregatedArtifactRecord.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsMavenReportersMavenArtifact.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsMavenReportersMavenArtifactRecord.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsModelAbstractBuild.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsModelAbstractCIBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsModelAbstractItem.cs" />

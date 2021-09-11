@@ -781,6 +781,21 @@
             Jenkins Java class name.
             </summary>
         </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsMavenReportersMavenAggregatedArtifactRecord.Class">
+            <summary>
+            Jenkins Java class name.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsMavenReportersMavenArtifact.Class">
+            <summary>
+            Jenkins Java class name.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsMavenReportersMavenArtifactRecord.Class">
+            <summary>
+            Jenkins Java class name.
+            </summary>
+        </member>
         <member name="P:JenkinsWebApi.Model.JenkinsModelActionable.Class">
             <summary>
             Jenkins Java class name.

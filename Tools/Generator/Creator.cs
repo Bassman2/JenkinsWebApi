@@ -103,7 +103,9 @@ namespace Generator
                     writer.WriteLine("    {");
                     foreach (var e in ct.Items)
                     {
-                        if (e.Name != "monitorData")
+                        if (e.Name != "monitorData" && 
+                            !(ct.Name == "hudson.maven.MavenModule" && e.Name == "displayName") // override base class
+                           )
                         {
                             if (!string.IsNullOrEmpty(e.Description))
                             {
