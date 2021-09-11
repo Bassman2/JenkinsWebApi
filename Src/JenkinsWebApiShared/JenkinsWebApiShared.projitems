@@ -16,6 +16,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Jenkins.Helper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Jenkins.Info.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Jenkins.Job.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Jenkins.Job.Generic.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Jenkins.System.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JenkinsBuildParameters.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JenkinsExtensions.cs" />
