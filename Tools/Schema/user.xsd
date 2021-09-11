@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="user" type="hudson.model.User"/>
+  <xsd:complexType name="hudson.model.User">
+    <xsd:sequence>
+      <xsd:element name="absoluteUrl" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="fullName" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="id" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="property" type="hudson.model.UserProperty" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+    <xsd:attribute name="_class" type="xsd:string" use="optional"/>
+  </xsd:complexType>
+  <xsd:complexType name="hudson.model.UserProperty">
+    <xsd:sequence/>
+    <xsd:attribute name="_class" type="xsd:string" use="optional"/>
+  </xsd:complexType>
+</xsd:schema>
+

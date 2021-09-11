@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="envInjectVarList" type="org.jenkinsci.plugins.envinject.EnvInjectVarList"/>
+  <xsd:complexType name="org.jenkinsci.plugins.envinject.EnvInjectVarList">
+    <xsd:sequence>
+      <xsd:element name="envMap" type="xsd:anyType" minOccurs="0"/>
+    </xsd:sequence>
+    <xsd:attribute name="_class" type="xsd:string" use="optional"/>
+  </xsd:complexType>
+</xsd:schema>
+

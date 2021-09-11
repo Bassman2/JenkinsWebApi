@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="queue" type="hudson.model.Queue"/>
+  <xsd:complexType name="hudson.model.Queue">
+    <xsd:sequence>
+      <xsd:element name="discoverableItem" type="hudson.model.Queue-StubItem" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="item" type="hudson.model.Queue-Item" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+    <xsd:attribute name="_class" type="xsd:string" use="optional"/>
+  </xsd:complexType>
+  <xsd:complexType name="hudson.model.Queue-Item">
+    <xsd:complexContent>
+      <xsd:extension base="hudson.model.Actionable">
+        <xsd:sequence>
+          <xsd:element name="blocked" type="xsd:boolean"/>
+          <xsd:element name="buildable" type="xsd:boolean"/>
+          <xsd:element name="id" type="xsd:long"/>
+          <xsd:element name="inQueueSince" type="xsd:long"/>
+          <xsd:element name="params" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="stuck" type="xsd:boolean"/>
+          <xsd:element name="task" type="xsd:anyType" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation> Project to be built.
+</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="url" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="why" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="hudson.model.Actionable">
+    <xsd:sequence>
+      <xsd:element name="action" type="xsd:anyType" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+    <xsd:attribute name="_class" type="xsd:string" use="optional"/>
+  </xsd:complexType>
+  <xsd:complexType name="hudson.model.Queue-StubItem">
+    <xsd:sequence>
+      <xsd:element name="task" type="hudson.model.Queue-StubTask" minOccurs="0"/>
+    </xsd:sequence>
+    <xsd:attribute name="_class" type="xsd:string" use="optional"/>
+  </xsd:complexType>
+  <xsd:complexType name="hudson.model.Queue-StubTask">
+    <xsd:sequence>
+      <xsd:element name="name" type="xsd:string" minOccurs="0"/>
+    </xsd:sequence>
+    <xsd:attribute name="_class" type="xsd:string" use="optional"/>
+  </xsd:complexType>
+</xsd:schema>
+

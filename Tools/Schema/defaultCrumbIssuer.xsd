@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="defaultCrumbIssuer" type="hudson.security.csrf.DefaultCrumbIssuer"/>
+  <xsd:complexType name="hudson.security.csrf.DefaultCrumbIssuer">
+    <xsd:complexContent>
+      <xsd:extension base="hudson.security.csrf.CrumbIssuer">
+        <xsd:sequence/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="hudson.security.csrf.CrumbIssuer">
+    <xsd:sequence>
+      <xsd:element name="crumb" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="crumbRequestField" type="xsd:string" minOccurs="0"/>
+    </xsd:sequence>
+    <xsd:attribute name="_class" type="xsd:string" use="optional"/>
+  </xsd:complexType>
+</xsd:schema>
+

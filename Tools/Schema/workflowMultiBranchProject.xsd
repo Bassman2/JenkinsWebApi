@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="workflowMultiBranchProject" type="org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProject"/>
+  <xsd:complexType name="org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProject">
+    <xsd:complexContent>
+      <xsd:extension base="jenkins.branch.MultiBranchProject">
+        <xsd:sequence/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="jenkins.branch.MultiBranchProject">
+    <xsd:complexContent>
+      <xsd:extension base="com.cloudbees.hudson.plugins.folder.computed.ComputedFolder">
+        <xsd:sequence>
+          <xsd:element name="source" type="jenkins.branch.BranchSource" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="jenkins.branch.BranchSource">
+    <xsd:sequence>
+      <xsd:element name="source" type="jenkins.scm.api.SCMSource" minOccurs="0"/>
+    </xsd:sequence>
+    <xsd:attribute name="_class" type="xsd:string" use="optional"/>
+  </xsd:complexType>
+  <xsd:complexType name="jenkins.scm.api.SCMSource">
+    <xsd:sequence/>
+    <xsd:attribute name="_class" type="xsd:string" use="optional"/>
+  </xsd:complexType>
+  <xsd:complexType name="com.cloudbees.hudson.plugins.folder.computed.ComputedFolder">
+    <xsd:complexContent>
+      <xsd:extension base="com.cloudbees.hudson.plugins.folder.AbstractFolder">
+        <xsd:sequence/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="com.cloudbees.hudson.plugins.folder.AbstractFolder">
+    <xsd:complexContent>
+      <xsd:extension base="hudson.model.AbstractItem">
+        <xsd:sequence>
+          <xsd:element name="healthReport" type="hudson.model.HealthReport" minOccurs="0" maxOccurs="unbounded"/>
+          <xsd:element name="job" type="xsd:anyType" minOccurs="0" maxOccurs="unbounded"/>
+          <xsd:element name="primaryView" type="hudson.model.View" minOccurs="0"/>
+          <xsd:element name="view" type="hudson.model.View" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="hudson.model.View">
+    <xsd:sequence>
+      <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="job" type="xsd:anyType" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="name" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="property" type="xsd:anyType" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="url" type="xsd:string" minOccurs="0"/>
+    </xsd:sequence>
+    <xsd:attribute name="_class" type="xsd:string" use="optional"/>
+  </xsd:complexType>
+  <xsd:complexType name="hudson.model.HealthReport">
+    <xsd:sequence>
+      <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="iconClassName" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="iconUrl" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="score" type="xsd:int"/>
+    </xsd:sequence>
+    <xsd:attribute name="_class" type="xsd:string" use="optional"/>
+  </xsd:complexType>
+  <xsd:complexType name="hudson.model.AbstractItem">
+    <xsd:complexContent>
+      <xsd:extension base="hudson.model.Actionable">
+        <xsd:sequence>
+          <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="displayName" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="displayNameOrNull" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="fullDisplayName" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="fullName" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="name" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="url" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="hudson.model.Actionable">
+    <xsd:sequence>
+      <xsd:element name="action" type="xsd:anyType" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+    <xsd:attribute name="_class" type="xsd:string" use="optional"/>
+  </xsd:complexType>
+</xsd:schema>
+
