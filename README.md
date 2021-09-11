@@ -16,8 +16,8 @@ You are welcome to support this project.
 # Supported Plugins
 
 ## View Plugins
-[categorized-view](https://plugins.jenkins.io/categorized-view/) 
-[dashboard-view](https://plugins.jenkins.io/dashboard-view/)
-[jenkins-multijob-plugin](https://plugins.jenkins.io/jenkins-multijob-plugin/)
+* [categorized-view](https://plugins.jenkins.io/categorized-view/) 
+* [dashboard-view](https://plugins.jenkins.io/dashboard-view/)
+* [jenkins-multijob-plugin](https://plugins.jenkins.io/jenkins-multijob-plugin/)
 
 ## Job Plugins
