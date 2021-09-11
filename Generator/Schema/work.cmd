@@ -20,6 +20,7 @@ curl --user %JENKINSUSER% -o listView.xsd %JENKINSURL%/view/Test/api/schema
 curl --user %JENKINSUSER% -o myView.xsd %JENKINSURL%/view/my%%20view/api/schema
 curl --user %JENKINSUSER% -o dashboard.xsd %JENKINSURL%/view/Dashboard/api/schema
 curl --user %JENKINSUSER% -o allView.xsd %JENKINSURL%/view/all/api/schema
+curl --user %JENKINSUSER% -o multiJobView.xsd %JENKINSURL%/view/MultiJob/api/schema
 
 rem jobs & builds
 curl --user %JENKINSUSER% -o externalJob.xsd %JENKINSURL%/job/External%%20Job/api/schema
