@@ -1,9 +1,9 @@
-﻿using HtmlAgilityPack;
-using JenkinsWebApi.Internal;
+﻿using JenkinsWebApi.Internal;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
@@ -80,44 +80,8 @@ namespace JenkinsWebApi
 
         private string TrimScript(string str)
         {
-            HtmlDocument doc = new HtmlDocument();
-            doc.LoadHtml(str);
-            var el = doc.DocumentNode.SelectSingleNode("//*[@id='main-panel']/pre[last()]");        // Jenkins ver. 1.424.6
-            if (el != null)
-            {
-                return HtmlEntity.DeEntitize(el.InnerText).Trim();
-            }
-            return null;
-        }
-
-        private string TrimDescription(string str)
-        {
-            str = str.Replace("&&", "");
-            HtmlDocument doc = new HtmlDocument();
-            doc.LoadHtml(str);
-            var el = doc.DocumentNode.SelectSingleNode("//input[@name='_.nodeDescription']");        // Jenkins ver. 1.424.6
-            if (el != null)
-            {
-                HtmlAttribute attr = el.Attributes["value"];
-                string res = HtmlEntity.DeEntitize(attr.Value);
-                return res.Trim();
-            }
-            return null;
-        }
-
-        private string TrimLabel(string str)
-        {
-            str = str.Replace("&&", "");
-            HtmlDocument doc = new HtmlDocument();
-            doc.LoadHtml(str);
-            var el = doc.DocumentNode.SelectSingleNode("//input[@name='_.labelString']");        // Jenkins ver. 1.424.6
-            if (el != null)
-            {
-                HtmlAttribute attr = el.Attributes["value"];
-                string res = HtmlEntity.DeEntitize(attr.Value);
-                return res.Trim();
-            }
-            return null;
+            Match match = Regex.Match(str, @"(<pre>(?<script>[^<]*)<\/pre>)*");
+            return match.Success ? match.Groups["script"].Value : null;
         }
     }
 }

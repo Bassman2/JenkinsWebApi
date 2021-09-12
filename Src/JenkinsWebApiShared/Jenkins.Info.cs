@@ -1,5 +1,4 @@
-﻿using HtmlAgilityPack;
-using JenkinsWebApi.Model;
+﻿using JenkinsWebApi.Model;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -328,32 +327,32 @@ namespace JenkinsWebApi
             return computer;
         }
 
-        /// <summary>
-        /// Get extended infos of a Jenkins slave node.
-        /// </summary>
-        /// <param name="computerName">Name of the node.</param>
-        /// <returns>Node infos</returns>
-        public async Task<JenkinsComputerExt> GetComputerExtAsync(string computerName)
-        {
-            return await GetComputerExtAsync(computerName, CancellationToken.None);
-        }
+        ///// <summary>
+        ///// Get extended infos of a Jenkins slave node.
+        ///// </summary>
+        ///// <param name="computerName">Name of the node.</param>
+        ///// <returns>Node infos</returns>
+        //public async Task<JenkinsComputerExt> GetComputerExtAsync(string computerName)
+        //{
+        //    return await GetComputerExtAsync(computerName, CancellationToken.None);
+        //}
 
-        /// <summary>
-        /// Get extended infos of a Jenkins slave node.
-        /// </summary>
-        /// <param name="computerName">Name of the node.</param>
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <returns>Node infos</returns>
-        public async Task<JenkinsComputerExt> GetComputerExtAsync(string computerName, CancellationToken cancellationToken)
-        {
-            string str = await GetStringAsync($"computer/{computerName}/configure", cancellationToken);
-            JenkinsComputerExt computerExt = new JenkinsComputerExt
-            {
-                Description = TrimDescription(str),
-                Label = TrimLabel(str)
-            };
-            return computerExt;
-        }
+        ///// <summary>
+        ///// Get extended infos of a Jenkins slave node.
+        ///// </summary>
+        ///// <param name="computerName">Name of the node.</param>
+        ///// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        ///// <returns>Node infos</returns>
+        //public async Task<JenkinsComputerExt> GetComputerExtAsync(string computerName, CancellationToken cancellationToken)
+        //{
+        //    string str = await GetStringAsync($"computer/{computerName}/configure", cancellationToken);
+        //    JenkinsComputerExt computerExt = new JenkinsComputerExt
+        //    {
+        //        Description = TrimDescription(str),
+        //        Label = TrimLabel(str)
+        //    };
+        //    return computerExt;
+        //}
 
         /// <summary>
         /// Get the log of the computer
@@ -373,8 +372,7 @@ namespace JenkinsWebApi
         /// <returns>Log text</returns>
         public async Task<string> GetComputerLogAsync(string computerName, CancellationToken cancellationToken)
         {
-            string str = await GetStringAsync($"computer/{computerName}/logText/progressiveHtml", cancellationToken);
-            return HtmlEntity.DeEntitize(str);
+            return await GetStringAsync($"computer/{computerName}/logText/progressiveText", cancellationToken);
         }
 
         /// <summary>

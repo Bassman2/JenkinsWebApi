@@ -124,9 +124,6 @@
     <EmbeddedResource Include="Properties\JenkinsWebApiUwp.rd.xml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="HtmlAgilityPack">
-      <Version>1.11.36</Version>
-    </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.12</Version>
     </PackageReference>
