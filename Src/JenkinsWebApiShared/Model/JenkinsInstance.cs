@@ -2,7 +2,7 @@
 using System.Net;
 using System.Xml.Serialization;
 
-namespace JenkinsWebApi
+namespace JenkinsWebApi.Model
 {
     /// <summary>
     /// Jenkins server instance information.

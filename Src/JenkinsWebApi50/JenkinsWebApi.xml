@@ -714,54 +714,34 @@
             </summary>
             <param name="param">JenkinsBuildParameters instance to cast</param>
         </member>
-        <member name="T:JenkinsWebApi.JenkinsInstance">
+        <member name="T:JenkinsWebApi.Model.JenkinsInstance">
             <summary>
             Jenkins server instance information.
             </summary>
         </member>
-        <member name="P:JenkinsWebApi.JenkinsInstance.Version">
+        <member name="P:JenkinsWebApi.Model.JenkinsInstance.Version">
             <summary>
             Version of the Jenkins server.
             </summary>
         </member>
-        <member name="P:JenkinsWebApi.JenkinsInstance.ServerId">
+        <member name="P:JenkinsWebApi.Model.JenkinsInstance.ServerId">
             <summary>
             Id of the Jenkins server.
             </summary>
         </member>
-        <member name="P:JenkinsWebApi.JenkinsInstance.Url">
+        <member name="P:JenkinsWebApi.Model.JenkinsInstance.Url">
             <summary>
             URL of the Jenkins server.
             </summary>
         </member>
-        <member name="P:JenkinsWebApi.JenkinsInstance.SlavePort">
+        <member name="P:JenkinsWebApi.Model.JenkinsInstance.SlavePort">
             <summary>
             Port to connect the Jenkins server.
             </summary>
         </member>
-        <member name="P:JenkinsWebApi.JenkinsInstance.Address">
+        <member name="P:JenkinsWebApi.Model.JenkinsInstance.Address">
             <summary>
             IP of the Jenkins server
-            </summary>
-        </member>
-        <member name="T:JenkinsWebApi.JenkinsParameterType">
-            <summary>
-            Type of the Jenkins start job parameter
-            </summary>
-        </member>
-        <member name="F:JenkinsWebApi.JenkinsParameterType.String">
-            <summary>
-            The parameter is a string.
-            </summary>
-        </member>
-        <member name="F:JenkinsWebApi.JenkinsParameterType.Boolean">
-            <summary>
-            The parameter is a boolean.
-            </summary>
-        </member>
-        <member name="F:JenkinsWebApi.JenkinsParameterType.Stream">
-            <summary>
-            The parameter is a file stream.
             </summary>
         </member>
         <member name="P:JenkinsWebApi.Model.JenkinsBranchBranchSource.Class">
@@ -1032,6 +1012,26 @@
         <member name="P:JenkinsWebApi.Model.JenkinsExecutable.Class">
             <summary>
             Jenkins Java class name.
+            </summary>
+        </member>
+        <member name="T:JenkinsWebApi.JenkinsParameterType">
+            <summary>
+            Type of the Jenkins start job parameter
+            </summary>
+        </member>
+        <member name="F:JenkinsWebApi.JenkinsParameterType.String">
+            <summary>
+            The parameter is a string.
+            </summary>
+        </member>
+        <member name="F:JenkinsWebApi.JenkinsParameterType.Boolean">
+            <summary>
+            The parameter is a boolean.
+            </summary>
+        </member>
+        <member name="F:JenkinsWebApi.JenkinsParameterType.Stream">
+            <summary>
+            The parameter is a file stream.
             </summary>
         </member>
     </members>

@@ -19,7 +19,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Jenkins.System.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JenkinsBuildParameters.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Jenkins.Job.Wait.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)JenkinsInstance.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\JenkinsInstance.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JenkinsParameterType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsBranchBranchSource.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsBranchMultiBranchProject.cs" />
