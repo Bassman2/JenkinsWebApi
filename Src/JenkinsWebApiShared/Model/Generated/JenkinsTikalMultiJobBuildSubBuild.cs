@@ -41,7 +41,7 @@ namespace JenkinsWebApi.Model
         public string PhaseName { get; set; }
 
         [XmlElement("result")]
-        public JenkinsTasksTestTestResult Result { get; set; }
+        public object Result { get; set; }
 
         [XmlElement("retry")]
         public bool IsRetry { get; set; }

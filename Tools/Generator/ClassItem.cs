@@ -2,17 +2,17 @@
 {
     public class ClassItem
     {
-        public ClassItem(string name, string xmlType, bool isList, string description)
+        public ClassItem(string className, string methodName, string xmlType, bool isList, string description)
         {
-            this.Name = name;
-            this.ItemType = isList ? ItemTypes.List : (xmlType == "xsd:boolean" && !name.StartsWith("use") ? ItemTypes.Bool : ItemTypes.Single);
+            this.Name = methodName;
+            this.ItemType = isList ? ItemTypes.List : (xmlType == "xsd:boolean" && !methodName.StartsWith("use") ? ItemTypes.Bool : ItemTypes.Single);
             this.Description = description;
 
             this.ItemName = this.ItemType switch
             {
-                ItemTypes.Single => name.HungarianNotation(),
-                ItemTypes.Bool => $"Is{name.HungarianNotation()}",
-                ItemTypes.List => $"{name.HungarianNotation()}s",
+                ItemTypes.Single => methodName.HungarianNotation(),
+                ItemTypes.Bool => $"Is{methodName.HungarianNotation()}",
+                ItemTypes.List => $"{methodName.HungarianNotation()}s",
                 _ => throw new System.Exception($"Unknown ItemType {this.ItemType}")
             };
 
@@ -22,13 +22,19 @@
                 "xsd:string" => "string",
                 "xsd:int" => "int",
                 "xsd:long" => "long",
-                "xsd:anyType" => name switch
+                "xsd:anyType" => methodName switch
                 {
                     "executable" => "JenkinsExecutable",
                     "job" => "JenkinsModelJob",
                     "task" => "object",
                     "action" => "object",
-                    "result" => "JenkinsTasksTestTestResult",
+                    //"result" => "JenkinsResult",
+                    
+                    "result" => className switch
+                    {
+                        "hudson.model.Run" => "JenkinsResult",
+                        _ => "object"
+                    },
                     "currentExecutable" => "object",
                     "property" => "object",
                     "timestamp" => "object",

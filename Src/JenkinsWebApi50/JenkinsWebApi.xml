@@ -1127,5 +1127,20 @@
             Jenkins Java class name.
             </summary>
         </member>
+        <member name="T:JenkinsWebApi.Model.JenkinsResult">
+            <summary>
+            Jenkins Result
+            </summary>
+        </member>
+        <member name="F:JenkinsWebApi.Model.JenkinsResult.Success">
+            <summary>
+            Success
+            </summary>
+        </member>
+        <member name="F:JenkinsWebApi.Model.JenkinsResult.Failure">
+            <summary>
+            Failure
+            </summary>
+        </member>
     </members>
 </doc>

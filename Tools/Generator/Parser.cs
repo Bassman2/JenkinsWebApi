@@ -78,7 +78,7 @@ namespace Generator
 
                 ct.BaseName = x?.GetAttribute("base");
                 ct.Items = c.GetElementsByTagName("element", XMLSchemaNamespace).Cast<XmlElement>().Select(e =>
-                    new ClassItem(e.GetAttribute("name"), e.GetAttribute("type"), e.HasAttribute("maxOccurs"), e.SelectSingleNode("xsd:documentation", nsm)?.InnerText)).ToList();
+                    new ClassItem(ct.Name, e.GetAttribute("name"), e.GetAttribute("type"), e.HasAttribute("maxOccurs"), e.SelectSingleNode("xsd:documentation", nsm)?.InnerText)).ToList();
                 ct.HasClassAttribut = c.SelectSingleNode("xsd:attribute", nsm) != null ? true : false;
             }
 
