@@ -66,6 +66,7 @@ Classes
     hudson.model.Project - JenkinsModelProject
     hudson.model.Queue - JenkinsModelQueue
     hudson.model.Queue-Item - JenkinsModelQueueItem
+    hudson.model.Queue-LeftItem - JenkinsModelQueueLeftItem
     hudson.model.Queue-StubItem - JenkinsModelQueueStubItem
     hudson.model.Queue-StubTask - JenkinsModelQueueStubTask
     hudson.model.Run - JenkinsModelRun

@@ -16,10 +16,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Jenkins.Helper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Jenkins.Info.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Jenkins.Job.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Jenkins.Job.Generic.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Jenkins.System.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JenkinsBuildParameters.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)JenkinsExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Jenkins.Job.Wait.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JenkinsInstance.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JenkinsParameterType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsBranchBranchSource.cs" />
@@ -90,6 +89,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsModelProject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsModelQueue.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsModelQueueItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsModelQueueLeftItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsModelQueueStubItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsModelQueueStubTask.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsModelRun.cs" />
@@ -135,6 +135,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsTasksTestTestResult.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsYesNoMaybe.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\JenkinsComputerExt.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\JenkinsExecutable.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\JenkinsModelComputer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\JenkinsModelRun.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\JenkinsNodeMonitorsArchitectureMonitor.cs" />

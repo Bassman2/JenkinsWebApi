@@ -591,38 +591,6 @@
             <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
             <returns>Task handle</returns>
         </member>
-        <member name="M:JenkinsWebApi.Jenkins.RunJobAsync``1(System.String)">
-            <summary>
-            Run a Jenkins job.
-            </summary>
-            <param name="jobName">Name of the Jenkins job</param>
-            <returns>Result and number of the Jenkins build</returns>
-        </member>
-        <member name="M:JenkinsWebApi.Jenkins.RunJobAsync``1(System.String,JenkinsWebApi.JenkinsBuildParameters)">
-            <summary>
-            Run a Jenkins job.
-            </summary>
-            <param name="jobName">Name of the Jenkins job</param>
-            <param name="parameters">Parameters for the Jenkins job</param>
-            <returns>Result and number of the Jenkins build</returns>
-        </member>
-        <member name="M:JenkinsWebApi.Jenkins.RunJobAsync``1(System.String,System.Threading.CancellationToken)">
-            <summary>
-            Run a Jenkins job.
-            </summary>
-            <param name="jobName">Name of the Jenkins job</param>
-            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-            <returns>Result and number of the Jenkins build</returns>
-        </member>
-        <member name="M:JenkinsWebApi.Jenkins.RunJobAsync``1(System.String,JenkinsWebApi.JenkinsBuildParameters,System.Threading.CancellationToken)">
-            <summary>
-            Run a Jenkins job.
-            </summary>
-            <param name="jobName">Name of the Jenkins job</param>
-            <param name="parameters">Parameters for the Jenkins job</param>
-            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-            <returns>Result and number of the Jenkins build</returns>
-        </member>
         <member name="M:JenkinsWebApi.Jenkins.QuiteDownAsync">
             <summary>
             Enter into the "quiet down" mode.
@@ -690,6 +658,24 @@
             <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
             <returns></returns>
         </member>
+        <member name="M:JenkinsWebApi.Jenkins.RunJobComplete(System.String,JenkinsWebApi.JenkinsBuildParameters,System.Int32)">
+            <summary>
+            Run Jenkins job and return after job has finished.
+            </summary>
+            <param name="name">Name of the Jenkins job.</param>
+            <param name="parameters">Parameter list for the Jenkins job.</param>
+            <param name="pollingTime">Polling time in milliseconds. The default value is 5 seconds.</param>
+            <returns>Finished build</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.RunJobCompleteAsync(System.String,JenkinsWebApi.JenkinsBuildParameters,System.Int32)">
+            <summary>
+            Run Jenkins job complete asynchron.
+            </summary>
+            <param name="name">Name of the Jenkins job.</param>
+            <param name="parameters">Parameter list for the Jenkins job.</param>
+            <param name="pollingTime">Polling time in milliseconds. The default value is 5 seconds.</param>
+            <returns>Finished build</returns>
+        </member>
         <member name="T:JenkinsWebApi.JenkinsBuildParameters">
             <summary>
             Class for build parameters.
@@ -727,21 +713,6 @@
             Cast JenkinsBuildParameters to HttpContent.
             </summary>
             <param name="param">JenkinsBuildParameters instance to cast</param>
-        </member>
-        <member name="T:JenkinsWebApi.JenkinsExtensions">
-            <summary>
-            Extensions for the Jenkins class.
-            </summary>
-        </member>
-        <member name="M:JenkinsWebApi.JenkinsExtensions.RunJobComplete(JenkinsWebApi.Jenkins,System.String,JenkinsWebApi.JenkinsBuildParameters,System.Int32)">
-            <summary>
-            Run Jenkins job and return after job has finished.
-            </summary>
-            <param name="jenkins">Jenkins this parameter</param>
-            <param name="name">Name of the Jenkins job.</param>
-            <param name="parameters">Parameter list for the Jenkins job.</param>
-            <param name="pollingTime">Polling time in milliseconds. The default value is 5 seconds.</param>
-            <returns>Finished build</returns>
         </member>
         <member name="T:JenkinsWebApi.JenkinsInstance">
             <summary>
@@ -1041,6 +1012,26 @@
         <member name="P:JenkinsWebApi.Model.JenkinsComputerExt.Label">
             <summary>
             Label list of a node.
+            </summary>
+        </member>
+        <member name="T:JenkinsWebApi.Model.JenkinsExecutable">
+            <summary>
+            Job executable
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsExecutable.Number">
+            <summary>
+            Build number
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsExecutable.Url">
+            <summary>
+            Build URL
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsExecutable.Class">
+            <summary>
+            Jenkins Java class name.
             </summary>
         </member>
     </members>

@@ -24,7 +24,7 @@
                 "xsd:long" => "long",
                 "xsd:anyType" => name switch
                 {
-                    "executable" => "JenkinsExecutor",
+                    "executable" => "JenkinsExecutable",
                     "job" => "JenkinsModelJob",
                     "task" => "object",
                     "action" => "object",

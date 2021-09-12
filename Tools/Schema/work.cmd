@@ -52,7 +52,7 @@ curl --user %JENKINSUSER% -o bldFreeStyle.xsd %JENKINSURL%/job/FreeStyle/1/api/s
 
 :: Maven-Project https://plugins.jenkins.io/maven-plugin
 curl --user %JENKINSUSER% -o jobMaven.xsd %JENKINSURL%/job/Maven/api/schema
-curl --user %JENKINSUSER% -o BldMaven.xsd %JENKINSURL%/job/Maven/1/api/schema
+curl --user %JENKINSUSER% -o bldMaven.xsd %JENKINSURL%/job/Maven/1/api/schema
 
 :: Pipeline https://plugins.jenkins.io/workflow-aggregato
 curl --user %JENKINSUSER% -o jobPipeline.xsd %JENKINSURL%/job/Pipeline/api/schema
