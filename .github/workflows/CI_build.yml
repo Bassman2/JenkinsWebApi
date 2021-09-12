@@ -4,7 +4,7 @@ on: [push, pull_request]
 
 jobs:
   build:
-    runs-on: windows-2019
+    runs-on: latest
     strategy:
       max-parallel: 2
       matrix:
@@ -29,7 +29,9 @@ jobs:
       uses: nuget/setup-nuget@v1
       
     - name: Show VS Version
-      run: msbuild -version 
+      run: |
+           "C:\Program Files (x86)\Microsoft Visual Studio\Installer\vswhere.exe" -latest -property displayName 
+           "C:\Program Files (x86)\Microsoft Visual Studio\Installer\vswhere.exe" -latest -property catalog_productDisplayVersion 
 
     - name: "Download and install sandcastle"
       run: |
