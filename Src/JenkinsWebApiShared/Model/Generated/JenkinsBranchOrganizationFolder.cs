@@ -6,7 +6,7 @@ namespace JenkinsWebApi.Model
 {
     // jenkins.branch.OrganizationFolder
     [XmlRoot("organizationFolder")]
-    public partial class JenkinsBranchOrganizationFolder : JenkinsComCloudbeesHudsonPluginsFolderComputedComputedFolder
+    public partial class JenkinsBranchOrganizationFolder : JenkinsCloudbeesComputedComputedFolder
     {
         // empty
     }

@@ -11,6 +11,62 @@ namespace JenkinsWebApi
     public sealed partial class Jenkins
     {
         /// <summary>
+        /// Get the Jenkins job data.
+        /// </summary>
+        /// <param name="jobName">Name of the job</param>
+        /// <returns>Jenkins job data</returns>
+        public async Task<JenkinsModelAbstractItem> GetJobAsync(string jobName)
+        {
+            return await GetJobAsync(jobName, CancellationToken.None);
+        }
+
+        /// <summary>
+        /// Get the Jenkins job data.
+        /// </summary>
+        /// <param name="jobName">Name of the job</param>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>Jenkins job data</returns>
+        public async Task<JenkinsModelAbstractItem> GetJobAsync(string jobName, CancellationToken cancellationToken)
+        {
+            if (string.IsNullOrEmpty(jobName))
+            {
+                throw new ArgumentNullException(nameof(jobName));
+            }
+
+            string str = await GetStringAsync($"job/{jobName}/api/xml", cancellationToken);
+            JenkinsModelAbstractItem job = Deserialize<JenkinsModelAbstractItem>(str, jobTypes);
+            return job;
+        }
+
+        /// <summary>
+        /// Get the Jenkins job data.
+        /// </summary>
+        /// <param name="jobName">Name of the job</param>
+        /// <returns>Jenkins job data</returns>
+        public async Task<T> GetJobAsync<T>(string jobName)
+        {
+            return await GetJobAsync<T>(jobName, CancellationToken.None);
+        }
+
+        /// <summary>
+        /// Get the Jenkins job data.
+        /// </summary>
+        /// <param name="jobName">Name of the job</param>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>Jenkins job data</returns>
+        public async Task<T> GetJobAsync<T>(string jobName, CancellationToken cancellationToken)
+        {
+            if (string.IsNullOrEmpty(jobName))
+            {
+                throw new ArgumentNullException(nameof(jobName));
+            }
+
+            string str = await GetStringAsync($"job/{jobName}/api/xml", cancellationToken);
+            var job = Deserialize<T>(str, jobTypes);
+            return job;
+        }
+
+        /// <summary>
         /// Run a Jenkins job.
         /// </summary>
         /// <param name="jobName">Name of the Jenkins job</param>

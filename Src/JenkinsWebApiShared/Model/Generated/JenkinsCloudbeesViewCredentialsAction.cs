@@ -4,12 +4,11 @@ using System.Xml.Serialization;
 
 namespace JenkinsWebApi.Model
 {
-    // org.jenkinsci.plugins.envinject.EnvInjectVarList
-    [XmlRoot("envInjectVarList")]
-    public partial class JenkinsOrgJenkinsciPluginsEnvinjectEnvInjectVarList
+    // com.cloudbees.plugins.credentials.ViewCredentialsAction
+    public partial class JenkinsCloudbeesViewCredentialsAction
     {
-        [XmlElement("envMap")]
-        public object EnvMap { get; set; }
+        [XmlElement("stores")]
+        public object Stores { get; set; }
 
         /// <summary>
         /// Jenkins Java class name.

@@ -5,7 +5,7 @@ using System.Xml.Serialization;
 namespace JenkinsWebApi.Model
 {
     // jenkins.branch.MultiBranchProject
-    public partial class JenkinsBranchMultiBranchProject : JenkinsComCloudbeesHudsonPluginsFolderComputedComputedFolder
+    public partial class JenkinsBranchMultiBranchProject : JenkinsCloudbeesComputedComputedFolder
     {
         [XmlElement("source")]
         public JenkinsBranchBranchSource[] Sources { get; set; }

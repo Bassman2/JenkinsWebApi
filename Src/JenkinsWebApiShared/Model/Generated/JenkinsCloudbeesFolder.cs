@@ -6,7 +6,7 @@ namespace JenkinsWebApi.Model
 {
     // com.cloudbees.hudson.plugins.folder.Folder
     [XmlRoot("folder")]
-    public partial class JenkinsComCloudbeesHudsonPluginsFolderFolder : JenkinsComCloudbeesHudsonPluginsFolderAbstractFolder
+    public partial class JenkinsCloudbeesFolder : JenkinsCloudbeesAbstractFolder
     {
         // empty
     }

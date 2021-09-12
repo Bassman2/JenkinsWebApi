@@ -167,7 +167,7 @@ namespace JenkinsTest
         [TestMethod]
         public void CredentialsTest()
         {
-            JenkinsComCloudbeesPluginsCredentialsViewCredentialsActionRootActionImpl credentials;
+            JenkinsCloudbeesViewCredentialsActionRootActionImpl credentials;
 
             using (Jenkins jenkins = new Jenkins(this.host, this.login, this.password))
             {
@@ -260,9 +260,9 @@ namespace JenkinsTest
             JenkinsModelFreeStyleProject freeStyleJob = null;
             JenkinsModelExternalJob externalJob = null;
             JenkinsMatrixMatrixProject matrixJob = null;
-            JenkinsOrgJenkinsciPluginsWorkflowJobWorkflowJob workflowJob = null;
-            JenkinsOrgJenkinsciPluginsWorkflowMultibranchWorkflowMultiBranchProject multiBranchJob = null;
-            JenkinsComCloudbeesHudsonPluginsFolderFolder folderJob = null;
+            JenkinsJenkinsciWorkflowJob workflowJob = null;
+            JenkinsJenkinsciWorkflowMultiBranchProject multiBranchJob = null;
+            JenkinsCloudbeesFolder folderJob = null;
             JenkinsBranchOrganizationFolder organizationFolderJob = null;
 
             using (Jenkins jenkins = new Jenkins(this.host, this.login, this.password))
@@ -270,9 +270,9 @@ namespace JenkinsTest
                 freeStyleJob = jenkins.GetJobAsync("Freestyle Test Pure").Result as JenkinsModelFreeStyleProject;
                 externalJob = jenkins.GetJobAsync("External Job").Result as JenkinsModelExternalJob;
                 matrixJob = jenkins.GetJobAsync("Multiconfiguration").Result as JenkinsMatrixMatrixProject;
-                workflowJob = jenkins.GetJobAsync("Pipeline").Result as JenkinsOrgJenkinsciPluginsWorkflowJobWorkflowJob;
-                multiBranchJob = jenkins.GetJobAsync("Multibranch").Result as JenkinsOrgJenkinsciPluginsWorkflowMultibranchWorkflowMultiBranchProject;
-                folderJob = jenkins.GetJobAsync("Folder").Result as JenkinsComCloudbeesHudsonPluginsFolderFolder;
+                workflowJob = jenkins.GetJobAsync("Pipeline").Result as JenkinsJenkinsciWorkflowJob;
+                multiBranchJob = jenkins.GetJobAsync("Multibranch").Result as JenkinsJenkinsciWorkflowMultiBranchProject;
+                folderJob = jenkins.GetJobAsync("Folder").Result as JenkinsCloudbeesFolder;
                 organizationFolderJob = jenkins.GetJobAsync("GitHub").Result as JenkinsBranchOrganizationFolder;
             }
 
@@ -309,7 +309,7 @@ namespace JenkinsTest
             JenkinsModelFreeStyleBuild freeStyleBuild = null;
             //JenkinsBuildExternal externalBuild = null;
             JenkinsMatrixMatrixBuild matrixBuild = null;
-            JenkinsOrgJenkinsciPluginsWorkflowJobWorkflowRun workflowBuild = null;
+            JenkinsJenkinsciWorkflowRun workflowBuild = null;
             //JenkinsBuildWorkflowMultiBranch multiBranchBuild = null;
             //JenkinsBuildFolder folderBuild = null;
             //JenkinsBuildOrganizationFolder organizationFolderBuild = null;
@@ -319,7 +319,7 @@ namespace JenkinsTest
                 freeStyleBuild = jenkins.GetLastBuildAsync("Freestyle Test Pure").Result as JenkinsModelFreeStyleBuild;
                 //externalBuild = jenkins.GetBuildAsync("External Job", 1).Result as JenkinsBuildExternal;
                 matrixBuild = jenkins.GetBuildAsync("Multiconfiguration", 1).Result as JenkinsMatrixMatrixBuild;
-                workflowBuild = jenkins.GetBuildAsync("Pipeline", 1).Result as JenkinsOrgJenkinsciPluginsWorkflowJobWorkflowRun;
+                workflowBuild = jenkins.GetBuildAsync("Pipeline", 1).Result as JenkinsJenkinsciWorkflowRun;
                 //multiBranchBuild = jenkins.GetBuildAsync("Multibranch", 1).Result as JenkinsBuildWorkflowMultiBranch;
                 //folderBuild = jenkins.GetBuildAsync("Folder", 1).Result as JenkinsBuildFolder;
                 //organizationFolderBuild = jenkins.GetBuildAsync("GitHub", 1).Result as JenkinsBuildOrganizationFolder;

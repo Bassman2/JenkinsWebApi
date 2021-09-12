@@ -6,7 +6,7 @@ namespace JenkinsWebApi.Model
 {
     // com.tikal.jenkins.plugins.multijob.views.MultiJobView
     [XmlRoot("multiJobView")]
-    public partial class JenkinsComTikalJenkinsPluginsMultijobViewsMultiJobView : JenkinsModelListView
+    public partial class JenkinsTikalMultiJobView : JenkinsModelListView
     {
         // empty
     }

@@ -6,7 +6,7 @@ namespace JenkinsWebApi.Model
 {
     // org.jenkinsci.plugins.workflow.job.WorkflowJob
     [XmlRoot("workflowJob")]
-    public partial class JenkinsOrgJenkinsciPluginsWorkflowJobWorkflowJob : JenkinsModelJob
+    public partial class JenkinsJenkinsciWorkflowJob : JenkinsModelJob
     {
         [XmlElement("concurrentBuild")]
         public bool IsConcurrentBuild { get; set; }

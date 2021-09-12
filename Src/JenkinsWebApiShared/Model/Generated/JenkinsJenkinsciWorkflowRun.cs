@@ -6,7 +6,7 @@ namespace JenkinsWebApi.Model
 {
     // org.jenkinsci.plugins.workflow.job.WorkflowRun
     [XmlRoot("workflowRun")]
-    public partial class JenkinsOrgJenkinsciPluginsWorkflowJobWorkflowRun : JenkinsModelRun
+    public partial class JenkinsJenkinsciWorkflowRun : JenkinsModelRun
     {
         [XmlElement("changeSet")]
         public JenkinsScmChangeLogSet[] ChangeSets { get; set; }
@@ -15,10 +15,10 @@ namespace JenkinsWebApi.Model
         public JenkinsModelUser[] Culprits { get; set; }
 
         [XmlElement("nextBuild")]
-        public JenkinsOrgJenkinsciPluginsWorkflowJobWorkflowRun NextBuild { get; set; }
+        public JenkinsJenkinsciWorkflowRun NextBuild { get; set; }
 
         [XmlElement("previousBuild")]
-        public JenkinsOrgJenkinsciPluginsWorkflowJobWorkflowRun PreviousBuild { get; set; }
+        public JenkinsJenkinsciWorkflowRun PreviousBuild { get; set; }
 
     }
 }

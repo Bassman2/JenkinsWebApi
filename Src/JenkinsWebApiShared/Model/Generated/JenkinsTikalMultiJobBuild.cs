@@ -6,10 +6,10 @@ namespace JenkinsWebApi.Model
 {
     // com.tikal.jenkins.plugins.multijob.MultiJobBuild
     [XmlRoot("multiJobBuild")]
-    public partial class JenkinsComTikalJenkinsPluginsMultijobMultiJobBuild : JenkinsModelBuild
+    public partial class JenkinsTikalMultiJobBuild : JenkinsModelBuild
     {
         [XmlElement("subBuild")]
-        public JenkinsComTikalJenkinsPluginsMultijobMultiJobBuildSubBuild[] SubBuilds { get; set; }
+        public JenkinsTikalMultiJobBuildSubBuild[] SubBuilds { get; set; }
 
     }
 }

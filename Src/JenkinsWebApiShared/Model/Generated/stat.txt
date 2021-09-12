@@ -5,17 +5,17 @@ Enums
     jenkins.YesNoMaybe - JenkinsYesNoMaybe
 
 Classes
-    com.cloudbees.hudson.plugins.folder.AbstractFolder - JenkinsComCloudbeesHudsonPluginsFolderAbstractFolder
-    com.cloudbees.hudson.plugins.folder.computed.ComputedFolder - JenkinsComCloudbeesHudsonPluginsFolderComputedComputedFolder
-    com.cloudbees.hudson.plugins.folder.Folder - JenkinsComCloudbeesHudsonPluginsFolderFolder
-    com.cloudbees.plugins.credentials.CredentialsStoreAction - JenkinsComCloudbeesPluginsCredentialsCredentialsStoreAction
-    com.cloudbees.plugins.credentials.SystemCredentialsProvider-UserFacingAction - JenkinsComCloudbeesPluginsCredentialsSystemCredentialsProviderUserFacingAction
-    com.cloudbees.plugins.credentials.ViewCredentialsAction - JenkinsComCloudbeesPluginsCredentialsViewCredentialsAction
-    com.cloudbees.plugins.credentials.ViewCredentialsAction-RootActionImpl - JenkinsComCloudbeesPluginsCredentialsViewCredentialsActionRootActionImpl
-    com.tikal.jenkins.plugins.multijob.MultiJobBuild - JenkinsComTikalJenkinsPluginsMultijobMultiJobBuild
-    com.tikal.jenkins.plugins.multijob.MultiJobBuild-SubBuild - JenkinsComTikalJenkinsPluginsMultijobMultiJobBuildSubBuild
-    com.tikal.jenkins.plugins.multijob.MultiJobProject - JenkinsComTikalJenkinsPluginsMultijobMultiJobProject
-    com.tikal.jenkins.plugins.multijob.views.MultiJobView - JenkinsComTikalJenkinsPluginsMultijobViewsMultiJobView
+    com.cloudbees.hudson.plugins.folder.AbstractFolder - JenkinsCloudbeesAbstractFolder
+    com.cloudbees.hudson.plugins.folder.computed.ComputedFolder - JenkinsCloudbeesComputedComputedFolder
+    com.cloudbees.hudson.plugins.folder.Folder - JenkinsCloudbeesFolder
+    com.cloudbees.plugins.credentials.CredentialsStoreAction - JenkinsCloudbeesCredentialsStoreAction
+    com.cloudbees.plugins.credentials.SystemCredentialsProvider-UserFacingAction - JenkinsCloudbeesSystemCredentialsProviderUserFacingAction
+    com.cloudbees.plugins.credentials.ViewCredentialsAction - JenkinsCloudbeesViewCredentialsAction
+    com.cloudbees.plugins.credentials.ViewCredentialsAction-RootActionImpl - JenkinsCloudbeesViewCredentialsActionRootActionImpl
+    com.tikal.jenkins.plugins.multijob.MultiJobBuild - JenkinsTikalMultiJobBuild
+    com.tikal.jenkins.plugins.multijob.MultiJobBuild-SubBuild - JenkinsTikalMultiJobBuildSubBuild
+    com.tikal.jenkins.plugins.multijob.MultiJobProject - JenkinsTikalMultiJobProject
+    com.tikal.jenkins.plugins.multijob.views.MultiJobView - JenkinsTikalMultiJobView
     hudson.LocalPluginManager - JenkinsLocalPluginManager
     hudson.matrix.MatrixBuild - JenkinsMatrixMatrixBuild
     hudson.matrix.MatrixConfiguration - JenkinsMatrixMatrixConfiguration
@@ -64,6 +64,7 @@ Classes
     hudson.model.OneOffExecutor - JenkinsModelOneOffExecutor
     hudson.model.OverallLoadStatistics - JenkinsModelOverallLoadStatistics
     hudson.model.Project - JenkinsModelProject
+    hudson.model.ProxyView - JenkinsModelProxyView
     hudson.model.Queue - JenkinsModelQueue
     hudson.model.Queue-Item - JenkinsModelQueueItem
     hudson.model.Queue-LeftItem - JenkinsModelQueueLeftItem
@@ -108,9 +109,9 @@ Classes
     jenkins.model.Jenkins - JenkinsModelJenkins
     jenkins.model.Jenkins-MasterComputer - JenkinsModelJenkinsMasterComputer
     jenkins.scm.api.SCMSource - JenkinsScmApiSCMSource
-    org.jenkinsci.plugins.buildgraphview.BuildGraph - JenkinsOrgJenkinsciPluginsBuildgraphviewBuildGraph
-    org.jenkinsci.plugins.categorizedview.CategorizedJobsView - JenkinsOrgJenkinsciPluginsCategorizedviewCategorizedJobsView
-    org.jenkinsci.plugins.envinject.EnvInjectVarList - JenkinsOrgJenkinsciPluginsEnvinjectEnvInjectVarList
-    org.jenkinsci.plugins.workflow.job.WorkflowJob - JenkinsOrgJenkinsciPluginsWorkflowJobWorkflowJob
-    org.jenkinsci.plugins.workflow.job.WorkflowRun - JenkinsOrgJenkinsciPluginsWorkflowJobWorkflowRun
-    org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProject - JenkinsOrgJenkinsciPluginsWorkflowMultibranchWorkflowMultiBranchProject
+    org.jenkinsci.plugins.buildgraphview.BuildGraph - JenkinsJenkinsciBuildGraph
+    org.jenkinsci.plugins.categorizedview.CategorizedJobsView - JenkinsJenkinsciCategorizedJobsView
+    org.jenkinsci.plugins.envinject.EnvInjectVarList - JenkinsJenkinsciEnvInjectVarList
+    org.jenkinsci.plugins.workflow.job.WorkflowJob - JenkinsJenkinsciWorkflowJob
+    org.jenkinsci.plugins.workflow.job.WorkflowRun - JenkinsJenkinsciWorkflowRun
+    org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProject - JenkinsJenkinsciWorkflowMultiBranchProject

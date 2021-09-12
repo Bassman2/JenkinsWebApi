@@ -5,7 +5,7 @@ using System.Xml.Serialization;
 namespace JenkinsWebApi.Model
 {
     // com.cloudbees.hudson.plugins.folder.AbstractFolder
-    public partial class JenkinsComCloudbeesHudsonPluginsFolderAbstractFolder : JenkinsModelAbstractItem
+    public partial class JenkinsCloudbeesAbstractFolder : JenkinsModelAbstractItem
     {
         [XmlElement("healthReport")]
         public JenkinsModelHealthReport[] HealthReports { get; set; }

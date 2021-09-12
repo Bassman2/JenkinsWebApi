@@ -6,7 +6,7 @@ namespace JenkinsWebApi.Model
 {
     // org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProject
     [XmlRoot("workflowMultiBranchProject")]
-    public partial class JenkinsOrgJenkinsciPluginsWorkflowMultibranchWorkflowMultiBranchProject : JenkinsBranchMultiBranchProject
+    public partial class JenkinsJenkinsciWorkflowMultiBranchProject : JenkinsBranchMultiBranchProject
     {
         // empty
     }

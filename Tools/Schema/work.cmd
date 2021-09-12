@@ -41,6 +41,7 @@ curl --user %JENKINSUSER% -o viewMy.xsd %JENKINSURL%/view/my%%20view/api/schema
 curl --user %JENKINSUSER% -o viewDashboard.xsd %JENKINSURL%/view/Dashboard/api/schema
 curl --user %JENKINSUSER% -o viewAll.xsd %JENKINSURL%/view/all/api/schema
 curl --user %JENKINSUSER% -o viewMmultiJob.xsd %JENKINSURL%/view/MultiJob/api/schema
+curl --user %JENKINSUSER% -o viewMyGlobal.xsd %JENKINSURL%/me/my-views/view/GlobalView/api/schema
 
 rem -----------------------------------------------------------------------------------------------
 rem jobs & builds

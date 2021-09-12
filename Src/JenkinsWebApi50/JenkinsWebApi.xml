@@ -279,36 +279,6 @@
             <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
             <returns>Jenkins user data</returns>
         </member>
-        <member name="M:JenkinsWebApi.Jenkins.GetJobAsync(System.String)">
-            <summary>
-            Get the Jenkins job data.
-            </summary>
-            <param name="jobName">Name of the job</param>
-            <returns>Jenkins job data</returns>
-        </member>
-        <member name="M:JenkinsWebApi.Jenkins.GetJobAsync(System.String,System.Threading.CancellationToken)">
-            <summary>
-            Get the Jenkins job data.
-            </summary>
-            <param name="jobName">Name of the job</param>
-            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-            <returns>Jenkins job data</returns>
-        </member>
-        <member name="M:JenkinsWebApi.Jenkins.GetViewAsync(System.String)">
-            <summary>
-            Get the Jenkins view data.
-            </summary>
-            <param name="viewName">Name of the view</param>
-            <returns></returns>
-        </member>
-        <member name="M:JenkinsWebApi.Jenkins.GetViewAsync(System.String,System.Threading.CancellationToken)">
-            <summary>
-            Get the Jenkins view data.
-            </summary>
-            <param name="viewName">Name of the view</param>
-            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-            <returns></returns>
-        </member>
         <member name="M:JenkinsWebApi.Jenkins.GetBuildAsync(System.String,System.Int32)">
             <summary>
             Get the Jenkins build data.
@@ -470,43 +440,35 @@
             <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
             <returns>Label info</returns>
         </member>
-        <member name="M:JenkinsWebApi.Jenkins.GetEnvInjectVarListAsync(System.String,System.Int32)">
+        <member name="M:JenkinsWebApi.Jenkins.GetJobAsync(System.String)">
             <summary>
-            Get environment variable list
+            Get the Jenkins job data.
             </summary>
-            <param name="jobName">Name of the Jenkins job</param>
-            <param name="buildNum">Number of the Jenkins build</param>
-            <returns>Get environment variables</returns>
-            <remarks>Plugin &quot;Environment Injector Plugin&quot; must be installed </remarks>
+            <param name="jobName">Name of the job</param>
+            <returns>Jenkins job data</returns>
         </member>
-        <member name="M:JenkinsWebApi.Jenkins.GetEnvInjectVarListAsync(System.String,System.Int32,System.Threading.CancellationToken)">
+        <member name="M:JenkinsWebApi.Jenkins.GetJobAsync(System.String,System.Threading.CancellationToken)">
             <summary>
-            Get environment variable list
+            Get the Jenkins job data.
             </summary>
-            <param name="jobName">Name of the Jenkins job</param>
-            <param name="buildNum">Number of the Jenkins build</param>
+            <param name="jobName">Name of the job</param>
             <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-            <returns>Get environment variables</returns>
-            <remarks>Plugin &quot;Environment Injector Plugin&quot; must be installed </remarks>
+            <returns>Jenkins job data</returns>
         </member>
-        <member name="M:JenkinsWebApi.Jenkins.GetBuildGraph(System.String,System.Int32)">
+        <member name="M:JenkinsWebApi.Jenkins.GetJobAsync``1(System.String)">
             <summary>
-            Get build graph
+            Get the Jenkins job data.
             </summary>
-            <param name="jobName">Name of the Jenkins job</param>
-            <param name="buildNum">Number of the Jenkins build</param>
-            <returns>Get graph information</returns>
-            <remarks>Plugin &quot;buildgraph-view&quot; must be installed </remarks>
+            <param name="jobName">Name of the job</param>
+            <returns>Jenkins job data</returns>
         </member>
-        <member name="M:JenkinsWebApi.Jenkins.GetBuildGraph(System.String,System.Int32,System.Threading.CancellationToken)">
+        <member name="M:JenkinsWebApi.Jenkins.GetJobAsync``1(System.String,System.Threading.CancellationToken)">
             <summary>
-            Get build graph
+            Get the Jenkins job data.
             </summary>
-            <param name="jobName">Name of the Jenkins job</param>
-            <param name="buildNum">Number of the Jenkins build</param>
+            <param name="jobName">Name of the job</param>
             <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-            <returns>Get graph information</returns>
-            <remarks>Plugin &quot;buildgraph-view&quot; must be installed </remarks>
+            <returns>Jenkins job data</returns>
         </member>
         <member name="M:JenkinsWebApi.Jenkins.RunJobAsync(System.String)">
             <summary>
@@ -676,6 +638,147 @@
             <param name="pollingTime">Polling time in milliseconds. The default value is 5 seconds.</param>
             <returns>Finished build</returns>
         </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetEnvInjectVarListAsync(System.String,System.Int32)">
+            <summary>
+            Get environment variable list
+            </summary>
+            <param name="jobName">Name of the Jenkins job</param>
+            <param name="buildNum">Number of the Jenkins build</param>
+            <returns>Get environment variables</returns>
+            <remarks>Plugin &quot;Environment Injector Plugin&quot; must be installed </remarks>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetEnvInjectVarListAsync(System.String,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Get environment variable list
+            </summary>
+            <param name="jobName">Name of the Jenkins job</param>
+            <param name="buildNum">Number of the Jenkins build</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <returns>Get environment variables</returns>
+            <remarks>Plugin &quot;Environment Injector Plugin&quot; must be installed </remarks>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetBuildGraph(System.String,System.Int32)">
+            <summary>
+            Get build graph
+            </summary>
+            <param name="jobName">Name of the Jenkins job</param>
+            <param name="buildNum">Number of the Jenkins build</param>
+            <returns>Get graph information</returns>
+            <remarks>Plugin &quot;buildgraph-view&quot; must be installed </remarks>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetBuildGraph(System.String,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Get build graph
+            </summary>
+            <param name="jobName">Name of the Jenkins job</param>
+            <param name="buildNum">Number of the Jenkins build</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <returns>Get graph information</returns>
+            <remarks>Plugin &quot;buildgraph-view&quot; must be installed </remarks>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetViewAsync(System.String)">
+            <summary>
+            Get the Jenkins view data.
+            </summary>
+            <param name="viewName">Name of the view</param>
+            <returns> Returns view data.</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetViewAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get the Jenkins view data.
+            </summary>
+            <param name="viewName">Name of the view</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <returns> Returns view data.</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetViewAsync``1(System.String)">
+            <summary>
+            Get the Jenkins view data.
+            </summary>
+            <typeparam name="T">Type of view return data.</typeparam> 
+            <param name="viewName">Name of the view.</param>
+            <returns> Returns view data.</returns>
+            <remarks>
+            <list type="table">
+            <listheader>
+            <term>View</term>
+            <term>Class</term>
+            <term>Plugin</term>
+            </listheader>
+            <item>
+            <term>List View</term>
+            <term><see cref="T:JenkinsWebApi.Model.JenkinsModelListView"/></term>
+            <term>-</term>
+            </item>
+            <item>
+            <term>My View</term>
+            <term><see cref="T:JenkinsWebApi.Model.JenkinsModelMyView"/></term>
+            <term>-</term>
+            </item>
+            <item>
+            <term>All View</term>
+            <term><see cref="T:JenkinsWebApi.Model.JenkinsModelAllView"/></term>
+            <term>-</term>
+            </item>
+            <item>
+            <term>Categorized Jobs View</term>
+            <term><see cref="T:JenkinsWebApi.Model.JenkinsJenkinsciCategorizedJobsView"/></term>
+            <term><see href="https://plugins.jenkins.io/categorized-view/">categorized-view</see></term>
+            </item>
+            <item>
+            <term>Dashboard</term>
+            <term><see cref="T:JenkinsWebApi.Model.JenkinsPluginsViewDashboardDashboard"/></term>
+            <term><see href="https://plugins.jenkins.io/dashboard-view/">Dashboard View</see></term>
+            </item>
+            <item>
+            <term>Multijob View</term>
+            <term><see cref="T:JenkinsWebApi.Model.JenkinsTikalMultiJobView"/></term>
+            <term><see href="https://plugins.jenkins.io/jenkins-multijob-plugin/">Multijob</see></term>
+            </item>
+            </list>
+            </remarks>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetViewAsync``1(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get the Jenkins view data.
+            </summary>
+            <typeparam name="T">Type of view return data.</typeparam> 
+            <param name="viewName">Name of the view</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <returns> Returns view data.</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetMyViewAsync(System.String)">
+            <summary>
+            Get the Jenkins my view data.
+            </summary>
+            <param name="viewName">Name of the view</param>
+            <returns> Returns view data.</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetMyViewAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get the Jenkins my view data.
+            </summary>
+            <param name="viewName">Name of the view</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <returns> Returns view data.</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetMyViewAsync``1(System.String)">
+            <summary>
+            Get the Jenkins my view data.
+            </summary>
+            <typeparam name="T">Type of view return data.</typeparam> 
+            <param name="viewName">Name of the view.</param>
+            <returns> Returns view data.</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetMyViewAsync``1(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get the Jenkins my view data.
+            </summary>
+            <typeparam name="T">Type of view return data.</typeparam> 
+            <param name="viewName">Name of the view</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <returns> Returns view data.</returns>
+        </member>
         <member name="T:JenkinsWebApi.JenkinsBuildParameters">
             <summary>
             Class for build parameters.
@@ -714,6 +817,31 @@
             </summary>
             <param name="param">JenkinsBuildParameters instance to cast</param>
         </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsCloudbeesCredentialsStoreAction.Class">
+            <summary>
+            Jenkins Java class name.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsCloudbeesViewCredentialsAction.Class">
+            <summary>
+            Jenkins Java class name.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsJenkinsciBuildGraph.Class">
+            <summary>
+            Jenkins Java class name.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsJenkinsciEnvInjectVarList.Class">
+            <summary>
+            Jenkins Java class name.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsTikalMultiJobBuildSubBuild.Class">
+            <summary>
+            Jenkins Java class name.
+            </summary>
+        </member>
         <member name="T:JenkinsWebApi.Model.JenkinsInstance">
             <summary>
             Jenkins server instance information.
@@ -745,21 +873,6 @@
             </summary>
         </member>
         <member name="P:JenkinsWebApi.Model.JenkinsBranchBranchSource.Class">
-            <summary>
-            Jenkins Java class name.
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.Model.JenkinsComCloudbeesPluginsCredentialsCredentialsStoreAction.Class">
-            <summary>
-            Jenkins Java class name.
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.Model.JenkinsComCloudbeesPluginsCredentialsViewCredentialsAction.Class">
-            <summary>
-            Jenkins Java class name.
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.Model.JenkinsComTikalJenkinsPluginsMultijobMultiJobBuildSubBuild.Class">
             <summary>
             Jenkins Java class name.
             </summary>
@@ -905,16 +1018,6 @@
             </summary>
         </member>
         <member name="P:JenkinsWebApi.Model.JenkinsModelViewUserInfo.Class">
-            <summary>
-            Jenkins Java class name.
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.Model.JenkinsOrgJenkinsciPluginsBuildgraphviewBuildGraph.Class">
-            <summary>
-            Jenkins Java class name.
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.Model.JenkinsOrgJenkinsciPluginsEnvinjectEnvInjectVarList.Class">
             <summary>
             Jenkins Java class name.
             </summary>

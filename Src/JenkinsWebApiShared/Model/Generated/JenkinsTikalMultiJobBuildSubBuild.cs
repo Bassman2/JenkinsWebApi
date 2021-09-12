@@ -5,7 +5,7 @@ using System.Xml.Serialization;
 namespace JenkinsWebApi.Model
 {
     // com.tikal.jenkins.plugins.multijob.MultiJobBuild-SubBuild
-    public partial class JenkinsComTikalJenkinsPluginsMultijobMultiJobBuildSubBuild
+    public partial class JenkinsTikalMultiJobBuildSubBuild
     {
         [XmlElement("abort")]
         public bool IsAbort { get; set; }

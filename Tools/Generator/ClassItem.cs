@@ -10,9 +10,9 @@
 
             this.ItemName = this.ItemType switch
             {
-                ItemTypes.Single => Converter.JenkinsToItemName(name),
-                ItemTypes.Bool => $"Is{Converter.JenkinsToItemName(name)}",
-                ItemTypes.List => $"{Converter.JenkinsToItemName(name)}s",
+                ItemTypes.Single => name.HungarianNotation(),
+                ItemTypes.Bool => $"Is{name.HungarianNotation()}",
+                ItemTypes.List => $"{name.HungarianNotation()}s",
                 _ => throw new System.Exception($"Unknown ItemType {this.ItemType}")
             };
 

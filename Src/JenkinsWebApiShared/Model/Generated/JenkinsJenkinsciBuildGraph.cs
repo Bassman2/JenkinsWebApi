@@ -4,11 +4,12 @@ using System.Xml.Serialization;
 
 namespace JenkinsWebApi.Model
 {
-    // com.cloudbees.plugins.credentials.CredentialsStoreAction
-    public partial class JenkinsComCloudbeesPluginsCredentialsCredentialsStoreAction
+    // org.jenkinsci.plugins.buildgraphview.BuildGraph
+    [XmlRoot("buildGraph")]
+    public partial class JenkinsJenkinsciBuildGraph
     {
-        [XmlElement("domains")]
-        public object Domains { get; set; }
+        [XmlElement("buildGraph")]
+        public string BuildGraph { get; set; }
 
         /// <summary>
         /// Jenkins Java class name.

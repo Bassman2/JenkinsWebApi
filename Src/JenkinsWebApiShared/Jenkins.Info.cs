@@ -34,7 +34,7 @@ namespace JenkinsWebApi
         /// </summary>
         /// <returns>Jenkins server credentials</returns>
         /// <remark>Only in V2 or above</remark>
-        public async Task<JenkinsComCloudbeesPluginsCredentialsViewCredentialsActionRootActionImpl> GetCredentialsAsync()
+        public async Task<JenkinsCloudbeesViewCredentialsActionRootActionImpl> GetCredentialsAsync()
         {
             return await GetCredentialsAsync(CancellationToken.None);
         }
@@ -45,9 +45,9 @@ namespace JenkinsWebApi
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Jenkins server credentials</returns>
         /// <remark>Only in V2 or above</remark>
-        public async Task<JenkinsComCloudbeesPluginsCredentialsViewCredentialsActionRootActionImpl> GetCredentialsAsync(CancellationToken cancellationToken)
+        public async Task<JenkinsCloudbeesViewCredentialsActionRootActionImpl> GetCredentialsAsync(CancellationToken cancellationToken)
         {
-            JenkinsComCloudbeesPluginsCredentialsViewCredentialsActionRootActionImpl credentials = await GetAsync<JenkinsComCloudbeesPluginsCredentialsViewCredentialsActionRootActionImpl>("credentials/api/xml", cancellationToken);
+            JenkinsCloudbeesViewCredentialsActionRootActionImpl credentials = await GetAsync<JenkinsCloudbeesViewCredentialsActionRootActionImpl>("credentials/api/xml", cancellationToken);
             return credentials;
         }
 
@@ -135,61 +135,9 @@ namespace JenkinsWebApi
             return user;
         }
 
-        /// <summary>
-        /// Get the Jenkins job data.
-        /// </summary>
-        /// <param name="jobName">Name of the job</param>
-        /// <returns>Jenkins job data</returns>
-        public async Task<JenkinsModelAbstractItem> GetJobAsync(string jobName)
-        {
-            return await GetJobAsync(jobName, CancellationToken.None);
-        }
+        
 
-        /// <summary>
-        /// Get the Jenkins job data.
-        /// </summary>
-        /// <param name="jobName">Name of the job</param>
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <returns>Jenkins job data</returns>
-        public async Task<JenkinsModelAbstractItem> GetJobAsync(string jobName, CancellationToken cancellationToken)
-        {
-            if (string.IsNullOrEmpty(jobName))
-            {
-                throw new ArgumentNullException(nameof(jobName));
-            }
-
-            string str = await GetStringAsync($"job/{jobName}/api/xml", cancellationToken);
-            JenkinsModelAbstractItem job = Deserialize<JenkinsModelAbstractItem>(str, jobTypes);
-            return job;
-        }
-
-        /// <summary>
-        /// Get the Jenkins view data.
-        /// </summary>
-        /// <param name="viewName">Name of the view</param>
-        /// <returns></returns>
-        public async Task<JenkinsModelView> GetViewAsync(string viewName)
-        {
-            return await GetViewAsync(viewName, CancellationToken.None);
-        }
-
-        /// <summary>
-        /// Get the Jenkins view data.
-        /// </summary>
-        /// <param name="viewName">Name of the view</param>
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <returns></returns>
-        public async Task<JenkinsModelView> GetViewAsync(string viewName, CancellationToken cancellationToken)
-        {
-            if (string.IsNullOrEmpty(viewName))
-            {
-                throw new ArgumentNullException(nameof(viewName));
-            }
-
-            string str = await GetStringAsync($"view/{viewName}/api/xml", cancellationToken);
-            JenkinsModelView view = Deserialize<JenkinsModelView>(str, viewTypes);
-            return view;
-        }
+        
 
         /// <summary>
         /// Get the Jenkins build data.
@@ -451,56 +399,6 @@ namespace JenkinsWebApi
             return label;
         }
 
-        /// <summary>
-        /// Get environment variable list
-        /// </summary>
-        /// <param name="jobName">Name of the Jenkins job</param>
-        /// <param name="buildNum">Number of the Jenkins build</param>
-        /// <returns>Get environment variables</returns>
-        /// <remarks>Plugin &quot;Environment Injector Plugin&quot; must be installed </remarks>
-        public async Task<JenkinsOrgJenkinsciPluginsEnvinjectEnvInjectVarList> GetEnvInjectVarListAsync(string jobName, int buildNum)
-        {
-            return await GetEnvInjectVarListAsync(jobName, buildNum, CancellationToken.None);
-        }
-
-        /// <summary>
-        /// Get environment variable list
-        /// </summary>
-        /// <param name="jobName">Name of the Jenkins job</param>
-        /// <param name="buildNum">Number of the Jenkins build</param>
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <returns>Get environment variables</returns>
-        /// <remarks>Plugin &quot;Environment Injector Plugin&quot; must be installed </remarks>
-        public async Task<JenkinsOrgJenkinsciPluginsEnvinjectEnvInjectVarList> GetEnvInjectVarListAsync(string jobName, int buildNum, CancellationToken cancellationToken)
-        {
-            JenkinsOrgJenkinsciPluginsEnvinjectEnvInjectVarList label = await GetAsync<JenkinsOrgJenkinsciPluginsEnvinjectEnvInjectVarList>($"job/{jobName}/{buildNum}/injectedEnvVars/api/xml", cancellationToken);
-            return label;
-        }
-
-        /// <summary>
-        /// Get build graph
-        /// </summary>
-        /// <param name="jobName">Name of the Jenkins job</param>
-        /// <param name="buildNum">Number of the Jenkins build</param>
-        /// <returns>Get graph information</returns>
-        /// <remarks>Plugin &quot;buildgraph-view&quot; must be installed </remarks>
-        public async Task<JenkinsOrgJenkinsciPluginsBuildgraphviewBuildGraph> GetBuildGraph(string jobName, int buildNum)
-        {
-            return await GetBuildGraph(jobName, buildNum, CancellationToken.None);
-        }
-
-        /// <summary>
-        /// Get build graph
-        /// </summary>
-        /// <param name="jobName">Name of the Jenkins job</param>
-        /// <param name="buildNum">Number of the Jenkins build</param>
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <returns>Get graph information</returns>
-        /// <remarks>Plugin &quot;buildgraph-view&quot; must be installed </remarks>
-        public async Task<JenkinsOrgJenkinsciPluginsBuildgraphviewBuildGraph> GetBuildGraph(string jobName, int buildNum, CancellationToken cancellationToken)
-        {
-            JenkinsOrgJenkinsciPluginsBuildgraphviewBuildGraph label = await GetAsync<JenkinsOrgJenkinsciPluginsBuildgraphviewBuildGraph>($"job/{jobName}/{buildNum}/BuildGraph/api/xml", cancellationToken);
-            return label;
-        }
+        
     }
 }

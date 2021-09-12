@@ -6,7 +6,7 @@ namespace JenkinsWebApi.Model
 {
     // com.cloudbees.plugins.credentials.SystemCredentialsProvider-UserFacingAction
     [XmlRoot("userFacingAction")]
-    public partial class JenkinsComCloudbeesPluginsCredentialsSystemCredentialsProviderUserFacingAction : JenkinsComCloudbeesPluginsCredentialsCredentialsStoreAction
+    public partial class JenkinsCloudbeesSystemCredentialsProviderUserFacingAction : JenkinsCloudbeesCredentialsStoreAction
     {
         // empty
     }
