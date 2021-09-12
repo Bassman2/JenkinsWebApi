@@ -16,11 +16,20 @@ jobs:
     - name: Checkout repo
       uses: actions/checkout@v2
 
+#    - name: Add msbuild to PATH
+#      uses: microsoft/setup-msbuild@v1
+      
     - name: Add msbuild to PATH
-      uses: microsoft/setup-msbuild@v1
+      uses: microsoft/setup-msbuild@v1.0.3
+      with:
+        vs-version: '[17.0,17.0)'
+        vs-prerelease: true
 
     - name: Setup NuGet
       uses: nuget/setup-nuget@v1
+      
+    - name: Show VS Version
+      run: msbuild -version 
 
     - name: "Download and install sandcastle"
       run: |
