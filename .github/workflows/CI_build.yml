@@ -22,7 +22,7 @@ jobs:
     - name: Add msbuild to PATH
       uses: microsoft/setup-msbuild@v1.0.3
       with:
-        vs-version: '[17.0,17.0)'
+        vs-version: '17.0'
         vs-prerelease: true
 
     - name: Setup NuGet
