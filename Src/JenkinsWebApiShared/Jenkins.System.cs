@@ -8,7 +8,7 @@ namespace JenkinsWebApi
         /// <summary>
         /// Enter into the "quiet down" mode.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The task object representing the asynchronous operation.</returns>
         public async Task QuiteDownAsync()
         {
             await QuiteDownAsync(CancellationToken.None);
@@ -18,7 +18,7 @@ namespace JenkinsWebApi
         /// Enter into the "quiet down" mode.
         /// </summary>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <returns></returns>
+        /// <returns>The task object representing the asynchronous operation.</returns>
         public async Task QuiteDownAsync(CancellationToken cancellationToken)
         {
             await PostRunAsync("quietDown", null, cancellationToken);
@@ -27,7 +27,7 @@ namespace JenkinsWebApi
         /// <summary>
         /// Cancel the "quiet down" mode.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The task object representing the asynchronous operation.</returns>
         public async Task CancelQuietDown()
         {
             await CancelQuietDown(CancellationToken.None);
@@ -37,7 +37,7 @@ namespace JenkinsWebApi
         /// Cancel the "quiet down" mode.
         /// </summary>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <returns></returns>
+        /// <returns>The task object representing the asynchronous operation.</returns>
         public async Task CancelQuietDown(CancellationToken cancellationToken)
         {
             await PostRunAsync("cancelQuietDown", null, cancellationToken);
@@ -46,7 +46,7 @@ namespace JenkinsWebApi
         /// <summary>
         /// Restart the Jenkins Server
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The task object representing the asynchronous operation.</returns>
         public async Task RestartAsync()
         {
             await RestartAsync(CancellationToken.None);
@@ -56,7 +56,7 @@ namespace JenkinsWebApi
         /// Restart the Jenkins Server
         /// </summary>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <returns></returns>
+        /// <returns>The task object representing the asynchronous operation.</returns>
         public async Task RestartAsync(CancellationToken cancellationToken)
         {
             await PostRunAsync("restart", null, cancellationToken);
@@ -65,7 +65,7 @@ namespace JenkinsWebApi
         /// <summary>
         /// Save restart the Jenkins Server if no job is running
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The task object representing the asynchronous operation.</returns>
         public async Task SaveRestartAsync()
         {
             await SaveRestartAsync(CancellationToken.None);
@@ -75,7 +75,7 @@ namespace JenkinsWebApi
         /// Save restart the Jenkins Server if no job is running
         /// </summary>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <returns></returns>
+        /// <returns>The task object representing the asynchronous operation.</returns>
         public async Task SaveRestartAsync(CancellationToken cancellationToken)
         {
             await PostRunAsync("safeRestart", null, cancellationToken);
@@ -85,7 +85,7 @@ namespace JenkinsWebApi
         /// Launch slave agent
         /// </summary>
         /// <param name="hostName">Name of the slave host</param>
-        /// <returns></returns>
+        /// <returns>The task object representing the asynchronous operation.</returns>
         public async Task LaunchSlaveAgent(string hostName)
         {
             await LaunchSlaveAgent(hostName, CancellationToken.None);
@@ -96,7 +96,7 @@ namespace JenkinsWebApi
         /// </summary>
         /// <param name="hostName">Name of the slave host</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <returns></returns>
+        /// <returns>The task object representing the asynchronous operation.</returns>
         public async Task LaunchSlaveAgent(string hostName, CancellationToken cancellationToken)
         {
             await GetStringAsync($"computer/{hostName}/launchSlaveAgent", cancellationToken);

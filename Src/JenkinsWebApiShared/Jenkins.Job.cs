@@ -41,6 +41,7 @@ namespace JenkinsWebApi
         /// <summary>
         /// Get the Jenkins job data.
         /// </summary>
+        /// <typeparam name="T">Job class type</typeparam>
         /// <param name="jobName">Name of the job</param>
         /// <returns>Jenkins job data</returns>
         public async Task<T> GetJobAsync<T>(string jobName)
@@ -51,6 +52,7 @@ namespace JenkinsWebApi
         /// <summary>
         /// Get the Jenkins job data.
         /// </summary>
+        /// <typeparam name="T">Job class type</typeparam>
         /// <param name="jobName">Name of the job</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Jenkins job data</returns>
@@ -141,6 +143,7 @@ namespace JenkinsWebApi
         /// </summary>
         /// <param name="jobName">Name of the Jenkins job</param>
         /// <param name="buildNum">Number of the Jenkins build</param>
+        /// <returns>The task object representing the asynchronous operation.</returns>
         public async Task StopJobAsync(string jobName, int buildNum)
         {
             await StopJobAsync(jobName, buildNum, CancellationToken.None);
@@ -152,6 +155,7 @@ namespace JenkinsWebApi
         /// <param name="jobName">Name of the Jenkins job</param>
         /// <param name="buildNum">Number of the Jenkins build</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>The task object representing the asynchronous operation.</returns>
         public async Task StopJobAsync(string jobName, int buildNum, CancellationToken cancellationToken)
         {
             if (string.IsNullOrEmpty(jobName))
@@ -168,7 +172,7 @@ namespace JenkinsWebApi
         /// <param name="jobName">Name of the job</param>
         /// <param name="stream">XML data of the new job.</param>
         /// <param name="fileName">File name of the data</param>
-        /// <returns>Task handle</returns>        
+        /// <returns>The task object representing the asynchronous operation.</returns>
         public async Task CreateJobAsync(string jobName, Stream stream, string fileName)
         {
             await CreateJobAsync(jobName, stream, fileName, CancellationToken.None);
@@ -181,7 +185,7 @@ namespace JenkinsWebApi
         /// <param name="stream">XML data of the new job.</param>
         /// <param name="fileName">File name of the data</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <returns>Task handle</returns>        
+        /// <returns>The task object representing the asynchronous operation.</returns>
         public async Task CreateJobAsync(string jobName, Stream stream, string fileName, CancellationToken cancellationToken)
         {
             MultipartFormDataContent content = new MultipartFormDataContent
@@ -197,7 +201,7 @@ namespace JenkinsWebApi
         /// </summary>
         /// <param name="fromJobName">Existing job name.</param>
         /// <param name="newJobName">Name of the new job.</param>
-        /// <returns>Task handle</returns>
+        /// <returns>The task object representing the asynchronous operation.</returns>
         public async Task CloneJobAsync(string fromJobName, string newJobName)
         {
             await CloneJobAsync(fromJobName, newJobName, CancellationToken.None);
@@ -209,7 +213,7 @@ namespace JenkinsWebApi
         /// <param name="fromJobName">Existing job name.</param>
         /// <param name="newJobName">Name of the new job.</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <returns>Task handle</returns>
+        /// <returns>The task object representing the asynchronous operation.</returns>
         public async Task CloneJobAsync(string fromJobName, string newJobName, CancellationToken cancellationToken)
         {
             List<KeyValuePair<string, string>> param = new List<KeyValuePair<string, string>>

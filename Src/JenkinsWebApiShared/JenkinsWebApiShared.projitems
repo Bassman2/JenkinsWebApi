@@ -38,7 +38,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsTikalMultiJobProject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsTikalMultiJobView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\JenkinsInstance.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)JenkinsParameterType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsBranchBranchSource.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsBranchMultiBranchProject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsBranchOrganizationFolder.cs" />

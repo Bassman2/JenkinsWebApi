@@ -444,6 +444,7 @@
             <summary>
             Get the Jenkins job data.
             </summary>
+            <typeparam name="T">Job class type</typeparam>
             <param name="jobName">Name of the job</param>
             <returns>Jenkins job data</returns>
         </member>
@@ -451,6 +452,7 @@
             <summary>
             Get the Jenkins job data.
             </summary>
+            <typeparam name="T">Job class type</typeparam>
             <param name="jobName">Name of the job</param>
             <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
             <returns>Jenkins job data</returns>
@@ -493,6 +495,7 @@
             </summary>
             <param name="jobName">Name of the Jenkins job</param>
             <param name="buildNum">Number of the Jenkins build</param>
+            <returns>The task object representing the asynchronous operation.</returns>
         </member>
         <member name="M:JenkinsWebApi.Jenkins.StopJobAsync(System.String,System.Int32,System.Threading.CancellationToken)">
             <summary>
@@ -501,6 +504,7 @@
             <param name="jobName">Name of the Jenkins job</param>
             <param name="buildNum">Number of the Jenkins build</param>
             <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <returns>The task object representing the asynchronous operation.</returns>
         </member>
         <member name="M:JenkinsWebApi.Jenkins.CreateJobAsync(System.String,System.IO.Stream,System.String)">
             <summary>
@@ -509,7 +513,7 @@
             <param name="jobName">Name of the job</param>
             <param name="stream">XML data of the new job.</param>
             <param name="fileName">File name of the data</param>
-            <returns>Task handle</returns>        
+            <returns>The task object representing the asynchronous operation.</returns>
         </member>
         <member name="M:JenkinsWebApi.Jenkins.CreateJobAsync(System.String,System.IO.Stream,System.String,System.Threading.CancellationToken)">
             <summary>
@@ -519,7 +523,7 @@
             <param name="stream">XML data of the new job.</param>
             <param name="fileName">File name of the data</param>
             <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-            <returns>Task handle</returns>        
+            <returns>The task object representing the asynchronous operation.</returns>
         </member>
         <member name="M:JenkinsWebApi.Jenkins.CloneJobAsync(System.String,System.String)">
             <summary>
@@ -527,7 +531,7 @@
             </summary>
             <param name="fromJobName">Existing job name.</param>
             <param name="newJobName">Name of the new job.</param>
-            <returns>Task handle</returns>
+            <returns>The task object representing the asynchronous operation.</returns>
         </member>
         <member name="M:JenkinsWebApi.Jenkins.CloneJobAsync(System.String,System.String,System.Threading.CancellationToken)">
             <summary>
@@ -536,66 +540,66 @@
             <param name="fromJobName">Existing job name.</param>
             <param name="newJobName">Name of the new job.</param>
             <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-            <returns>Task handle</returns>
+            <returns>The task object representing the asynchronous operation.</returns>
         </member>
         <member name="M:JenkinsWebApi.Jenkins.QuiteDownAsync">
             <summary>
             Enter into the "quiet down" mode.
             </summary>
-            <returns></returns>
+            <returns>The task object representing the asynchronous operation.</returns>
         </member>
         <member name="M:JenkinsWebApi.Jenkins.QuiteDownAsync(System.Threading.CancellationToken)">
             <summary>
             Enter into the "quiet down" mode.
             </summary>
             <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-            <returns></returns>
+            <returns>The task object representing the asynchronous operation.</returns>
         </member>
         <member name="M:JenkinsWebApi.Jenkins.CancelQuietDown">
             <summary>
             Cancel the "quiet down" mode.
             </summary>
-            <returns></returns>
+            <returns>The task object representing the asynchronous operation.</returns>
         </member>
         <member name="M:JenkinsWebApi.Jenkins.CancelQuietDown(System.Threading.CancellationToken)">
             <summary>
             Cancel the "quiet down" mode.
             </summary>
             <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-            <returns></returns>
+            <returns>The task object representing the asynchronous operation.</returns>
         </member>
         <member name="M:JenkinsWebApi.Jenkins.RestartAsync">
             <summary>
             Restart the Jenkins Server
             </summary>
-            <returns></returns>
+            <returns>The task object representing the asynchronous operation.</returns>
         </member>
         <member name="M:JenkinsWebApi.Jenkins.RestartAsync(System.Threading.CancellationToken)">
             <summary>
             Restart the Jenkins Server
             </summary>
             <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-            <returns></returns>
+            <returns>The task object representing the asynchronous operation.</returns>
         </member>
         <member name="M:JenkinsWebApi.Jenkins.SaveRestartAsync">
             <summary>
             Save restart the Jenkins Server if no job is running
             </summary>
-            <returns></returns>
+            <returns>The task object representing the asynchronous operation.</returns>
         </member>
         <member name="M:JenkinsWebApi.Jenkins.SaveRestartAsync(System.Threading.CancellationToken)">
             <summary>
             Save restart the Jenkins Server if no job is running
             </summary>
             <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-            <returns></returns>
+            <returns>The task object representing the asynchronous operation.</returns>
         </member>
         <member name="M:JenkinsWebApi.Jenkins.LaunchSlaveAgent(System.String)">
             <summary>
             Launch slave agent
             </summary>
             <param name="hostName">Name of the slave host</param>
-            <returns></returns>
+            <returns>The task object representing the asynchronous operation.</returns>
         </member>
         <member name="M:JenkinsWebApi.Jenkins.LaunchSlaveAgent(System.String,System.Threading.CancellationToken)">
             <summary>
@@ -603,7 +607,7 @@
             </summary>
             <param name="hostName">Name of the slave host</param>
             <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-            <returns></returns>
+            <returns>The task object representing the asynchronous operation.</returns>
         </member>
         <member name="M:JenkinsWebApi.Jenkins.RunJobComplete(System.String,JenkinsWebApi.JenkinsBuildParameters,System.Int32)">
             <summary>
@@ -682,7 +686,7 @@
             </summary>
             <typeparam name="T">Type of view return data.</typeparam> 
             <param name="viewName">Name of the view.</param>
-            <returns> Returns view data.</returns>
+            <returns>Returns view data.</returns>
             <remarks>
             <list type="table">
             <listheader>
@@ -730,14 +734,14 @@
             <typeparam name="T">Type of view return data.</typeparam> 
             <param name="viewName">Name of the view</param>
             <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-            <returns> Returns view data.</returns>
+            <returns>Returns view data.</returns>
         </member>
         <member name="M:JenkinsWebApi.Jenkins.GetMyViewAsync(System.String)">
             <summary>
             Get the Jenkins my view data.
             </summary>
             <param name="viewName">Name of the view</param>
-            <returns> Returns view data.</returns>
+            <returns>Returns view data.</returns>
         </member>
         <member name="M:JenkinsWebApi.Jenkins.GetMyViewAsync(System.String,System.Threading.CancellationToken)">
             <summary>
@@ -745,7 +749,7 @@
             </summary>
             <param name="viewName">Name of the view</param>
             <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-            <returns> Returns view data.</returns>
+            <returns>Returns view data.</returns>
         </member>
         <member name="M:JenkinsWebApi.Jenkins.GetMyViewAsync``1(System.String)">
             <summary>
@@ -753,7 +757,7 @@
             </summary>
             <typeparam name="T">Type of view return data.</typeparam> 
             <param name="viewName">Name of the view.</param>
-            <returns> Returns view data.</returns>
+            <returns>Returns view data.</returns>
         </member>
         <member name="M:JenkinsWebApi.Jenkins.GetMyViewAsync``1(System.String,System.Threading.CancellationToken)">
             <summary>
@@ -762,7 +766,7 @@
             <typeparam name="T">Type of view return data.</typeparam> 
             <param name="viewName">Name of the view</param>
             <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-            <returns> Returns view data.</returns>
+            <returns>Returns view data.</returns>
         </member>
         <member name="T:JenkinsWebApi.JenkinsBuildParameters">
             <summary>
@@ -801,6 +805,27 @@
             Cast JenkinsBuildParameters to HttpContent.
             </summary>
             <param name="param">JenkinsBuildParameters instance to cast</param>
+            <returns>Cast to HttpContent.</returns>
+        </member>
+        <member name="T:JenkinsWebApi.JenkinsBuildParameters.JenkinsParameterType">
+            <summary>
+            Type of the Jenkins start job parameter
+            </summary>
+        </member>
+        <member name="F:JenkinsWebApi.JenkinsBuildParameters.JenkinsParameterType.String">
+            <summary>
+            The parameter is a string.
+            </summary>
+        </member>
+        <member name="F:JenkinsWebApi.JenkinsBuildParameters.JenkinsParameterType.Boolean">
+            <summary>
+            The parameter is a boolean.
+            </summary>
+        </member>
+        <member name="F:JenkinsWebApi.JenkinsBuildParameters.JenkinsParameterType.Stream">
+            <summary>
+            The parameter is a file stream.
+            </summary>
         </member>
         <member name="P:JenkinsWebApi.Model.JenkinsCloudbeesCredentialsStoreAction.Class">
             <summary>
@@ -1100,26 +1125,6 @@
         <member name="P:JenkinsWebApi.Model.JenkinsExecutable.Class">
             <summary>
             Jenkins Java class name.
-            </summary>
-        </member>
-        <member name="T:JenkinsWebApi.JenkinsParameterType">
-            <summary>
-            Type of the Jenkins start job parameter
-            </summary>
-        </member>
-        <member name="F:JenkinsWebApi.JenkinsParameterType.String">
-            <summary>
-            The parameter is a string.
-            </summary>
-        </member>
-        <member name="F:JenkinsWebApi.JenkinsParameterType.Boolean">
-            <summary>
-            The parameter is a boolean.
-            </summary>
-        </member>
-        <member name="F:JenkinsWebApi.JenkinsParameterType.Stream">
-            <summary>
-            The parameter is a file stream.
             </summary>
         </member>
     </members>

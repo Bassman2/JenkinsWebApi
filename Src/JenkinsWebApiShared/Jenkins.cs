@@ -23,7 +23,6 @@ namespace JenkinsWebApi
     /// </summary>
     public sealed partial class Jenkins : IDisposable
     {
-        //private readonly Uri host;
         private HttpClientHandler handler;
         private HttpClient client;
         private const int udpPort = 33848;

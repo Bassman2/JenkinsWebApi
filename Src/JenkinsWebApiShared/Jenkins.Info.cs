@@ -134,10 +134,6 @@ namespace JenkinsWebApi
             return user;
         }
 
-        
-
-        
-
         /// <summary>
         /// Get the Jenkins build data.
         /// </summary>

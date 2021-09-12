@@ -40,7 +40,7 @@ namespace JenkinsWebApi
         /// </summary>
         /// <typeparam name="T">Type of view return data.</typeparam> 
         /// <param name="viewName">Name of the view.</param>
-        /// <returns> Returns view data.</returns>
+        /// <returns>Returns view data.</returns>
         /// <remarks>
         /// <list type="table">
         /// <listheader>
@@ -91,7 +91,7 @@ namespace JenkinsWebApi
         /// <typeparam name="T">Type of view return data.</typeparam> 
         /// <param name="viewName">Name of the view</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <returns> Returns view data.</returns>
+        /// <returns>Returns view data.</returns>
         public async Task<T> GetViewAsync<T>(string viewName, CancellationToken cancellationToken)
         {
             if (string.IsNullOrEmpty(viewName))
@@ -108,7 +108,7 @@ namespace JenkinsWebApi
         /// Get the Jenkins my view data.
         /// </summary>
         /// <param name="viewName">Name of the view</param>
-        /// <returns> Returns view data.</returns>
+        /// <returns>Returns view data.</returns>
         public async Task<JenkinsModelView> GetMyViewAsync(string viewName)
         {
             return await GetMyViewAsync(viewName, CancellationToken.None);
@@ -119,7 +119,7 @@ namespace JenkinsWebApi
         /// </summary>
         /// <param name="viewName">Name of the view</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <returns> Returns view data.</returns>
+        /// <returns>Returns view data.</returns>
         public async Task<JenkinsModelView> GetMyViewAsync(string viewName, CancellationToken cancellationToken)
         {
             if (string.IsNullOrEmpty(viewName))
@@ -137,7 +137,7 @@ namespace JenkinsWebApi
         /// </summary>
         /// <typeparam name="T">Type of view return data.</typeparam> 
         /// <param name="viewName">Name of the view.</param>
-        /// <returns> Returns view data.</returns>
+        /// <returns>Returns view data.</returns>
         public async Task<T> GetMyViewAsync<T>(string viewName)
         {
             return await GetMyViewAsync<T>(viewName, CancellationToken.None);
@@ -149,7 +149,7 @@ namespace JenkinsWebApi
         /// <typeparam name="T">Type of view return data.</typeparam> 
         /// <param name="viewName">Name of the view</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <returns> Returns view data.</returns>
+        /// <returns>Returns view data.</returns>
         public async Task<T> GetMyViewAsync<T>(string viewName, CancellationToken cancellationToken)
         {
             if (string.IsNullOrEmpty(viewName))
