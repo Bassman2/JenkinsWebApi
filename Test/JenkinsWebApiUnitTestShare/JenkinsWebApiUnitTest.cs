@@ -98,35 +98,35 @@ namespace JenkinsTest
         [TestMethod]
         public void ServerTest()
         {
+            // Arrange
             JenkinsModelHudson server = null;
 
+            // Act
             using (Jenkins jenkins = new Jenkins(this.host, this.login, this.password))
             {
                 server = jenkins.GetServerAsync().Result;
             }
 
-            Assert.IsNotNull(server);
-            Assert.IsNotNull(server.AssignedLabels, "assignedLabels");
+            // Assert
+            Assert.IsNotNull(server, nameof(server));
+            Assert.AreEqual("hudson.model.Hudson", server.Class, nameof(server.Class));
+            
+            Assert.AreEqual("Hello World", server.Description, nameof(server.Description));
+            Assert.AreEqual(-1, server.SlaveAgentPort, nameof(server.SlaveAgentPort));
+            Assert.AreEqual($"{this.host}", server.Url, nameof(server.Url));
+            Assert.AreEqual(true, server.UseCrumbs, nameof(server.UseCrumbs));
+            Assert.AreEqual(true, server.UseSecurity, nameof(server.UseSecurity));
 
-            //Assert.AreEqual(this.serverMode, server.Mode, "mode");
-            Assert.AreEqual("the master Jenkins node", server.NodeDescription, "nodeDescription");
-            Assert.AreEqual("", server.NodeName, "nodeName");
-            Assert.AreEqual(4, server.NumExecutors, "numExecutors");
-            Assert.AreEqual(null, server.Description, "description");
+            Assert.AreEqual(JenkinsModelNodeMode.Normal, server.Mode, nameof(server.Mode));
+            Assert.AreEqual("the master Jenkins node", server.NodeDescription, nameof(server.NodeDescription));
+            Assert.AreEqual("", server.NodeName, nameof(server.NodeName));
+            Assert.AreEqual(2, server.NumExecutors, nameof(server.NumExecutors));
 
-            Assert.IsNotNull(server.Jobs, "jobs");
-
-            Assert.IsNotNull(server.OverallLoad, "overallLoad");
-
-            Assert.IsNotNull(server.PrimaryView, "primaryView");
-
-            Assert.AreEqual(-1, server.SlaveAgentPort, "slaveAgentPort");
-            Assert.AreEqual(true, server.UseCrumbs, "useCrumbs");
-            Assert.AreEqual(true, server.UseSecurity, "useSecurity");
-
-            Assert.IsNotNull(server.Views, "views");
-
-            Assert.AreEqual("", server.NodeName, "nodeName");
+            Assert.IsNotNull(server.AssignedLabels, nameof(server.AssignedLabels));
+            Assert.IsNotNull(server.Jobs, nameof(server.Jobs));
+            Assert.IsNotNull(server.OverallLoad, nameof(server.OverallLoad));
+            Assert.IsNotNull(server.PrimaryView, nameof(server.PrimaryView));
+            Assert.IsNotNull(server.Views, nameof(server.Views));
         }
 
 
@@ -181,80 +181,97 @@ namespace JenkinsTest
         [TestMethod]
         public void PeopleTest()
         {
+            // Arrange
             JenkinsModelViewPeople people = null;
 
+            // Act
             using (Jenkins jenkins = new Jenkins(this.host, this.login, this.password))
             {
                 people = jenkins.GetPeopleAsync().Result;
             }
 
-            Assert.IsNotNull(people, "people");
-            Assert.AreEqual("hudson.model.View$AsynchPeople$People", people.Class, "people.Class");
+            // Assert
+            Assert.IsNotNull(people, nameof(people));
+            Assert.AreEqual("hudson.model.View$People", people.Class, nameof(people.Class));
 
-            Assert.IsNotNull(people.Users, "people.Users");
+            Assert.IsNotNull(people.Users, nameof(people.Users));
 
-            var user = people.Users.Single(u => u.User.FullName == "User");
-            Assert.IsNotNull(user, "user");
-            Assert.AreEqual($"{this.host}/user/xx", user.User.AbsoluteUrl, "user.User.AbsoluteUrl");
-            Assert.AreEqual("xx", user.User.FullName, "user.User.FullName");
+            var user = people.Users.Single(u => u.User.FullName == "Tester");
+            Assert.IsNotNull(user, nameof(user));
+            Assert.AreEqual($"{this.host}user/tester", user.User.AbsoluteUrl, nameof(user.User.AbsoluteUrl));
+            Assert.AreEqual("Tester", user.User.FullName, nameof(user.User.FullName));
         }
 
         [TestMethod]
         public void UserTest()
         {
+            // Arrange
             JenkinsModelUser user = null;
 
+            // Act
             using (Jenkins jenkins = new Jenkins(this.host, this.login, this.password))
             {
-                user = jenkins.GetUserAsync("User").Result;
+                user = jenkins.GetUserAsync("Tester").Result;
             }
 
-            Assert.IsNotNull(user, "user");
-            Assert.AreEqual($"{this.host}/user/xx", user.AbsoluteUrl, "user.AbsoluteUrl");
-            Assert.AreEqual(null, user.Description, "user.Description");
-            Assert.AreEqual("User", user.FullName, "user.FullName");
-            Assert.AreEqual("User", user.Id, "user.Id");
-            
-            
+            // Assert
+            Assert.IsNotNull(user, nameof(user));
+
+            Assert.AreEqual("hudson.model.User", user.Class, nameof(user.Class));
+            Assert.AreEqual($"{this.host}user/tester", user.AbsoluteUrl, nameof(user.AbsoluteUrl));
+
+            Assert.AreEqual("tester", user.Id, nameof(user.Id));
+            Assert.AreEqual("Tester", user.FullName, nameof(user.FullName));
+            Assert.AreEqual("Test User", user.Description, nameof(user.Description));
         }
 
         [TestMethod]
         public void CurrentUserTest()
         {
+            // Arrange
             JenkinsModelUser user = null;
 
+            // Act
             using (Jenkins jenkins = new Jenkins(this.host, this.login, this.password))
             {
                 user = jenkins.GetCurrentUserAsync().Result;
             }
             
-            Assert.IsNotNull(user, "user");
-            Assert.AreEqual($"{this.host}/user/xx", user.AbsoluteUrl, "user.AbsoluteUrl");
-            Assert.AreEqual(null, user.Description, "user.Description");
-            Assert.AreEqual("xxx", user.FullName, "user.FullName");
-            Assert.AreEqual("xx", user.Id, "user.Id");
+            // Assert
+            Assert.IsNotNull(user, nameof(user));
 
-            
+            Assert.AreEqual("hudson.model.User", user.Class, nameof(user.Class));
+            Assert.AreEqual($"{this.host}user/tester", user.AbsoluteUrl, nameof(user.AbsoluteUrl));
+
+            Assert.AreEqual("tester", user.Id, nameof(user.Id));
+            Assert.AreEqual("Tester", user.FullName, nameof(user.FullName));
+            Assert.AreEqual("Test User", user.Description, nameof(user.Description));            
         }
 
         [TestMethod]
         public void ViewTest()
         {
-            string viewName = "View 2";
+            // Arrange            
             JenkinsModelView view = null;
 
+            // Act
             using (Jenkins jenkins = new Jenkins(this.host, this.login, this.password))
             {
-                view = jenkins.GetViewAsync(viewName).Result;
+                view = jenkins.GetViewAsync("ListView").Result;
             }
 
-            Assert.IsNotNull(view);
-            Assert.AreEqual(viewName, view.Name, "Name");
+            // Assert
+            Assert.IsNotNull(view, nameof(view));
+            Assert.AreEqual("hudson.model.ListView", view.Class, nameof(view.Class));
+            Assert.AreEqual("ListView", view.Name, nameof(view.Name));
+            Assert.AreEqual("ListView Description", view.Description, nameof(view.Description));
+            Assert.AreEqual($"{this.host}view/ListView/", view.Url, nameof(view.Url));
         }
 
         [TestMethod]
         public void JobTest()
         {
+            // Arrange
             string jobName = "Freestyle Test Parameter";
             
             JenkinsModelFreeStyleProject freeStyleJob = null;
@@ -265,6 +282,7 @@ namespace JenkinsTest
             JenkinsCloudbeesFolder folderJob = null;
             JenkinsBranchOrganizationFolder organizationFolderJob = null;
 
+            // Act
             using (Jenkins jenkins = new Jenkins(this.host, this.login, this.password))
             {
                 freeStyleJob = jenkins.GetJobAsync("Freestyle Test Pure").Result as JenkinsModelFreeStyleProject;
@@ -276,6 +294,7 @@ namespace JenkinsTest
                 organizationFolderJob = jenkins.GetJobAsync("GitHub").Result as JenkinsBranchOrganizationFolder;
             }
 
+            // Assert
             Assert.IsNotNull(freeStyleJob);
             Assert.IsNotNull(externalJob);
             Assert.IsNotNull(matrixJob);
@@ -306,6 +325,7 @@ namespace JenkinsTest
         [TestMethod]
         public void BuildTest()
         {
+            // Arrange
             JenkinsModelFreeStyleBuild freeStyleBuild = null;
             //JenkinsBuildExternal externalBuild = null;
             JenkinsMatrixMatrixBuild matrixBuild = null;
@@ -314,6 +334,7 @@ namespace JenkinsTest
             //JenkinsBuildFolder folderBuild = null;
             //JenkinsBuildOrganizationFolder organizationFolderBuild = null;
 
+            // Act
             using (Jenkins jenkins = new Jenkins(this.host, this.login, this.password))
             {
                 freeStyleBuild = jenkins.GetLastBuildAsync("Freestyle Test Pure").Result as JenkinsModelFreeStyleBuild;
@@ -325,6 +346,7 @@ namespace JenkinsTest
                 //organizationFolderBuild = jenkins.GetBuildAsync("GitHub", 1).Result as JenkinsBuildOrganizationFolder;
             }
 
+            // Assert
             Assert.IsNotNull(freeStyleBuild);
             //Assert.IsNotNull(externalBuild);
             Assert.IsNotNull(matrixBuild);
