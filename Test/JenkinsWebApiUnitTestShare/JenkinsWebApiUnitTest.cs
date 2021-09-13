@@ -86,14 +86,15 @@ namespace JenkinsTest
             //Assert.AreEqual(JenkinsResult.Failure, build.Result, "build.Result");
         }
 
-        [TestMethod]
-        public void InstancesTest()
-        {
-            List<JenkinsInstance> list = Jenkins.GetJenkinsInstancesAsync().Result?.ToList();
+        // Feature removed in newer Jenkins versions
+        //[TestMethod]
+        //public void InstancesTest()
+        //{
+        //    List<JenkinsInstance> list = Jenkins.GetJenkinsInstancesAsync().Result?.ToList();
 
-            Assert.IsNotNull(list, "list");
-            Assert.IsTrue(list.Count > 0, "list.Count");
-        }
+        //    Assert.IsNotNull(list, "list");
+        //    Assert.IsTrue(list.Count > 0, "list.Count");
+        //}
 
         [TestMethod]
         public void ServerTest()

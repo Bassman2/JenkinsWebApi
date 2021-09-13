@@ -172,13 +172,20 @@ namespace JenkinsWebApi
                 Debug.WriteLine(ex.Message);
             }
         }
-    
+
         /// <summary>
         /// Get a list with all Jenkins servers in the local subnet.
         /// </summary>
         /// <param name="timeout">Timeout of the search.</param>
         /// <returns>List with Jenkins servers</returns>
-        /// <remarks>From Jenkins 2.219 und LTS 2.204.2 this feature is deactivated by default.</remarks>
+        /// <remarks>
+        /// Since 2.220 the feature has been completely removed.<br/>
+        /// Since 2.219 und LTS 2.204.2 this feature is deactivated by default, <br/>
+        /// but can be activated by setting the system property hudson.DNSMultiCast.disabled to false or hudson.udp to 33848.<br/>
+        /// <see href="https://www.jenkins.io/security/advisory/2020-01-29/"/><br/>
+        /// <see href="https://www.jenkins.io/doc/book/managing/system-properties/"/> 
+        /// </remarks>
+        [Obsolete("Feature removed in newer Jenkins versions!")]
         public static async Task<IEnumerable<JenkinsInstance>> GetJenkinsInstancesAsync(long timeout = 2000)
         {
             List<JenkinsInstance> list = null;
