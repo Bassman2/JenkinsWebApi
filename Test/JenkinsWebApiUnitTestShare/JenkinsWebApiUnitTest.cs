@@ -273,8 +273,6 @@ namespace JenkinsTest
         public void JobTest()
         {
             // Arrange
-            string jobName = "Freestyle Test Parameter";
-            
             JenkinsModelFreeStyleProject freeStyleJob = null;
             JenkinsModelExternalJob externalJob = null;
             JenkinsMatrixMatrixProject matrixJob = null;
@@ -286,13 +284,13 @@ namespace JenkinsTest
             // Act
             using (Jenkins jenkins = new Jenkins(this.host, this.login, this.password))
             {
-                freeStyleJob = jenkins.GetJobAsync("Freestyle Test Pure").Result as JenkinsModelFreeStyleProject;
-                externalJob = jenkins.GetJobAsync("External Job").Result as JenkinsModelExternalJob;
+                freeStyleJob = jenkins.GetJobAsync("FreeStyle").Result as JenkinsModelFreeStyleProject;
+                externalJob = jenkins.GetJobAsync("ExternalJob").Result as JenkinsModelExternalJob;
                 matrixJob = jenkins.GetJobAsync("Multiconfiguration").Result as JenkinsMatrixMatrixProject;
                 workflowJob = jenkins.GetJobAsync("Pipeline").Result as JenkinsJenkinsciWorkflowJob;
-                multiBranchJob = jenkins.GetJobAsync("Multibranch").Result as JenkinsJenkinsciWorkflowMultiBranchProject;
-                folderJob = jenkins.GetJobAsync("Folder").Result as JenkinsCloudbeesFolder;
-                organizationFolderJob = jenkins.GetJobAsync("GitHub").Result as JenkinsBranchOrganizationFolder;
+                //multiBranchJob = jenkins.GetJobAsync("MultibranchPipeline").Result as JenkinsJenkinsciWorkflowMultiBranchProject;
+                //folderJob = jenkins.GetJobAsync("Folder").Result as JenkinsCloudbeesFolder;
+                //organizationFolderJob = jenkins.GetJobAsync("GitHubOrganization").Result as JenkinsBranchOrganizationFolder;
             }
 
             // Assert
@@ -300,27 +298,27 @@ namespace JenkinsTest
             Assert.IsNotNull(externalJob);
             Assert.IsNotNull(matrixJob);
             Assert.IsNotNull(workflowJob);
-            Assert.IsNotNull(multiBranchJob);
-            Assert.IsNotNull(folderJob);
-            Assert.IsNotNull(organizationFolderJob);
+            //Assert.IsNotNull(multiBranchJob);
+            //Assert.IsNotNull(folderJob);
+            //Assert.IsNotNull(organizationFolderJob);
 
 
 
-            Assert.IsNotNull(freeStyleJob.Actions, "actions");
+            Assert.IsNotNull(freeStyleJob.Actions, nameof(freeStyleJob.Actions));
 
-            Assert.AreEqual("Test with Parameters", freeStyleJob.Description, "description");
-            Assert.AreEqual(jobName, freeStyleJob.DisplayName, "job.DisplayName");
-            Assert.AreEqual(jobName, freeStyleJob.Name, "job.Name");
-            Assert.AreEqual($"{this.host}/job/Freestyle%20Test%20Parameter/", freeStyleJob.Url, "job.Url");
-            Assert.AreEqual(true, freeStyleJob.IsBuildable, "job.IsBuildable");
+            Assert.AreEqual("Project description", freeStyleJob.Description, nameof(freeStyleJob.Description));
+            Assert.AreEqual("FreeStyle", freeStyleJob.DisplayName, nameof(freeStyleJob.DisplayName));
+            Assert.AreEqual("FreeStyle", freeStyleJob.Name, nameof(freeStyleJob.Name));
+            Assert.AreEqual($"{this.host}job/FreeStyle/", freeStyleJob.Url, nameof(freeStyleJob.Url));
+            Assert.AreEqual(true, freeStyleJob.IsBuildable, nameof(freeStyleJob.IsBuildable));
 
-            Assert.IsNotNull(freeStyleJob.Builds, "builds");
+            Assert.IsNotNull(freeStyleJob.Builds, nameof(freeStyleJob.Builds));
 
             //Assert.IsTrue(freeStyleJob.State.HasFlag(JenkinsJobState.Success), "color");
 
-            Assert.IsNotNull(freeStyleJob.FirstBuild, "firstBuild");
+            Assert.IsNotNull(freeStyleJob.FirstBuild, nameof(freeStyleJob.FirstBuild));
 
-            Assert.IsNotNull(freeStyleJob.HealthReports, "healthReport");
+            Assert.IsNotNull(freeStyleJob.HealthReports, nameof(freeStyleJob.HealthReports));
         }
 
         [TestMethod]
