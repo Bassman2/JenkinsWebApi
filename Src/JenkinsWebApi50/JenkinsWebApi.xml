@@ -524,6 +524,83 @@
             <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
             <returns>The task object representing the asynchronous operation.</returns>
         </member>
+        <member name="M:JenkinsWebApi.Jenkins.DeleteJobAsync(System.String)">
+            <summary>
+            Delete an existing job.
+            </summary>
+            <param name="jobName">Name of the job to delete.</param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.DeleteJobAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Delete an existing job.
+            </summary>
+            <param name="jobName">Name of the job to delete.</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.DisableJobAsync(System.String)">
+            <summary>
+            Delete an existing job.
+            </summary>
+            <param name="jobName">Name of the job to delete.</param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.DisableJobAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Delete an existing job.
+            </summary>
+            <param name="jobName">Name of the job to delete.</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.EnableJobAsync(System.String)">
+            <summary>
+            Delete an existing job.
+            </summary>
+            <param name="jobName">Name of the job to delete.</param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.EnableJobAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Delete an existing job.
+            </summary>
+            <param name="jobName">Name of the job to delete.</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetJobDescriptionAsync(System.String)">
+            <summary>
+            Get the Jenkins job data.
+            </summary>
+            <param name="jobName">Name of the job</param>
+            <returns>Jenkins job data</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetJobDescriptionAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get the Jenkins job data.
+            </summary>
+            <param name="jobName">Name of the job</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <returns>Jenkins job data</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.SetJobDescriptionAsync(System.String,System.String)">
+            <summary>
+            Get the Jenkins job data.
+            </summary>
+            <param name="jobName">Name of the job</param>
+            <param name="description"></param>
+            <returns>Jenkins job data</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.SetJobDescriptionAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get the Jenkins job data.
+            </summary>
+            <param name="jobName">Name of the job</param>
+            <param name="description"></param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <returns>Jenkins job data</returns>
+        </member>
         <member name="M:JenkinsWebApi.Jenkins.QuiteDownAsync">
             <summary>
             Enter into the "quiet down" mode.

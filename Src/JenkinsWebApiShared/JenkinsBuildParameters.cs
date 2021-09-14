@@ -156,7 +156,7 @@ namespace JenkinsWebApi
         /// <returns>Cast to HttpContent.</returns>
         public static implicit operator HttpContent(JenkinsBuildParameters param)
         {
-            return param.GetContent();
+            return param?.GetContent();
         }
 
         private class JenkinsParameter

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
 
 namespace JenkinsTest
 {
@@ -53,37 +54,146 @@ namespace JenkinsTest
         }
 
         [TestMethod]
-        public void RunTest()
+        public void JobRunSimpleTest()
         {
-            //JenkinsRun build;
+            // Arrange
+            JenkinsModelQueueLeftItem item;
 
+            // Act
             using (Jenkins jenkins = new Jenkins(host, this.login, this.password))
             {
-                /*build =*/
-                var x = jenkins.RunJobAsync("Freestyle Test Pure").Result;
+                item = jenkins.RunJobAsync("FreeStyle").Result;
             }
 
-            //Assert.AreEqual(JenkinsResult.Success, build.Result, "build.Result");
+            // Assert
+            Assert.IsNotNull(item, nameof(item));
+            Assert.IsNotNull(item.Url, "build.Result");
+
+            Assert.IsNotNull(item.Executable, nameof(item.Executable));
         }
 
         [TestMethod]
-        public void RunParamTest()
+        public void JobRunParamTest()
         {
-            JenkinsModelRun build;
+            // Arrange
+            JenkinsModelQueueLeftItem item;
+            JenkinsBuildParameters par = new JenkinsBuildParameters();
+            par.Add("ParamA", "TestA");
+            par.Add("ParamB", "TestB");
+            par.Add("ParamC", "TestC");
+            par.Add("CheckD", true);
+            par.Add("CheckE", false);
+            par.Add("TextBoxF", "TextF1\r\nTextF2\r\nTextF3");
+
+            // Act
             using (Jenkins jenkins = new Jenkins(host, this.login, this.password))
             {
-                JenkinsBuildParameters par = new JenkinsBuildParameters();
-                par.Add("ParamA", "");
-                par.Add("ParamB", "");
-                par.Add("ParamC", "");
-                par.Add("CheckD", true);
-                par.Add("CheckE", false);
-                par.Add("TextBoxF", "Dies ist ein\r\nkleines Beispiel");
-
-                build = jenkins.RunJobComplete("Freestyle Test Parameter", par);
+                 item = jenkins.RunJobAsync("FreestyleParam", par).Result;
             }
 
-            //Assert.AreEqual(JenkinsResult.Failure, build.Result, "build.Result");
+            // Assert
+            Assert.IsNotNull(item, nameof(item));
+            Assert.IsNotNull(item.Url, "build.Result");
+        }
+
+        [TestMethod]
+        public void JobRunFileTest()
+        {
+            // Arrange
+            MemoryStream stream = new MemoryStream();
+            using (StreamWriter writer = new StreamWriter(stream))
+            {
+                writer.WriteLine("This is a test file!");
+            }
+            JenkinsModelQueueLeftItem item;
+            JenkinsBuildParameters par = new JenkinsBuildParameters();
+            par.Add("ParamA", "");
+            par.Add("ParamB", "");
+            par.Add("ParamC", "");
+            par.Add("CheckD", true);
+            par.Add("CheckE", false);
+            par.Add("TextBoxF", "Dies ist ein\r\nkleines Beispiel");
+            par.Add("TestFile", stream, "FileName.bin");
+
+            // Act
+            using (Jenkins jenkins = new Jenkins(host, this.login, this.password))
+            {
+                item = jenkins.RunJobAsync("FreestyleParam", par).Result;
+            }
+
+            // Assert
+            Assert.IsNotNull(item, nameof(item));
+            Assert.IsNotNull(item.Url, "build.Result");
+        }
+
+        [TestMethod]
+        public void JobDisableEnableTest()
+        {
+            // Arrange
+            JenkinsModelFreeStyleProject freeStyleJobDisabled = null;
+            JenkinsModelFreeStyleProject freeStyleJobEnabled = null;
+
+            // Act
+            using (Jenkins jenkins = new Jenkins(host, this.login, this.password))
+            {
+                jenkins.DisableJobAsync("FreestyleDisableEnable").Wait();
+                freeStyleJobDisabled = jenkins.GetJobAsync<JenkinsModelFreeStyleProject>("FreestyleDisableEnable").Result;
+                jenkins.EnableJobAsync("FreestyleDisableEnable").Wait();
+                freeStyleJobEnabled = jenkins.GetJobAsync<JenkinsModelFreeStyleProject>("FreestyleDisableEnable").Result;
+            }
+
+            // Assert
+            Assert.IsNotNull(freeStyleJobDisabled, nameof(freeStyleJobDisabled));
+            Assert.IsTrue(freeStyleJobDisabled.IsDisabled, nameof(freeStyleJobDisabled.IsDisabled));
+
+            Assert.IsNotNull(freeStyleJobEnabled, nameof(freeStyleJobEnabled));
+            Assert.IsFalse(freeStyleJobEnabled.IsDisabled, nameof(freeStyleJobDisabled.IsDisabled));
+        }
+
+        [TestMethod]
+        public void JobDescriptionTest()
+        {
+            // Arrange
+            string descriptionDef = null;
+            string descriptionTst = null;
+
+            // Act
+            using (Jenkins jenkins = new Jenkins(host, this.login, this.password))
+            {
+                jenkins.SetJobDescriptionAsync("FreestyleDescription", "Default Description", CancellationToken.None).Wait();
+                descriptionDef = jenkins.GetJobDescriptionAsync("FreestyleDescription", CancellationToken.None).Result;
+                jenkins.SetJobDescriptionAsync("FreestyleDescription", "Test Description", CancellationToken.None).Wait();
+                descriptionTst = jenkins.GetJobDescriptionAsync("FreestyleDescription", CancellationToken.None).Result;
+                jenkins.SetJobDescriptionAsync("FreestyleDescription", "Default Description", CancellationToken.None).Wait();
+            }
+
+            // Assert
+            Assert.AreEqual("Default Description", descriptionDef, nameof(descriptionDef));
+            Assert.AreEqual("Test Description", descriptionTst, nameof(descriptionTst));
+        }
+
+        [TestMethod]
+        public void JobCreateDeleteTest()
+        {
+            // Arrange
+            JenkinsModelFreeStyleProject freeStyleJobDisabled = null;
+            JenkinsModelFreeStyleProject freeStyleJobEnabled = null;
+
+            // Act
+            using (Jenkins jenkins = new Jenkins(host, this.login, this.password))
+            {
+                //jenkins.CreateJobAsync("Dummy").Wait();
+                freeStyleJobDisabled = jenkins.GetJobAsync<JenkinsModelFreeStyleProject>("FreestyleDisableEnable").Result;
+                jenkins.DeleteJobAsync("Dummy").Wait();
+                freeStyleJobEnabled = jenkins.GetJobAsync<JenkinsModelFreeStyleProject>("FreestyleDisableEnable").Result;
+            }
+
+            // Assert
+            Assert.IsNotNull(freeStyleJobDisabled, nameof(freeStyleJobDisabled));
+            Assert.IsTrue(freeStyleJobDisabled.IsDisabled, nameof(freeStyleJobDisabled.IsDisabled));
+
+            Assert.IsNotNull(freeStyleJobEnabled, nameof(freeStyleJobEnabled));
+            Assert.IsFalse(freeStyleJobEnabled.IsDisabled, nameof(freeStyleJobDisabled.IsDisabled));
         }
 
         // Feature removed in newer Jenkins versions
@@ -495,58 +605,58 @@ namespace JenkinsTest
 
         }
 
-        [TestMethod]
-        public void RunTestXXXXX()
-        {
-            JenkinsModelRun build;
+        //[TestMethod]
+        //public void RunTestXXXXX()
+        //{
+        //    JenkinsModelRun build;
 
-            using (Jenkins jenkins = new Jenkins(this.host, this.login, this.password))
-            {
-                build = jenkins.RunJobComplete("Freestyle Test Pure");
-            }
+        //    using (Jenkins jenkins = new Jenkins(this.host, this.login, this.password))
+        //    {
+        //        build = jenkins.RunJobComplete("Freestyle Test Pure");
+        //    }
 
-            //Assert.AreEqual(JenkinsResult.Success, build.Result, "build.Result");
-        }
+        //    //Assert.AreEqual(JenkinsResult.Success, build.Result, "build.Result");
+        //}
 
-        [TestMethod]
-        public void RunParamTestXXXXX()
-        {
-            JenkinsModelRun build;
-            using (Jenkins jenkins = new Jenkins(this.host, this.login, this.password))
-            {
-                JenkinsBuildParameters par = new JenkinsBuildParameters();
-                par.Add("ParamA", "TestA");
-                par.Add("ParamB", "TestB");
-                par.Add("ParamC", "TestC");
-                par.Add("CheckD", false);
-                par.Add("CheckE", true);
-                par.Add("TextBoxF", "TextF1\\nTextF2\\nTextF3");
+        //[TestMethod]
+        //public void RunParamTestXXXXX()
+        //{
+        //    JenkinsModelRun build;
+        //    using (Jenkins jenkins = new Jenkins(this.host, this.login, this.password))
+        //    {
+        //        JenkinsBuildParameters par = new JenkinsBuildParameters();
+        //        par.Add("ParamA", "TestA");
+        //        par.Add("ParamB", "TestB");
+        //        par.Add("ParamC", "TestC");
+        //        par.Add("CheckD", false);
+        //        par.Add("CheckE", true);
+        //        par.Add("TextBoxF", "TextF1\\nTextF2\\nTextF3");
 
-                build = jenkins.RunJobComplete("Freestyle Test Parameter", par);
-            }
+        //        build = jenkins.RunJobComplete("Freestyle Test Parameter", par);
+        //    }
 
-            //Assert.AreEqual(JenkinsResult.Success, build.Result, "build.Result");
-        }
+        //    //Assert.AreEqual(JenkinsResult.Success, build.Result, "build.Result");
+        //}
 
-        [TestMethod]
-        public void RunFileTest()
-        {
-            //JenkinsBuild build;
-            //using (Jenkins jenkins = new Jenkins(this.host, this.login, this.password))
-            //{
-            //    using (FileStream file = File.OpenRead(filePath))
-            //    {
-            //        JenkinsBuildParameters par = new JenkinsBuildParameters();
-            //        par.Add("AppStartATF.core.gz", file, filePath);
-            //        par.Add("NavVersion", "");
-            //        par.Add("CoreDescription", "");
-            //        build = jenkins.RunJobComplete(jobName, par);
-            //    }
-            //}
+        //[TestMethod]
+        //public void RunFileTest()
+        //{
+        //    //JenkinsBuild build;
+        //    //using (Jenkins jenkins = new Jenkins(this.host, this.login, this.password))
+        //    //{
+        //    //    using (FileStream file = File.OpenRead(filePath))
+        //    //    {
+        //    //        JenkinsBuildParameters par = new JenkinsBuildParameters();
+        //    //        par.Add("AppStartATF.core.gz", file, filePath);
+        //    //        par.Add("NavVersion", "");
+        //    //        par.Add("CoreDescription", "");
+        //    //        build = jenkins.RunJobComplete(jobName, par);
+        //    //    }
+        //    //}
 
-            //Assert.AreEqual(JenkinsBuildResult.Success, build.Result, "build.Result");
-            //Assert.AreNotEqual(0, build.Number, "Number");
-        }
+        //    //Assert.AreEqual(JenkinsBuildResult.Success, build.Result, "build.Result");
+        //    //Assert.AreNotEqual(0, build.Number, "Number");
+        //}
 
         [TestMethod]
         public void ReportTest()

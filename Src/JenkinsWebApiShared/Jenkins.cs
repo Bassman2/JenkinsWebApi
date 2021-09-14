@@ -65,6 +65,7 @@ namespace JenkinsWebApi
             {
                 CookieContainer = new System.Net.CookieContainer(),
                 UseCookies = true
+                //AllowAutoRedirect = false
             };
             this.client = new HttpClient(this.handler)
             {

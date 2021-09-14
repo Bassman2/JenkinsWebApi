@@ -37,17 +37,28 @@ namespace JenkinsWebApi
             return value;
         }
 
-        private async Task<bool> PostLoginAsync(string path, HttpContent content, CancellationToken cancellationToken)
+        private async Task PostAsync(string path, CancellationToken cancellationToken)
+        {
+            using (HttpResponseMessage response = await this.client.PostAsync(path, null, cancellationToken))
+            {
+                response.EnsureSuccess();
+            }
+        }
+
+        private async Task PostAsync(string path, HttpContent content, CancellationToken cancellationToken)
         {
             using (HttpResponseMessage response = await this.client.PostAsync(path, content, cancellationToken))
             {
-                if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
-                {
-                    return false;
-                }
                 response.EnsureSuccess();
             }
-            return true;
+        }
+
+        private async Task PostAsync(string path, IEnumerable<KeyValuePair<string,string>> content, CancellationToken cancellationToken)
+        {
+            using (HttpResponseMessage response = await this.client.PostAsync(path, new FormUrlEncodedContent(content), cancellationToken))
+            {
+                response.EnsureSuccess();
+            }
         }
 
         private async Task<Uri> PostRunAsync(string path, HttpContent content, CancellationToken cancellationToken)
@@ -58,8 +69,15 @@ namespace JenkinsWebApi
                 response.EnsureSuccess();
                 location = response.Headers.Location;
             }
-
             return location;
+        }
+
+        private async Task DeleteAsync(string path, CancellationToken cancellationToken)
+        {
+            using (HttpResponseMessage response = await this.client.DeleteAsync(path, cancellationToken))
+            {
+                response.EnsureSuccess();
+            }
         }
 
         private T Deserialize<T>(string xmlText, IEnumerable<Type> classTypes)

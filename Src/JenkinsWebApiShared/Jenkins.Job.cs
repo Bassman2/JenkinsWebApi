@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -225,5 +226,132 @@ namespace JenkinsWebApi
             FormUrlEncodedContent content = new FormUrlEncodedContent(param);
             await PostRunAsync("createItem", content, cancellationToken);
         }
+
+        /// <summary>
+        /// Delete an existing job.
+        /// </summary>
+        /// <param name="jobName">Name of the job to delete.</param>
+        /// <returns>The task object representing the asynchronous operation.</returns>
+        public async Task DeleteJobAsync(string jobName)
+        {
+            await DeleteJobAsync(jobName, CancellationToken.None);
+        }
+
+        /// <summary>
+        /// Delete an existing job.
+        /// </summary>
+        /// <param name="jobName">Name of the job to delete.</param>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>The task object representing the asynchronous operation.</returns>
+        public async Task DeleteJobAsync(string jobName, CancellationToken cancellationToken)
+        {
+            await DeleteAsync($"job/{jobName}/", cancellationToken);
+        }
+
+        /// <summary>
+        /// Delete an existing job.
+        /// </summary>
+        /// <param name="jobName">Name of the job to delete.</param>
+        /// <returns>The task object representing the asynchronous operation.</returns>
+        public async Task DisableJobAsync(string jobName)
+        {
+            await DisableJobAsync(jobName, CancellationToken.None);
+        }
+
+        /// <summary>
+        /// Delete an existing job.
+        /// </summary>
+        /// <param name="jobName">Name of the job to delete.</param>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>The task object representing the asynchronous operation.</returns>
+        public async Task DisableJobAsync(string jobName, CancellationToken cancellationToken)
+        {
+            //Dictionary<string, string> content = new Dictionary<string, string>();
+            //content.Add("Submit", "Disable Project");
+            //await PostAsync($"job/{jobName}/disable", content, cancellationToken);
+            await PostAsync($"job/{jobName}/disable", cancellationToken);
+        }
+
+        /// <summary>
+        /// Delete an existing job.
+        /// </summary>
+        /// <param name="jobName">Name of the job to delete.</param>
+        /// <returns>The task object representing the asynchronous operation.</returns>
+        public async Task EnableJobAsync(string jobName)
+        {
+            await EnableJobAsync(jobName, CancellationToken.None);
+        }
+
+        /// <summary>
+        /// Delete an existing job.
+        /// </summary>
+        /// <param name="jobName">Name of the job to delete.</param>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>The task object representing the asynchronous operation.</returns>
+        public async Task EnableJobAsync(string jobName, CancellationToken cancellationToken)
+        {
+            //Dictionary<string, string> content = new Dictionary<string, string>();
+            //content.Add("Submit", "Enable");
+            //await PostAsync($"job/{jobName}/enable", content, cancellationToken);
+            await PostAsync($"job/{jobName}/enable", cancellationToken);
+        }
+
+        /// <summary>
+        /// Get the Jenkins job data.
+        /// </summary>
+        /// <param name="jobName">Name of the job</param>
+        /// <returns>Jenkins job data</returns>
+        public async Task<string> GetJobDescriptionAsync(string jobName)
+        {
+            return await GetJobDescriptionAsync(jobName, CancellationToken.None);
+        }
+
+        /// <summary>
+        /// Get the Jenkins job data.
+        /// </summary>
+        /// <param name="jobName">Name of the job</param>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>Jenkins job data</returns>
+        public async Task<string> GetJobDescriptionAsync(string jobName, CancellationToken cancellationToken)
+        {
+            if (string.IsNullOrEmpty(jobName))
+            {
+                throw new ArgumentNullException(nameof(jobName));
+            }
+            string str = await GetStringAsync($"job/{jobName}/description", cancellationToken);
+            return str;
+        }
+
+        /// <summary>
+        /// Get the Jenkins job data.
+        /// </summary>
+        /// <param name="jobName">Name of the job</param>
+        /// <param name="description"></param>
+        /// <returns>Jenkins job data</returns>
+        public async Task SetJobDescriptionAsync(string jobName, string description)
+        {
+            await SetJobDescriptionAsync(jobName, description, CancellationToken.None);
+        }
+
+        /// <summary>
+        /// Get the Jenkins job data.
+        /// </summary>
+        /// <param name="jobName">Name of the job</param>
+        /// <param name="description"></param>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>Jenkins job data</returns>
+        public async Task SetJobDescriptionAsync(string jobName, string description, CancellationToken cancellationToken)
+        {
+            if (string.IsNullOrEmpty(jobName))
+            {
+                throw new ArgumentNullException(nameof(jobName));
+            }
+
+            Dictionary<string, string> content = new Dictionary<string, string>();
+            content.Add("description", description);
+            await PostAsync($"job/{jobName}/description", content, cancellationToken);
+        }
+
     }
 }
+
