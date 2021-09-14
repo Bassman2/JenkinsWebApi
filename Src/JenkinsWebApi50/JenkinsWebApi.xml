@@ -9,6 +9,70 @@
             Main class of the Jenkins server API
             </summary>
         </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetBuildAsync(System.String,System.Int32)">
+            <summary>
+            Get the Jenkins build data.
+            </summary>
+            <param name="jobName">Name of the Jenkins job</param>
+            <param name="buildNum">Number of the Jenkins build</param>
+            <returns>Jenkins build data</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetBuildAsync(System.String,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Get the Jenkins build data.
+            </summary>
+            <param name="jobName">Name of the Jenkins job</param>
+            <param name="buildNum">Number of the Jenkins build</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <returns>Jenkins build data</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetBuildAsync``1(System.String,System.Int32)">
+            <summary>
+            Get the Jenkins build data.
+            </summary>
+            <param name="jobName">Name of the Jenkins job</param>
+            <param name="buildNum">Number of the Jenkins build</param>
+            <returns>Jenkins build data</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetBuildAsync``1(System.String,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Get the Jenkins build data.
+            </summary>
+            <param name="jobName">Name of the Jenkins job</param>
+            <param name="buildNum">Number of the Jenkins build</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <returns>Jenkins build data</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetLastBuildAsync(System.String)">
+            <summary>
+            Get the last build
+            </summary>
+            <param name="jobName">Name of the Jenkins job</param>
+            <returns>Jenkins build data</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetLastBuildAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get the last build
+            </summary>
+            <param name="jobName">Name of the Jenkins job</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <returns>Jenkins build data</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetLastBuildAsync``1(System.String)">
+            <summary>
+            Get the last build
+            </summary>
+            <param name="jobName">Name of the Jenkins job</param>
+            <returns>Jenkins build data</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetLastBuildAsync``1(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get the last build
+            </summary>
+            <param name="jobName">Name of the Jenkins job</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <returns>Jenkins build data</returns>
+        </member>
         <member name="M:JenkinsWebApi.Jenkins.#ctor(System.String)">
             <summary>
             Initializes a new instance of the Jenkins class.
@@ -228,94 +292,6 @@
             <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
             <returns>Jenkins server credentials</returns>
             <remark>Only in V2 or above</remark>
-        </member>
-        <member name="M:JenkinsWebApi.Jenkins.GetPeopleAsync">
-            <summary>
-            Get a list of all Jenkins users.
-            </summary>
-            <returns>List of all Jenkins users</returns>
-            <remarks>For compatibility to old Jenkins version. For new version use GetAsyncPeopleAsync instead.</remarks>
-        </member>
-        <member name="M:JenkinsWebApi.Jenkins.GetPeopleAsync(System.Threading.CancellationToken)">
-            <summary>
-            Get a list of all Jenkins users.
-            </summary>
-            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-            <returns>List of all Jenkins users</returns>
-            <remarks>For compatibility to old Jenkins version. For new version use GetAsyncPeopleAsync instead.</remarks>
-        </member>
-        <member name="M:JenkinsWebApi.Jenkins.GetAsyncPeopleAsync">
-            <summary>
-            Get a list of all Jenkins users.
-            </summary>
-            <returns>List of all Jenkins users</returns>
-        </member>
-        <member name="M:JenkinsWebApi.Jenkins.GetAsyncPeopleAsync(System.Threading.CancellationToken)">
-            <summary>
-            Get a list of all Jenkins users.
-            </summary>
-            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-            <returns>List of all Jenkins users</returns>
-        </member>
-        <member name="M:JenkinsWebApi.Jenkins.GetUserAsync(System.String)">
-            <summary>
-            Get the data of one Jenkins user.
-            </summary>
-            <param name="userName">Name of the Jenkins user</param>
-            <returns>Jenkins user data</returns>
-        </member>
-        <member name="M:JenkinsWebApi.Jenkins.GetUserAsync(System.String,System.Threading.CancellationToken)">
-            <summary>
-            Get the data of one Jenkins user.
-            </summary>
-            <param name="userName">Name of the Jenkins user</param>
-            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-            <returns>Jenkins user data</returns>
-        </member>
-        <member name="M:JenkinsWebApi.Jenkins.GetCurrentUserAsync">
-            <summary>
-            Get the data of the current login user.
-            </summary>
-            <returns>Jenkins user data</returns>
-        </member>
-        <member name="M:JenkinsWebApi.Jenkins.GetCurrentUserAsync(System.Threading.CancellationToken)">
-            <summary>
-            Get the data of the current login user.
-            </summary>
-            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-            <returns>Jenkins user data</returns>
-        </member>
-        <member name="M:JenkinsWebApi.Jenkins.GetBuildAsync(System.String,System.Int32)">
-            <summary>
-            Get the Jenkins build data.
-            </summary>
-            <param name="jobName">Name of the Jenkins job</param>
-            <param name="buildNum">Number of the Jenkins build</param>
-            <returns>Jenkins build data</returns>
-        </member>
-        <member name="M:JenkinsWebApi.Jenkins.GetBuildAsync(System.String,System.Int32,System.Threading.CancellationToken)">
-            <summary>
-            Get the Jenkins build data.
-            </summary>
-            <param name="jobName">Name of the Jenkins job</param>
-            <param name="buildNum">Number of the Jenkins build</param>
-            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-            <returns>Jenkins build data</returns>
-        </member>
-        <member name="M:JenkinsWebApi.Jenkins.GetLastBuildAsync(System.String)">
-            <summary>
-            Get the last build
-            </summary>
-            <param name="jobName">Name of the Jenkins job</param>
-            <returns>Jenkins build data</returns>
-        </member>
-        <member name="M:JenkinsWebApi.Jenkins.GetLastBuildAsync(System.String,System.Threading.CancellationToken)">
-            <summary>
-            Get the last build
-            </summary>
-            <param name="jobName">Name of the Jenkins job</param>
-            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-            <returns>Jenkins build data</returns>
         </member>
         <member name="M:JenkinsWebApi.Jenkins.GetTestReportAsync(System.String,System.Int32)">
             <summary>
@@ -614,6 +590,62 @@
             <param name="hostName">Name of the slave host</param>
             <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
             <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetPeopleAsync">
+            <summary>
+            Get a list of all Jenkins users.
+            </summary>
+            <returns>List of all Jenkins users</returns>
+            <remarks>For compatibility to old Jenkins version. For new version use GetAsyncPeopleAsync instead.</remarks>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetPeopleAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get a list of all Jenkins users.
+            </summary>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <returns>List of all Jenkins users</returns>
+            <remarks>For compatibility to old Jenkins version. For new version use GetAsyncPeopleAsync instead.</remarks>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetAsyncPeopleAsync">
+            <summary>
+            Get a list of all Jenkins users.
+            </summary>
+            <returns>List of all Jenkins users</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetAsyncPeopleAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get a list of all Jenkins users.
+            </summary>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <returns>List of all Jenkins users</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetUserAsync(System.String)">
+            <summary>
+            Get the data of one Jenkins user.
+            </summary>
+            <param name="userName">Name of the Jenkins user</param>
+            <returns>Jenkins user data</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetUserAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get the data of one Jenkins user.
+            </summary>
+            <param name="userName">Name of the Jenkins user</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <returns>Jenkins user data</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetCurrentUserAsync">
+            <summary>
+            Get the data of the current login user.
+            </summary>
+            <returns>Jenkins user data</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetCurrentUserAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get the data of the current login user.
+            </summary>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <returns>Jenkins user data</returns>
         </member>
         <member name="M:JenkinsWebApi.Jenkins.RunJobComplete(System.String,JenkinsWebApi.JenkinsBuildParameters,System.Int32)">
             <summary>

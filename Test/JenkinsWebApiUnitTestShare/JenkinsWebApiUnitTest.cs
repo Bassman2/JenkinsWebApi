@@ -253,20 +253,72 @@ namespace JenkinsTest
         public void ViewTest()
         {
             // Arrange            
-            JenkinsModelView view = null;
+            JenkinsModelListView listView = null;
+            JenkinsModelMyView myView = null;
+            JenkinsModelAllView allView = null;
+            JenkinsJenkinsciCategorizedJobsView categorizedJobsView = null;
+            JenkinsPluginsViewDashboardDashboard dashboard = null;
+            JenkinsTikalMultiJobView multiJobView = null;
 
             // Act
             using (Jenkins jenkins = new Jenkins(this.host, this.login, this.password))
             {
-                view = jenkins.GetViewAsync("ListView").Result;
+                listView = jenkins.GetViewAsync("ListView").Result as JenkinsModelListView;
+                myView = jenkins.GetViewAsync("MyView").Result as JenkinsModelMyView;
+                allView = jenkins.GetViewAsync("all").Result as JenkinsModelAllView;
+                categorizedJobsView = jenkins.GetViewAsync("Categorization").Result as JenkinsJenkinsciCategorizedJobsView;
+                dashboard = jenkins.GetViewAsync("Dashboard").Result as JenkinsPluginsViewDashboardDashboard;
+                multiJobView = jenkins.GetViewAsync("MultiJob").Result as JenkinsTikalMultiJobView;
             }
 
             // Assert
-            Assert.IsNotNull(view, nameof(view));
-            Assert.AreEqual("hudson.model.ListView", view.Class, nameof(view.Class));
-            Assert.AreEqual("ListView", view.Name, nameof(view.Name));
-            Assert.AreEqual("ListView Description", view.Description, nameof(view.Description));
-            Assert.AreEqual($"{this.host}view/ListView/", view.Url, nameof(view.Url));
+            Assert.IsNotNull(listView, nameof(listView));
+            Assert.AreEqual("hudson.model.ListView", listView.Class, nameof(listView.Class));
+            Assert.AreEqual("ListView", listView.Name, nameof(listView.Name));
+            Assert.AreEqual("ListView Description", listView.Description, nameof(listView.Description));
+            Assert.AreEqual($"{this.host}view/ListView/", listView.Url, nameof(listView.Url));
+
+            Assert.IsNotNull(myView, nameof(myView));
+            Assert.IsNotNull(allView, nameof(allView));
+            Assert.IsNotNull(categorizedJobsView, nameof(categorizedJobsView));
+            Assert.IsNotNull(dashboard, nameof(dashboard));
+            Assert.IsNotNull(multiJobView, nameof(multiJobView));
+        }
+
+        [TestMethod]
+        public void ViewGenericTest()
+        {
+            // Arrange            
+            JenkinsModelListView listView = null;
+            JenkinsModelMyView myView = null;
+            JenkinsModelAllView allView = null;
+            JenkinsJenkinsciCategorizedJobsView categorizedJobsView = null;
+            JenkinsPluginsViewDashboardDashboard dashboard = null;
+            JenkinsTikalMultiJobView multiJobView = null;
+
+            // Act
+            using (Jenkins jenkins = new Jenkins(this.host, this.login, this.password))
+            {
+                listView = jenkins.GetViewAsync<JenkinsModelListView>("ListView").Result;
+                myView = jenkins.GetViewAsync<JenkinsModelMyView>("MyView").Result;
+                allView = jenkins.GetViewAsync<JenkinsModelAllView>("all").Result;
+                categorizedJobsView = jenkins.GetViewAsync<JenkinsJenkinsciCategorizedJobsView>("Categorization").Result;
+                dashboard = jenkins.GetViewAsync<JenkinsPluginsViewDashboardDashboard>("Dashboard").Result;
+                multiJobView = jenkins.GetViewAsync<JenkinsTikalMultiJobView>("MultiJob").Result;
+            }
+
+            // Assert
+            Assert.IsNotNull(listView, nameof(listView));
+            Assert.AreEqual("hudson.model.ListView", listView.Class, nameof(listView.Class));
+            Assert.AreEqual("ListView", listView.Name, nameof(listView.Name));
+            Assert.AreEqual("ListView Description", listView.Description, nameof(listView.Description));
+            Assert.AreEqual($"{this.host}view/ListView/", listView.Url, nameof(listView.Url));
+
+            Assert.IsNotNull(myView, nameof(myView));
+            Assert.IsNotNull(allView, nameof(allView));
+            Assert.IsNotNull(categorizedJobsView, nameof(categorizedJobsView));
+            Assert.IsNotNull(dashboard, nameof(dashboard));
+            Assert.IsNotNull(multiJobView, nameof(multiJobView));
         }
 
         [TestMethod]
@@ -277,9 +329,9 @@ namespace JenkinsTest
             JenkinsModelExternalJob externalJob = null;
             JenkinsMatrixMatrixProject matrixJob = null;
             JenkinsJenkinsciWorkflowJob workflowJob = null;
-            JenkinsJenkinsciWorkflowMultiBranchProject multiBranchJob = null;
-            JenkinsCloudbeesFolder folderJob = null;
-            JenkinsBranchOrganizationFolder organizationFolderJob = null;
+            //JenkinsJenkinsciWorkflowMultiBranchProject multiBranchJob = null;
+            //JenkinsCloudbeesFolder folderJob = null;
+            //JenkinsBranchOrganizationFolder organizationFolderJob = null;
 
             // Act
             using (Jenkins jenkins = new Jenkins(this.host, this.login, this.password))
@@ -291,6 +343,58 @@ namespace JenkinsTest
                 //multiBranchJob = jenkins.GetJobAsync("MultibranchPipeline").Result as JenkinsJenkinsciWorkflowMultiBranchProject;
                 //folderJob = jenkins.GetJobAsync("Folder").Result as JenkinsCloudbeesFolder;
                 //organizationFolderJob = jenkins.GetJobAsync("GitHubOrganization").Result as JenkinsBranchOrganizationFolder;
+            }
+
+            // Assert
+            Assert.IsNotNull(freeStyleJob);
+            Assert.IsNotNull(externalJob);
+            Assert.IsNotNull(matrixJob);
+            Assert.IsNotNull(workflowJob);
+            //Assert.IsNotNull(multiBranchJob);
+            //Assert.IsNotNull(folderJob);
+            //Assert.IsNotNull(organizationFolderJob);
+
+
+
+            Assert.IsNotNull(freeStyleJob.Actions, nameof(freeStyleJob.Actions));
+
+            Assert.AreEqual("Project description", freeStyleJob.Description, nameof(freeStyleJob.Description));
+            Assert.AreEqual("FreeStyle", freeStyleJob.DisplayName, nameof(freeStyleJob.DisplayName));
+            Assert.AreEqual("FreeStyle", freeStyleJob.Name, nameof(freeStyleJob.Name));
+            Assert.AreEqual($"{this.host}job/FreeStyle/", freeStyleJob.Url, nameof(freeStyleJob.Url));
+            Assert.AreEqual(true, freeStyleJob.IsBuildable, nameof(freeStyleJob.IsBuildable));
+
+            Assert.IsNotNull(freeStyleJob.Builds, nameof(freeStyleJob.Builds));
+
+            //Assert.IsTrue(freeStyleJob.State.HasFlag(JenkinsJobState.Success), "color");
+
+            Assert.IsNotNull(freeStyleJob.FirstBuild, nameof(freeStyleJob.FirstBuild));
+
+            Assert.IsNotNull(freeStyleJob.HealthReports, nameof(freeStyleJob.HealthReports));
+        }
+
+        [TestMethod]
+        public void JobGenericTest()
+        {
+            // Arrange
+            JenkinsModelFreeStyleProject freeStyleJob = null;
+            JenkinsModelExternalJob externalJob = null;
+            JenkinsMatrixMatrixProject matrixJob = null;
+            JenkinsJenkinsciWorkflowJob workflowJob = null;
+            //JenkinsJenkinsciWorkflowMultiBranchProject multiBranchJob = null;
+            //JenkinsCloudbeesFolder folderJob = null;
+            //JenkinsBranchOrganizationFolder organizationFolderJob = null;
+
+            // Act
+            using (Jenkins jenkins = new Jenkins(this.host, this.login, this.password))
+            {
+                freeStyleJob = jenkins.GetJobAsync<JenkinsModelFreeStyleProject>("FreeStyle").Result;
+                externalJob = jenkins.GetJobAsync<JenkinsModelExternalJob>("ExternalJob").Result;
+                matrixJob = jenkins.GetJobAsync<JenkinsMatrixMatrixProject>("Multiconfiguration").Result;
+                workflowJob = jenkins.GetJobAsync<JenkinsJenkinsciWorkflowJob>("Pipeline").Result;
+                //multiBranchJob = jenkins.GetJobAsync<JenkinsJenkinsciWorkflowMultiBranchProject>("MultibranchPipeline").Result;
+                //folderJob = jenkins.GetJobAsync<JenkinsCloudbeesFolder>("Folder").Result;
+                //organizationFolderJob = jenkins.GetJobAsync<JenkinsBranchOrganizationFolder>("GitHubOrganization").Result;
             }
 
             // Assert
@@ -354,6 +458,41 @@ namespace JenkinsTest
             //Assert.IsNotNull(folderBuild);
             //Assert.IsNotNull(organizationFolderBuild);
                         
+        }
+
+        [TestMethod]
+        public void BuildGenericTest()
+        {
+            // Arrange
+            JenkinsModelFreeStyleBuild freeStyleBuild = null;
+            //JenkinsBuildExternal externalBuild = null;
+            JenkinsMatrixMatrixBuild matrixBuild = null;
+            JenkinsJenkinsciWorkflowRun workflowBuild = null;
+            //JenkinsBuildWorkflowMultiBranch multiBranchBuild = null;
+            //JenkinsBuildFolder folderBuild = null;
+            //JenkinsBuildOrganizationFolder organizationFolderBuild = null;
+
+            // Act
+            using (Jenkins jenkins = new Jenkins(this.host, this.login, this.password))
+            {
+                freeStyleBuild = jenkins.GetLastBuildAsync<JenkinsModelFreeStyleBuild>("Freestyle Test Pure").Result;
+                //externalBuild = jenkins.GetBuildAsync("External Job", 1).Result as JenkinsBuildExternal;
+                matrixBuild = jenkins.GetBuildAsync<JenkinsMatrixMatrixBuild>("Multiconfiguration", 1).Result;
+                workflowBuild = jenkins.GetBuildAsync<JenkinsJenkinsciWorkflowRun>("Pipeline", 1).Result;
+                //multiBranchBuild = jenkins.GetBuildAsync("Multibranch", 1).Result as JenkinsBuildWorkflowMultiBranch;
+                //folderBuild = jenkins.GetBuildAsync("Folder", 1).Result as JenkinsBuildFolder;
+                //organizationFolderBuild = jenkins.GetBuildAsync("GitHub", 1).Result as JenkinsBuildOrganizationFolder;
+            }
+
+            // Assert
+            Assert.IsNotNull(freeStyleBuild);
+            //Assert.IsNotNull(externalBuild);
+            Assert.IsNotNull(matrixBuild);
+            //Assert.IsNotNull(workflowBuild);
+            //Assert.IsNotNull(multiBranchBuild);
+            //Assert.IsNotNull(folderBuild);
+            //Assert.IsNotNull(organizationFolderBuild);
+
         }
 
         [TestMethod]
