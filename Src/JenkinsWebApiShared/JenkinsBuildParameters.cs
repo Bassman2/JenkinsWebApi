@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -84,10 +85,10 @@ namespace JenkinsWebApi
                         break;
 
                     case JenkinsParameterType.Boolean:
-                        content.Add(new StringContent(para.Name), "name");                            
+                        content.Add(new StringContent(para.Name), "name");
                         if (para.BooleanValue)
                         {
-                            content.Add(new StringContent(para.StringValue), "value");
+                            content.Add(new StringContent("on"), "value");
                             json.Append($"{{\"name\": \"{para.Name}\", \"value\": true}}, ");
                         }
                         else
@@ -100,7 +101,7 @@ namespace JenkinsWebApi
 
                 json.Remove(json.Length - 2, 2);
                 json.Append($"]}}");
-                
+
                 content.Add(new StringContent(json.ToString()), "json");
                 content.Add(new StringContent("Build"), "Submit");
 

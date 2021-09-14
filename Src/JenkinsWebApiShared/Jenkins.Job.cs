@@ -3,9 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
-using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace JenkinsWebApi
 {
@@ -74,7 +75,7 @@ namespace JenkinsWebApi
         /// </summary>
         /// <param name="jobName">Name of the Jenkins job</param>
         /// <returns>Result and number of the Jenkins build</returns>
-        public async Task<JenkinsModelQueueLeftItem> RunJobAsync(string jobName)
+        public async Task<string> RunJobAsync(string jobName)
         {
             return await RunJobAsync(jobName, null, CancellationToken.None);
         }
@@ -85,7 +86,7 @@ namespace JenkinsWebApi
         /// <param name="jobName">Name of the Jenkins job</param>
         /// <param name="parameters">Parameters for the Jenkins job</param>
         /// <returns>Result and number of the Jenkins build</returns>
-        public async Task<JenkinsModelQueueLeftItem> RunJobAsync(string jobName, JenkinsBuildParameters parameters)
+        public async Task<string> RunJobAsync(string jobName, JenkinsBuildParameters parameters)
         {
             return await RunJobAsync(jobName, parameters, CancellationToken.None);
         }
@@ -96,7 +97,7 @@ namespace JenkinsWebApi
         /// <param name="jobName">Name of the Jenkins job</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Result and number of the Jenkins build</returns>
-        public async Task<JenkinsModelQueueLeftItem> RunJobAsync(string jobName, CancellationToken cancellationToken)
+        public async Task<string> RunJobAsync(string jobName, CancellationToken cancellationToken)
         {
             return await RunJobAsync(jobName, null, cancellationToken);
         }
@@ -108,32 +109,70 @@ namespace JenkinsWebApi
         /// <param name="parameters">Parameters for the Jenkins job</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Result and number of the Jenkins build</returns>
-        public async Task<JenkinsModelQueueLeftItem> RunJobAsync(string jobName, JenkinsBuildParameters parameters, CancellationToken cancellationToken)
+        public async Task<string> RunJobAsync(string jobName, JenkinsBuildParameters parameters, CancellationToken cancellationToken)
         {
+            // IProgress<T> x, 
+
             if (string.IsNullOrEmpty(jobName))
             {
                 throw new ArgumentNullException(nameof(jobName));
             }
 
-            //Uri location;
-            //if (parameters == null || parameters.IsEmpty)
-            //{
-            //    location = await PostRunAsync($"/job/{jobName}/build?delay=0sec", null, cancellationToken);
-            //}
-            //else
-            //{
-            //    location = await PostRunAsync($"/job/{jobName}/build?delay=0sec", parameters, cancellationToken);
-            //}
-
-
-            Uri location = await PostRunAsync($"/job/{jobName}/build?delay=0sec", parameters, cancellationToken);
+            Uri location = null;
+            if (parameters == null)
+            {
+                location = await PostRunAsync($"/job/{jobName}/build?delay=0sec", null, cancellationToken);
+            }
+            else
+            {
+                location = await PostRunAsync($"/job/{jobName}/buildWithParameters?delay=0sec", parameters, cancellationToken);
+            }
 
             // example: http://tiny:8080/queue/item/10/
             if (location != null)
             {
-                // if no delay item.Executable will be null
-                await Task.Delay(100);
-                return await GetAsync<JenkinsModelQueueLeftItem>(new Uri(location, "api/xml").ToString(), CancellationToken.None);
+                string buildUrl = null;
+
+                while (!cancellationToken.IsCancellationRequested)
+                {
+                    //string schema = await GetStringAsync(new Uri(location, "api/schema").ToString(), cancellationToken);
+                    //if (schema.StartsWith("<buildableItem"))
+                    //{
+                    //}
+
+                    string str = await GetStringAsync(new Uri(location, "api/xml").ToString(), cancellationToken);
+                    if (str.StartsWith("<buildableItem"))
+                    {
+                        JenkinsModelQueueBuildableItem item = XmlDeserialize<JenkinsModelQueueBuildableItem>(str);
+                        Console.WriteLine($"IsPending: {item.IsPending}");
+                    }
+                    else if (str.StartsWith("<leftItem"))
+                    {
+                        JenkinsModelQueueLeftItem item = XmlDeserialize<JenkinsModelQueueLeftItem>(str);
+                        //Console.WriteLine($"IsPending: {item.Executable.Url}");
+                        if (item.Executable != null)
+                        {
+                            buildUrl = item.Executable.Url;
+                            Console.WriteLine($"buildUrl: {buildUrl}");
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        throw new Exception("Unknown XML Schema!!!");
+                    }
+                }
+
+                while (!cancellationToken.IsCancellationRequested)
+                {
+                    string str = await GetStringAsync(new Uri(new Uri(buildUrl), "api/xml").ToString(), cancellationToken);
+                    JenkinsModelRun run = Deserialize<JenkinsModelRun>(str, buildTypes);
+                    Console.WriteLine($"IsBuilding: {run.IsBuilding}");
+                    if (!run.IsBuilding)
+                    {
+                        return buildUrl;
+                    }
+                }
             }
 
             return null;
@@ -195,6 +234,98 @@ namespace JenkinsWebApi
                 { new StreamContent(stream), "file0", fileName }
             };
             await PostRunAsync("createItem", content, cancellationToken);
+        }
+
+        /// <summary>
+        /// Create a new job from an XML file.
+        /// </summary>
+        /// <param name="jobName">Name of the job</param>
+        /// <returns>The task object representing the asynchronous operation.</returns>
+        public async Task<string> GetJobConfigAsync(string jobName)
+        {
+            return await GetJobConfigAsync(jobName, CancellationToken.None);
+        }
+
+        /// <summary>
+        /// Create a new job from an XML file.
+        /// </summary>
+        /// <param name="jobName">Name of the job</param>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>The task object representing the asynchronous operation.</returns>
+        public async Task<string> GetJobConfigAsync(string jobName, CancellationToken cancellationToken)
+        {
+            string str = await GetStringAsync($"job/{jobName}/config.xml", cancellationToken);
+            return str;
+        }
+
+        /// <summary>
+        /// Create a new job from an XML file.
+        /// </summary>
+        /// <param name="jobName">Name of the job</param>
+        /// <returns>The task object representing the asynchronous operation.</returns>
+        public async Task<XmlDocument> GetJobConfigXmlAsync(string jobName)
+        {
+            return await GetJobConfigXmlAsync(jobName, CancellationToken.None);
+        }
+
+        /// <summary>
+        /// Create a new job from an XML file.
+        /// </summary>
+        /// <param name="jobName">Name of the job</param>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>The task object representing the asynchronous operation.</returns>
+        public async Task<XmlDocument> GetJobConfigXmlAsync(string jobName, CancellationToken cancellationToken)
+        {
+            string str = await GetJobConfigAsync(jobName, cancellationToken);
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(str);
+            return doc;
+        }
+
+        /// <summary>
+        /// Create a new job from an XML file.
+        /// </summary>
+        /// <param name="jobName">Name of the job</param>
+        /// <param name="config"></param>
+        /// <returns>The task object representing the asynchronous operation.</returns>
+        public async Task SetJobConfigAsync(string jobName, string config)
+        {
+            await SetJobConfigAsync(jobName, config, CancellationToken.None);
+        }
+
+        /// <summary>
+        /// Create a new job from an XML file.
+        /// </summary>
+        /// <param name="jobName">Name of the job</param>
+        /// <param name="config"></param>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>The task object representing the asynchronous operation.</returns>
+        public async Task SetJobConfigAsync(string jobName, string config, CancellationToken cancellationToken)
+        {
+            await PostAsync($"job/{jobName}/config.xml", cancellationToken);
+        }
+
+        /// <summary>
+        /// Create a new job from an XML file.
+        /// </summary>
+        /// <param name="jobName">Name of the job</param>
+        /// <param name="config"></param>
+        /// <returns>The task object representing the asynchronous operation.</returns>
+        public async Task SetJobConfigXmlAsync(string jobName, XmlDocument config)
+        {
+            await SetJobConfigXmlAsync(jobName, config, CancellationToken.None);
+        }
+
+        /// <summary>
+        /// Create a new job from an XML file.
+        /// </summary>
+        /// <param name="jobName">Name of the job</param>
+        /// <param name="config"></param>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>The task object representing the asynchronous operation.</returns>
+        public async Task SetJobConfigXmlAsync(string jobName, XmlDocument config, CancellationToken cancellationToken)
+        {
+            await SetJobConfigAsync(jobName, config.ToString(), cancellationToken);
         }
 
         /// <summary>

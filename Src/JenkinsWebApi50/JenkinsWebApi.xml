@@ -507,6 +507,70 @@
             <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
             <returns>The task object representing the asynchronous operation.</returns>
         </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetJobConfigAsync(System.String)">
+            <summary>
+            Create a new job from an XML file.
+            </summary>
+            <param name="jobName">Name of the job</param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetJobConfigAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Create a new job from an XML file.
+            </summary>
+            <param name="jobName">Name of the job</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetJobConfigXmlAsync(System.String)">
+            <summary>
+            Create a new job from an XML file.
+            </summary>
+            <param name="jobName">Name of the job</param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetJobConfigXmlAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Create a new job from an XML file.
+            </summary>
+            <param name="jobName">Name of the job</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.SetJobConfigAsync(System.String,System.String)">
+            <summary>
+            Create a new job from an XML file.
+            </summary>
+            <param name="jobName">Name of the job</param>
+            <param name="config"></param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.SetJobConfigAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Create a new job from an XML file.
+            </summary>
+            <param name="jobName">Name of the job</param>
+            <param name="config"></param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.SetJobConfigXmlAsync(System.String,System.Xml.XmlDocument)">
+            <summary>
+            Create a new job from an XML file.
+            </summary>
+            <param name="jobName">Name of the job</param>
+            <param name="config"></param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.SetJobConfigXmlAsync(System.String,System.Xml.XmlDocument,System.Threading.CancellationToken)">
+            <summary>
+            Create a new job from an XML file.
+            </summary>
+            <param name="jobName">Name of the job</param>
+            <param name="config"></param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
         <member name="M:JenkinsWebApi.Jenkins.CloneJobAsync(System.String,System.String)">
             <summary>
             Clone a new job from an existing.
@@ -723,24 +787,6 @@
             </summary>
             <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
             <returns>Jenkins user data</returns>
-        </member>
-        <member name="M:JenkinsWebApi.Jenkins.RunJobComplete(System.String,JenkinsWebApi.JenkinsBuildParameters,System.Int32)">
-            <summary>
-            Run Jenkins job and return after job has finished.
-            </summary>
-            <param name="name">Name of the Jenkins job.</param>
-            <param name="parameters">Parameter list for the Jenkins job.</param>
-            <param name="pollingTime">Polling time in milliseconds. The default value is 5 seconds.</param>
-            <returns>Finished build</returns>
-        </member>
-        <member name="M:JenkinsWebApi.Jenkins.RunJobCompleteAsync(System.String,JenkinsWebApi.JenkinsBuildParameters,System.Int32)">
-            <summary>
-            Run Jenkins job complete asynchron.
-            </summary>
-            <param name="name">Name of the Jenkins job.</param>
-            <param name="parameters">Parameter list for the Jenkins job.</param>
-            <param name="pollingTime">Polling time in milliseconds. The default value is 5 seconds.</param>
-            <returns>Finished build</returns>
         </member>
         <member name="M:JenkinsWebApi.Jenkins.GetEnvInjectVarListAsync(System.String,System.Int32)">
             <summary>

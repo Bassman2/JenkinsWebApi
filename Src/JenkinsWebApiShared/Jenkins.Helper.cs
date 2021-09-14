@@ -13,6 +13,12 @@ namespace JenkinsWebApi
 {
     public sealed partial class Jenkins
     {
+        private T XmlDeserialize<T>(string str) where T : class
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(T));
+            return serializer.Deserialize(new StringReader(str)) as T;
+        }
+
         private async Task<T> GetAsync<T>(string path, CancellationToken cancellationToken) where T : class
         {
             T value = null;
@@ -20,6 +26,22 @@ namespace JenkinsWebApi
             {
                 response.EnsureSuccess();
                 string str = await response.Content.ReadAsStringAsync();
+                //if (path.Contains("queue/item"))
+                //{
+                //    //if (str.StartsWith("<leftItem"))
+                //    //{
+                //    //    Console.WriteLine("leftItem");
+                //    //}
+                //    //else if (str.StartsWith("<buildableItem"))
+                //    //{
+                //    //    Console.WriteLine("buildableItem");
+                //    //}
+                //    //else
+                //    //{
+
+                //    //}
+
+                //}
                 XmlSerializer serializer = new XmlSerializer(typeof(T));
                 value = (T)serializer.Deserialize(new StringReader(str));
             }

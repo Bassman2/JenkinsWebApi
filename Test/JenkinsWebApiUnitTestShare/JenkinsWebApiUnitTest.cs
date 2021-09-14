@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading;
+using System.Xml;
 
 namespace JenkinsTest
 {
@@ -57,26 +58,26 @@ namespace JenkinsTest
         public void JobRunSimpleTest()
         {
             // Arrange
-            JenkinsModelQueueLeftItem item;
+            string runUrl;
 
             // Act
             using (Jenkins jenkins = new Jenkins(host, this.login, this.password))
             {
-                item = jenkins.RunJobAsync("FreeStyle").Result;
+                runUrl = jenkins.RunJobAsync("FreeStyle").Result;
             }
 
             // Assert
-            Assert.IsNotNull(item, nameof(item));
-            Assert.IsNotNull(item.Url, "build.Result");
+            Assert.IsNotNull(runUrl, nameof(runUrl));
+            //Assert.IsNotNull(item.Url, "build.Result");
 
-            Assert.IsNotNull(item.Executable, nameof(item.Executable));
+            //Assert.IsNotNull(item.Executable, nameof(item.Executable));
         }
 
         [TestMethod]
         public void JobRunParamTest()
         {
             // Arrange
-            JenkinsModelQueueLeftItem item;
+            string runUrl;
             JenkinsBuildParameters par = new JenkinsBuildParameters();
             par.Add("ParamA", "TestA");
             par.Add("ParamB", "TestB");
@@ -88,12 +89,12 @@ namespace JenkinsTest
             // Act
             using (Jenkins jenkins = new Jenkins(host, this.login, this.password))
             {
-                 item = jenkins.RunJobAsync("FreestyleParam", par).Result;
+                runUrl = jenkins.RunJobAsync("FreestyleParam", par).Result;
             }
 
             // Assert
-            Assert.IsNotNull(item, nameof(item));
-            Assert.IsNotNull(item.Url, "build.Result");
+            Assert.IsNotNull(runUrl, nameof(runUrl));
+            //Assert.IsNotNull(item.Url, "build.Result");
         }
 
         [TestMethod]
@@ -101,11 +102,11 @@ namespace JenkinsTest
         {
             // Arrange
             MemoryStream stream = new MemoryStream();
-            using (StreamWriter writer = new StreamWriter(stream))
-            {
-                writer.WriteLine("This is a test file!");
-            }
-            JenkinsModelQueueLeftItem item;
+            StreamWriter writer = new StreamWriter(stream);
+            writer.WriteLine("This is a test file!");
+            stream.Position = 0;
+
+            string runUrl;
             JenkinsBuildParameters par = new JenkinsBuildParameters();
             par.Add("ParamA", "");
             par.Add("ParamB", "");
@@ -118,12 +119,12 @@ namespace JenkinsTest
             // Act
             using (Jenkins jenkins = new Jenkins(host, this.login, this.password))
             {
-                item = jenkins.RunJobAsync("FreestyleParam", par).Result;
+                runUrl = jenkins.RunJobAsync("FreestyleFile", par).Result;
             }
 
             // Assert
-            Assert.IsNotNull(item, nameof(item));
-            Assert.IsNotNull(item.Url, "build.Result");
+            Assert.IsNotNull(runUrl, nameof(runUrl));
+            //Assert.IsNotNull(item.Url, "build.Result");
         }
 
         [TestMethod]
@@ -170,6 +171,55 @@ namespace JenkinsTest
             // Assert
             Assert.AreEqual("Default Description", descriptionDef, nameof(descriptionDef));
             Assert.AreEqual("Test Description", descriptionTst, nameof(descriptionTst));
+        }
+
+        [TestMethod]
+        public void JobConfigTest()
+        {
+            // Arrange
+            string orgConfig = null;
+            string updConfig = null;
+            string cngConfig = null;
+            string descOrg = null;
+            string descCng = null;
+
+            // Act
+            using (Jenkins jenkins = new Jenkins(host, this.login, this.password))
+            {
+                orgConfig = jenkins.GetJobConfigAsync("FreeStyleConfig", CancellationToken.None).Result;
+                descOrg = GetConfigDescription(orgConfig);
+                cngConfig = SetConfigDescription(orgConfig, "Test Description");
+                jenkins.SetJobConfigAsync("FreeStyleConfig", cngConfig, CancellationToken.None).Wait();
+                updConfig = jenkins.GetJobConfigAsync("FreeStyleConfig", CancellationToken.None).Result;
+                descCng = GetConfigDescription(updConfig);
+                jenkins.SetJobConfigAsync("FreeStyleConfig", orgConfig, CancellationToken.None).Wait();
+
+            }
+
+            // Assert
+            Assert.IsNotNull(orgConfig);
+            Assert.IsNotNull(updConfig);
+            Assert.IsNotNull(cngConfig);
+            Assert.AreEqual("Default Description", descOrg, nameof(descOrg));
+            Assert.AreEqual("Test Description", descCng, nameof(descCng));
+
+        }
+
+        private string GetConfigDescription(string config)
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(config);
+            XmlElement elm = doc.SelectSingleNode("description") as XmlElement;
+            return elm.InnerText; 
+        }
+
+        private string SetConfigDescription(string config, string description)
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(config);
+            XmlElement elm = doc.SelectSingleNode("description") as XmlElement;
+            elm.InnerText = description;
+            return doc.ToString();
         }
 
         [TestMethod]
