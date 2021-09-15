@@ -28,7 +28,7 @@ namespace JenkinsWebApi
         /// The build is stucked.
         /// </summary>
         /// <remarks>
-        /// This can occure if the nodes are offline.</br>
+        /// This can occure if the nodes are offline.<br/>
         /// See JenkinsRunProgress
         /// </remarks>
         Stuck,
@@ -36,6 +36,11 @@ namespace JenkinsWebApi
         /// The build is blocked.
         /// </summary>
         Blocked,
+
+        /// <summary>
+        /// The Jenkins job is disabled.
+        /// </summary>
+        Disabled,
 
         /// <summary>
         /// The build has been canceled.

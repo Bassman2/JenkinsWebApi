@@ -63,16 +63,16 @@ namespace JenkinsTest
         public void JobRunSimpleTest()
         {
             // Arrange
-            string runUrl;
+            JenkinsRunProgress progress;
 
             // Act
             using (Jenkins jenkins = new Jenkins(host, this.login, this.password))
             {
-                runUrl = jenkins.RunJobAsync("FreeStyle").Result;
+                progress = jenkins.RunJobAsync("FreeStyle").Result;
             }
 
             // Assert
-            Assert.IsNotNull(runUrl, nameof(runUrl));
+            Assert.IsNotNull(progress, nameof(progress));
             //Assert.IsNotNull(item.Url, "build.Result");
 
             //Assert.IsNotNull(item.Executable, nameof(item.Executable));
@@ -82,30 +82,65 @@ namespace JenkinsTest
         public void JobRunOfflineTest()
         {
             // Arrange
-            string runUrl;
+            JenkinsRunProgress progress;
 
             // Act
             using (Jenkins jenkins = new Jenkins(host, this.login, this.password))
             {
-                jenkins.RunConfig.BlockMode = JenkinsRunBlockMode.Leave;
                 jenkins.RunProgress += OnRunProgress;
-                runUrl = jenkins.RunJobAsync("FreestyleOffline").Result;
+                progress = jenkins.RunJobAsync("FreestyleOffline").Result;
             }
 
             // Assert
-            Assert.IsNotNull(runUrl, nameof(runUrl));
-            //Assert.IsNotNull(item.Url, "build.Result");
-
-            //Assert.IsNotNull(item.Executable, nameof(item.Executable));
+            Assert.IsNotNull(progress, nameof(progress));
+            Assert.AreEqual(JenkinsRunStatus.Stuck, progress.Status, nameof(progress.Status));
         }
 
-        
+        //[TestMethod]
+        public void JobRunPeningTest()
+        {
+            // Arrange
+            JenkinsRunProgress longRun;
+            JenkinsRunProgress progress;
+
+            // Act
+            using (Jenkins jenkins = new Jenkins(host, this.login, this.password))
+            {
+                longRun = jenkins.RunJobAsync("FreestyleRun1h", null, new JenkinsRunConfig() { RunMode = JenkinsRunMode.Started }, null, CancellationToken.None).Result;
+                
+                progress = jenkins.RunJobAsync("Freestyle").Result;
+
+                jenkins.StopJobAsync(longRun.JobName, longRun.BuildNum).Wait();
+            }
+
+            // Assert
+            Assert.IsNotNull(progress, nameof(progress));
+            Assert.AreEqual(JenkinsRunStatus.Stuck, progress.Status, nameof(progress.Status));
+        }
+
+
+        [TestMethod]
+        public void JobRunDisabledTest()
+        {
+            // Arrange
+            JenkinsRunProgress progress;
+            
+            // Act
+            using (Jenkins jenkins = new Jenkins(host, this.login, this.password))
+            {
+                progress = jenkins.RunJobAsync("FreestyleDisabled").Result;
+            }
+            
+            // Assert
+            Assert.IsNotNull(progress, nameof(progress));
+            Assert.AreEqual(JenkinsRunStatus.Disabled, progress.Status, nameof(progress.Status));
+        }
 
         [TestMethod]
         public void JobRunParamTest()
         {
             // Arrange
-            string runUrl;
+            JenkinsRunProgress progress;
             JenkinsBuildParameters par = new JenkinsBuildParameters();
             par.Add("ParamA", "TestA");
             par.Add("ParamB", "TestB");
@@ -117,11 +152,11 @@ namespace JenkinsTest
             // Act
             using (Jenkins jenkins = new Jenkins(host, this.login, this.password))
             {
-                runUrl = jenkins.RunJobAsync("FreestyleParam", par).Result;
+                progress = jenkins.RunJobAsync("FreestyleParam", par).Result;
             }
 
             // Assert
-            Assert.IsNotNull(runUrl, nameof(runUrl));
+            Assert.IsNotNull(progress, nameof(progress));
             //Assert.IsNotNull(item.Url, "build.Result");
         }
 
@@ -134,7 +169,7 @@ namespace JenkinsTest
             writer.WriteLine("This is a test file!");
             stream.Position = 0;
 
-            string runUrl;
+            JenkinsRunProgress progress;
             JenkinsBuildParameters par = new JenkinsBuildParameters();
             par.Add("ParamA", "");
             par.Add("ParamB", "");
@@ -147,11 +182,11 @@ namespace JenkinsTest
             // Act
             using (Jenkins jenkins = new Jenkins(host, this.login, this.password))
             {
-                runUrl = jenkins.RunJobAsync("FreestyleFile", par).Result;
+                progress = jenkins.RunJobAsync("FreestyleFile", par).Result;
             }
 
             // Assert
-            Assert.IsNotNull(runUrl, nameof(runUrl));
+            Assert.IsNotNull(progress, nameof(progress));
             //Assert.IsNotNull(item.Url, "build.Result");
         }
 
@@ -301,7 +336,7 @@ namespace JenkinsTest
             Assert.AreEqual("hudson.model.Hudson", server.Class, nameof(server.Class));
             
             Assert.AreEqual("Hello World", server.Description, nameof(server.Description));
-            Assert.AreEqual(-1, server.SlaveAgentPort, nameof(server.SlaveAgentPort));
+            Assert.AreEqual(0, server.SlaveAgentPort, nameof(server.SlaveAgentPort));
             Assert.AreEqual($"{this.host}", server.Url, nameof(server.Url));
             Assert.AreEqual(true, server.UseCrumbs, nameof(server.UseCrumbs));
             Assert.AreEqual(true, server.UseSecurity, nameof(server.UseSecurity));
@@ -309,7 +344,7 @@ namespace JenkinsTest
             Assert.AreEqual(JenkinsModelNodeMode.Normal, server.Mode, nameof(server.Mode));
             Assert.AreEqual("the master Jenkins node", server.NodeDescription, nameof(server.NodeDescription));
             Assert.AreEqual("", server.NodeName, nameof(server.NodeName));
-            Assert.AreEqual(2, server.NumExecutors, nameof(server.NumExecutors));
+            Assert.AreEqual(1, server.NumExecutors, nameof(server.NumExecutors));
 
             Assert.IsNotNull(server.AssignedLabels, nameof(server.AssignedLabels));
             Assert.IsNotNull(server.Jobs, nameof(server.Jobs));

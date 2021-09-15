@@ -1009,26 +1009,6 @@
             The parameter is a file stream.
             </summary>
         </member>
-        <member name="T:JenkinsWebApi.JenkinsRunBlockMode">
-            <summary>
-            Select what to do if a jekins build blocks.
-            </summary>
-        </member>
-        <member name="F:JenkinsWebApi.JenkinsRunBlockMode.Continue">
-            <summary>
-            Poll until the blocking reason is removed.
-            </summary>
-        </member>
-        <member name="F:JenkinsWebApi.JenkinsRunBlockMode.Leave">
-            <summary>
-            Leave the method on blocking
-            </summary>
-        </member>
-        <member name="F:JenkinsWebApi.JenkinsRunBlockMode.Exception">
-            <summary>
-            Throw an Exception if the build blocks.
-            </summary>
-        </member>
         <member name="T:JenkinsWebApi.JenkinsRunConfig">
             <summary>
             Configuration class for JobRunAsync
@@ -1041,7 +1021,12 @@
         </member>
         <member name="P:JenkinsWebApi.JenkinsRunConfig.RunMode">
             <summary>
-            Get or set the JenkinsRunMode. The default value is Ready.
+            Get or set the JenkinsRunMode. The default value is <see cref="F:JenkinsWebApi.JenkinsRunMode.Ready"/> Ready.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.JenkinsRunConfig.ReturnIfBlocked">
+            <summary>
+            Select the behaviour if a jenkins build blocks. The default value is true.
             </summary>
         </member>
         <member name="P:JenkinsWebApi.JenkinsRunConfig.PollingTime">
@@ -1109,6 +1094,21 @@
             Url of the Jenkins job which is running.
             </summary>
         </member>
+        <member name="P:JenkinsWebApi.JenkinsRunProgress.QueueId">
+            <summary>
+            Id of the queue
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.JenkinsRunProgress.QueueUrl">
+            <summary>
+            Url of the queue
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.JenkinsRunProgress.BuildNum">
+            <summary>
+            Number of the build
+            </summary>
+        </member>
         <member name="P:JenkinsWebApi.JenkinsRunProgress.BuildUrl">
             <summary>
             Url of the build
@@ -1154,10 +1154,23 @@
             The build has finished.
             </summary>
         </member>
-        <!-- Badly formed XML comment ignored for member "F:JenkinsWebApi.JenkinsRunStatus.Stuck" -->
+        <member name="F:JenkinsWebApi.JenkinsRunStatus.Stuck">
+            <summary>
+            The build is stucked.
+            </summary>
+            <remarks>
+            This can occure if the nodes are offline.<br/>
+            See JenkinsRunProgress
+            </remarks>
+        </member>
         <member name="F:JenkinsWebApi.JenkinsRunStatus.Blocked">
             <summary>
             The build is blocked.
+            </summary>
+        </member>
+        <member name="F:JenkinsWebApi.JenkinsRunStatus.Disabled">
+            <summary>
+            The Jenkins job is disabled.
             </summary>
         </member>
         <member name="F:JenkinsWebApi.JenkinsRunStatus.Canceled">

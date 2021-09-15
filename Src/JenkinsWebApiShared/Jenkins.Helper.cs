@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -83,15 +84,23 @@ namespace JenkinsWebApi
             }
         }
 
-        private async Task<Uri> PostRunAsync(string path, HttpContent content, CancellationToken cancellationToken)
+        internal class PostRunRes
         {
-            Uri location = null;
+            public Uri Location { get; set; }
+            public HttpStatusCode StatusCode { get; set; }
+        }
+
+        private async Task<PostRunRes> PostRunAsync(string path, HttpContent content, CancellationToken cancellationToken)
+        {
             using (HttpResponseMessage response = await this.client.PostAsync(path, content, cancellationToken))
             {
-                response.EnsureSuccess();
-                location = response.Headers.Location;
+                if (response.StatusCode != HttpStatusCode.Conflict)
+                {
+                    response.EnsureSuccess();
+                }
+                
+                return new PostRunRes() { Location = response.Headers.Location, StatusCode = response.StatusCode };
             }
-            return location;
         }
 
         private async Task DeleteAsync(string path, CancellationToken cancellationToken)

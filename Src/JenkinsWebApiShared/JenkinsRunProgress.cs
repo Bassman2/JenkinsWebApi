@@ -1,6 +1,7 @@
 ﻿using JenkinsWebApi.Model;
 using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Text;
 
 namespace JenkinsWebApi
@@ -14,27 +15,33 @@ namespace JenkinsWebApi
         {
             this.JobName = jobName;
             this.JobUrl = jobUrl;
-
-            if (item is JenkinsModelQueueBuildableItem)
+            if (item is Jenkins.PostRunRes res)
             {
-                JenkinsModelQueueBuildableItem buildableItem = item as JenkinsModelQueueBuildableItem;
+                this.Status = res.StatusCode == HttpStatusCode.Conflict ? JenkinsRunStatus.Disabled : JenkinsRunStatus.Queued;
+                this.QueueUrl = (item as Uri)?.ToString();
+            }
+            else if (item is JenkinsModelQueueBuildableItem buildableItem)
+            {
                 this.Status = buildableItem.IsStuck ? JenkinsRunStatus.Stuck : JenkinsRunStatus.Queued;
                 this.ProblemDescription = buildableItem.Why;
-                this.Result = null;
-                this.BuildUrl = null;
             }
-            else if (item is JenkinsModelQueueLeftItem)
+            else if (item is JenkinsModelQueueLeftItem queueItem)
             {
-                JenkinsModelQueueLeftItem queueItem = item as JenkinsModelQueueLeftItem;
                 this.Status = JenkinsRunStatus.Queued;
+                this.ProblemDescription = queueItem.Why;
                 this.Result = null;
+                this.QueueId = queueItem.Id;
+                this.QueueUrl = queueItem.Url;
+                this.BuildNum = queueItem.Executable?.Number ?? 0;
                 this.BuildUrl = queueItem.Executable?.Url ?? null;
             }
-            else if (item is JenkinsModelRun)
+            else if (item is JenkinsModelRun run)
             {
-                JenkinsModelRun run = item as JenkinsModelRun;
                 this.Status = run.IsBuilding ? JenkinsRunStatus.Building : JenkinsRunStatus.Finished;
                 this.Result = run.IsBuilding ? null : (JenkinsResult?)run.Result;
+                this.QueueId = run.QueueId;
+                //this.QueueUrl =
+                this.BuildNum = run.Number;
                 this.BuildUrl = run.Url;
             }
             else 
@@ -68,6 +75,20 @@ namespace JenkinsWebApi
         /// </summary>
         public string JobUrl { get; }
 
+        /// <summary>
+        /// Id of the queue
+        /// </summary>
+        public long QueueId { get; }
+
+        /// <summary>
+        /// Url of the queue
+        /// </summary>
+        public string QueueUrl { get; }
+
+        /// <summary>
+        /// Number of the build
+        /// </summary>
+        public int BuildNum { get; }
 
         /// <summary>
         /// Url of the build
