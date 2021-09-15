@@ -79,18 +79,7 @@ namespace JenkinsWebApi
         /// <returns>Result and number of the Jenkins build</returns>
         public async Task<JenkinsRunProgress> RunJobAsync(string jobName)
         {
-            return await RunJobAsync(jobName, null, CancellationToken.None);
-        }
-
-        /// <summary>
-        /// Run a Jenkins job.
-        /// </summary>
-        /// <param name="jobName">Name of the Jenkins job</param>
-        /// <param name="parameters">Parameters for the Jenkins job</param>
-        /// <returns>Result and number of the Jenkins build</returns>
-        public async Task<JenkinsRunProgress> RunJobAsync(string jobName, JenkinsBuildParameters parameters)
-        {
-            return await RunJobAsync(jobName, parameters, CancellationToken.None);
+            return await RunJobAsync(jobName, null, null, null, CancellationToken.None);
         }
 
         /// <summary>
@@ -101,9 +90,20 @@ namespace JenkinsWebApi
         /// <returns>Result and number of the Jenkins build</returns>
         public async Task<JenkinsRunProgress> RunJobAsync(string jobName, CancellationToken cancellationToken)
         {
-            return await RunJobAsync(jobName, null, cancellationToken);
+            return await RunJobAsync(jobName, null, null, null, cancellationToken);
         }
 
+        /// <summary>
+        /// Run a Jenkins job.
+        /// </summary>
+        /// <param name="jobName">Name of the Jenkins job</param>
+        /// <param name="parameters">Parameters for the Jenkins job</param>
+        /// <returns>Result and number of the Jenkins build</returns>
+        public async Task<JenkinsRunProgress> RunJobAsync(string jobName, JenkinsBuildParameters parameters)
+        {
+            return await RunJobAsync(jobName, parameters, null, null, CancellationToken.None);
+        }
+        
         /// <summary>
         /// Run a Jenkins job.
         /// </summary>
@@ -113,7 +113,20 @@ namespace JenkinsWebApi
         /// <returns>Result and number of the Jenkins build</returns>
         public async Task<JenkinsRunProgress> RunJobAsync(string jobName, JenkinsBuildParameters parameters, CancellationToken cancellationToken)
         {
-            return await RunJobAsync(jobName, null, null, null, cancellationToken);
+            return await RunJobAsync(jobName, parameters, null, null, cancellationToken);
+        }
+
+        /// <summary>
+        /// Run a Jenkins job.
+        /// </summary>
+        /// <param name="jobName">Name of the Jenkins job</param>
+        /// <param name="parameters">Parameters for the Jenkins job</param>
+        /// <param name="runConfig"></param>
+        /// <param name="progress"></param>
+        /// <returns>Result and number of the Jenkins build</returns>
+        public async Task<JenkinsRunProgress> RunJobAsync(string jobName, JenkinsBuildParameters parameters, JenkinsRunConfig runConfig, IProgress<JenkinsRunProgress> progress)
+        {
+            return await RunJobAsync(jobName, parameters, runConfig, progress, CancellationToken.None);
         }
 
         /// <summary>
