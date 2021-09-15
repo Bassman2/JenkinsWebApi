@@ -111,6 +111,20 @@ namespace JenkinsWebApi
         /// <returns>Result and number of the Jenkins build</returns>
         public async Task<string> RunJobAsync(string jobName, JenkinsBuildParameters parameters, CancellationToken cancellationToken)
         {
+            return await RunJobAsync(jobName, null, null, null, cancellationToken);
+        }
+
+        /// <summary>
+        /// Run a Jenkins job.
+        /// </summary>
+        /// <param name="jobName">Name of the Jenkins job</param>
+        /// <param name="parameters">Parameters for the Jenkins job</param>
+        /// <param name="runConfig"></param>
+        /// <param name="progress"></param>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>Result and number of the Jenkins build</returns>
+        public async Task<string> RunJobAsync(string jobName, JenkinsBuildParameters parameters, JenkinsRunConfig runConfig, IProgress<JenkinsRunProgress> progress, CancellationToken cancellationToken)
+        {
             // IProgress<T> x, 
 
             if (string.IsNullOrEmpty(jobName))
@@ -118,15 +132,18 @@ namespace JenkinsWebApi
                 throw new ArgumentNullException(nameof(jobName));
             }
 
-            Uri location = null;
-            if (parameters == null)
+            runConfig = runConfig ?? this.RunConfig ?? throw new Exception("No JenkinsRunConfig available.");
+            
+            string path = $"/job/{jobName}/{(parameters == null ? "build" : "buildWithParameters")}?delay={runConfig.StartDelay}sec";
+            Uri location = await PostRunAsync(path, null, cancellationToken);
+            
+            if (runConfig.RunMode == JenkinsRunMode.Immediately)
             {
-                location = await PostRunAsync($"/job/{jobName}/build?delay=0sec", null, cancellationToken);
+                return location?.ToString();
             }
-            else
-            {
-                location = await PostRunAsync($"/job/{jobName}/buildWithParameters?delay=0sec", parameters, cancellationToken);
-            }
+
+            // store last progress info to compare for changes
+            JenkinsRunProgress last = null;
 
             // example: http://tiny:8080/queue/item/10/
             if (location != null)
@@ -135,25 +152,20 @@ namespace JenkinsWebApi
 
                 while (!cancellationToken.IsCancellationRequested)
                 {
-                    //string schema = await GetStringAsync(new Uri(location, "api/schema").ToString(), cancellationToken);
-                    //if (schema.StartsWith("<buildableItem"))
-                    //{
-                    //}
-
                     string str = await GetStringAsync(new Uri(location, "api/xml").ToString(), cancellationToken);
                     if (str.StartsWith("<buildableItem"))
                     {
                         JenkinsModelQueueBuildableItem item = XmlDeserialize<JenkinsModelQueueBuildableItem>(str);
-                        Console.WriteLine($"IsPending: {item.IsPending}");
+                        UpdateProgress(ref last, progress, jobName, item);
                     }
                     else if (str.StartsWith("<leftItem"))
                     {
                         JenkinsModelQueueLeftItem item = XmlDeserialize<JenkinsModelQueueLeftItem>(str);
-                        //Console.WriteLine($"IsPending: {item.Executable.Url}");
+                        UpdateProgress(ref last, progress, jobName, item);
+
                         if (item.Executable != null)
                         {
                             buildUrl = item.Executable.Url;
-                            Console.WriteLine($"buildUrl: {buildUrl}");
                             break;
                         }
                     }
@@ -161,21 +173,56 @@ namespace JenkinsWebApi
                     {
                         throw new Exception("Unknown XML Schema!!!");
                     }
+                    await Task.Delay(runConfig.PollingTime);
                 }
+
+                if (runConfig.RunMode <= JenkinsRunMode.Queued)
+                {
+                    return buildUrl;
+                }                
 
                 while (!cancellationToken.IsCancellationRequested)
                 {
                     string str = await GetStringAsync(new Uri(new Uri(buildUrl), "api/xml").ToString(), cancellationToken);
                     JenkinsModelRun run = Deserialize<JenkinsModelRun>(str, buildTypes);
+
+                    UpdateProgress(ref last, progress, jobName, run);
+
                     Console.WriteLine($"IsBuilding: {run.IsBuilding}");
-                    if (!run.IsBuilding)
+                    if (runConfig.RunMode <= JenkinsRunMode.Started && run.IsBuilding)
                     {
+                        // build started
                         return buildUrl;
                     }
+                    if (runConfig.RunMode <= JenkinsRunMode.Started && !run.IsBuilding)
+                    {
+                        // build finished
+                        return buildUrl;
+                    }
+                    await Task.Delay(runConfig.PollingTime);
                 }
             }
 
             return null;
+        }
+
+        private void UpdateProgress(ref JenkinsRunProgress last, IProgress<JenkinsRunProgress> progress, string jobName, object item)
+        {
+            if (this.RunProgress == null & progress == null)
+            {
+                // no progress handler
+                return; 
+            }
+
+            string jobUrl = new Uri(this.client.BaseAddress, $"/job/{jobName}").ToString();
+            JenkinsRunProgress runProgress = new JenkinsRunProgress(jobName, jobUrl, item);
+
+            if (last != runProgress)
+            {
+                this.RunProgress?.Invoke(this, runProgress);
+                progress?.Report(runProgress);
+                last = runProgress;
+            }
         }
 
         /// <summary>

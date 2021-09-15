@@ -73,6 +73,16 @@
             <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
             <returns>Jenkins build data</returns>
         </member>
+        <member name="E:JenkinsWebApi.Jenkins.RunProgress">
+            <summary>
+            JobRunAsync progress event.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Jenkins.RunConfig">
+            <summary>
+            JobRunAsync global configuration.
+            </summary>
+        </member>
         <member name="M:JenkinsWebApi.Jenkins.#ctor(System.String)">
             <summary>
             Initializes a new instance of the Jenkins class.
@@ -468,6 +478,17 @@
             </summary>
             <param name="jobName">Name of the Jenkins job</param>
             <param name="parameters">Parameters for the Jenkins job</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <returns>Result and number of the Jenkins build</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.RunJobAsync(System.String,JenkinsWebApi.JenkinsBuildParameters,JenkinsWebApi.JenkinsRunConfig,System.IProgress{JenkinsWebApi.JenkinsRunProgress},System.Threading.CancellationToken)">
+            <summary>
+            Run a Jenkins job.
+            </summary>
+            <param name="jobName">Name of the Jenkins job</param>
+            <param name="parameters">Parameters for the Jenkins job</param>
+            <param name="runConfig"></param>
+            <param name="progress"></param>
             <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
             <returns>Result and number of the Jenkins build</returns>
         </member>
@@ -986,6 +1007,136 @@
         <member name="F:JenkinsWebApi.JenkinsBuildParameters.JenkinsParameterType.Stream">
             <summary>
             The parameter is a file stream.
+            </summary>
+        </member>
+        <member name="T:JenkinsWebApi.JenkinsRunConfig">
+            <summary>
+            Configuration class for JobRunAsync
+            </summary>
+        </member>
+        <member name="M:JenkinsWebApi.JenkinsRunConfig.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.JenkinsRunConfig.RunMode">
+            <summary>
+            Get or set the JenkinsRunMode. The default value is Ready.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.JenkinsRunConfig.PollingTime">
+            <summary>
+            Status update polling time in milli seconds. The default value is 1 second.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.JenkinsRunConfig.StartDelay">
+            <summary>
+            RunJobAsync start delay in seconds. Defalut value is 0 seconds.
+            </summary>
+        </member>
+        <member name="T:JenkinsWebApi.JenkinsRunMode">
+            <summary>
+            Jenkins job run mode
+            </summary>
+        </member>
+        <member name="F:JenkinsWebApi.JenkinsRunMode.Immediately">
+            <summary>
+            JobRunAsync returns immediately without and informations about the build.
+            </summary>
+        </member>
+        <member name="F:JenkinsWebApi.JenkinsRunMode.Queued">
+            <summary>
+            JobRunAsync returns after the job was queued.
+            </summary>
+        </member>
+        <member name="F:JenkinsWebApi.JenkinsRunMode.Started">
+            <summary>
+            JobRunAsync returns after the job was started.
+            </summary>
+        </member>
+        <member name="F:JenkinsWebApi.JenkinsRunMode.Ready">
+            <summary>
+            JobRunAsync returns after the job was finished.
+            </summary>
+        </member>
+        <member name="T:JenkinsWebApi.JenkinsRunProgress">
+            <summary>
+            JobRunAsync progress information class
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.JenkinsRunProgress.Status">
+            <summary>
+            Status of the run
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.JenkinsRunProgress.Result">
+            <summary>
+            Result of the run
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.JenkinsRunProgress.JobName">
+            <summary>
+            Name of the Jenkins job which is running.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.JenkinsRunProgress.JobUrl">
+            <summary>
+            Url of the Jenkins job which is running.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.JenkinsRunProgress.BuildUrl">
+            <summary>
+            Url of the build
+            </summary>
+        </member>
+        <member name="M:JenkinsWebApi.JenkinsRunProgress.Equals(JenkinsWebApi.JenkinsRunProgress)">
+            <summary>
+            
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JenkinsWebApi.JenkinsRunProgress.Equals(System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JenkinsWebApi.JenkinsRunProgress.GetHashCode">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:JenkinsWebApi.JenkinsRunStatus">
+            <summary>
+            Status of a run
+            </summary>
+        </member>
+        <member name="F:JenkinsWebApi.JenkinsRunStatus.Queued">
+            <summary>
+            The build is queued.
+            </summary>
+        </member>
+        <member name="F:JenkinsWebApi.JenkinsRunStatus.Building">
+            <summary>
+            The build is building.
+            </summary>
+        </member>
+        <member name="F:JenkinsWebApi.JenkinsRunStatus.Finished">
+            <summary>
+            The build has finished.
+            </summary>
+        </member>
+        <member name="F:JenkinsWebApi.JenkinsRunStatus.Blocked">
+            <summary>
+            The build is blocked.
+            </summary>
+        </member>
+        <member name="F:JenkinsWebApi.JenkinsRunStatus.Canceled">
+            <summary>
+            The build has been canceled.
             </summary>
         </member>
         <member name="P:JenkinsWebApi.Model.JenkinsCloudbeesCredentialsStoreAction.Class">

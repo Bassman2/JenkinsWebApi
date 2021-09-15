@@ -21,6 +21,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)Jenkins.User.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JenkinsBuildParameters.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Jenkins.Job.Wait.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JenkinsRunConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JenkinsRunMode.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JenkinsRunProgress.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JenkinsRunStatus.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsCloudbeesAbstractFolder.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsCloudbeesComputedComputedFolder.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsCloudbeesCredentialsStoreAction.cs" />

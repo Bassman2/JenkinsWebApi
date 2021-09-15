@@ -8,6 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Net.Sockets;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -43,36 +44,50 @@ namespace JenkinsWebApi
                                         .ToArray();
 
         /// <summary>
+        /// JobRunAsync progress event.
+        /// </summary>
+        public event EventHandler<JenkinsRunProgress> RunProgress;
+
+        /// <summary>
+        /// JobRunAsync global configuration.
+        /// </summary>
+        public JenkinsRunConfig RunConfig { get; set; }
+
+
+        /// <summary>
         /// Initializes a new instance of the Jenkins class.
         /// </summary>
         /// <param name="host">Host URL of the Jenkins server</param>
-        public Jenkins(string host) : this(new Uri(host))
+        public Jenkins(string host) : this(new Uri(host), null, null)
         { }
 
         /// <summary>
         /// Initializes a new instance of the Jenkins class.
         /// </summary>
         /// <param name="host">Host URL of the Jenkins server</param>
-        public Jenkins(Uri host)
+        public Jenkins(Uri host) : this(host, null, null)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
+            //if (host == null)
+            //{
+            //    throw new ArgumentNullException(nameof(host));
+            //}
 
-            // connect
-            this.handler = new HttpClientHandler
-            {
-                CookieContainer = new System.Net.CookieContainer(),
-                UseCookies = true
-                //AllowAutoRedirect = false
-            };
-            this.client = new HttpClient(this.handler)
-            {
-                BaseAddress = host
-            };
+            //// init variables
+            //this.RunConfig = new JenkinsRunConfig();
 
-            Crumb();
+            //// connect
+            //this.handler = new HttpClientHandler
+            //{
+            //    CookieContainer = new System.Net.CookieContainer(),
+            //    UseCookies = true
+            //    //AllowAutoRedirect = false
+            //};
+            //this.client = new HttpClient(this.handler)
+            //{
+            //    BaseAddress = host
+            //};
+
+            //Crumb();
         }
 
         /// <summary>
@@ -97,6 +112,9 @@ namespace JenkinsWebApi
                 throw new ArgumentNullException(nameof(host));
             }
 
+            // init variables
+            this.RunConfig = new JenkinsRunConfig();
+
             // connect
             this.handler = new HttpClientHandler
             {
@@ -109,8 +127,12 @@ namespace JenkinsWebApi
             };
 
             // set authorization
-            this.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.ASCII.GetBytes($"{login}:{passwordOrToken}")));
+            if (!string.IsNullOrEmpty(login) && !string.IsNullOrEmpty(passwordOrToken))
+            {
+                this.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.ASCII.GetBytes($"{login}:{passwordOrToken}")));
+            }
 
+            // set crumb
             Crumb();
         }
 
