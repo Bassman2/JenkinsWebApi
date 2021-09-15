@@ -54,6 +54,11 @@ namespace JenkinsTest
             Assert.IsNotNull(server);
         }
 
+        private void OnRunProgress(object sender, JenkinsRunProgress e)
+        {
+            Console.WriteLine($"Progess: {e.Status} {e.ProblemDescription}");
+        }
+
         [TestMethod]
         public void JobRunSimpleTest()
         {
@@ -72,6 +77,29 @@ namespace JenkinsTest
 
             //Assert.IsNotNull(item.Executable, nameof(item.Executable));
         }
+
+        [TestMethod]
+        public void JobRunOfflineTest()
+        {
+            // Arrange
+            string runUrl;
+
+            // Act
+            using (Jenkins jenkins = new Jenkins(host, this.login, this.password))
+            {
+                jenkins.RunConfig.BlockMode = JenkinsRunBlockMode.Leave;
+                jenkins.RunProgress += OnRunProgress;
+                runUrl = jenkins.RunJobAsync("FreestyleOffline").Result;
+            }
+
+            // Assert
+            Assert.IsNotNull(runUrl, nameof(runUrl));
+            //Assert.IsNotNull(item.Url, "build.Result");
+
+            //Assert.IsNotNull(item.Executable, nameof(item.Executable));
+        }
+
+        
 
         [TestMethod]
         public void JobRunParamTest()

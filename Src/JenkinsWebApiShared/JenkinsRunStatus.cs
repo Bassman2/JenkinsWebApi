@@ -25,6 +25,14 @@ namespace JenkinsWebApi
         Finished,
 
         /// <summary>
+        /// The build is stucked.
+        /// </summary>
+        /// <remarks>
+        /// This can occure if the nodes are offline.</br>
+        /// See JenkinsRunProgress
+        /// </remarks>
+        Stuck,
+        /// <summary>
         /// The build is blocked.
         /// </summary>
         Blocked,

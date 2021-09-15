@@ -18,7 +18,8 @@ namespace JenkinsWebApi
             if (item is JenkinsModelQueueBuildableItem)
             {
                 JenkinsModelQueueBuildableItem buildableItem = item as JenkinsModelQueueBuildableItem;
-                this.Status = JenkinsRunStatus.Queued;
+                this.Status = buildableItem.IsStuck ? JenkinsRunStatus.Stuck : JenkinsRunStatus.Queued;
+                this.ProblemDescription = buildableItem.Why;
                 this.Result = null;
                 this.BuildUrl = null;
             }
@@ -46,6 +47,11 @@ namespace JenkinsWebApi
         /// Status of the run
         /// </summary>
         public JenkinsRunStatus Status { get; }
+
+        /// <summary>
+        /// Problem description
+        /// </summary>
+        public string ProblemDescription { get; }
 
         /// <summary>
         /// Result of the run

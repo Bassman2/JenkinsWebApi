@@ -1009,6 +1009,26 @@
             The parameter is a file stream.
             </summary>
         </member>
+        <member name="T:JenkinsWebApi.JenkinsRunBlockMode">
+            <summary>
+            Select what to do if a jekins build blocks.
+            </summary>
+        </member>
+        <member name="F:JenkinsWebApi.JenkinsRunBlockMode.Continue">
+            <summary>
+            Poll until the blocking reason is removed.
+            </summary>
+        </member>
+        <member name="F:JenkinsWebApi.JenkinsRunBlockMode.Leave">
+            <summary>
+            Leave the method on blocking
+            </summary>
+        </member>
+        <member name="F:JenkinsWebApi.JenkinsRunBlockMode.Exception">
+            <summary>
+            Throw an Exception if the build blocks.
+            </summary>
+        </member>
         <member name="T:JenkinsWebApi.JenkinsRunConfig">
             <summary>
             Configuration class for JobRunAsync
@@ -1067,6 +1087,11 @@
         <member name="P:JenkinsWebApi.JenkinsRunProgress.Status">
             <summary>
             Status of the run
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.JenkinsRunProgress.ProblemDescription">
+            <summary>
+            Problem description
             </summary>
         </member>
         <member name="P:JenkinsWebApi.JenkinsRunProgress.Result">
@@ -1129,6 +1154,7 @@
             The build has finished.
             </summary>
         </member>
+        <!-- Badly formed XML comment ignored for member "F:JenkinsWebApi.JenkinsRunStatus.Stuck" -->
         <member name="F:JenkinsWebApi.JenkinsRunStatus.Blocked">
             <summary>
             The build is blocked.

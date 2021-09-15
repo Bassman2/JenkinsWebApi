@@ -29,5 +29,9 @@
         /// RunJobAsync start delay in seconds. Defalut value is 0 seconds.
         /// </summary>
         public int StartDelay { get; set; }
+
+        public JenkinsRunBlockMode BlockMode { get; set; }
     }
+
+    
 }
