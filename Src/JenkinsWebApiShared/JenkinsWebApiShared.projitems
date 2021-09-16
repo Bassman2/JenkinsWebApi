@@ -19,12 +19,15 @@
     <Compile Include="$(MSBuildThisFileDirectory)Jenkins.Job.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Jenkins.System.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Jenkins.User.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JenkinsBuild.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JenkinsBuildParameters.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Jenkins.Job.Wait.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JenkinsJob.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JenkinsRunConfig.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JenkinsRunMode.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JenkinsRunProgress.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JenkinsRunStatus.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JenkinsView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsCloudbeesAbstractFolder.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsCloudbeesComputedComputedFolder.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsCloudbeesCredentialsStoreAction.cs" />
@@ -163,5 +166,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="$(MSBuildThisFileDirectory)Model\Generated\stat.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)Comments.xml">
+      <SubType>Designer</SubType>
+    </None>
+    <Compile Include="$(MSBuildThisFileDirectory)Jenkins.MyView.cs" />
   </ItemGroup>
 </Project>

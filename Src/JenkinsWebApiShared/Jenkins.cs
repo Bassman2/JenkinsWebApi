@@ -66,29 +66,7 @@ namespace JenkinsWebApi
         /// </summary>
         /// <param name="host">Host URL of the Jenkins server</param>
         public Jenkins(Uri host) : this(host, null, null)
-        {
-            //if (host == null)
-            //{
-            //    throw new ArgumentNullException(nameof(host));
-            //}
-
-            //// init variables
-            //this.RunConfig = new JenkinsRunConfig();
-
-            //// connect
-            //this.handler = new HttpClientHandler
-            //{
-            //    CookieContainer = new System.Net.CookieContainer(),
-            //    UseCookies = true
-            //    //AllowAutoRedirect = false
-            //};
-            //this.client = new HttpClient(this.handler)
-            //{
-            //    BaseAddress = host
-            //};
-
-            //Crumb();
-        }
+        { }
 
         /// <summary>
         /// Initializes a new instance of the Jenkins class.
@@ -247,6 +225,16 @@ namespace JenkinsWebApi
             }
 
             return list;
+        }
+
+        public JenkinsView GetView(string viewName)
+        {
+            return new JenkinsView(this, viewName);
+        }
+
+        public JenkinsJob GetJob(string jobName)
+        {
+            return new JenkinsJob(this, jobName);
         }
     }
 }

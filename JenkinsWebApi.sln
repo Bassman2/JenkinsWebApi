@@ -48,7 +48,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JenkinsWebApiUnitTestFramew
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{4FEB7434-B6EB-4693-A703-FEE427C091E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Generator", "Tools\Generator\Generator.csproj", "{C11CFF79-449F-4BCE-8DF8-A8C48FAB1E14}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Generator", "Tools\Generator\Generator.csproj", "{C11CFF79-449F-4BCE-8DF8-A8C48FAB1E14}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution

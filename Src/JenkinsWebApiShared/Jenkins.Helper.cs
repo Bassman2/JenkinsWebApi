@@ -64,6 +64,7 @@ namespace JenkinsWebApi
         {
             using (HttpResponseMessage response = await this.client.PostAsync(path, null, cancellationToken))
             {
+                string str = await response.Content.ReadAsStringAsync();
                 response.EnsureSuccess();
             }
         }

@@ -252,9 +252,9 @@ namespace JenkinsTest
             // Act
             using (Jenkins jenkins = new Jenkins(host, this.login, this.password))
             {
-                jenkins.DisableJobAsync("FreestyleDisableEnable").Wait();
+                jenkins.DisableJobAsync("FreestyleDisableEnable", CancellationToken.None).Wait();
                 freeStyleJobDisabled = jenkins.GetJobAsync<JenkinsModelFreeStyleProject>("FreestyleDisableEnable").Result;
-                jenkins.EnableJobAsync("FreestyleDisableEnable").Wait();
+                jenkins.EnableJobAsync("FreestyleDisableEnable", CancellationToken.None).Wait();
                 freeStyleJobEnabled = jenkins.GetJobAsync<JenkinsModelFreeStyleProject>("FreestyleDisableEnable").Result;
             }
 

@@ -8,7 +8,6 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
-using System.Xml.Serialization;
 
 namespace JenkinsWebApi
 {
@@ -30,6 +29,7 @@ namespace JenkinsWebApi
         /// <param name="jobName">Name of the job</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Jenkins job data</returns>
+        /// <remarks><include file="Comments.xml" path="comments/comment[@id='job']/*"/></remarks>
         public async Task<JenkinsModelAbstractItem> GetJobAsync(string jobName, CancellationToken cancellationToken)
         {
             if (string.IsNullOrEmpty(jobName))
@@ -48,6 +48,7 @@ namespace JenkinsWebApi
         /// <typeparam name="T">Job class type</typeparam>
         /// <param name="jobName">Name of the job</param>
         /// <returns>Jenkins job data</returns>
+        /// <remarks><include file="Comments.xml" path="comments/comment[@id='job']/*"/></remarks>
         public async Task<T> GetJobAsync<T>(string jobName)
         {
             return await GetJobAsync<T>(jobName, CancellationToken.None);
@@ -60,6 +61,7 @@ namespace JenkinsWebApi
         /// <param name="jobName">Name of the job</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Jenkins job data</returns>
+        /// <remarks><include file="Comments.xml" path="comments/comment[@id='job']/*"/></remarks>
         public async Task<T> GetJobAsync<T>(string jobName, CancellationToken cancellationToken)
         {
             if (string.IsNullOrEmpty(jobName))
@@ -468,7 +470,7 @@ namespace JenkinsWebApi
             //Dictionary<string, string> content = new Dictionary<string, string>();
             //content.Add("Submit", "Disable Project");
             //await PostAsync($"job/{jobName}/disable", content, cancellationToken);
-            await PostAsync($"job/{jobName}/disable", cancellationToken);
+            await PostAsync($"/job/{jobName}/disable", cancellationToken);
         }
 
         /// <summary>

@@ -2,6 +2,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace JenkinsWebApi
 {
@@ -12,6 +13,7 @@ namespace JenkinsWebApi
         /// </summary>
         /// <param name="viewName">Name of the view</param>
         /// <returns> Returns view data.</returns>
+        /// <remarks><include file="Comments.xml" path="comments/comment[@id='view']/*"/></remarks>
         public async Task<JenkinsModelView> GetViewAsync(string viewName)
         {
             return await GetViewAsync(viewName, CancellationToken.None);
@@ -23,6 +25,7 @@ namespace JenkinsWebApi
         /// <param name="viewName">Name of the view</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns> Returns view data.</returns>
+        /// <remarks><include file="Comments.xml" path="comments/comment[@id='view']/*"/></remarks>
         public async Task<JenkinsModelView> GetViewAsync(string viewName, CancellationToken cancellationToken)
         {
             if (string.IsNullOrEmpty(viewName))
@@ -41,45 +44,7 @@ namespace JenkinsWebApi
         /// <typeparam name="T">Type of view return data.</typeparam> 
         /// <param name="viewName">Name of the view.</param>
         /// <returns>Returns view data.</returns>
-        /// <remarks>
-        /// <list type="table">
-        /// <listheader>
-        /// <term>View</term>
-        /// <term>Class</term>
-        /// <term>Plugin</term>
-        /// </listheader>
-        /// <item>
-        /// <term>List View</term>
-        /// <term><see cref="JenkinsModelListView"/></term>
-        /// <term>-</term>
-        /// </item>
-        /// <item>
-        /// <term>My View</term>
-        /// <term><see cref="JenkinsModelMyView"/></term>
-        /// <term>-</term>
-        /// </item>
-        /// <item>
-        /// <term>All View</term>
-        /// <term><see cref="JenkinsModelAllView"/></term>
-        /// <term>-</term>
-        /// </item>
-        /// <item>
-        /// <term>Categorized Jobs View</term>
-        /// <term><see cref="JenkinsJenkinsciCategorizedJobsView"/></term>
-        /// <term><see href="https://plugins.jenkins.io/categorized-view/">categorized-view</see></term>
-        /// </item>
-        /// <item>
-        /// <term>Dashboard</term>
-        /// <term><see cref="JenkinsPluginsViewDashboardDashboard"/></term>
-        /// <term><see href="https://plugins.jenkins.io/dashboard-view/">Dashboard View</see></term>
-        /// </item>
-        /// <item>
-        /// <term>Multijob View</term>
-        /// <term><see cref="JenkinsTikalMultiJobView"/></term>
-        /// <term><see href="https://plugins.jenkins.io/jenkins-multijob-plugin/">Multijob</see></term>
-        /// </item>
-        /// </list>
-        /// </remarks>
+        /// <remarks><include file="Comments.xml" path="comments/comment[@id='view']/*"/></remarks>
         public async Task<T> GetViewAsync<T>(string viewName)
         {
             return await GetViewAsync<T>(viewName, CancellationToken.None);
@@ -92,6 +57,7 @@ namespace JenkinsWebApi
         /// <param name="viewName">Name of the view</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Returns view data.</returns>
+        /// <remarks><include file="Comments.xml" path="comments/comment[@id='view']/*"/></remarks>
         public async Task<T> GetViewAsync<T>(string viewName, CancellationToken cancellationToken)
         {
             if (string.IsNullOrEmpty(viewName))
@@ -105,61 +71,93 @@ namespace JenkinsWebApi
         }
 
         /// <summary>
-        /// Get the Jenkins my view data.
+        /// 
         /// </summary>
-        /// <param name="viewName">Name of the view</param>
-        /// <returns>Returns view data.</returns>
-        public async Task<JenkinsModelView> GetMyViewAsync(string viewName)
+        /// <param name="viewName"></param>
+        /// <returns></returns>
+        public async Task<XmlDocument> GetViewConfigXmlAsync(string viewName)
         {
-            return await GetMyViewAsync(viewName, CancellationToken.None);
+            return await GetViewConfigXmlAsync(viewName, CancellationToken.None);
         }
 
         /// <summary>
-        /// Get the Jenkins my view data.
+        /// 
         /// </summary>
-        /// <param name="viewName">Name of the view</param>
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <returns>Returns view data.</returns>
-        public async Task<JenkinsModelView> GetMyViewAsync(string viewName, CancellationToken cancellationToken)
+        /// <param name="viewName"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public async Task<XmlDocument> GetViewConfigXmlAsync(string viewName, CancellationToken cancellationToken)
         {
-            if (string.IsNullOrEmpty(viewName))
-            {
-                throw new ArgumentNullException(nameof(viewName));
-            }
-
-            string str = await GetStringAsync($"me/my-views/view/{viewName}/api/xml", cancellationToken);
-            JenkinsModelView view = Deserialize<JenkinsModelView>(str, viewTypes);
-            return view;
+            string str = await GetViewConfigAsync(viewName, cancellationToken);
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(str);
+            return doc;
         }
 
         /// <summary>
-        /// Get the Jenkins my view data.
+        /// 
         /// </summary>
-        /// <typeparam name="T">Type of view return data.</typeparam> 
-        /// <param name="viewName">Name of the view.</param>
-        /// <returns>Returns view data.</returns>
-        public async Task<T> GetMyViewAsync<T>(string viewName)
+        /// <param name="viewName"></param>
+        /// <returns></returns>
+        public async Task<string> GetViewConfigAsync(string viewName)
         {
-            return await GetMyViewAsync<T>(viewName, CancellationToken.None);
+            return await GetViewConfigAsync(viewName, CancellationToken.None);
         }
 
         /// <summary>
-        /// Get the Jenkins my view data.
+        /// 
         /// </summary>
-        /// <typeparam name="T">Type of view return data.</typeparam> 
-        /// <param name="viewName">Name of the view</param>
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <returns>Returns view data.</returns>
-        public async Task<T> GetMyViewAsync<T>(string viewName, CancellationToken cancellationToken)
+        /// <param name="viewName"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public async Task<string> GetViewConfigAsync(string viewName, CancellationToken cancellationToken)
         {
-            if (string.IsNullOrEmpty(viewName))
-            {
-                throw new ArgumentNullException(nameof(viewName));
-            }
-
-            string str = await GetStringAsync($"me/my-views/view/{viewName}/api/xml", cancellationToken);
-            var view = Deserialize<T>(str, viewTypes);
-            return view;
+            string str = await GetStringAsync($"/view/{viewName}/config.xml", cancellationToken);
+            return str;
         }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="viewName"></param>
+        /// <returns></returns>
+        public async Task SetViewConfigXmlAsync(string viewName, XmlDocument config)
+        {
+            await SetViewConfigXmlAsync(viewName, config, CancellationToken.None);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="viewName"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public async Task SetViewConfigXmlAsync(string viewName, XmlDocument config, CancellationToken cancellationToken)
+        {
+            await SetViewConfigAsync(viewName, config.ToString(), cancellationToken); 
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="viewName"></param>
+        /// <returns></returns>
+        public async Task SetViewConfigAsync(string viewName, string config)
+        {
+            await SetViewConfigAsync(viewName, config, CancellationToken.None);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="viewName"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public async Task SetViewConfigAsync(string viewName, string config, CancellationToken cancellationToken)
+        {
+            await PostAsync($"/view/{viewName}/config.xml", cancellationToken);
+
+        }
+
     }
 }

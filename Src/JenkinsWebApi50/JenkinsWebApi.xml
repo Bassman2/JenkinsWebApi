@@ -431,6 +431,63 @@
             <param name="jobName">Name of the job</param>
             <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
             <returns>Jenkins job data</returns>
+            <remarks><list type="table">
+      <listheader>
+        <term>Job</term>
+        <term>Class</term>
+        <term>Plugin</term>
+      </listheader>
+      <item>
+        <term>Freestyle Project</term>
+        <term>
+          <see cref="T:JenkinsWebApi.Model.JenkinsModelFreeStyleProject" />
+        </term>
+        <term>-</term>
+      </item>
+      <!--
+      <item>
+        <term>My View</term>
+        <term>
+          <see cref="JenkinsModelMyView"/>
+        </term>
+        <term>-</term>
+      </item>
+      <item>
+        <term>All View</term>
+        <term>
+          <see cref="JenkinsModelAllView"/>
+        </term>
+        <term>-</term>
+      </item>
+      <item>
+        <term>Categorized Jobs View</term>
+        <term>
+          <see cref="JenkinsJenkinsciCategorizedJobsView"/>
+        </term>
+        <term>
+          <see href="https://plugins.jenkins.io/categorized-view/">categorized-view</see>
+        </term>
+      </item>
+      <item>
+        <term>Dashboard</term>
+        <term>
+          <see cref="JenkinsPluginsViewDashboardDashboard"/>
+        </term>
+        <term>
+          <see href="https://plugins.jenkins.io/dashboard-view/">Dashboard View</see>
+        </term>
+      </item>
+      <item>
+        <term>Multijob View</term>
+        <term>
+          <see cref="JenkinsTikalMultiJobView"/>
+        </term>
+        <term>
+          <see href="https://plugins.jenkins.io/jenkins-multijob-plugin/">Multijob</see>
+        </term>
+      </item>
+      -->
+    </list></remarks>
         </member>
         <member name="M:JenkinsWebApi.Jenkins.GetJobAsync``1(System.String)">
             <summary>
@@ -439,6 +496,63 @@
             <typeparam name="T">Job class type</typeparam>
             <param name="jobName">Name of the job</param>
             <returns>Jenkins job data</returns>
+            <remarks><list type="table">
+      <listheader>
+        <term>Job</term>
+        <term>Class</term>
+        <term>Plugin</term>
+      </listheader>
+      <item>
+        <term>Freestyle Project</term>
+        <term>
+          <see cref="T:JenkinsWebApi.Model.JenkinsModelFreeStyleProject" />
+        </term>
+        <term>-</term>
+      </item>
+      <!--
+      <item>
+        <term>My View</term>
+        <term>
+          <see cref="JenkinsModelMyView"/>
+        </term>
+        <term>-</term>
+      </item>
+      <item>
+        <term>All View</term>
+        <term>
+          <see cref="JenkinsModelAllView"/>
+        </term>
+        <term>-</term>
+      </item>
+      <item>
+        <term>Categorized Jobs View</term>
+        <term>
+          <see cref="JenkinsJenkinsciCategorizedJobsView"/>
+        </term>
+        <term>
+          <see href="https://plugins.jenkins.io/categorized-view/">categorized-view</see>
+        </term>
+      </item>
+      <item>
+        <term>Dashboard</term>
+        <term>
+          <see cref="JenkinsPluginsViewDashboardDashboard"/>
+        </term>
+        <term>
+          <see href="https://plugins.jenkins.io/dashboard-view/">Dashboard View</see>
+        </term>
+      </item>
+      <item>
+        <term>Multijob View</term>
+        <term>
+          <see cref="JenkinsTikalMultiJobView"/>
+        </term>
+        <term>
+          <see href="https://plugins.jenkins.io/jenkins-multijob-plugin/">Multijob</see>
+        </term>
+      </item>
+      -->
+    </list></remarks>
         </member>
         <member name="M:JenkinsWebApi.Jenkins.GetJobAsync``1(System.String,System.Threading.CancellationToken)">
             <summary>
@@ -448,6 +562,63 @@
             <param name="jobName">Name of the job</param>
             <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
             <returns>Jenkins job data</returns>
+            <remarks><list type="table">
+      <listheader>
+        <term>Job</term>
+        <term>Class</term>
+        <term>Plugin</term>
+      </listheader>
+      <item>
+        <term>Freestyle Project</term>
+        <term>
+          <see cref="T:JenkinsWebApi.Model.JenkinsModelFreeStyleProject" />
+        </term>
+        <term>-</term>
+      </item>
+      <!--
+      <item>
+        <term>My View</term>
+        <term>
+          <see cref="JenkinsModelMyView"/>
+        </term>
+        <term>-</term>
+      </item>
+      <item>
+        <term>All View</term>
+        <term>
+          <see cref="JenkinsModelAllView"/>
+        </term>
+        <term>-</term>
+      </item>
+      <item>
+        <term>Categorized Jobs View</term>
+        <term>
+          <see cref="JenkinsJenkinsciCategorizedJobsView"/>
+        </term>
+        <term>
+          <see href="https://plugins.jenkins.io/categorized-view/">categorized-view</see>
+        </term>
+      </item>
+      <item>
+        <term>Dashboard</term>
+        <term>
+          <see cref="JenkinsPluginsViewDashboardDashboard"/>
+        </term>
+        <term>
+          <see href="https://plugins.jenkins.io/dashboard-view/">Dashboard View</see>
+        </term>
+      </item>
+      <item>
+        <term>Multijob View</term>
+        <term>
+          <see cref="JenkinsTikalMultiJobView"/>
+        </term>
+        <term>
+          <see href="https://plugins.jenkins.io/jenkins-multijob-plugin/">Multijob</see>
+        </term>
+      </item>
+      -->
+    </list></remarks>
         </member>
         <member name="M:JenkinsWebApi.Jenkins.RunJobAsync(System.String)">
             <summary>
@@ -863,6 +1034,61 @@
             </summary>
             <param name="viewName">Name of the view</param>
             <returns> Returns view data.</returns>
+            <remarks><list type="table">
+      <listheader>
+        <term>View</term>
+        <term>Class</term>
+        <term>Plugin</term>
+      </listheader>
+      <item>
+        <term>List View</term>
+        <term>
+          <see cref="T:JenkinsWebApi.Model.JenkinsModelListView" />
+        </term>
+        <term>-</term>
+      </item>
+      <item>
+        <term>My View</term>
+        <term>
+          <see cref="T:JenkinsWebApi.Model.JenkinsModelMyView" />
+        </term>
+        <term>-</term>
+      </item>
+      <item>
+        <term>All View</term>
+        <term>
+          <see cref="T:JenkinsWebApi.Model.JenkinsModelAllView" />
+        </term>
+        <term>-</term>
+      </item>
+      <item>
+        <term>Categorized Jobs View</term>
+        <term>
+          <see cref="T:JenkinsWebApi.Model.JenkinsJenkinsciCategorizedJobsView" />
+        </term>
+        <term>
+          <see href="https://plugins.jenkins.io/categorized-view/">categorized-view</see>
+        </term>
+      </item>
+      <item>
+        <term>Dashboard</term>
+        <term>
+          <see cref="T:JenkinsWebApi.Model.JenkinsPluginsViewDashboardDashboard" />
+        </term>
+        <term>
+          <see href="https://plugins.jenkins.io/dashboard-view/">Dashboard View</see>
+        </term>
+      </item>
+      <item>
+        <term>Multijob View</term>
+        <term>
+          <see cref="T:JenkinsWebApi.Model.JenkinsTikalMultiJobView" />
+        </term>
+        <term>
+          <see href="https://plugins.jenkins.io/jenkins-multijob-plugin/">Multijob</see>
+        </term>
+      </item>
+    </list></remarks>
         </member>
         <member name="M:JenkinsWebApi.Jenkins.GetViewAsync(System.String,System.Threading.CancellationToken)">
             <summary>
@@ -871,6 +1097,61 @@
             <param name="viewName">Name of the view</param>
             <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
             <returns> Returns view data.</returns>
+            <remarks><list type="table">
+      <listheader>
+        <term>View</term>
+        <term>Class</term>
+        <term>Plugin</term>
+      </listheader>
+      <item>
+        <term>List View</term>
+        <term>
+          <see cref="T:JenkinsWebApi.Model.JenkinsModelListView" />
+        </term>
+        <term>-</term>
+      </item>
+      <item>
+        <term>My View</term>
+        <term>
+          <see cref="T:JenkinsWebApi.Model.JenkinsModelMyView" />
+        </term>
+        <term>-</term>
+      </item>
+      <item>
+        <term>All View</term>
+        <term>
+          <see cref="T:JenkinsWebApi.Model.JenkinsModelAllView" />
+        </term>
+        <term>-</term>
+      </item>
+      <item>
+        <term>Categorized Jobs View</term>
+        <term>
+          <see cref="T:JenkinsWebApi.Model.JenkinsJenkinsciCategorizedJobsView" />
+        </term>
+        <term>
+          <see href="https://plugins.jenkins.io/categorized-view/">categorized-view</see>
+        </term>
+      </item>
+      <item>
+        <term>Dashboard</term>
+        <term>
+          <see cref="T:JenkinsWebApi.Model.JenkinsPluginsViewDashboardDashboard" />
+        </term>
+        <term>
+          <see href="https://plugins.jenkins.io/dashboard-view/">Dashboard View</see>
+        </term>
+      </item>
+      <item>
+        <term>Multijob View</term>
+        <term>
+          <see cref="T:JenkinsWebApi.Model.JenkinsTikalMultiJobView" />
+        </term>
+        <term>
+          <see href="https://plugins.jenkins.io/jenkins-multijob-plugin/">Multijob</see>
+        </term>
+      </item>
+    </list></remarks>
         </member>
         <member name="M:JenkinsWebApi.Jenkins.GetViewAsync``1(System.String)">
             <summary>
@@ -879,45 +1160,61 @@
             <typeparam name="T">Type of view return data.</typeparam> 
             <param name="viewName">Name of the view.</param>
             <returns>Returns view data.</returns>
-            <remarks>
-            <list type="table">
-            <listheader>
-            <term>View</term>
-            <term>Class</term>
-            <term>Plugin</term>
-            </listheader>
-            <item>
-            <term>List View</term>
-            <term><see cref="T:JenkinsWebApi.Model.JenkinsModelListView"/></term>
-            <term>-</term>
-            </item>
-            <item>
-            <term>My View</term>
-            <term><see cref="T:JenkinsWebApi.Model.JenkinsModelMyView"/></term>
-            <term>-</term>
-            </item>
-            <item>
-            <term>All View</term>
-            <term><see cref="T:JenkinsWebApi.Model.JenkinsModelAllView"/></term>
-            <term>-</term>
-            </item>
-            <item>
-            <term>Categorized Jobs View</term>
-            <term><see cref="T:JenkinsWebApi.Model.JenkinsJenkinsciCategorizedJobsView"/></term>
-            <term><see href="https://plugins.jenkins.io/categorized-view/">categorized-view</see></term>
-            </item>
-            <item>
-            <term>Dashboard</term>
-            <term><see cref="T:JenkinsWebApi.Model.JenkinsPluginsViewDashboardDashboard"/></term>
-            <term><see href="https://plugins.jenkins.io/dashboard-view/">Dashboard View</see></term>
-            </item>
-            <item>
-            <term>Multijob View</term>
-            <term><see cref="T:JenkinsWebApi.Model.JenkinsTikalMultiJobView"/></term>
-            <term><see href="https://plugins.jenkins.io/jenkins-multijob-plugin/">Multijob</see></term>
-            </item>
-            </list>
-            </remarks>
+            <remarks><list type="table">
+      <listheader>
+        <term>View</term>
+        <term>Class</term>
+        <term>Plugin</term>
+      </listheader>
+      <item>
+        <term>List View</term>
+        <term>
+          <see cref="T:JenkinsWebApi.Model.JenkinsModelListView" />
+        </term>
+        <term>-</term>
+      </item>
+      <item>
+        <term>My View</term>
+        <term>
+          <see cref="T:JenkinsWebApi.Model.JenkinsModelMyView" />
+        </term>
+        <term>-</term>
+      </item>
+      <item>
+        <term>All View</term>
+        <term>
+          <see cref="T:JenkinsWebApi.Model.JenkinsModelAllView" />
+        </term>
+        <term>-</term>
+      </item>
+      <item>
+        <term>Categorized Jobs View</term>
+        <term>
+          <see cref="T:JenkinsWebApi.Model.JenkinsJenkinsciCategorizedJobsView" />
+        </term>
+        <term>
+          <see href="https://plugins.jenkins.io/categorized-view/">categorized-view</see>
+        </term>
+      </item>
+      <item>
+        <term>Dashboard</term>
+        <term>
+          <see cref="T:JenkinsWebApi.Model.JenkinsPluginsViewDashboardDashboard" />
+        </term>
+        <term>
+          <see href="https://plugins.jenkins.io/dashboard-view/">Dashboard View</see>
+        </term>
+      </item>
+      <item>
+        <term>Multijob View</term>
+        <term>
+          <see cref="T:JenkinsWebApi.Model.JenkinsTikalMultiJobView" />
+        </term>
+        <term>
+          <see href="https://plugins.jenkins.io/jenkins-multijob-plugin/">Multijob</see>
+        </term>
+      </item>
+    </list></remarks>
         </member>
         <member name="M:JenkinsWebApi.Jenkins.GetViewAsync``1(System.String,System.Threading.CancellationToken)">
             <summary>
@@ -927,6 +1224,121 @@
             <param name="viewName">Name of the view</param>
             <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
             <returns>Returns view data.</returns>
+            <remarks><list type="table">
+      <listheader>
+        <term>View</term>
+        <term>Class</term>
+        <term>Plugin</term>
+      </listheader>
+      <item>
+        <term>List View</term>
+        <term>
+          <see cref="T:JenkinsWebApi.Model.JenkinsModelListView" />
+        </term>
+        <term>-</term>
+      </item>
+      <item>
+        <term>My View</term>
+        <term>
+          <see cref="T:JenkinsWebApi.Model.JenkinsModelMyView" />
+        </term>
+        <term>-</term>
+      </item>
+      <item>
+        <term>All View</term>
+        <term>
+          <see cref="T:JenkinsWebApi.Model.JenkinsModelAllView" />
+        </term>
+        <term>-</term>
+      </item>
+      <item>
+        <term>Categorized Jobs View</term>
+        <term>
+          <see cref="T:JenkinsWebApi.Model.JenkinsJenkinsciCategorizedJobsView" />
+        </term>
+        <term>
+          <see href="https://plugins.jenkins.io/categorized-view/">categorized-view</see>
+        </term>
+      </item>
+      <item>
+        <term>Dashboard</term>
+        <term>
+          <see cref="T:JenkinsWebApi.Model.JenkinsPluginsViewDashboardDashboard" />
+        </term>
+        <term>
+          <see href="https://plugins.jenkins.io/dashboard-view/">Dashboard View</see>
+        </term>
+      </item>
+      <item>
+        <term>Multijob View</term>
+        <term>
+          <see cref="T:JenkinsWebApi.Model.JenkinsTikalMultiJobView" />
+        </term>
+        <term>
+          <see href="https://plugins.jenkins.io/jenkins-multijob-plugin/">Multijob</see>
+        </term>
+      </item>
+    </list></remarks>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetViewConfigXmlAsync(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="viewName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetViewConfigXmlAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            
+            </summary>
+            <param name="viewName"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetViewConfigAsync(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="viewName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetViewConfigAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            
+            </summary>
+            <param name="viewName"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.SetViewConfigXmlAsync(System.String,System.Xml.XmlDocument)">
+            <summary>
+            
+            </summary>
+            <param name="viewName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.SetViewConfigXmlAsync(System.String,System.Xml.XmlDocument,System.Threading.CancellationToken)">
+            <summary>
+            
+            </summary>
+            <param name="viewName"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.SetViewConfigAsync(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="viewName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.SetViewConfigAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            
+            </summary>
+            <param name="viewName"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
         </member>
         <member name="M:JenkinsWebApi.Jenkins.GetMyViewAsync(System.String)">
             <summary>
