@@ -17,6 +17,13 @@ namespace JenkinsWebApi
             this.modelRun = modelRun;
         }
 
+        internal JenkinsBuild(Jenkins jenkins, JenkinsJob job, int buildNum)
+        {
+            this.jenkins = jenkins;
+            this.job = job;
+            this.modelRun = jenkins.GetBuildAsync<JenkinsModelRun>(this.JobName, buildNum).Result;
+        }
+
         public Jenkins Jenkins { get { return this.jenkins; } }
         public JenkinsJob Job { get { return this.job; } }
 

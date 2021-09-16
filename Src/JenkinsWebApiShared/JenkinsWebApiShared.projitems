@@ -21,7 +21,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Jenkins.User.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JenkinsBuild.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JenkinsBuildParameters.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Jenkins.Job.Wait.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JenkinsJob.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JenkinsRunConfig.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JenkinsRunMode.cs" />

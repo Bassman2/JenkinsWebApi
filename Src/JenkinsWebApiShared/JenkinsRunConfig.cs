@@ -1,9 +1,11 @@
-﻿namespace JenkinsWebApi
+﻿using System;
+
+namespace JenkinsWebApi
 {
     /// <summary>
     /// Configuration class for JobRunAsync
     /// </summary>
-    public class JenkinsRunConfig
+    public class JenkinsRunConfig : ICloneable
     {
         /// <summary>
         /// Constructor
@@ -35,5 +37,15 @@
         /// RunJobAsync start delay in seconds. Defalut value is 0 seconds.
         /// </summary>
         public int StartDelay { get; set; }
+
+        public JenkinsRunConfig Clone()
+        {
+            return new JenkinsRunConfig() { RunMode = this.RunMode, ReturnIfBlocked = this.ReturnIfBlocked, PollingTime = this.PollingTime, StartDelay = this.StartDelay };
+        }
+        
+        object ICloneable.Clone()
+        {
+            return Clone();
+        }
     }
 }

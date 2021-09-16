@@ -1431,6 +1431,24 @@
             The parameter is a file stream.
             </summary>
         </member>
+        <member name="M:JenkinsWebApi.JenkinsJob.QueueBuild(JenkinsWebApi.JenkinsBuildParameters)">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:JenkinsWebApi.JenkinsJob.StartBuild(JenkinsWebApi.JenkinsBuildParameters)">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:JenkinsWebApi.JenkinsJob.RunBuild(JenkinsWebApi.JenkinsBuildParameters)">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:JenkinsWebApi.JenkinsRunConfig">
             <summary>
             Configuration class for JobRunAsync
