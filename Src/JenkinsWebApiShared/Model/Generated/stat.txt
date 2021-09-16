@@ -66,6 +66,7 @@ Classes
     hudson.model.Project - JenkinsModelProject
     hudson.model.ProxyView - JenkinsModelProxyView
     hudson.model.Queue - JenkinsModelQueue
+    hudson.model.Queue-BlockedItem - JenkinsModelQueueBlockedItem
     hudson.model.Queue-BuildableItem - JenkinsModelQueueBuildableItem
     hudson.model.Queue-Item - JenkinsModelQueueItem
     hudson.model.Queue-LeftItem - JenkinsModelQueueLeftItem

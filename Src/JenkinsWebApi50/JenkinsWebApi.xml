@@ -1031,7 +1031,7 @@
         </member>
         <member name="P:JenkinsWebApi.JenkinsRunConfig.RunMode">
             <summary>
-            Get or set the JenkinsRunMode. The default value is <see cref="F:JenkinsWebApi.JenkinsRunMode.Ready"/> Ready.
+            Get or set the JenkinsRunMode. The default value is <see cref="F:JenkinsWebApi.JenkinsRunMode.Finished"/> Ready.
             </summary>
         </member>
         <member name="P:JenkinsWebApi.JenkinsRunConfig.ReturnIfBlocked">
@@ -1069,7 +1069,7 @@
             JobRunAsync returns after the job was started.
             </summary>
         </member>
-        <member name="F:JenkinsWebApi.JenkinsRunMode.Ready">
+        <member name="F:JenkinsWebApi.JenkinsRunMode.Finished">
             <summary>
             JobRunAsync returns after the job was finished.
             </summary>

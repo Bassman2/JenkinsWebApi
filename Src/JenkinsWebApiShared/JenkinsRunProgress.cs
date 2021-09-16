@@ -25,6 +25,12 @@ namespace JenkinsWebApi
                 this.Status = buildableItem.IsStuck ? JenkinsRunStatus.Stuck : JenkinsRunStatus.Queued;
                 this.ProblemDescription = buildableItem.Why;
             }
+            else if(item is JenkinsModelQueueBlockedItem blockedItem)
+            {
+                this.Status = blockedItem.IsBlocked ? JenkinsRunStatus.Blocked : JenkinsRunStatus.Queued;
+                this.ProblemDescription = blockedItem.Why;
+
+            }
             else if (item is JenkinsModelQueueLeftItem queueItem)
             {
                 this.Status = JenkinsRunStatus.Queued;

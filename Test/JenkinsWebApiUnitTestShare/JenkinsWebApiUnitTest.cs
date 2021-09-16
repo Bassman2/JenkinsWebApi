@@ -60,7 +60,7 @@ namespace JenkinsTest
         }
 
         [TestMethod]
-        public void JobRunSimpleTest()
+        public void JobRunSimpleImmediatelyTest()
         {
             // Arrange
             JenkinsRunProgress progress;
@@ -68,14 +68,66 @@ namespace JenkinsTest
             // Act
             using (Jenkins jenkins = new Jenkins(host, this.login, this.password))
             {
+                jenkins.RunConfig.RunMode = JenkinsRunMode.Immediately;
                 progress = jenkins.RunJobAsync("FreeStyle").Result;
             }
 
             // Assert
             Assert.IsNotNull(progress, nameof(progress));
-            //Assert.IsNotNull(item.Url, "build.Result");
+            Assert.AreEqual(JenkinsRunStatus.Queued, progress.Status, nameof(progress.Status));
+        }
 
-            //Assert.IsNotNull(item.Executable, nameof(item.Executable));
+        [TestMethod]
+        public void JobRunSimpleQueuedTest()
+        {
+            // Arrange
+            JenkinsRunProgress progress;
+
+            // Act
+            using (Jenkins jenkins = new Jenkins(host, this.login, this.password))
+            {
+                jenkins.RunConfig.RunMode = JenkinsRunMode.Queued;
+                progress = jenkins.RunJobAsync("FreeStyle").Result;
+            }
+
+            // Assert
+            Assert.IsNotNull(progress, nameof(progress));
+            Assert.AreEqual(JenkinsRunStatus.Queued, progress.Status, nameof(progress.Status));
+        }
+
+        [TestMethod]
+        public void JobRunSimpleStartedTest()
+        {
+            // Arrange
+            JenkinsRunProgress progress;
+
+            // Act
+            using (Jenkins jenkins = new Jenkins(host, this.login, this.password))
+            {
+                jenkins.RunConfig.RunMode = JenkinsRunMode.Started;
+                progress = jenkins.RunJobAsync("FreeStyle").Result;
+            }
+
+            // Assert
+            Assert.IsNotNull(progress, nameof(progress));
+            Assert.AreEqual(JenkinsRunStatus.Building, progress.Status, nameof(progress.Status));
+        }
+        [TestMethod]
+        public void JobRunSimpleFinishedTest()
+        {
+            // Arrange
+            JenkinsRunProgress progress;
+
+            // Act
+            using (Jenkins jenkins = new Jenkins(host, this.login, this.password))
+            {
+                jenkins.RunConfig.RunMode = JenkinsRunMode.Finished;
+                progress = jenkins.RunJobAsync("FreeStyle").Result;
+            }
+
+            // Assert
+            Assert.IsNotNull(progress, nameof(progress));
+            Assert.AreEqual(JenkinsRunStatus.Finished, progress.Status, nameof(progress.Status));
         }
 
         [TestMethod]

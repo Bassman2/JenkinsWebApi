@@ -39,6 +39,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsJenkinsciWorkflowMultiBranchProject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsJenkinsciWorkflowRun.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsModelProxyView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsModelQueueBlockedItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsModelQueueBuildableItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsModelQueueNotWaitingItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsTikalMultiJobBuild.cs" />

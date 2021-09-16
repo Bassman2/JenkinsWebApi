@@ -177,6 +177,17 @@ namespace JenkinsWebApi
                         return last;
                     }
                 }
+                else if (str.StartsWith("<blockedItem"))
+                {
+                    JenkinsModelQueueBlockedItem item = XmlDeserialize<JenkinsModelQueueBlockedItem>(str);
+                    Debug.WriteLine($"blockedItem: IsBlocked={item.IsBlocked} IsBuildable={item.IsBuildable} IsStuck={item.IsStuck} Why={item.Why}");
+                    UpdateProgress(ref last, progress, jobName, jobUrl, item);
+                    if (item.IsStuck && runConfig.ReturnIfBlocked)
+                    {
+                        return last;
+                    }
+
+                }
                 else if (str.StartsWith("<leftItem"))
                 {
                     JenkinsModelQueueLeftItem item = XmlDeserialize<JenkinsModelQueueLeftItem>(str);
@@ -190,7 +201,8 @@ namespace JenkinsWebApi
                 }
                 else
                 {
-                    throw new Exception("Unknown XML Schema!!!");
+                    string schema = await GetStringAsync(new Uri(res.Location, "api/schema").ToString(), cancellationToken);
+                    throw new Exception($"Unknown XML Schema!!!\r\n{schema}");
                 }
                 await Task.Delay(runConfig.PollingTime, cancellationToken);
             }

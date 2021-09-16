@@ -23,6 +23,6 @@
         /// <summary>
         /// JobRunAsync returns after the job was finished.
         /// </summary>
-        Ready
+        Finished
     }
 }

@@ -10,14 +10,14 @@
         /// </summary>
         public JenkinsRunConfig()
         {
-            this.RunMode = JenkinsRunMode.Ready;
+            this.RunMode = JenkinsRunMode.Finished;
             this.ReturnIfBlocked = true;
             this.PollingTime = 1000;
             this.StartDelay = 0;
         }
 
         /// <summary>
-        /// Get or set the JenkinsRunMode. The default value is <see cref="JenkinsRunMode.Ready"/> Ready.
+        /// Get or set the JenkinsRunMode. The default value is <see cref="JenkinsRunMode.Finished"/> Ready.
         /// </summary>
         public JenkinsRunMode RunMode { get; set;}
 
