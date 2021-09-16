@@ -35,7 +35,7 @@ namespace JenkinsWebApi
                 throw new ArgumentException(nameof(jobName));
             }
 
-            string str = await GetStringAsync($"job/{jobName}/{buildNum}/api/xml", cancellationToken);
+            string str = await GetApiStringAsync($"job/{jobName}/{buildNum}", cancellationToken);
             JenkinsModelRun build = Deserialize<JenkinsModelRun>(str, buildTypes);
             return build;
         }
@@ -65,7 +65,7 @@ namespace JenkinsWebApi
                 throw new ArgumentException(nameof(jobName));
             }
 
-            string str = await GetStringAsync($"job/{jobName}/{buildNum}/api/xml", cancellationToken);
+            string str = await GetApiStringAsync($"job/{jobName}/{buildNum}", cancellationToken);
             T build = Deserialize<T>(str, buildTypes);
             return build;
         }
@@ -93,7 +93,7 @@ namespace JenkinsWebApi
                 throw new ArgumentException(nameof(jobName));
             }
 
-            string str = await GetStringAsync($"job/{jobName}/lastBuild/api/xml", cancellationToken);
+            string str = await GetApiStringAsync($"job/{jobName}/lastBuild", cancellationToken);
             JenkinsModelRun build = Deserialize<JenkinsModelRun>(str, buildTypes);
             return build;
         }
@@ -121,7 +121,7 @@ namespace JenkinsWebApi
                 throw new ArgumentException(nameof(jobName));
             }
 
-            string str = await GetStringAsync($"job/{jobName}/lastBuild/api/xml", cancellationToken);
+            string str = await GetApiStringAsync($"job/{jobName}/lastBuild", cancellationToken);
             T build = Deserialize<T>(str, buildTypes);
             return build;
         }

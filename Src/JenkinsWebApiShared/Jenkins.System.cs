@@ -99,7 +99,7 @@ namespace JenkinsWebApi
         /// <returns>The task object representing the asynchronous operation.</returns>
         public async Task LaunchSlaveAgent(string hostName, CancellationToken cancellationToken)
         {
-            await GetStringAsync($"computer/{hostName}/launchSlaveAgent", cancellationToken);
+            await GetApiStringAsync($"computer/{hostName}/launchSlaveAgent", cancellationToken);
         }
     }
 }

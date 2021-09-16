@@ -1,7 +1,9 @@
 ﻿using JenkinsWebApi.Internal;
+using JenkinsWebApi.Model;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text.RegularExpressions;
@@ -14,50 +16,61 @@ namespace JenkinsWebApi
 {
     public sealed partial class Jenkins
     {
+        private const string apiFormat = "/api/xml";
+
+        private readonly static Type[] viewTypes = AppDomain.CurrentDomain.GetAssemblies()
+                                .SelectMany(s => s.GetTypes())
+                                .Where(t => typeof(JenkinsModelView).IsAssignableFrom(t) && t.IsClass && !t.IsGenericType && !t.IsAbstract)
+                                .ToArray();
+
+        private readonly static Type[] jobTypes = AppDomain.CurrentDomain.GetAssemblies()
+                                        .SelectMany(s => s.GetTypes())
+                                        .Where(t => typeof(JenkinsModelJob).IsAssignableFrom(t) && t.IsClass && !t.IsGenericType && !t.IsAbstract)
+                                        .ToArray();
+
+        private readonly static Type[] buildTypes = AppDomain.CurrentDomain.GetAssemblies()
+                                        .SelectMany(s => s.GetTypes())
+                                        .Where(t => typeof(JenkinsModelRun).IsAssignableFrom(t) && t.IsClass && !t.IsGenericType && !t.IsAbstract)
+                                        .ToArray();
+
+
         private T XmlDeserialize<T>(string str) where T : class
         {
             XmlSerializer serializer = new XmlSerializer(typeof(T));
             return serializer.Deserialize(new StringReader(str)) as T;
         }
 
-        private async Task<T> GetAsync<T>(string path, CancellationToken cancellationToken) where T : class
+        private async Task<T> GetApiAsync<T>(string path, CancellationToken cancellationToken) where T : class
         {
             T value = null;
-            using (HttpResponseMessage response = await this.client.GetAsync(path, cancellationToken))
+            using (HttpResponseMessage response = await this.client.GetAsync(path + apiFormat, cancellationToken))
             {
                 response.EnsureSuccess();
                 string str = await response.Content.ReadAsStringAsync();
-                //if (path.Contains("queue/item"))
-                //{
-                //    //if (str.StartsWith("<leftItem"))
-                //    //{
-                //    //    Console.WriteLine("leftItem");
-                //    //}
-                //    //else if (str.StartsWith("<buildableItem"))
-                //    //{
-                //    //    Console.WriteLine("buildableItem");
-                //    //}
-                //    //else
-                //    //{
-
-                //    //}
-
-                //}
                 XmlSerializer serializer = new XmlSerializer(typeof(T));
                 value = (T)serializer.Deserialize(new StringReader(str));
             }
             return value;
         }
 
+        private async Task<string> GetApiStringAsync(string path, CancellationToken cancellationToken)
+        {
+            using (HttpResponseMessage response = await this.client.GetAsync(path + apiFormat, cancellationToken))
+            {
+                response.EnsureSuccess();
+                string value = await response.Content.ReadAsStringAsync();
+                return value;
+            }
+        }
+
         private async Task<string> GetStringAsync(string path, CancellationToken cancellationToken)
         {
-            string value = null;
             using (HttpResponseMessage response = await this.client.GetAsync(path, cancellationToken))
             {
                 response.EnsureSuccess();
-                value = await response.Content.ReadAsStringAsync();
+                string value = await response.Content.ReadAsStringAsync();
+                return value;
             }
-            return value;
         }
 
         private async Task PostAsync(string path, CancellationToken cancellationToken)

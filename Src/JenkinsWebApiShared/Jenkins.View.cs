@@ -33,7 +33,7 @@ namespace JenkinsWebApi
                 throw new ArgumentNullException(nameof(viewName));
             }
 
-            string str = await GetStringAsync($"view/{viewName}/api/xml", cancellationToken);
+            string str = await GetApiStringAsync($"view/{viewName}", cancellationToken);
             JenkinsModelView view = Deserialize<JenkinsModelView>(str, viewTypes);
             return view;
         }
@@ -65,7 +65,7 @@ namespace JenkinsWebApi
                 throw new ArgumentNullException(nameof(viewName));
             }
 
-            string str = await GetStringAsync($"view/{viewName}/api/xml", cancellationToken);
+            string str = await GetApiStringAsync($"view/{viewName}", cancellationToken);
             var view = Deserialize<T>(str, viewTypes);
             return view;
         }

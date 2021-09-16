@@ -31,7 +31,7 @@ namespace JenkinsWebApi
         /// <remarks>Plugin &quot;Environment Injector Plugin&quot; must be installed </remarks>
         public async Task<JenkinsJenkinsciEnvInjectVarList> GetEnvInjectVarListAsync(string jobName, int buildNum, CancellationToken cancellationToken)
         {
-            JenkinsJenkinsciEnvInjectVarList label = await GetAsync<JenkinsJenkinsciEnvInjectVarList>($"job/{jobName}/{buildNum}/injectedEnvVars/api/xml", cancellationToken);
+            JenkinsJenkinsciEnvInjectVarList label = await GetApiAsync<JenkinsJenkinsciEnvInjectVarList>($"job/{jobName}/{buildNum}/injectedEnvVars", cancellationToken);
             return label;
         }
         
@@ -57,7 +57,7 @@ namespace JenkinsWebApi
         /// <remarks>Plugin &quot;buildgraph-view&quot; must be installed </remarks>
         public async Task<JenkinsJenkinsciBuildGraph> GetBuildGraph(string jobName, int buildNum, CancellationToken cancellationToken)
         {
-            JenkinsJenkinsciBuildGraph label = await GetAsync<JenkinsJenkinsciBuildGraph>($"job/{jobName}/{buildNum}/BuildGraph/api/xml", cancellationToken);
+            JenkinsJenkinsciBuildGraph label = await GetApiAsync<JenkinsJenkinsciBuildGraph>($"job/{jobName}/{buildNum}/BuildGraph", cancellationToken);
             return label;
         }
     }

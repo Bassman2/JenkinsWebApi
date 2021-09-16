@@ -3,12 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Net.Sockets;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -28,21 +26,6 @@ namespace JenkinsWebApi
         private HttpClient client;
         private const int udpPort = 33848;
 
-        private readonly static Type[] viewTypes = AppDomain.CurrentDomain.GetAssemblies()
-                                        .SelectMany(s => s.GetTypes())
-                                        .Where(t => typeof(JenkinsModelView).IsAssignableFrom(t) && t.IsClass && !t.IsGenericType && !t.IsAbstract)
-                                        .ToArray();
-
-        private readonly static Type[] jobTypes = AppDomain.CurrentDomain.GetAssemblies()
-                                        .SelectMany(s => s.GetTypes())
-                                        .Where(t => typeof(JenkinsModelJob).IsAssignableFrom(t) && t.IsClass && !t.IsGenericType && !t.IsAbstract)
-                                        .ToArray();
-
-        private readonly static Type[] buildTypes = AppDomain.CurrentDomain.GetAssemblies()
-                                        .SelectMany(s => s.GetTypes())
-                                        .Where(t => typeof(JenkinsModelRun).IsAssignableFrom(t) && t.IsClass && !t.IsGenericType && !t.IsAbstract)
-                                        .ToArray();
-
         /// <summary>
         /// JobRunAsync progress event.
         /// </summary>
@@ -52,7 +35,6 @@ namespace JenkinsWebApi
         /// JobRunAsync global configuration.
         /// </summary>
         public JenkinsRunConfig RunConfig { get; set; }
-
 
         /// <summary>
         /// Initializes a new instance of the Jenkins class.
@@ -165,7 +147,7 @@ namespace JenkinsWebApi
             // handle CSRF Protection
             try
             {
-                JenkinsSecurityCsrfDefaultCrumbIssuer crumb = GetAsync<JenkinsSecurityCsrfDefaultCrumbIssuer>("crumbIssuer/api/xml", CancellationToken.None).Result;
+                JenkinsSecurityCsrfDefaultCrumbIssuer crumb = GetApiAsync<JenkinsSecurityCsrfDefaultCrumbIssuer>("crumbIssuer", CancellationToken.None).Result;
                 this.client.DefaultRequestHeaders.Add(crumb.CrumbRequestField, crumb.Crumb);
             }
             catch (Exception ex)

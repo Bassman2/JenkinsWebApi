@@ -4,7 +4,9 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
+#pragma warning disable IDE0079 // Remove unnecessary suppression
 #pragma warning disable IDE0063 // Use simple 'using' statement
+#pragma warning restore IDE0079 // Remove unnecessary suppression
 
 namespace JenkinsWebApi
 {

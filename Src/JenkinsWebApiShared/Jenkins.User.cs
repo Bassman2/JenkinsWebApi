@@ -24,7 +24,7 @@ namespace JenkinsWebApi
         /// <remarks>For compatibility to old Jenkins version. For new version use GetAsyncPeopleAsync instead.</remarks>
         public async Task<JenkinsModelViewPeople> GetPeopleAsync(CancellationToken cancellationToken)
         {
-            JenkinsModelViewPeople people = await GetAsync<JenkinsModelViewPeople>("people/api/xml", cancellationToken);
+            JenkinsModelViewPeople people = await GetApiAsync<JenkinsModelViewPeople>("people", cancellationToken);
             return people;
         }
 
@@ -44,7 +44,7 @@ namespace JenkinsWebApi
         /// <returns>List of all Jenkins users</returns>
         public async Task<JenkinsModelViewAsynchPeoplePeople> GetAsyncPeopleAsync(CancellationToken cancellationToken)
         {
-            JenkinsModelViewAsynchPeoplePeople people = await GetAsync<JenkinsModelViewAsynchPeoplePeople>("asynchPeople/api/xml", cancellationToken);
+            JenkinsModelViewAsynchPeoplePeople people = await GetApiAsync<JenkinsModelViewAsynchPeoplePeople>("asynchPeople", cancellationToken);
             return people;
         }
 
@@ -66,7 +66,7 @@ namespace JenkinsWebApi
         /// <returns>Jenkins user data</returns>
         public async Task<JenkinsModelUser> GetUserAsync(string userName, CancellationToken cancellationToken)
         {
-            JenkinsModelUser user = await GetAsync<JenkinsModelUser>($"user/{userName}/api/xml", cancellationToken);
+            JenkinsModelUser user = await GetApiAsync<JenkinsModelUser>($"user/{userName}", cancellationToken);
             return user;
         }
 
@@ -86,7 +86,7 @@ namespace JenkinsWebApi
         /// <returns>Jenkins user data</returns>
         public async Task<JenkinsModelUser> GetCurrentUserAsync(CancellationToken cancellationToken)
         {
-            JenkinsModelUser user = await GetAsync<JenkinsModelUser>("me/api/xml", cancellationToken);
+            JenkinsModelUser user = await GetApiAsync<JenkinsModelUser>("me", cancellationToken);
             return user;
         }
     }

@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>JenkinsWebApi</id>
-    <version>2.3</version>
+    <version>3.0</version>
     <title>JenkinsWebApi</title>
     <authors>Ralf Beckers</authors>
     <owners>Ralf Beckers</owners>

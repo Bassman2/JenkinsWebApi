@@ -23,7 +23,7 @@ namespace JenkinsWebApi
         /// <returns>Jenkins server configuration</returns>
         public async Task<JenkinsModelHudson> GetServerAsync(CancellationToken cancellationToken)
         {
-            JenkinsModelHudson server = await GetAsync<JenkinsModelHudson>("api/xml", cancellationToken);
+            JenkinsModelHudson server = await GetApiAsync<JenkinsModelHudson>("", cancellationToken);
             return server;
         }
 
@@ -45,7 +45,7 @@ namespace JenkinsWebApi
         /// <remark>Only in V2 or above</remark>
         public async Task<JenkinsCloudbeesViewCredentialsActionRootActionImpl> GetCredentialsAsync(CancellationToken cancellationToken)
         {
-            JenkinsCloudbeesViewCredentialsActionRootActionImpl credentials = await GetAsync<JenkinsCloudbeesViewCredentialsActionRootActionImpl>("credentials/api/xml", cancellationToken);
+            JenkinsCloudbeesViewCredentialsActionRootActionImpl credentials = await GetApiAsync<JenkinsCloudbeesViewCredentialsActionRootActionImpl>("credentials", cancellationToken);
             return credentials;
         }
 
@@ -74,7 +74,7 @@ namespace JenkinsWebApi
                 throw new ArgumentNullException(nameof(jobName));
             }
 
-            JenkinsTasksJunitTestResult report = await GetAsync<JenkinsTasksJunitTestResult>($"/job/{jobName}/{buildNum}/testReport/api/xml", cancellationToken);
+            JenkinsTasksJunitTestResult report = await GetApiAsync<JenkinsTasksJunitTestResult>($"/job/{jobName}/{buildNum}/testReport", cancellationToken);
             return report;
         }
 
@@ -94,7 +94,7 @@ namespace JenkinsWebApi
         /// <returns>Jenkins queue</returns>
         public async Task<JenkinsModelQueue> GetQueueAsync(CancellationToken cancellationToken)
         {
-            JenkinsModelQueue queue = await GetAsync<JenkinsModelQueue>("queue/api/xml", cancellationToken);
+            JenkinsModelQueue queue = await GetApiAsync<JenkinsModelQueue>("queue", cancellationToken);
             return queue;
         }
 
@@ -114,7 +114,7 @@ namespace JenkinsWebApi
         /// <returns>Statistics result</returns>
         public async Task<JenkinsModelOverallLoadStatistics> GetOverallLoadStatisticsAsync(CancellationToken cancellationToken)
         {
-            JenkinsModelOverallLoadStatistics statistics = await GetAsync<JenkinsModelOverallLoadStatistics>("overallLoad/api/xml", cancellationToken);
+            JenkinsModelOverallLoadStatistics statistics = await GetApiAsync<JenkinsModelOverallLoadStatistics>("overallLoad", cancellationToken);
             return statistics;
         }
 
@@ -134,7 +134,7 @@ namespace JenkinsWebApi
         /// <returns>Nodes infos</returns>
         public async Task<JenkinsModelComputerSet> GetComputerSetAsync(CancellationToken cancellationToken)
         {
-            JenkinsModelComputerSet computerSet = await GetAsync<JenkinsModelComputerSet>("computer/api/xml", cancellationToken);
+            JenkinsModelComputerSet computerSet = await GetApiAsync<JenkinsModelComputerSet>("computer", cancellationToken);
             return computerSet;
         }
 
@@ -154,7 +154,7 @@ namespace JenkinsWebApi
         /// <returns>Master node infos</returns>
         public async Task<JenkinsModelHudsonMasterComputer> GetMasterComputerAsync(CancellationToken cancellationToken)
         {
-            JenkinsModelHudsonMasterComputer computer = await GetAsync<JenkinsModelHudsonMasterComputer>("computer/(master)/api/xml", cancellationToken);
+            JenkinsModelHudsonMasterComputer computer = await GetApiAsync<JenkinsModelHudsonMasterComputer>("computer/(master)", cancellationToken);
             return computer;
         }
 
@@ -176,7 +176,7 @@ namespace JenkinsWebApi
         /// <returns>Node infos</returns>
         public async Task<JenkinsSlavesSlaveComputer> GetComputerAsync(string computerName, CancellationToken cancellationToken)
         {
-            JenkinsSlavesSlaveComputer computer = await GetAsync<JenkinsSlavesSlaveComputer>($"computer/{computerName}/api/xml", cancellationToken);
+            JenkinsSlavesSlaveComputer computer = await GetApiAsync<JenkinsSlavesSlaveComputer>($"computer/{computerName}", cancellationToken);
             return computer;
         }
 
@@ -225,7 +225,7 @@ namespace JenkinsWebApi
         /// <returns>Log text</returns>
         public async Task<string> GetComputerLogAsync(string computerName, CancellationToken cancellationToken)
         {
-            return await GetStringAsync($"computer/{computerName}/logText/progressiveText", cancellationToken);
+            return await GetApiStringAsync($"computer/{computerName}/logText/progressiveText", cancellationToken);
         }
 
         /// <summary>
@@ -246,7 +246,7 @@ namespace JenkinsWebApi
         /// <returns>Label info</returns>
         public async Task<JenkinsModelLabelsLabelAtom> GetLabelAsync(string labelName, CancellationToken cancellationToken)
         {
-            JenkinsModelLabelsLabelAtom label = await GetAsync<JenkinsModelLabelsLabelAtom>($"label/{labelName}/api/xml", cancellationToken);
+            JenkinsModelLabelsLabelAtom label = await GetApiAsync<JenkinsModelLabelsLabelAtom>($"label/{labelName}", cancellationToken);
             return label;
         }
 

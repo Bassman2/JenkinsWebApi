@@ -37,7 +37,7 @@ namespace JenkinsWebApi
                 throw new ArgumentNullException(nameof(jobName));
             }
 
-            string str = await GetStringAsync($"job/{jobName}/api/xml", cancellationToken);
+            string str = await GetApiStringAsync($"job/{jobName}", cancellationToken);
             JenkinsModelAbstractItem job = Deserialize<JenkinsModelAbstractItem>(str, jobTypes);
             return job;
         }
@@ -69,7 +69,7 @@ namespace JenkinsWebApi
                 throw new ArgumentNullException(nameof(jobName));
             }
 
-            string str = await GetStringAsync($"job/{jobName}/api/xml", cancellationToken);
+            string str = await GetApiStringAsync($"job/{jobName}", cancellationToken);
             var job = Deserialize<T>(str, jobTypes);
             return job;
         }
@@ -168,7 +168,7 @@ namespace JenkinsWebApi
             string buildUrl = null;
             while (!cancellationToken.IsCancellationRequested)
             {
-                string str = await GetStringAsync(new Uri(res.Location, "api/xml").ToString(), cancellationToken);
+                string str = await GetApiStringAsync(res.Location.ToString(), cancellationToken);
                 if (str.StartsWith("<buildableItem"))
                 {
                     JenkinsModelQueueBuildableItem item = XmlDeserialize<JenkinsModelQueueBuildableItem>(str);
@@ -203,7 +203,7 @@ namespace JenkinsWebApi
                 }
                 else
                 {
-                    string schema = await GetStringAsync(new Uri(res.Location, "api/schema").ToString(), cancellationToken);
+                    string schema = await GetApiStringAsync(new Uri(res.Location, "api/schema").ToString(), cancellationToken);
                     throw new Exception($"Unknown XML Schema!!!\r\n{schema}");
                 }
                 await Task.Delay(runConfig.PollingTime, cancellationToken);
@@ -216,7 +216,7 @@ namespace JenkinsWebApi
 
             while (!cancellationToken.IsCancellationRequested)
             {
-                string str = await GetStringAsync(new Uri(new Uri(buildUrl), "api/xml").ToString(), cancellationToken);
+                string str = await GetApiStringAsync(buildUrl.ToString(), cancellationToken);
                 JenkinsModelRun run = Deserialize<JenkinsModelRun>(str, buildTypes);
                 Debug.WriteLine($"modelRun: IsBuilding={run.IsBuilding} IsKeepLog ={run.IsKeepLog} Result={run.Result}");
                 UpdateProgress(ref last, progress, jobName, jobUrl, run);
@@ -519,7 +519,7 @@ namespace JenkinsWebApi
             {
                 throw new ArgumentNullException(nameof(jobName));
             }
-            string str = await GetStringAsync($"job/{jobName}/description", cancellationToken);
+            string str = await GetApiStringAsync($"job/{jobName}/description", cancellationToken);
             return str;
         }
 
