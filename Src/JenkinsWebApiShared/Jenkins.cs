@@ -5,7 +5,7 @@ namespace JenkinsWebApi
     /// <summary>
     /// Main class of the Jenkins server API
     /// </summary>
-    public sealed partial class Jenkins : JenkinsClient
+    public sealed partial class Jenkins 
     {
         /// <summary>
         /// JobRunAsync progress event.
@@ -38,7 +38,7 @@ namespace JenkinsWebApi
         /// <param name="login">Login for the Jenkins server</param>
         /// <param name="passwordOrToken">Password or API token for the Jenkins server</param>
         public Jenkins(string host, string login, string passwordOrToken) : this(new Uri(host), login, passwordOrToken)
-        { }        
+        { }
 
         /// <summary>
         /// Initializes a new instance of the Jenkins class.
@@ -46,8 +46,10 @@ namespace JenkinsWebApi
         /// <param name="host">Host URL of the Jenkins server</param>
         /// <param name="login">Login for the Jenkins server</param>
         /// <param name="passwordOrToken">Password or API token for the Jenkins server</param>
-        public Jenkins(Uri host, string login, string passwordOrToken) : base(host, login, passwordOrToken) 
+        public Jenkins(Uri host, string login, string passwordOrToken) 
         {
+            Connect(host, login, passwordOrToken);
+
             // init variables
             this.RunConfig = new JenkinsRunConfig();
         }

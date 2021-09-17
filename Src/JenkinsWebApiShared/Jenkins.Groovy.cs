@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace JenkinsWebApi
 {
-    public sealed partial class Jenkins : JenkinsClient
+    public sealed partial class Jenkins 
     {
         /// <summary>
         /// Run node script

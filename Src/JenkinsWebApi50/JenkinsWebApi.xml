@@ -19,24 +19,22 @@
             
             </summary>
         </member>
-        <member name="T:JenkinsWebApi.JenkinsClient">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.JenkinsClient.BaseAddress">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:JenkinsWebApi.JenkinsClient.Dispose">
-            <summary>
-            Release allocated resources.
-            </summary>
-        </member>
         <member name="T:JenkinsWebApi.Jenkins">
             <summary>
+            
+            </summary>
+            <summary>
             Main class of the Jenkins server API
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Jenkins.BaseAddress">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.Dispose">
+            <summary>
+            Release allocated resources.
             </summary>
         </member>
         <member name="M:JenkinsWebApi.Jenkins.GetBuildAsync(System.String,System.Int32)">
@@ -1925,6 +1923,11 @@
         <member name="P:JenkinsWebApi.JenkinsView.ConfigXml">
             <summary>
             Get and set the view configuration as XmlDocument.
+            </summary>
+        </member>
+        <member name="M:JenkinsWebApi.JenkinsView.Update">
+            <summary>
+            Update view data.
             </summary>
         </member>
         <member name="P:JenkinsWebApi.Model.JenkinsCloudbeesCredentialsStoreAction.Class">

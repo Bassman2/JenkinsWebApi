@@ -78,6 +78,9 @@ namespace JenkinsWebApi
             }
         }
 
+        /// <summary>
+        /// Update view data.
+        /// </summary>
         public void Update()
         {
             this.modelView = jenkins.GetViewAsync<JenkinsModelView>(this.Name).Result;

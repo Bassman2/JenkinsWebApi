@@ -11,14 +11,16 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 
-#pragma warning disable CS1591
+#pragma warning disable IDE0079 // Remove unnecessary suppression
+#pragma warning disable IDE0063 // Use simple 'using' statement
+#pragma warning restore IDE0079 // Remove unnecessary suppression
 
 namespace JenkinsWebApi
 {
     /// <summary>
     /// 
     /// </summary>
-    public abstract partial class JenkinsClient : IDisposable
+    public partial class Jenkins : IDisposable
     {
         private const string apiFormat = JenkinsDeserializer.ApiFormat;
 
@@ -29,9 +31,9 @@ namespace JenkinsWebApi
         /// <summary>
         /// 
         /// </summary>
-        protected Uri BaseAddress { get { return this.client.BaseAddress; } }
+        private Uri BaseAddress { get { return this.client.BaseAddress; } }
 
-        internal JenkinsClient(Uri host, string login, string passwordOrToken)
+        private void Connect(Uri host, string login, string passwordOrToken)
         {
             if (host == null)
             {
@@ -76,7 +78,7 @@ namespace JenkinsWebApi
             }
         }
 
-        protected void Authorize(string login, string passwordOrToken)
+        private void Authorize(string login, string passwordOrToken)
         {
             // set authorization
             this.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.ASCII.GetBytes($"{login}:{passwordOrToken}")));
@@ -99,74 +101,94 @@ namespace JenkinsWebApi
                 Debug.WriteLine(ex.Message);
             }
         }
-        
-        protected async Task<T> GetApiAsync<T>(string path, CancellationToken cancellationToken) where T : class
+
+        private async Task<T> GetApiAsync<T>(string path, CancellationToken cancellationToken) where T : class
         {
             using (HttpResponseMessage response = await this.client.GetAsync(path + apiFormat, cancellationToken))
             {
                 response.EnsureSuccess();
-                string str = await response.Content.ReadAsStringAsync();
+                string str = await response.Content.ReadAsStringAsync(
+#if NET
+                    cancellationToken
+#endif
+                    );
                 T value = JenkinsDeserializer.Deserialize<T>(str);
                 return value;
             }
         }
 
-        protected async Task<string> GetApiStringAsync(string path, CancellationToken cancellationToken)
+        private async Task<string> GetApiStringAsync(string path, CancellationToken cancellationToken)
         {
             using (HttpResponseMessage response = await this.client.GetAsync(path + apiFormat, cancellationToken))
             {
                 response.EnsureSuccess();
-                string str = await response.Content.ReadAsStringAsync();
+                string str = await response.Content.ReadAsStringAsync(
+#if NET
+                    cancellationToken
+#endif
+                    );
                 return str;
             }
         }
 
-        protected async Task<string> GetStringAsync(string path, CancellationToken cancellationToken)
+        private async Task<string> GetStringAsync(string path, CancellationToken cancellationToken)
         {
             using (HttpResponseMessage response = await this.client.GetAsync(path, cancellationToken))
             {
                 response.EnsureSuccess();
-                string str = await response.Content.ReadAsStringAsync();
+                string str = await response.Content.ReadAsStringAsync(
+#if NET
+                    cancellationToken
+#endif
+                    );
                 return str;
             }
         }
 
-        protected async Task PostAsync(string path, CancellationToken cancellationToken)
+        private async Task PostAsync(string path, CancellationToken cancellationToken)
         {
             using (HttpResponseMessage response = await this.client.PostAsync(path, null, cancellationToken))
             {
-                string str = await response.Content.ReadAsStringAsync();
+                string str = await response.Content.ReadAsStringAsync(
+#if NET
+                    cancellationToken
+#endif
+                    );
                 response.EnsureSuccess();
             }
         }
 
-        protected async Task PostAsync(string path, HttpContent content, CancellationToken cancellationToken)
-        {
-            using (HttpResponseMessage response = await this.client.PostAsync(path, content, cancellationToken))
-            {
-                response.EnsureSuccess();
-            }
-        }
+        //private async Task PostAsync(string path, HttpContent content, CancellationToken cancellationToken)
+        //{
+        //    using (HttpResponseMessage response = await this.client.PostAsync(path, content, cancellationToken))
+        //    {
+        //        response.EnsureSuccess();
+        //    }
+        //}
 
-        protected async Task PostAsync(string path, IEnumerable<KeyValuePair<string, string>> content, CancellationToken cancellationToken)
-        {
-            using (HttpResponseMessage response = await this.client.PostAsync(path, new FormUrlEncodedContent(content), cancellationToken))
-            {
-                response.EnsureSuccess();
-            }
-        }
-
-        protected async Task<string> PostResAsync(string path, IEnumerable<KeyValuePair<string, string>> content, CancellationToken cancellationToken)
+        private async Task PostAsync(string path, IEnumerable<KeyValuePair<string, string>> content, CancellationToken cancellationToken)
         {
             using (HttpResponseMessage response = await this.client.PostAsync(path, new FormUrlEncodedContent(content), cancellationToken))
             {
                 response.EnsureSuccess();
-                string str = await response.Content.ReadAsStringAsync();
+            }
+        }
+
+        private async Task<string> PostResAsync(string path, IEnumerable<KeyValuePair<string, string>> content, CancellationToken cancellationToken)
+        {
+            using (HttpResponseMessage response = await this.client.PostAsync(path, new FormUrlEncodedContent(content), cancellationToken))
+            {
+                response.EnsureSuccess();
+                string str = await response.Content.ReadAsStringAsync(
+#if NET
+                    cancellationToken
+#endif
+                    );
                 return str;
             }
         }
 
-        protected async Task<PostRunRes> PostRunAsync(string path, HttpContent content, CancellationToken cancellationToken)
+        private async Task<PostRunRes> PostRunAsync(string path, HttpContent content, CancellationToken cancellationToken)
         {
             using (HttpResponseMessage response = await this.client.PostAsync(path, content, cancellationToken))
             {
@@ -179,15 +201,15 @@ namespace JenkinsWebApi
             }
         }
 
-        protected async Task DeleteAsync(string path, CancellationToken cancellationToken)
+        private async Task DeleteAsync(string path, CancellationToken cancellationToken)
         {
             using (HttpResponseMessage response = await this.client.DeleteAsync(path, cancellationToken))
             {
                 response.EnsureSuccess();
             }
         }
-        
-        protected string TrimScript(string str)
+
+        private static string TrimScript(string str)
         {
             Match match = Regex.Match(str, @"(<pre>(?<script>[^<]*)<\/pre>)*");
             return match.Success ? match.Groups["script"].Value : null;

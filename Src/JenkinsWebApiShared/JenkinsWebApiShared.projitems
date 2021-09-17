@@ -12,7 +12,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Internal\JenkinsDeserializer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internal\PostRunRes.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internal\SerializableClassAttribute.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)JenkinsClient.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Jenkins.Client.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internal\MessageEnsure.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internal\XmlConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Jenkins.Build.cs" />
