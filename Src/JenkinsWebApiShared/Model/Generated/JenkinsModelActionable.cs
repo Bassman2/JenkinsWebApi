@@ -1,8 +1,9 @@
+using JenkinsWebApi.Internal;
 using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
-    // hudson.model.Actionable
+    [SerializableClass("hudson.model.Actionable")]
     public partial class JenkinsModelActionable
     {
         [JsonPropertyName("action")]

@@ -1,8 +1,9 @@
+using JenkinsWebApi.Internal;
 using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
-    // hudson.PluginWrapper
+    [SerializableClass("hudson.PluginWrapper")]
     public partial class JenkinsPluginWrapper
     {
         [JsonPropertyName("active")]

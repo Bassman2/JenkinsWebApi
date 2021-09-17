@@ -1,8 +1,9 @@
+using JenkinsWebApi.Internal;
 using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
-    // hudson.slaves.OfflineCause
+    [SerializableClass("hudson.slaves.OfflineCause")]
     public partial class JenkinsSlavesOfflineCause
     {
         [JsonPropertyName("timestamp")]

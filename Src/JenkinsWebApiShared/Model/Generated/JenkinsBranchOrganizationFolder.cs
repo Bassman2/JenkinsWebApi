@@ -1,8 +1,9 @@
+using JenkinsWebApi.Internal;
 using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
-    // jenkins.branch.OrganizationFolder
+    [SerializableClass("jenkins.branch.OrganizationFolder")]
     public partial class JenkinsBranchOrganizationFolder : JenkinsCloudbeesComputedComputedFolder
     {
         // empty

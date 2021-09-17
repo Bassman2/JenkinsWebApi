@@ -1,8 +1,9 @@
+using JenkinsWebApi.Internal;
 using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
-    // hudson.model.JobProperty
+    [SerializableClass("hudson.model.JobProperty")]
     public partial class JenkinsModelJobProperty
     {
         /// <summary>

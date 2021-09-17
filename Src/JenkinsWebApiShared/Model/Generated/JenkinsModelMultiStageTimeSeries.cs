@@ -1,8 +1,9 @@
+using JenkinsWebApi.Internal;
 using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
-    // hudson.model.MultiStageTimeSeries
+    [SerializableClass("hudson.model.MultiStageTimeSeries")]
     public partial class JenkinsModelMultiStageTimeSeries
     {
         [JsonPropertyName("hour")]

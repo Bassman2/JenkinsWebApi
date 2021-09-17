@@ -1,8 +1,9 @@
+using JenkinsWebApi.Internal;
 using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
-    // hudson.LocalPluginManager
+    [SerializableClass("hudson.LocalPluginManager")]
     public partial class JenkinsLocalPluginManager : JenkinsPluginManager
     {
         // empty

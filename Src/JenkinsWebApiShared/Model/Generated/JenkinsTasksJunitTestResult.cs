@@ -1,8 +1,9 @@
+using JenkinsWebApi.Internal;
 using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
-    // hudson.tasks.junit.TestResult
+    [SerializableClass("hudson.tasks.junit.TestResult")]
     public partial class JenkinsTasksJunitTestResult : JenkinsTasksTestMetaTabulatedResult
     {
         [JsonPropertyName("duration")]

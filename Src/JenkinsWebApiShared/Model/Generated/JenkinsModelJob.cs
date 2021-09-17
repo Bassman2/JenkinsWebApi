@@ -1,8 +1,9 @@
+using JenkinsWebApi.Internal;
 using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
-    // hudson.model.Job
+    [SerializableClass("hudson.model.Job")]
     public partial class JenkinsModelJob : JenkinsModelAbstractItem
     {
         [JsonPropertyName("allBuild")]

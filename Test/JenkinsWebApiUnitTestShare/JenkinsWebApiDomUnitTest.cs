@@ -7,7 +7,7 @@ using System.Linq;
 using System.Threading;
 using System.Xml;
 
-namespace JenkinsWebApiUnitTestShare
+namespace JenkinsTest
 {
 
     [TestClass]

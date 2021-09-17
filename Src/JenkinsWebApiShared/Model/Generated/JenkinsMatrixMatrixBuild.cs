@@ -1,8 +1,9 @@
+using JenkinsWebApi.Internal;
 using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
-    // hudson.matrix.MatrixBuild
+    [SerializableClass("hudson.matrix.MatrixBuild")]
     public partial class JenkinsMatrixMatrixBuild : JenkinsModelAbstractBuild
     {
         [JsonPropertyName("run")]

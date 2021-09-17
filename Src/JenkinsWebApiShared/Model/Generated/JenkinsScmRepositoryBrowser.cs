@@ -1,8 +1,9 @@
+using JenkinsWebApi.Internal;
 using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
-    // hudson.scm.RepositoryBrowser
+    [SerializableClass("hudson.scm.RepositoryBrowser")]
     public partial class JenkinsScmRepositoryBrowser
     {
         /// <summary>

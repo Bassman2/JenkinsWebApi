@@ -1,8 +1,9 @@
+using JenkinsWebApi.Internal;
 using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
-    // hudson.tasks.junit.CaseResult
+    [SerializableClass("hudson.tasks.junit.CaseResult")]
     public partial class JenkinsTasksJunitCaseResult : JenkinsTasksTestTestResult
     {
         [JsonPropertyName("age")]

@@ -1,8 +1,9 @@
+using JenkinsWebApi.Internal;
 using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
-    // hudson.model.View-UserInfo
+    [SerializableClass("hudson.model.View-UserInfo")]
     public partial class JenkinsModelViewUserInfo
     {
         [JsonPropertyName("lastChange")]

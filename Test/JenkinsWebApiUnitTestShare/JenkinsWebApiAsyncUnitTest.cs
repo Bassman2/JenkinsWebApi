@@ -592,7 +592,7 @@ namespace JenkinsTest
         }
 
         [TestMethod]
-        public void JobTest()
+        public void JobGetTest()
         {
             // Arrange
             JenkinsModelFreeStyleProject freeStyleJob = null;
@@ -644,7 +644,7 @@ namespace JenkinsTest
         }
 
         [TestMethod]
-        public void JobGenericTest()
+        public void JobGetGenericTest()
         {
             // Arrange
             JenkinsModelFreeStyleProject freeStyleJob = null;
@@ -675,24 +675,6 @@ namespace JenkinsTest
             //Assert.IsNotNull(multiBranchJob);
             //Assert.IsNotNull(folderJob);
             //Assert.IsNotNull(organizationFolderJob);
-
-
-
-            Assert.IsNotNull(freeStyleJob.Actions, nameof(freeStyleJob.Actions));
-
-            Assert.AreEqual("Project description", freeStyleJob.Description, nameof(freeStyleJob.Description));
-            Assert.AreEqual("FreeStyle", freeStyleJob.DisplayName, nameof(freeStyleJob.DisplayName));
-            Assert.AreEqual("FreeStyle", freeStyleJob.Name, nameof(freeStyleJob.Name));
-            Assert.AreEqual($"{this.host}job/FreeStyle/", freeStyleJob.Url, nameof(freeStyleJob.Url));
-            Assert.AreEqual(true, freeStyleJob.IsBuildable, nameof(freeStyleJob.IsBuildable));
-
-            Assert.IsNotNull(freeStyleJob.Builds, nameof(freeStyleJob.Builds));
-
-            //Assert.IsTrue(freeStyleJob.State.HasFlag(JenkinsJobState.Success), "color");
-
-            Assert.IsNotNull(freeStyleJob.FirstBuild, nameof(freeStyleJob.FirstBuild));
-
-            Assert.IsNotNull(freeStyleJob.HealthReports, nameof(freeStyleJob.HealthReports));
         }
 
         [TestMethod]

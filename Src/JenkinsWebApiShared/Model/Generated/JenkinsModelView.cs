@@ -1,8 +1,9 @@
+using JenkinsWebApi.Internal;
 using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
-    // hudson.model.View
+    [SerializableClass("hudson.model.View")]
     public partial class JenkinsModelView
     {
         [JsonPropertyName("description")]

@@ -1,8 +1,9 @@
+using JenkinsWebApi.Internal;
 using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
-    // jenkins.branch.BranchSource
+    [SerializableClass("jenkins.branch.BranchSource")]
     public partial class JenkinsBranchBranchSource
     {
         [JsonPropertyName("source")]

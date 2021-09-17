@@ -1,8 +1,9 @@
+using JenkinsWebApi.Internal;
 using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
-    // org.jenkinsci.plugins.buildgraphview.BuildGraph
+    [SerializableClass("org.jenkinsci.plugins.buildgraphview.BuildGraph")]
     public partial class JenkinsJenkinsciBuildGraph
     {
         [JsonPropertyName("buildGraph")]

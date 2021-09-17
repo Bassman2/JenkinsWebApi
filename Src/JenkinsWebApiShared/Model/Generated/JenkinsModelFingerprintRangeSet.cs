@@ -1,8 +1,9 @@
+using JenkinsWebApi.Internal;
 using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
-    // hudson.model.Fingerprint-RangeSet
+    [SerializableClass("hudson.model.Fingerprint-RangeSet")]
     public partial class JenkinsModelFingerprintRangeSet
     {
         [JsonPropertyName("range")]

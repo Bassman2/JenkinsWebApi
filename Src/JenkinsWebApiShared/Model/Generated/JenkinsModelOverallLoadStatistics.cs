@@ -1,8 +1,9 @@
+using JenkinsWebApi.Internal;
 using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
-    // hudson.model.OverallLoadStatistics
+    [SerializableClass("hudson.model.OverallLoadStatistics")]
     public partial class JenkinsModelOverallLoadStatistics : JenkinsModelLoadStatistics
     {
         [JsonPropertyName("totalQueueLength")]

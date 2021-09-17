@@ -1,8 +1,9 @@
+using JenkinsWebApi.Internal;
 using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
-    // hudson.slaves.SlaveComputer
+    [SerializableClass("hudson.slaves.SlaveComputer")]
     public partial class JenkinsSlavesSlaveComputer : JenkinsModelComputer
     {
         [JsonPropertyName("absoluteRemotePath")]

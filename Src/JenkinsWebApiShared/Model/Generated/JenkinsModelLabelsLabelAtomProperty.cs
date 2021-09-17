@@ -1,8 +1,9 @@
+using JenkinsWebApi.Internal;
 using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
-    // hudson.model.labels.LabelAtomProperty
+    [SerializableClass("hudson.model.labels.LabelAtomProperty")]
     public partial class JenkinsModelLabelsLabelAtomProperty
     {
         /// <summary>

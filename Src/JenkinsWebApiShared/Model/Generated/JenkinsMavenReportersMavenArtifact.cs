@@ -1,8 +1,9 @@
+using JenkinsWebApi.Internal;
 using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
-    // hudson.maven.reporters.MavenArtifact
+    [SerializableClass("hudson.maven.reporters.MavenArtifact")]
     public partial class JenkinsMavenReportersMavenArtifact
     {
         [JsonPropertyName("artifactId")]

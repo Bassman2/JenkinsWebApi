@@ -1,8 +1,9 @@
+using JenkinsWebApi.Internal;
 using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
-    // hudson.model.Fingerprint-BuildPtr
+    [SerializableClass("hudson.model.Fingerprint-BuildPtr")]
     public partial class JenkinsModelFingerprintBuildPtr
     {
         [JsonPropertyName("name")]

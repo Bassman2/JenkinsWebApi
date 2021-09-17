@@ -1,8 +1,9 @@
+using JenkinsWebApi.Internal;
 using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
-    // hudson.model.Queue-LeftItem
+    [SerializableClass("hudson.model.Queue-LeftItem")]
     public partial class JenkinsModelQueueLeftItem : JenkinsModelQueueItem
     {
         [JsonPropertyName("cancelled")]

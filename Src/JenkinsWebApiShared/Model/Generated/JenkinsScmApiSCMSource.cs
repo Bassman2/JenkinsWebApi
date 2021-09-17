@@ -1,8 +1,9 @@
+using JenkinsWebApi.Internal;
 using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
-    // jenkins.scm.api.SCMSource
+    [SerializableClass("jenkins.scm.api.SCMSource")]
     public partial class JenkinsScmApiSCMSource
     {
         /// <summary>

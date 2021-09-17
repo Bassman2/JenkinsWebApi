@@ -1,8 +1,9 @@
+using JenkinsWebApi.Internal;
 using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
-    // org.jenkinsci.plugins.workflow.job.WorkflowRun
+    [SerializableClass("org.jenkinsci.plugins.workflow.job.WorkflowRun")]
     public partial class JenkinsJenkinsciWorkflowRun : JenkinsModelRun
     {
         [JsonPropertyName("changeSet")]

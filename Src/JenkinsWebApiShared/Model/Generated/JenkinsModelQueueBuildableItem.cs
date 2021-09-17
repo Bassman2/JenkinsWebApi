@@ -1,8 +1,9 @@
+using JenkinsWebApi.Internal;
 using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
-    // hudson.model.Queue-BuildableItem
+    [SerializableClass("hudson.model.Queue-BuildableItem")]
     public partial class JenkinsModelQueueBuildableItem : JenkinsModelQueueNotWaitingItem
     {
         [JsonPropertyName("pending")]

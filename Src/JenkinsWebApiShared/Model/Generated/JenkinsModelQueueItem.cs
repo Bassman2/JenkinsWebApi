@@ -1,8 +1,9 @@
+using JenkinsWebApi.Internal;
 using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
-    // hudson.model.Queue-Item
+    [SerializableClass("hudson.model.Queue-Item")]
     public partial class JenkinsModelQueueItem : JenkinsModelActionable
     {
         [JsonPropertyName("blocked")]

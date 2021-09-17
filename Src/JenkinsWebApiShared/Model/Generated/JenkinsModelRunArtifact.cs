@@ -1,8 +1,9 @@
+using JenkinsWebApi.Internal;
 using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
-    // hudson.model.Run-Artifact
+    [SerializableClass("hudson.model.Run-Artifact")]
     public partial class JenkinsModelRunArtifact
     {
         [JsonPropertyName("displayPath")]

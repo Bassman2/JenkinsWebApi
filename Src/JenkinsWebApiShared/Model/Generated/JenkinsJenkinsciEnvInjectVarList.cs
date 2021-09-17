@@ -1,8 +1,9 @@
+using JenkinsWebApi.Internal;
 using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
-    // org.jenkinsci.plugins.envinject.EnvInjectVarList
+    [SerializableClass("org.jenkinsci.plugins.envinject.EnvInjectVarList")]
     public partial class JenkinsJenkinsciEnvInjectVarList
     {
         [JsonPropertyName("envMap")]

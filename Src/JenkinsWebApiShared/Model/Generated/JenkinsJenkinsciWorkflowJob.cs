@@ -1,8 +1,9 @@
+using JenkinsWebApi.Internal;
 using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
-    // org.jenkinsci.plugins.workflow.job.WorkflowJob
+    [SerializableClass("org.jenkinsci.plugins.workflow.job.WorkflowJob")]
     public partial class JenkinsJenkinsciWorkflowJob : JenkinsModelJob
     {
         [JsonPropertyName("concurrentBuild")]

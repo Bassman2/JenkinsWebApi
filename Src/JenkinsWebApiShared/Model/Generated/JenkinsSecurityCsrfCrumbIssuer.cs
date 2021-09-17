@@ -1,8 +1,9 @@
+using JenkinsWebApi.Internal;
 using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
-    // hudson.security.csrf.CrumbIssuer
+    [SerializableClass("hudson.security.csrf.CrumbIssuer")]
     public partial class JenkinsSecurityCsrfCrumbIssuer
     {
         [JsonPropertyName("crumb")]

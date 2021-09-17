@@ -1,8 +1,9 @@
+using JenkinsWebApi.Internal;
 using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
-    // hudson.model.UserProperty
+    [SerializableClass("hudson.model.UserProperty")]
     public partial class JenkinsModelUserProperty
     {
         /// <summary>

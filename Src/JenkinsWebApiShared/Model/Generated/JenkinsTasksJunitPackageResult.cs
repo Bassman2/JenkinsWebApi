@@ -1,8 +1,9 @@
+using JenkinsWebApi.Internal;
 using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
-    // hudson.tasks.junit.PackageResult
+    [SerializableClass("hudson.tasks.junit.PackageResult")]
     public partial class JenkinsTasksJunitPackageResult : JenkinsTasksTestMetaTabulatedResult
     {
         [JsonPropertyName("child")]

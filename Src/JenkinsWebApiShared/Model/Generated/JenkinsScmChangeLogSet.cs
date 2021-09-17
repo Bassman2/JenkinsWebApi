@@ -1,8 +1,9 @@
+using JenkinsWebApi.Internal;
 using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
-    // hudson.scm.ChangeLogSet
+    [SerializableClass("hudson.scm.ChangeLogSet")]
     public partial class JenkinsScmChangeLogSet
     {
         [JsonPropertyName("item")]

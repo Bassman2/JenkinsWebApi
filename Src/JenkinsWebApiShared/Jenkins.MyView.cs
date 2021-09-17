@@ -42,7 +42,7 @@ namespace JenkinsWebApi
         /// <typeparam name="T">Type of view return data.</typeparam> 
         /// <param name="viewName">Name of the view.</param>
         /// <returns>Returns view data.</returns>
-        public async Task<T> GetMyViewAsync<T>(string viewName)
+        public async Task<T> GetMyViewAsync<T>(string viewName) where T : class
         {
             return await GetMyViewAsync<T>(viewName, CancellationToken.None);
         }
@@ -54,7 +54,7 @@ namespace JenkinsWebApi
         /// <param name="viewName">Name of the view</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Returns view data.</returns>
-        public async Task<T> GetMyViewAsync<T>(string viewName, CancellationToken cancellationToken)
+        public async Task<T> GetMyViewAsync<T>(string viewName, CancellationToken cancellationToken) where T : class
         {
             if (string.IsNullOrEmpty(viewName))
             {

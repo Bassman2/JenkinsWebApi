@@ -1,8 +1,9 @@
+using JenkinsWebApi.Internal;
 using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
-    // com.tikal.jenkins.plugins.multijob.MultiJobBuild-SubBuild
+    [SerializableClass("com.tikal.jenkins.plugins.multijob.MultiJobBuild-SubBuild")]
     public partial class JenkinsTikalMultiJobBuildSubBuild
     {
         [JsonPropertyName("abort")]

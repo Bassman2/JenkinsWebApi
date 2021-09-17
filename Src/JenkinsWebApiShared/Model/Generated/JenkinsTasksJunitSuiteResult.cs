@@ -1,8 +1,9 @@
+using JenkinsWebApi.Internal;
 using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
-    // hudson.tasks.junit.SuiteResult
+    [SerializableClass("hudson.tasks.junit.SuiteResult")]
     public partial class JenkinsTasksJunitSuiteResult
     {
         [JsonPropertyName("case")]

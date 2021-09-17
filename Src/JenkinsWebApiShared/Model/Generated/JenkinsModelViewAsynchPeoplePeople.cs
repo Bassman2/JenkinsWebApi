@@ -1,8 +1,9 @@
+using JenkinsWebApi.Internal;
 using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
-    // hudson.model.View-AsynchPeople-People
+    [SerializableClass("hudson.model.View-AsynchPeople-People")]
     public partial class JenkinsModelViewAsynchPeoplePeople
     {
         [JsonPropertyName("user")]

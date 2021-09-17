@@ -1,8 +1,9 @@
+using JenkinsWebApi.Internal;
 using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
-    // com.cloudbees.plugins.credentials.ViewCredentialsAction
+    [SerializableClass("com.cloudbees.plugins.credentials.ViewCredentialsAction")]
     public partial class JenkinsCloudbeesViewCredentialsAction
     {
         [JsonPropertyName("stores")]

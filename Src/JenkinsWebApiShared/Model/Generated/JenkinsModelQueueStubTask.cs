@@ -1,8 +1,9 @@
+using JenkinsWebApi.Internal;
 using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
-    // hudson.model.Queue-StubTask
+    [SerializableClass("hudson.model.Queue-StubTask")]
     public partial class JenkinsModelQueueStubTask
     {
         [JsonPropertyName("name")]

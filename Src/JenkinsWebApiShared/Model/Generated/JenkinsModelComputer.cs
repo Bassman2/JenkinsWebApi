@@ -1,8 +1,9 @@
+using JenkinsWebApi.Internal;
 using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
-    // hudson.model.Computer
+    [SerializableClass("hudson.model.Computer")]
     public partial class JenkinsModelComputer : JenkinsModelActionable
     {
         [JsonPropertyName("assignedLabel")]

@@ -1,8 +1,9 @@
+using JenkinsWebApi.Internal;
 using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
-    // hudson.scm.SCM
+    [SerializableClass("hudson.scm.SCM")]
     public partial class JenkinsScmSCM
     {
         [JsonPropertyName("browser")]

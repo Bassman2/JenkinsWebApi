@@ -1,8 +1,9 @@
+using JenkinsWebApi.Internal;
 using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
-    // com.cloudbees.hudson.plugins.folder.AbstractFolder
+    [SerializableClass("com.cloudbees.hudson.plugins.folder.AbstractFolder")]
     public partial class JenkinsCloudbeesAbstractFolder : JenkinsModelAbstractItem
     {
         [JsonPropertyName("healthReport")]

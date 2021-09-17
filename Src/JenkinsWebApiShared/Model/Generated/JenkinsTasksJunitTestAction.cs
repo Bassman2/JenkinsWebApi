@@ -1,8 +1,9 @@
+using JenkinsWebApi.Internal;
 using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
-    // hudson.tasks.junit.TestAction
+    [SerializableClass("hudson.tasks.junit.TestAction")]
     public partial class JenkinsTasksJunitTestAction
     {
         /// <summary>

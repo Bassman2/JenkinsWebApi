@@ -1,8 +1,9 @@
+using JenkinsWebApi.Internal;
 using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
-    // jenkins.branch.MultiBranchProject
+    [SerializableClass("jenkins.branch.MultiBranchProject")]
     public partial class JenkinsBranchMultiBranchProject : JenkinsCloudbeesComputedComputedFolder
     {
         [JsonPropertyName("source")]

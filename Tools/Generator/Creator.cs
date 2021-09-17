@@ -76,6 +76,7 @@ namespace Generator
                 }
                 using (StreamWriter writer = File.CreateText(filePath))
                 {
+                    writer.WriteLine("using JenkinsWebApi.Internal;");
                     switch (apiType)
                     {
                     case APIType.XML:
@@ -91,7 +92,7 @@ namespace Generator
                     writer.WriteLine("namespace JenkinsWebApi.Model");
                     writer.WriteLine("{");
 
-                    writer.WriteLine($"    // {ct.Name}");
+                    writer.WriteLine($"    [SerializableClass(\"{ct.Name}\")]");
 
                     if (apiType == APIType.XML && !string.IsNullOrEmpty(ct.Root))
                     {

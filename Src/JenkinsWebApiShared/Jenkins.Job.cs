@@ -50,7 +50,7 @@ namespace JenkinsWebApi
         /// <param name="jobName">Name of the job</param>
         /// <returns>Jenkins job data</returns>
         /// <remarks><include file="Comments.xml" path="comments/comment[@id='job']/*"/></remarks>
-        public async Task<T> GetJobAsync<T>(string jobName)
+        public async Task<T> GetJobAsync<T>(string jobName) where T : class
         {
             return await GetJobAsync<T>(jobName, CancellationToken.None);
         }
@@ -63,7 +63,7 @@ namespace JenkinsWebApi
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Jenkins job data</returns>
         /// <remarks><include file="Comments.xml" path="comments/comment[@id='job']/*"/></remarks>
-        public async Task<T> GetJobAsync<T>(string jobName, CancellationToken cancellationToken)
+        public async Task<T> GetJobAsync<T>(string jobName, CancellationToken cancellationToken) where T : class
         {
             if (string.IsNullOrEmpty(jobName))
             {

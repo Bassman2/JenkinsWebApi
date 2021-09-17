@@ -1,8 +1,9 @@
+using JenkinsWebApi.Internal;
 using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
-    // hudson.model.TimeSeries
+    [SerializableClass("hudson.model.TimeSeries")]
     public partial class JenkinsModelTimeSeries
     {
         [JsonPropertyName("history")]

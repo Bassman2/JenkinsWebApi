@@ -1,8 +1,9 @@
+using JenkinsWebApi.Internal;
 using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Model
 {
-    // hudson.maven.MavenBuild
+    [SerializableClass("hudson.maven.MavenBuild")]
     public partial class JenkinsMavenMavenBuild : JenkinsMavenAbstractMavenBuild
     {
         [JsonPropertyName("mavenArtifacts")]
