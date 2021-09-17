@@ -77,11 +77,21 @@ namespace JenkinsWebApi
             return GetCurrentUserAsync().Result != null;
         }
 
+        /// <summary>
+        /// Get a view.
+        /// </summary>
+        /// <param name="viewName">Name of the view to get.</param>
+        /// <returns></returns>
         public JenkinsView GetView(string viewName)
         {
             return new JenkinsView(this, viewName);
         }
 
+        /// <summary>
+        /// Get a job.
+        /// </summary>
+        /// <param name="jobName">>Name of the job to get.</param>
+        /// <returns></returns>
         public JenkinsJob GetJob(string jobName)
         {
             return new JenkinsJob(this, jobName);

@@ -7,6 +7,9 @@ using System.Xml;
 
 namespace JenkinsWebApi
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public sealed class JenkinsView
     {
         private readonly Jenkins jenkins;
@@ -18,12 +21,34 @@ namespace JenkinsWebApi
             this.modelView = jenkins.GetViewAsync<JenkinsModelView>(viewName).Result;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string Description { get { return this.modelView.Description; } }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public IEnumerable<JenkinsJob> Jobs { get { return this.modelView.Jobs.Select(j => new JenkinsJob(this.jenkins, j.Name)); } }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public IEnumerable<string> JobNames { get { return this.modelView.Jobs.Select(j => j.Name); } }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public string Name { get { return this.modelView.Name; } }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public Uri Url { get { return new Uri(this.modelView.Url); } }
 
+        /// <summary>
+        /// Get and set the view configuration as text.
+        /// </summary>
         public string Config 
         { 
             get
@@ -37,6 +62,9 @@ namespace JenkinsWebApi
             }
         }
 
+        /// <summary>
+        /// Get and set the view configuration as XmlDocument.
+        /// </summary>
         public XmlDocument ConfigXml
         {
             get

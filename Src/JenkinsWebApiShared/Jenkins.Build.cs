@@ -45,7 +45,7 @@ namespace JenkinsWebApi
         /// <param name="jobName">Name of the Jenkins job</param>
         /// <param name="buildNum">Number of the Jenkins build</param>
         /// <returns>Jenkins build data</returns>
-        public async Task<T> GetBuildAsync<T>(string jobName, int buildNum) where T : class
+        public async Task<T> GetBuildAsync<T>(string jobName, int buildNum) where T : JenkinsModelRun
         {
             return await GetBuildAsync<T>(jobName, buildNum, CancellationToken.None);
         }
@@ -57,7 +57,7 @@ namespace JenkinsWebApi
         /// <param name="buildNum">Number of the Jenkins build</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Jenkins build data</returns>
-        public async Task<T> GetBuildAsync<T>(string jobName, int buildNum, CancellationToken cancellationToken) where T : class
+        public async Task<T> GetBuildAsync<T>(string jobName, int buildNum, CancellationToken cancellationToken) where T : JenkinsModelRun
         {
             if (string.IsNullOrEmpty(jobName))
             {
@@ -102,7 +102,7 @@ namespace JenkinsWebApi
         /// </summary>
         /// <param name="jobName">Name of the Jenkins job</param>
         /// <returns>Jenkins build data</returns>
-        public async Task<T> GetLastBuildAsync<T>(string jobName) where T : class
+        public async Task<T> GetLastBuildAsync<T>(string jobName) where T : JenkinsModelRun
         {
             return await GetLastBuildAsync<T>(jobName, CancellationToken.None);
         }
@@ -113,7 +113,7 @@ namespace JenkinsWebApi
         /// <param name="jobName">Name of the Jenkins job</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Jenkins build data</returns>
-        public async Task<T> GetLastBuildAsync<T>(string jobName, CancellationToken cancellationToken) where T : class
+        public async Task<T> GetLastBuildAsync<T>(string jobName, CancellationToken cancellationToken) where T : JenkinsModelRun
         {
             if (string.IsNullOrEmpty(jobName))
             {

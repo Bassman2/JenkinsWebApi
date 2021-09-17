@@ -16,21 +16,6 @@ namespace JenkinsWebApi.Internal
     {
         public const string ApiFormat = "/api/json";
 
-        //private readonly static Type[] viewTypes = AppDomain.CurrentDomain.GetAssemblies()
-        //                        .SelectMany(s => s.GetTypes())
-        //                        .Where(t => typeof(JenkinsModelView).IsAssignableFrom(t) && t.IsClass && !t.IsGenericType && !t.IsAbstract)
-        //                        .ToArray();
-
-        //private readonly static Type[] jobTypes = AppDomain.CurrentDomain.GetAssemblies()
-        //                                .SelectMany(s => s.GetTypes())
-        //                                .Where(t => typeof(JenkinsModelJob).IsAssignableFrom(t) && t.IsClass && !t.IsGenericType && !t.IsAbstract)
-        //                                .ToArray();
-
-        //private readonly static Type[] buildTypes = AppDomain.CurrentDomain.GetAssemblies()
-        //                                .SelectMany(s => s.GetTypes())
-        //                                .Where(t => typeof(JenkinsModelRun).IsAssignableFrom(t) && t.IsClass && !t.IsGenericType && !t.IsAbstract)
-        //                                .ToArray();
-
         private readonly static Dictionary<string, Type> viewTypes = AppDomain.CurrentDomain.GetAssemblies()
             .SelectMany(s => s.GetTypes())
             .Where(t => typeof(JenkinsModelView).IsAssignableFrom(t) && t.IsClass && !t.IsGenericType && !t.IsAbstract)
@@ -51,17 +36,17 @@ namespace JenkinsWebApi.Internal
             return JsonSerializer.Deserialize<T>(text);
         }
 
-        public static T DeserializeView<T>(string text) where T : class
+        public static T DeserializeView<T>(string text) where T : JenkinsModelView
         {
             return Deserialize<T>(text, viewTypes);
         }
 
-        public static T DeserializeJob<T>(string text) where T : class
+        public static T DeserializeJob<T>(string text) where T : JenkinsModelJob
         {
             return Deserialize<T>(text, jobTypes); 
         }
 
-        public static T DeserializeBuild<T>(string text) where T : class
+        public static T DeserializeBuild<T>(string text) where T : JenkinsModelRun
         {
             return Deserialize<T>(text, buildTypes);
         }

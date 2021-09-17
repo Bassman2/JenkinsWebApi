@@ -13,6 +13,9 @@ using System.Threading.Tasks;
 
 namespace JenkinsWebApi
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public abstract partial class JenkinsClient : IDisposable
     {
         private const string apiFormat = JenkinsDeserializer.ApiFormat;
@@ -21,6 +24,9 @@ namespace JenkinsWebApi
         private HttpClientHandler handler;
         private HttpClient client;
 
+        /// <summary>
+        /// 
+        /// </summary>
         protected Uri BaseAddress { get { return this.client.BaseAddress; } }
 
         internal JenkinsClient(Uri host, string login, string passwordOrToken)
