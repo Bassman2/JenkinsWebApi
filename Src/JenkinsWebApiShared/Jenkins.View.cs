@@ -34,7 +34,7 @@ namespace JenkinsWebApi
             }
 
             string str = await GetApiStringAsync($"view/{viewName}", cancellationToken);
-            JenkinsModelView view = Deserialize<JenkinsModelView>(str, viewTypes);
+            JenkinsModelView view = DeserializeView<JenkinsModelView>(str);
             return view;
         }
 
@@ -66,7 +66,7 @@ namespace JenkinsWebApi
             }
 
             string str = await GetApiStringAsync($"view/{viewName}", cancellationToken);
-            var view = Deserialize<T>(str, viewTypes);
+            var view = DeserializeView<T>(str);
             return view;
         }
 

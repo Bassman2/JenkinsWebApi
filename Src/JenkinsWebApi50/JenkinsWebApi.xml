@@ -4,6 +4,11 @@
         <name>JenkinsWebApi</name>
     </assembly>
     <members>
+        <member name="M:JenkinsWebApi.JenkinsClient.Dispose">
+            <summary>
+            Release allocated resources.
+            </summary>
+        </member>
         <member name="T:JenkinsWebApi.Jenkins">
             <summary>
             Main class of the Jenkins server API
@@ -111,11 +116,6 @@
             <param name="login">Login for the Jenkins server</param>
             <param name="passwordOrToken">Password or API token for the Jenkins server</param>
         </member>
-        <member name="M:JenkinsWebApi.Jenkins.Dispose">
-            <summary>
-            Release allocated resources.
-            </summary>
-        </member>
         <member name="M:JenkinsWebApi.Jenkins.Login(System.String,System.String)">
             <summary>
             Login to the Jenkins server.
@@ -123,20 +123,6 @@
             <param name="login">Login for the Jenkins server</param>
             <param name="passwordOrToken">Password or API token for the Jenkins server</param>
             <returns>true if login success; false if failed</returns>
-        </member>
-        <member name="M:JenkinsWebApi.Jenkins.GetJenkinsInstancesAsync(System.Int64)">
-            <summary>
-            Get a list with all Jenkins servers in the local subnet.
-            </summary>
-            <param name="timeout">Timeout of the search.</param>
-            <returns>List with Jenkins servers</returns>
-            <remarks>
-            Since 2.220 the feature has been completely removed.<br/>
-            Since 2.219 und LTS 2.204.2 this feature is deactivated by default, <br/>
-            but can be activated by setting the system property hudson.DNSMultiCast.disabled to false or hudson.udp to 33848.<br/>
-            <see href="https://www.jenkins.io/security/advisory/2020-01-29/"/><br/>
-            <see href="https://www.jenkins.io/doc/book/managing/system-properties/"/> 
-            </remarks>
         </member>
         <member name="M:JenkinsWebApi.Jenkins.RunComputerScriptAsync(System.String,System.String)">
             <summary>
@@ -416,6 +402,20 @@
             <param name="labelName">Name of the label</param>
             <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
             <returns>Label info</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetJenkinsInstancesAsync(System.Int64)">
+            <summary>
+            Get a list with all Jenkins servers in the local subnet.
+            </summary>
+            <param name="timeout">Timeout of the search.</param>
+            <returns>List with available Jenkins servers.</returns>
+            <remarks>
+            Since 2.220 the feature has been completely removed.<br/>
+            Since 2.219 und LTS 2.204.2 this feature is deactivated by default, <br/>
+            but can be activated by setting the system property hudson.DNSMultiCast.disabled to false or hudson.udp to 33848.<br/>
+            <see href="https://www.jenkins.io/security/advisory/2020-01-29/"/><br/>
+            <see href="https://www.jenkins.io/doc/book/managing/system-properties/"/> 
+            </remarks>
         </member>
         <member name="M:JenkinsWebApi.Jenkins.GetJobAsync(System.String)">
             <summary>

@@ -38,7 +38,7 @@ namespace JenkinsWebApi
             }
 
             string str = await GetApiStringAsync($"job/{jobName}", cancellationToken);
-            JenkinsModelAbstractItem job = Deserialize<JenkinsModelAbstractItem>(str, jobTypes);
+            JenkinsModelAbstractItem job = DeserializeJob<JenkinsModelAbstractItem>(str);
             return job;
         }
 
@@ -70,7 +70,7 @@ namespace JenkinsWebApi
             }
 
             string str = await GetApiStringAsync($"job/{jobName}", cancellationToken);
-            var job = Deserialize<T>(str, jobTypes);
+            var job = DeserializeJob<T>(str);
             return job;
         }
 
@@ -154,7 +154,7 @@ namespace JenkinsWebApi
 
             //Uri location =
             // store last progress info to compare for changes
-            string jobUrl = new Uri(this.client.BaseAddress, $"/job/{jobName}").ToString();
+            string jobUrl = new Uri(this.BaseAddress, $"/job/{jobName}").ToString();
             JenkinsRunProgress last = new JenkinsRunProgress(jobName, jobUrl, res);
 
             // return if 
@@ -171,7 +171,7 @@ namespace JenkinsWebApi
                 string str = await GetApiStringAsync(res.Location.ToString(), cancellationToken);
                 if (str.StartsWith("<buildableItem"))
                 {
-                    JenkinsModelQueueBuildableItem item = XmlDeserialize<JenkinsModelQueueBuildableItem>(str);
+                    JenkinsModelQueueBuildableItem item = Deserialize<JenkinsModelQueueBuildableItem>(str);
                     Debug.WriteLine($"buildableItem: IsPending={item.IsPending} IsBlocked={item.IsBlocked} IsBuildable={item.IsBuildable} IsStuck={item.IsStuck} Why={item.Why}");
                     UpdateProgress(ref last, progress, jobName, jobUrl, item);
                     if (item.IsStuck && runConfig.ReturnIfBlocked)
@@ -181,7 +181,7 @@ namespace JenkinsWebApi
                 }
                 else if (str.StartsWith("<blockedItem"))
                 {
-                    JenkinsModelQueueBlockedItem item = XmlDeserialize<JenkinsModelQueueBlockedItem>(str);
+                    JenkinsModelQueueBlockedItem item = Deserialize<JenkinsModelQueueBlockedItem>(str);
                     Debug.WriteLine($"blockedItem: IsBlocked={item.IsBlocked} IsBuildable={item.IsBuildable} IsStuck={item.IsStuck} Why={item.Why}");
                     UpdateProgress(ref last, progress, jobName, jobUrl, item);
                     if (item.IsStuck && runConfig.ReturnIfBlocked)
@@ -192,7 +192,7 @@ namespace JenkinsWebApi
                 }
                 else if (str.StartsWith("<leftItem"))
                 {
-                    JenkinsModelQueueLeftItem item = XmlDeserialize<JenkinsModelQueueLeftItem>(str);
+                    JenkinsModelQueueLeftItem item = Deserialize<JenkinsModelQueueLeftItem>(str);
                     Debug.WriteLine($"leftItem: IsCancelled={item.IsCancelled} IsBuildable={item.IsBlocked} IsBuildable={item.IsBuildable} IsStuck={item.IsStuck} Why={item.Why}");
                     UpdateProgress(ref last, progress, jobName, jobUrl, item);
                     if (item.Executable != null)
@@ -217,7 +217,7 @@ namespace JenkinsWebApi
             while (!cancellationToken.IsCancellationRequested)
             {
                 string str = await GetApiStringAsync(buildUrl.ToString(), cancellationToken);
-                JenkinsModelRun run = Deserialize<JenkinsModelRun>(str, buildTypes);
+                JenkinsModelRun run = DeserializeBuild<JenkinsModelRun>(str);
                 Debug.WriteLine($"modelRun: IsBuilding={run.IsBuilding} IsKeepLog ={run.IsKeepLog} Result={run.Result}");
                 UpdateProgress(ref last, progress, jobName, jobUrl, run);
                 Console.WriteLine($"IsBuilding: {run.IsBuilding}");

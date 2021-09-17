@@ -1,4 +1,5 @@
-﻿using JenkinsWebApi.Model;
+﻿using JenkinsWebApi.Internal;
+using JenkinsWebApi.Model;
 using System;
 using System.Net;
 
@@ -13,7 +14,7 @@ namespace JenkinsWebApi
         {
             this.JobName = jobName;
             this.JobUrl = jobUrl;
-            if (item is Jenkins.PostRunRes res)
+            if (item is PostRunRes res)
             {
                 this.Status = res.StatusCode == HttpStatusCode.Conflict ? JenkinsRunStatus.Disabled : JenkinsRunStatus.Queued;
                 this.QueueUrl = (item as Uri)?.ToString();

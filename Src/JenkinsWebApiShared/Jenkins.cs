@@ -1,31 +1,12 @@
-﻿using JenkinsWebApi.Model;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Net.Sockets;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Xml;
-using System.Xml.Serialization;
-
-#pragma warning disable IDE0063 // Use simple 'using' statement
+﻿using System;
 
 namespace JenkinsWebApi
 {
     /// <summary>
     /// Main class of the Jenkins server API
     /// </summary>
-    public sealed partial class Jenkins : IDisposable
+    public sealed partial class Jenkins : JenkinsClient
     {
-        private HttpClientHandler handler;
-        private HttpClient client;
-        private const int udpPort = 33848;
-
         /// <summary>
         /// JobRunAsync progress event.
         /// </summary>
@@ -65,52 +46,10 @@ namespace JenkinsWebApi
         /// <param name="host">Host URL of the Jenkins server</param>
         /// <param name="login">Login for the Jenkins server</param>
         /// <param name="passwordOrToken">Password or API token for the Jenkins server</param>
-        public Jenkins(Uri host, string login, string passwordOrToken) 
+        public Jenkins(Uri host, string login, string passwordOrToken) : base(host, login, passwordOrToken) 
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
-
             // init variables
             this.RunConfig = new JenkinsRunConfig();
-
-            // connect
-            this.handler = new HttpClientHandler
-            {
-                UseCookies = true,
-                CookieContainer = new System.Net.CookieContainer()
-            };
-            this.client = new HttpClient(this.handler)
-            {
-                BaseAddress = host
-            };
-
-            // set authorization
-            if (!string.IsNullOrEmpty(login) && !string.IsNullOrEmpty(passwordOrToken))
-            {
-                this.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.ASCII.GetBytes($"{login}:{passwordOrToken}")));
-            }
-
-            // set crumb
-            Crumb();
-        }
-
-        /// <summary>
-        /// Release allocated resources.
-        /// </summary>
-        public void Dispose()
-        {
-            if (this.client != null)
-            {
-                this.client.Dispose();
-                this.client = null;
-            }
-            if (this.handler != null)
-            {
-                this.handler.Dispose();
-                this.handler = null;
-            } 
         }
 
         /// <summary>
@@ -132,82 +71,15 @@ namespace JenkinsWebApi
             }
 
             // set authorization
-            this.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.ASCII.GetBytes($"{login}:{passwordOrToken}")));
-
-            // set crumb
-            Crumb();
+            Authorize(login, passwordOrToken);
 
             // check if login success            
             return GetCurrentUserAsync().Result != null;
         }
 
-        private void Crumb()
-        {
-            // only on newer Jenkins versions
-            // handle CSRF Protection
-            try
-            {
-                JenkinsSecurityCsrfDefaultCrumbIssuer crumb = GetApiAsync<JenkinsSecurityCsrfDefaultCrumbIssuer>("crumbIssuer", CancellationToken.None).Result;
-                this.client.DefaultRequestHeaders.Add(crumb.CrumbRequestField, crumb.Crumb);
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
-        }
+        
 
-        /// <summary>
-        /// Get a list with all Jenkins servers in the local subnet.
-        /// </summary>
-        /// <param name="timeout">Timeout of the search.</param>
-        /// <returns>List with Jenkins servers</returns>
-        /// <remarks>
-        /// Since 2.220 the feature has been completely removed.<br/>
-        /// Since 2.219 und LTS 2.204.2 this feature is deactivated by default, <br/>
-        /// but can be activated by setting the system property hudson.DNSMultiCast.disabled to false or hudson.udp to 33848.<br/>
-        /// <see href="https://www.jenkins.io/security/advisory/2020-01-29/"/><br/>
-        /// <see href="https://www.jenkins.io/doc/book/managing/system-properties/"/> 
-        /// </remarks>
-        [Obsolete("Feature removed in newer Jenkins versions!")]
-        public static async Task<IEnumerable<JenkinsInstance>> GetJenkinsInstancesAsync(long timeout = 2000)
-        {
-            List<JenkinsInstance> list = null;
-            using (UdpClient client = new UdpClient())
-            {
-                await client.SendAsync(new byte[0], 0, new IPEndPoint(IPAddress.Broadcast, udpPort));
-                int start = Environment.TickCount;
-                while (true)
-                {
-                    while (client.Available > 0)
-                    {
-                        UdpReceiveResult res = await client.ReceiveAsync();
-                        string result = Encoding.ASCII.GetString(res.Buffer);
-                        Trace.TraceInformation(result);
-                        using (XmlTextReader reader = new XmlTextReader(new StringReader(result)))
-                        {
-                            XmlSerializer serializer = new XmlSerializer(typeof(JenkinsInstance));
-                            if (serializer.CanDeserialize(reader))
-                            {
-                                JenkinsInstance inst = (JenkinsInstance)serializer.Deserialize(reader);
-                                inst.Address = res.RemoteEndPoint.Address;
-                                (list ?? (list = new List<JenkinsInstance>())).Add(inst);
-                            }
-                            else
-                            {
-                                Trace.TraceError($"Unknown broadcast response: {result}");
-                            }
-                        }
-                    }
-                    if (Environment.TickCount > start + timeout)
-                    {
-                        break;
-                    }
-                    await Task.Delay(100);
-                }
-            }
-
-            return list;
-        }
+        
 
         public JenkinsView GetView(string viewName)
         {

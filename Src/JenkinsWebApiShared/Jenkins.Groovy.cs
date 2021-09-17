@@ -1,6 +1,4 @@
-﻿using JenkinsWebApi.Internal;
-using System.Collections.Generic;
-using System.Net.Http;
+﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -10,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace JenkinsWebApi
 {
-    public sealed partial class Jenkins
+    public sealed partial class Jenkins : JenkinsClient
     {
         /// <summary>
         /// Run node script
@@ -50,13 +48,8 @@ namespace JenkinsWebApi
             {
                 { "script", script }
             };
-            var content = new FormUrlEncodedContent(parms);
-            using (HttpResponseMessage response = await this.client.PostAsync($"computer/{computerName}/script", content, cancellationToken))
-            {
-                response.EnsureSuccess();
-                string str = await response.Content.ReadAsStringAsync();
-                return TrimScript(str);
-            }
+            string str = await PostResAsync($"computer/{computerName}/script", parms, cancellationToken);
+            return TrimScript(str); 
         }
 
         /// <summary>
@@ -96,13 +89,8 @@ namespace JenkinsWebApi
                 //parms.Add("Jenkins-Crumb", crumb);
                 { "script", script }
             };
-            var content = new FormUrlEncodedContent(parms);
-            using (HttpResponseMessage response = await this.client.PostAsync("computer/(master)/script", content, cancellationToken))
-            {
-                response.EnsureSuccess();
-                string str = await response.Content.ReadAsStringAsync();
-                return TrimScript(str);
-            }
+            string str = await PostResAsync("computer/(master)/script", parms, cancellationToken);
+            return TrimScript(str);
         }
 
         /// <summary>

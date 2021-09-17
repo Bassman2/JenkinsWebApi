@@ -1,9 +1,11 @@
-﻿
-using System.Net;
+﻿using System.Net;
 using System.Xml.Serialization;
 
 namespace JenkinsWebApi.Model
 {
+    // must always be XML
+    // no JSON support
+
     /// <summary>
     /// Jenkins server instance information.
     /// </summary>

@@ -9,13 +9,16 @@
     <Import_RootNamespace>JenkinsWebApi</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\PostRunRes.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JenkinsClient.Api.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JenkinsClient.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internal\MessageEnsure.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internal\XmlConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Jenkins.Build.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Jenkins.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Jenkins.Groovy.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Jenkins.Helper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Jenkins.Info.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Jenkins.Instances.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Jenkins.Job.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Jenkins.System.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Jenkins.User.cs" />
