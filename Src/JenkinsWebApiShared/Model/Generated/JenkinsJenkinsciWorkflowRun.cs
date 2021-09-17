@@ -1,10 +1,11 @@
+using JenkinsWebApi.Internal;
 using System.Xml.Serialization;
 
 #pragma warning disable CS1591
 
 namespace JenkinsWebApi.Model
 {
-    // org.jenkinsci.plugins.workflow.job.WorkflowRun
+    [SerializableClass("org.jenkinsci.plugins.workflow.job.WorkflowRun")]
     [XmlRoot("workflowRun")]
     public partial class JenkinsJenkinsciWorkflowRun : JenkinsModelRun
     {

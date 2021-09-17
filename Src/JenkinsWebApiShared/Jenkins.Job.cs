@@ -19,7 +19,7 @@ namespace JenkinsWebApi
         /// </summary>
         /// <param name="jobName">Name of the job</param>
         /// <returns>Jenkins job data</returns>
-        public async Task<JenkinsModelAbstractItem> GetJobAsync(string jobName)
+        public async Task<JenkinsModelJob> GetJobAsync(string jobName)
         {
             return await GetJobAsync(jobName, CancellationToken.None);
         }
@@ -31,7 +31,7 @@ namespace JenkinsWebApi
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Jenkins job data</returns>
         /// <remarks><include file="Comments.xml" path="comments/comment[@id='job']/*"/></remarks>
-        public async Task<JenkinsModelAbstractItem> GetJobAsync(string jobName, CancellationToken cancellationToken)
+        public async Task<JenkinsModelJob> GetJobAsync(string jobName, CancellationToken cancellationToken)
         {
             if (string.IsNullOrEmpty(jobName))
             {
@@ -39,7 +39,7 @@ namespace JenkinsWebApi
             }
 
             string str = await GetApiStringAsync($"job/{jobName}", cancellationToken);
-            JenkinsModelAbstractItem job = JenkinsDeserializer.DeserializeJob<JenkinsModelAbstractItem>(str);
+            JenkinsModelJob job = JenkinsDeserializer.DeserializeJob<JenkinsModelJob>(str);
             return job;
         }
 
@@ -50,7 +50,7 @@ namespace JenkinsWebApi
         /// <param name="jobName">Name of the job</param>
         /// <returns>Jenkins job data</returns>
         /// <remarks><include file="Comments.xml" path="comments/comment[@id='job']/*"/></remarks>
-        public async Task<T> GetJobAsync<T>(string jobName)
+        public async Task<T> GetJobAsync<T>(string jobName) where T : JenkinsModelJob
         {
             return await GetJobAsync<T>(jobName, CancellationToken.None);
         }
@@ -63,7 +63,7 @@ namespace JenkinsWebApi
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Jenkins job data</returns>
         /// <remarks><include file="Comments.xml" path="comments/comment[@id='job']/*"/></remarks>
-        public async Task<T> GetJobAsync<T>(string jobName, CancellationToken cancellationToken)
+        public async Task<T> GetJobAsync<T>(string jobName, CancellationToken cancellationToken) where T : JenkinsModelJob
         {
             if (string.IsNullOrEmpty(jobName))
             {

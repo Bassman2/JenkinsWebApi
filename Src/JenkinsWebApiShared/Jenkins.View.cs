@@ -46,7 +46,7 @@ namespace JenkinsWebApi
         /// <param name="viewName">Name of the view.</param>
         /// <returns>Returns view data.</returns>
         /// <remarks><include file="Comments.xml" path="comments/comment[@id='view']/*"/></remarks>
-        public async Task<T> GetViewAsync<T>(string viewName)
+        public async Task<T> GetViewAsync<T>(string viewName) where T : JenkinsModelView
         {
             return await GetViewAsync<T>(viewName, CancellationToken.None);
         }
@@ -59,7 +59,7 @@ namespace JenkinsWebApi
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Returns view data.</returns>
         /// <remarks><include file="Comments.xml" path="comments/comment[@id='view']/*"/></remarks>
-        public async Task<T> GetViewAsync<T>(string viewName, CancellationToken cancellationToken)
+        public async Task<T> GetViewAsync<T>(string viewName, CancellationToken cancellationToken) where T : JenkinsModelView
         {
             if (string.IsNullOrEmpty(viewName))
             {
@@ -121,6 +121,7 @@ namespace JenkinsWebApi
         /// 
         /// </summary>
         /// <param name="viewName"></param>
+        /// <param name="config"></param>
         /// <returns></returns>
         public async Task SetViewConfigXmlAsync(string viewName, XmlDocument config)
         {
@@ -131,6 +132,7 @@ namespace JenkinsWebApi
         /// 
         /// </summary>
         /// <param name="viewName"></param>
+        /// <param name="config"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         public async Task SetViewConfigXmlAsync(string viewName, XmlDocument config, CancellationToken cancellationToken)
@@ -142,6 +144,7 @@ namespace JenkinsWebApi
         /// 
         /// </summary>
         /// <param name="viewName"></param>
+        /// <param name="config"></param>
         /// <returns></returns>
         public async Task SetViewConfigAsync(string viewName, string config)
         {
@@ -152,6 +155,7 @@ namespace JenkinsWebApi
         /// 
         /// </summary>
         /// <param name="viewName"></param>
+        /// <param name="config"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         public async Task SetViewConfigAsync(string viewName, string config, CancellationToken cancellationToken)

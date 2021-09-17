@@ -38,6 +38,10 @@ namespace JenkinsWebApi
         /// </summary>
         public int StartDelay { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public JenkinsRunConfig Clone()
         {
             return new JenkinsRunConfig() { RunMode = this.RunMode, ReturnIfBlocked = this.ReturnIfBlocked, PollingTime = this.PollingTime, StartDelay = this.StartDelay };

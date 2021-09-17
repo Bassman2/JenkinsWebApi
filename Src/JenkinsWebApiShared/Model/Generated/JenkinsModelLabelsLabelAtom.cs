@@ -1,10 +1,11 @@
+using JenkinsWebApi.Internal;
 using System.Xml.Serialization;
 
 #pragma warning disable CS1591
 
 namespace JenkinsWebApi.Model
 {
-    // hudson.model.labels.LabelAtom
+    [SerializableClass("hudson.model.labels.LabelAtom")]
     [XmlRoot("labelAtom")]
     public partial class JenkinsModelLabelsLabelAtom : JenkinsModelLabel
     {

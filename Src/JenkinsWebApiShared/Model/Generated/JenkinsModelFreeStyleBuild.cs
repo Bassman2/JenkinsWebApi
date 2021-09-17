@@ -1,10 +1,11 @@
+using JenkinsWebApi.Internal;
 using System.Xml.Serialization;
 
 #pragma warning disable CS1591
 
 namespace JenkinsWebApi.Model
 {
-    // hudson.model.FreeStyleBuild
+    [SerializableClass("hudson.model.FreeStyleBuild")]
     [XmlRoot("freeStyleBuild")]
     public partial class JenkinsModelFreeStyleBuild : JenkinsModelBuild
     {

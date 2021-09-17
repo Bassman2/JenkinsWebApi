@@ -1,10 +1,11 @@
+using JenkinsWebApi.Internal;
 using System.Xml.Serialization;
 
 #pragma warning disable CS1591
 
 namespace JenkinsWebApi.Model
 {
-    // hudson.security.csrf.CrumbIssuer
+    [SerializableClass("hudson.security.csrf.CrumbIssuer")]
     public partial class JenkinsSecurityCsrfCrumbIssuer
     {
         [XmlElement("crumb")]

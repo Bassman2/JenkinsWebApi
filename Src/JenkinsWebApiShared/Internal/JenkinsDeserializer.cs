@@ -1,4 +1,5 @@
 ﻿using JenkinsWebApi.Model;
+using JenkinsWebApi.Internal;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,56 +17,56 @@ namespace JenkinsWebApi.Internal
     {
         public const string ApiFormat = "/api/xml";
 
-        private readonly static Type[] viewTypes = AppDomain.CurrentDomain.GetAssemblies()
-                                .SelectMany(s => s.GetTypes())
-                                .Where(t => typeof(JenkinsModelView).IsAssignableFrom(t) && t.IsClass && !t.IsGenericType && !t.IsAbstract)
-                                .ToArray();
+        private readonly static Dictionary<string, Type> viewTypes = AppDomain.CurrentDomain.GetAssemblies()
+            .SelectMany(s => s.GetTypes())
+            .Where(t => typeof(JenkinsModelView).IsAssignableFrom(t) && t.IsClass && !t.IsGenericType && !t.IsAbstract)
+            .ToDictionary(t => SerializableClassAttribute.GetClassName(t), t => t);
 
-        private readonly static Type[] jobTypes = AppDomain.CurrentDomain.GetAssemblies()
-                                        .SelectMany(s => s.GetTypes())
-                                        .Where(t => typeof(JenkinsModelJob).IsAssignableFrom(t) && t.IsClass && !t.IsGenericType && !t.IsAbstract)
-                                        .ToArray();
+        private readonly static Dictionary<string, Type> jobTypes = AppDomain.CurrentDomain.GetAssemblies()
+            .SelectMany(s => s.GetTypes())
+            .Where(t => typeof(JenkinsModelJob).IsAssignableFrom(t) && t.IsClass && !t.IsGenericType && !t.IsAbstract)
+            .ToDictionary(t => SerializableClassAttribute.GetClassName(t), t => t);
 
-        private readonly static Type[] buildTypes = AppDomain.CurrentDomain.GetAssemblies()
-                                        .SelectMany(s => s.GetTypes())
-                                        .Where(t => typeof(JenkinsModelRun).IsAssignableFrom(t) && t.IsClass && !t.IsGenericType && !t.IsAbstract)
-                                        .ToArray();
+        private readonly static Dictionary<string, Type> buildTypes = AppDomain.CurrentDomain.GetAssemblies()
+            .SelectMany(s => s.GetTypes())
+            .Where(t => typeof(JenkinsModelRun).IsAssignableFrom(t) && t.IsClass && !t.IsGenericType && !t.IsAbstract)
+            .ToDictionary(t => SerializableClassAttribute.GetClassName(t), t => t);
 
-        public static T Deserialize<T>(string xmlText) where T : class
+        public static T Deserialize<T>(string text) where T : class
         {
             XmlSerializer serializer = new XmlSerializer(typeof(T));
-            return serializer.Deserialize(new StringReader(xmlText)) as T;
+            return serializer.Deserialize(new StringReader(text)) as T;
         }
 
-        public static T DeserializeView<T>(string xmlText)
+        public static T DeserializeView<T>(string text) where T : JenkinsModelView
         {
-            return Deserialize<T>(xmlText, viewTypes);
+            return Deserialize<T>(text, viewTypes);
         }
 
-        public static T DeserializeJob<T>(string xmlText)
+        public static T DeserializeJob<T>(string text) where T : JenkinsModelJob
         {
-            return Deserialize<T>(xmlText, jobTypes);
+            return Deserialize<T>(text, jobTypes);
         }
 
-        public static T DeserializeBuild<T>(string xmlText)
+        public static T DeserializeBuild<T>(string text) where T : JenkinsModelRun
         {
-            return Deserialize<T>(xmlText, buildTypes);
+            return Deserialize<T>(text, buildTypes);
         }
 
-        private static T Deserialize<T>(string xmlText, IEnumerable<Type> classTypes)
+        private static T Deserialize<T>(string text, Dictionary<string, Type> classTypes) where T : class
         {
-            using (XmlTextReader reader = new XmlTextReader(new StringReader(xmlText)))
+
+            var xmlDocument = new XmlDocument();
+            xmlDocument.LoadXml(text);
+            var typeValue = xmlDocument.DocumentElement.GetAttribute("_class");
+
+            if (classTypes.TryGetValue(typeValue, out Type type))
             {
-                foreach (Type t in classTypes)
-                {
-                    XmlSerializer serializer = new XmlSerializer(t);
-                    if (serializer.CanDeserialize(reader))
-                    {
-                        return (T)serializer.Deserialize(reader);
-                    }
-                }
+                XmlSerializer serializer = new XmlSerializer(type);
+                return serializer.Deserialize(new StringReader(text)) as T;
             }
-            throw new Exception($"Not class found for this type: {xmlText.Substring(1, xmlText.IndexOf(' '))}");
+            
+            return default(T);
         }
     }
 }

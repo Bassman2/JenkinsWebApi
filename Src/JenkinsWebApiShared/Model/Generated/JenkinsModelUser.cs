@@ -1,10 +1,11 @@
+using JenkinsWebApi.Internal;
 using System.Xml.Serialization;
 
 #pragma warning disable CS1591
 
 namespace JenkinsWebApi.Model
 {
-    // hudson.model.User
+    [SerializableClass("hudson.model.User")]
     [XmlRoot("user")]
     public partial class JenkinsModelUser
     {

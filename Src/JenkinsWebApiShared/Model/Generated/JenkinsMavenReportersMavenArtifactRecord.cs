@@ -1,10 +1,11 @@
+using JenkinsWebApi.Internal;
 using System.Xml.Serialization;
 
 #pragma warning disable CS1591
 
 namespace JenkinsWebApi.Model
 {
-    // hudson.maven.reporters.MavenArtifactRecord
+    [SerializableClass("hudson.maven.reporters.MavenArtifactRecord")]
     public partial class JenkinsMavenReportersMavenArtifactRecord
     {
         [XmlElement("attachedArtifact")]

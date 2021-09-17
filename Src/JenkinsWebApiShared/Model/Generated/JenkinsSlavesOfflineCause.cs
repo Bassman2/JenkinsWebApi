@@ -1,10 +1,11 @@
+using JenkinsWebApi.Internal;
 using System.Xml.Serialization;
 
 #pragma warning disable CS1591
 
 namespace JenkinsWebApi.Model
 {
-    // hudson.slaves.OfflineCause
+    [SerializableClass("hudson.slaves.OfflineCause")]
     public partial class JenkinsSlavesOfflineCause
     {
         [XmlElement("timestamp")]

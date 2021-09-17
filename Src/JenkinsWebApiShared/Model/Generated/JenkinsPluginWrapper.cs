@@ -1,10 +1,11 @@
+using JenkinsWebApi.Internal;
 using System.Xml.Serialization;
 
 #pragma warning disable CS1591
 
 namespace JenkinsWebApi.Model
 {
-    // hudson.PluginWrapper
+    [SerializableClass("hudson.PluginWrapper")]
     public partial class JenkinsPluginWrapper
     {
         [XmlElement("active")]

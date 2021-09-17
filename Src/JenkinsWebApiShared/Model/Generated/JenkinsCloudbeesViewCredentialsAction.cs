@@ -1,10 +1,11 @@
+using JenkinsWebApi.Internal;
 using System.Xml.Serialization;
 
 #pragma warning disable CS1591
 
 namespace JenkinsWebApi.Model
 {
-    // com.cloudbees.plugins.credentials.ViewCredentialsAction
+    [SerializableClass("com.cloudbees.plugins.credentials.ViewCredentialsAction")]
     public partial class JenkinsCloudbeesViewCredentialsAction
     {
         [XmlElement("stores")]

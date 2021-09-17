@@ -1,10 +1,11 @@
+using JenkinsWebApi.Internal;
 using System.Xml.Serialization;
 
 #pragma warning disable CS1591
 
 namespace JenkinsWebApi.Model
 {
-    // hudson.model.Node
+    [SerializableClass("hudson.model.Node")]
     public partial class JenkinsModelNode
     {
         [XmlElement("assignedLabel")]

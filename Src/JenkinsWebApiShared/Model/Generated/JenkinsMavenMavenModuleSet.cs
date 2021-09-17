@@ -1,10 +1,11 @@
+using JenkinsWebApi.Internal;
 using System.Xml.Serialization;
 
 #pragma warning disable CS1591
 
 namespace JenkinsWebApi.Model
 {
-    // hudson.maven.MavenModuleSet
+    [SerializableClass("hudson.maven.MavenModuleSet")]
     [XmlRoot("mavenModuleSet")]
     public partial class JenkinsMavenMavenModuleSet : JenkinsMavenAbstractMavenProject
     {

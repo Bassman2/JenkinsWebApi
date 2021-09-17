@@ -1,10 +1,11 @@
+using JenkinsWebApi.Internal;
 using System.Xml.Serialization;
 
 #pragma warning disable CS1591
 
 namespace JenkinsWebApi.Model
 {
-    // hudson.scm.RepositoryBrowser
+    [SerializableClass("hudson.scm.RepositoryBrowser")]
     public partial class JenkinsScmRepositoryBrowser
     {
         /// <summary>

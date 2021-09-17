@@ -1,10 +1,11 @@
+using JenkinsWebApi.Internal;
 using System.Xml.Serialization;
 
 #pragma warning disable CS1591
 
 namespace JenkinsWebApi.Model
 {
-    // hudson.model.Queue-StubTask
+    [SerializableClass("hudson.model.Queue-StubTask")]
     public partial class JenkinsModelQueueStubTask
     {
         [XmlElement("name")]

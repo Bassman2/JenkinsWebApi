@@ -1,10 +1,11 @@
+using JenkinsWebApi.Internal;
 using System.Xml.Serialization;
 
 #pragma warning disable CS1591
 
 namespace JenkinsWebApi.Model
 {
-    // hudson.tasks.junit.TestObject
+    [SerializableClass("hudson.tasks.junit.TestObject")]
     public partial class JenkinsTasksJunitTestObject
     {
         /// <summary>

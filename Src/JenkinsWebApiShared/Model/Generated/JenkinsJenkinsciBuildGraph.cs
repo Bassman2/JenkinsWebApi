@@ -1,10 +1,11 @@
+using JenkinsWebApi.Internal;
 using System.Xml.Serialization;
 
 #pragma warning disable CS1591
 
 namespace JenkinsWebApi.Model
 {
-    // org.jenkinsci.plugins.buildgraphview.BuildGraph
+    [SerializableClass("org.jenkinsci.plugins.buildgraphview.BuildGraph")]
     [XmlRoot("buildGraph")]
     public partial class JenkinsJenkinsciBuildGraph
     {

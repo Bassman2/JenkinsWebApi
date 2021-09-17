@@ -1,10 +1,11 @@
+using JenkinsWebApi.Internal;
 using System.Xml.Serialization;
 
 #pragma warning disable CS1591
 
 namespace JenkinsWebApi.Model
 {
-    // hudson.matrix.MatrixProject
+    [SerializableClass("hudson.matrix.MatrixProject")]
     [XmlRoot("matrixProject")]
     public partial class JenkinsMatrixMatrixProject : JenkinsModelAbstractProject
     {

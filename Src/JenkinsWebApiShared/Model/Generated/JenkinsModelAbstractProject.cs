@@ -1,10 +1,11 @@
+using JenkinsWebApi.Internal;
 using System.Xml.Serialization;
 
 #pragma warning disable CS1591
 
 namespace JenkinsWebApi.Model
 {
-    // hudson.model.AbstractProject
+    [SerializableClass("hudson.model.AbstractProject")]
     public partial class JenkinsModelAbstractProject : JenkinsModelJob
     {
         [XmlElement("concurrentBuild")]

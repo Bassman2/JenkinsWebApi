@@ -1,10 +1,11 @@
+using JenkinsWebApi.Internal;
 using System.Xml.Serialization;
 
 #pragma warning disable CS1591
 
 namespace JenkinsWebApi.Model
 {
-    // hudson.model.Fingerprint-Range
+    [SerializableClass("hudson.model.Fingerprint-Range")]
     public partial class JenkinsModelFingerprintRange
     {
         [XmlElement("end")]

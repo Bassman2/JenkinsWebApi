@@ -1,10 +1,11 @@
+using JenkinsWebApi.Internal;
 using System.Xml.Serialization;
 
 #pragma warning disable CS1591
 
 namespace JenkinsWebApi.Model
 {
-    // jenkins.model.Jenkins
+    [SerializableClass("jenkins.model.Jenkins")]
     public partial class JenkinsModelJenkins : JenkinsModelAbstractCIBase
     {
         [XmlElement("description")]

@@ -1,10 +1,11 @@
+using JenkinsWebApi.Internal;
 using System.Xml.Serialization;
 
 #pragma warning disable CS1591
 
 namespace JenkinsWebApi.Model
 {
-    // hudson.model.Queue-LeftItem
+    [SerializableClass("hudson.model.Queue-LeftItem")]
     [XmlRoot("leftItem")]
     public partial class JenkinsModelQueueLeftItem : JenkinsModelQueueItem
     {

@@ -26,14 +26,14 @@ namespace Generator
                     {
                     case APIType.XML:
                         writer.WriteLine("using System.Xml.Serialization;");
-                        writer.WriteLine();
-                        writer.WriteLine("#pragma warning disable CS1591");
                         break;
                     case APIType.JSON:
                         writer.WriteLine("using System.Runtime.Serialization;");
                         writer.WriteLine("using System.Text.Json.Serialization;");
                         break;
                     }
+                    writer.WriteLine();
+                    writer.WriteLine("#pragma warning disable CS1591"); // disable warnings for no commented items
                     writer.WriteLine();
                     writer.WriteLine("namespace JenkinsWebApi.Model");
                     writer.WriteLine("{");
@@ -76,22 +76,23 @@ namespace Generator
                 }
                 using (StreamWriter writer = File.CreateText(filePath))
                 {
+                    writer.WriteLine("using JenkinsWebApi.Internal;");
                     switch (apiType)
                     {
                     case APIType.XML:
                         writer.WriteLine("using System.Xml.Serialization;");
-                        writer.WriteLine();
-                        writer.WriteLine("#pragma warning disable CS1591");
                         break;
                     case APIType.JSON:
                         writer.WriteLine("using System.Text.Json.Serialization;");
                         break;
                     }
                     writer.WriteLine();
+                    writer.WriteLine("#pragma warning disable CS1591");     // disable warnings for no commented items
+                    writer.WriteLine();
                     writer.WriteLine("namespace JenkinsWebApi.Model");
                     writer.WriteLine("{");
 
-                    writer.WriteLine($"    // {ct.Name}");
+                    writer.WriteLine($"    [SerializableClass(\"{ct.Name}\")]");
 
                     if (apiType == APIType.XML && !string.IsNullOrEmpty(ct.Root))
                     {

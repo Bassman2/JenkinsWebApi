@@ -1,10 +1,11 @@
+using JenkinsWebApi.Internal;
 using System.Xml.Serialization;
 
 #pragma warning disable CS1591
 
 namespace JenkinsWebApi.Model
 {
-    // com.cloudbees.hudson.plugins.folder.AbstractFolder
+    [SerializableClass("com.cloudbees.hudson.plugins.folder.AbstractFolder")]
     public partial class JenkinsCloudbeesAbstractFolder : JenkinsModelAbstractItem
     {
         [XmlElement("healthReport")]

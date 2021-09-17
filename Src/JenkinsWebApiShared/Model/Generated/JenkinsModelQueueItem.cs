@@ -1,10 +1,11 @@
+using JenkinsWebApi.Internal;
 using System.Xml.Serialization;
 
 #pragma warning disable CS1591
 
 namespace JenkinsWebApi.Model
 {
-    // hudson.model.Queue-Item
+    [SerializableClass("hudson.model.Queue-Item")]
     public partial class JenkinsModelQueueItem : JenkinsModelActionable
     {
         [XmlElement("blocked")]

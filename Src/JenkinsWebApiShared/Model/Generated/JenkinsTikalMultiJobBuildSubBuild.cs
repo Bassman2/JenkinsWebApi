@@ -1,10 +1,11 @@
+using JenkinsWebApi.Internal;
 using System.Xml.Serialization;
 
 #pragma warning disable CS1591
 
 namespace JenkinsWebApi.Model
 {
-    // com.tikal.jenkins.plugins.multijob.MultiJobBuild-SubBuild
+    [SerializableClass("com.tikal.jenkins.plugins.multijob.MultiJobBuild-SubBuild")]
     public partial class JenkinsTikalMultiJobBuildSubBuild
     {
         [XmlElement("abort")]

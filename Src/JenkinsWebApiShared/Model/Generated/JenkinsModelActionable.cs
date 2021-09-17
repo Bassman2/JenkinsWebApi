@@ -1,10 +1,11 @@
+using JenkinsWebApi.Internal;
 using System.Xml.Serialization;
 
 #pragma warning disable CS1591
 
 namespace JenkinsWebApi.Model
 {
-    // hudson.model.Actionable
+    [SerializableClass("hudson.model.Actionable")]
     public partial class JenkinsModelActionable
     {
         [XmlElement("action")]

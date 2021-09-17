@@ -1,10 +1,11 @@
+using JenkinsWebApi.Internal;
 using System.Xml.Serialization;
 
 #pragma warning disable CS1591
 
 namespace JenkinsWebApi.Model
 {
-    // hudson.model.LoadStatistics
+    [SerializableClass("hudson.model.LoadStatistics")]
     public partial class JenkinsModelLoadStatistics
     {
         [XmlElement("availableExecutors")]

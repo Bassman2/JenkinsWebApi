@@ -1,10 +1,11 @@
+using JenkinsWebApi.Internal;
 using System.Xml.Serialization;
 
 #pragma warning disable CS1591
 
 namespace JenkinsWebApi.Model
 {
-    // org.jenkinsci.plugins.envinject.EnvInjectVarList
+    [SerializableClass("org.jenkinsci.plugins.envinject.EnvInjectVarList")]
     [XmlRoot("envInjectVarList")]
     public partial class JenkinsJenkinsciEnvInjectVarList
     {

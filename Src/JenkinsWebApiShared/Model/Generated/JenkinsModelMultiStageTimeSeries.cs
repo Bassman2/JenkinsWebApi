@@ -1,10 +1,11 @@
+using JenkinsWebApi.Internal;
 using System.Xml.Serialization;
 
 #pragma warning disable CS1591
 
 namespace JenkinsWebApi.Model
 {
-    // hudson.model.MultiStageTimeSeries
+    [SerializableClass("hudson.model.MultiStageTimeSeries")]
     public partial class JenkinsModelMultiStageTimeSeries
     {
         [XmlElement("hour")]
