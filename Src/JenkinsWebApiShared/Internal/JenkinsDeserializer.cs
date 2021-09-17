@@ -7,8 +7,8 @@ using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Xml;
-using System.Xml.Serialization;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace JenkinsWebApi.Internal
 {
@@ -31,41 +31,43 @@ namespace JenkinsWebApi.Internal
                                         .Where(t => typeof(JenkinsModelRun).IsAssignableFrom(t) && t.IsClass && !t.IsGenericType && !t.IsAbstract)
                                         .ToArray();
 
-        public static T Deserialize<T>(string xmlText) where T : class
+        public static T Deserialize<T>(string text) 
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(T));
-            return serializer.Deserialize(new StringReader(xmlText)) as T;
+            return JsonSerializer.Deserialize<T>(text);
         }
 
-        public static T DeserializeView<T>(string xmlText)
+        public static T DeserializeView<T>(string text)
         {
-            return Deserialize<T>(xmlText, viewTypes);
+            return Deserialize<T>(text, viewTypes);
         }
 
-        public static T DeserializeJob<T>(string xmlText)
+        public static T DeserializeJob<T>(string text)
         {
-            return Deserialize<T>(xmlText, jobTypes);
+            return Deserialize<T>(text, jobTypes);
         }
 
-        public static T DeserializeBuild<T>(string xmlText)
+        public static T DeserializeBuild<T>(string text)
         {
-            return Deserialize<T>(xmlText, buildTypes);
+            return Deserialize<T>(text, buildTypes);
         }
 
-        private static T Deserialize<T>(string xmlText, IEnumerable<Type> classTypes)
+        private static T Deserialize<T>(string text, IEnumerable<Type> classTypes) 
         {
-            using (XmlTextReader reader = new XmlTextReader(new StringReader(xmlText)))
-            {
-                foreach (Type t in classTypes)
-                {
-                    XmlSerializer serializer = new XmlSerializer(t);
-                    if (serializer.CanDeserialize(reader))
-                    {
-                        return (T)serializer.Deserialize(reader);
-                    }
-                }
-            }
-            throw new Exception($"Not class found for this type: {xmlText.Substring(1, xmlText.IndexOf(' '))}");
+            _ = classTypes;
+            return Deserialize<T>(text); 
+
+            //using (XmlTextReader reader = new XmlTextReader(new StringReader(xmlText)))
+            //{
+            //    foreach (Type t in classTypes)
+            //    {
+            //        XmlSerializer serializer = new XmlSerializer(t);
+            //        if (serializer.CanDeserialize(reader))
+            //        {
+            //            return (T)serializer.Deserialize(reader);
+            //        }
+            //    }
+            //}
+            //throw new Exception($"Not class found for this type: {xmlText.Substring(1, xmlText.IndexOf(' '))}");
         }
     }
 }
