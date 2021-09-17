@@ -1,4 +1,5 @@
-﻿using JenkinsWebApi.Model;
+﻿using JenkinsWebApi.Internal;
+using JenkinsWebApi.Model;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -34,7 +35,7 @@ namespace JenkinsWebApi
             }
 
             string str = await GetApiStringAsync($"job/{jobName}/{buildNum}", cancellationToken);
-            JenkinsModelRun build = DeserializeBuild<JenkinsModelRun>(str);
+            JenkinsModelRun build = JenkinsDeserializer.DeserializeBuild<JenkinsModelRun>(str);
             return build;
         }
 
@@ -64,7 +65,7 @@ namespace JenkinsWebApi
             }
 
             string str = await GetApiStringAsync($"job/{jobName}/{buildNum}", cancellationToken);
-            T build = DeserializeBuild<T>(str);
+            T build = JenkinsDeserializer.DeserializeBuild<T>(str);
             return build;
         }
 
@@ -92,7 +93,7 @@ namespace JenkinsWebApi
             }
 
             string str = await GetApiStringAsync($"job/{jobName}/lastBuild", cancellationToken);
-            JenkinsModelRun build = DeserializeBuild<JenkinsModelRun>(str);
+            JenkinsModelRun build = JenkinsDeserializer.DeserializeBuild<JenkinsModelRun>(str);
             return build;
         }
 
@@ -120,7 +121,7 @@ namespace JenkinsWebApi
             }
 
             string str = await GetApiStringAsync($"job/{jobName}/lastBuild", cancellationToken);
-            T build = DeserializeBuild<T>(str);
+            T build = JenkinsDeserializer.DeserializeBuild<T>(str);
             return build;
         }
 

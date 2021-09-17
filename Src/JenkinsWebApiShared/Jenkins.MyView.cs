@@ -1,4 +1,5 @@
-﻿using JenkinsWebApi.Model;
+﻿using JenkinsWebApi.Internal;
+using JenkinsWebApi.Model;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -31,7 +32,7 @@ namespace JenkinsWebApi
             }
 
             string str = await GetApiStringAsync($"me/my-views/view/{viewName}", cancellationToken);
-            JenkinsModelView view = DeserializeView<JenkinsModelView>(str);
+            JenkinsModelView view = JenkinsDeserializer.DeserializeView<JenkinsModelView>(str);
             return view;
         }
 
@@ -61,7 +62,7 @@ namespace JenkinsWebApi
             }
 
             string str = await GetApiStringAsync($"me/my-views/view/{viewName}", cancellationToken);
-            var view = DeserializeView<T>(str);
+            var view = JenkinsDeserializer.DeserializeView<T>(str);
             return view;
         }
     }

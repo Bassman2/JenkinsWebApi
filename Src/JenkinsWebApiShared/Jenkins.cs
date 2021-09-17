@@ -76,11 +76,7 @@ namespace JenkinsWebApi
             // check if login success            
             return GetCurrentUserAsync().Result != null;
         }
-
         
-
-        
-
         public JenkinsView GetView(string viewName)
         {
             return new JenkinsView(this, viewName);

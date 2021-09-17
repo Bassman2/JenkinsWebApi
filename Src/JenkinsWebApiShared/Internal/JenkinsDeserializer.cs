@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace JenkinsWebApi
+namespace JenkinsWebApi.Internal
 {
-    public abstract partial class JenkinsClient
+    internal static class JenkinsDeserializer
     {
-        private const string apiFormat = "/api/xml";
+        public const string ApiFormat = "/api/xml";
 
         private readonly static Type[] viewTypes = AppDomain.CurrentDomain.GetAssemblies()
                                 .SelectMany(s => s.GetTypes())
@@ -31,28 +31,28 @@ namespace JenkinsWebApi
                                         .Where(t => typeof(JenkinsModelRun).IsAssignableFrom(t) && t.IsClass && !t.IsGenericType && !t.IsAbstract)
                                         .ToArray();
 
-        protected T Deserialize<T>(string xmlText) where T : class
+        public static T Deserialize<T>(string xmlText) where T : class
         {
             XmlSerializer serializer = new XmlSerializer(typeof(T));
             return serializer.Deserialize(new StringReader(xmlText)) as T;
         }
 
-        protected T DeserializeView<T>(string xmlText)
+        public static T DeserializeView<T>(string xmlText)
         {
             return Deserialize<T>(xmlText, viewTypes);
         }
 
-        protected T DeserializeJob<T>(string xmlText)
+        public static T DeserializeJob<T>(string xmlText)
         {
             return Deserialize<T>(xmlText, jobTypes);
         }
 
-        protected T DeserializeBuild<T>(string xmlText)
+        public static T DeserializeBuild<T>(string xmlText)
         {
             return Deserialize<T>(xmlText, buildTypes);
         }
 
-        private T Deserialize<T>(string xmlText, IEnumerable<Type> classTypes)
+        private static T Deserialize<T>(string xmlText, IEnumerable<Type> classTypes)
         {
             using (XmlTextReader reader = new XmlTextReader(new StringReader(xmlText)))
             {
@@ -67,7 +67,5 @@ namespace JenkinsWebApi
             }
             throw new Exception($"Not class found for this type: {xmlText.Substring(1, xmlText.IndexOf(' '))}");
         }
-
-
     }
 }

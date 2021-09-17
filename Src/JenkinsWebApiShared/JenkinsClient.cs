@@ -3,8 +3,6 @@ using JenkinsWebApi.Model;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -12,13 +10,14 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
-//using System.Xml;
-//using System.Xml.Serialization;
 
 namespace JenkinsWebApi
 {
     public abstract partial class JenkinsClient : IDisposable
     {
+        private const string apiFormat = JenkinsDeserializer.ApiFormat;
+
+
         private HttpClientHandler handler;
         private HttpClient client;
 
@@ -99,7 +98,7 @@ namespace JenkinsWebApi
             {
                 response.EnsureSuccess();
                 string str = await response.Content.ReadAsStringAsync();
-                T value = Deserialize<T>(str);
+                T value = JenkinsDeserializer.Deserialize<T>(str);
                 return value;
             }
         }

@@ -86,7 +86,6 @@ namespace JenkinsWebApi
         {
             var parms = new Dictionary<string, string>
             {
-                //parms.Add("Jenkins-Crumb", crumb);
                 { "script", script }
             };
             string str = await PostResAsync("computer/(master)/script", parms, cancellationToken);
