@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -28,7 +29,7 @@ namespace JenkinsWebApi
         /// <param name="value">Value of the parameter</param>
         public void Add(string name, string value)
         {
-            this.list.Add(new JenkinsParameter() { Type = JenkinsParameterType.String, Name = name, StringValue = value });
+            this.list.Add(new JenkinsParameter(name, value));
         }
 
         /// <summary>
@@ -38,7 +39,7 @@ namespace JenkinsWebApi
         /// <param name="value">Value of the parameter</param>
         public void Add(string name, bool value)
         {
-            this.list.Add(new JenkinsParameter() { Type = JenkinsParameterType.Boolean, Name = name, BooleanValue = value});
+            this.list.Add(new JenkinsParameter(name, value));
         }
 
         /// <summary>
@@ -49,7 +50,7 @@ namespace JenkinsWebApi
         /// <param name="fileName">Name of the file</param>
         public void Add(string name, Stream stream, string fileName)
         {
-            this.list.Add(new JenkinsParameter() { Type = JenkinsParameterType.Stream, Name = name, FileStream = stream, FileName = fileName });
+            this.list.Add(new JenkinsParameter(name, stream, fileName));
         }
 
         private HttpContent GetContent()
@@ -87,7 +88,7 @@ namespace JenkinsWebApi
                         content.Add(new StringContent(para.Name), "name");                            
                         if (para.BooleanValue)
                         {
-                            content.Add(new StringContent(para.StringValue), "value");
+                            content.Add(new StringContent("on"), "value");
                             json.Append($"{{\"name\": \"{para.Name}\", \"value\": true}}, ");
                         }
                         else
@@ -149,30 +150,72 @@ namespace JenkinsWebApi
             }
         }
 
-        internal bool IsEmpty { get { return !this.list.Any(); } }
-
         /// <summary>
         /// Cast JenkinsBuildParameters to HttpContent.
         /// </summary>
         /// <param name="param">JenkinsBuildParameters instance to cast</param>
+        /// <returns>Cast to HttpContent.</returns>
         public static implicit operator HttpContent(JenkinsBuildParameters param)
         {
-            return param.GetContent();
+            return param?.GetContent();
         }
 
         private class JenkinsParameter
         {
-            internal JenkinsParameterType Type { get; set; }
+            public JenkinsParameter(string name, string value) 
+            {
+                this.Type = JenkinsParameterType.String;
+                this.Name = name;
+                this.StringValue = value;
+            }
 
-            internal string Name { get; set; }
+            public JenkinsParameter(string name, bool value)
+            {
+                this.Type = JenkinsParameterType.Boolean;
+                this.Name = name;
+                this.BooleanValue = value;
+            }
 
-            internal string StringValue { get; set; }
+            public JenkinsParameter(string name, Stream stream, string fileName) 
+            {
+                this.Type = JenkinsParameterType.Stream;
+                this.Name = name;
+                this.FileStream = stream;
+                this.FileName = fileName; 
+            }
 
-            internal bool BooleanValue { get; set; }
+            internal JenkinsParameterType Type { get;  }
 
-            internal Stream FileStream { get; set; }
+            internal string Name { get;  }
 
-            internal string FileName { get; set; }
+            internal string StringValue { get; }
+
+            internal bool BooleanValue { get; }
+
+            internal Stream FileStream { get; }
+
+            internal string FileName { get; }
+        }
+
+        /// <summary>
+        /// Type of the Jenkins start job parameter
+        /// </summary>
+        private enum JenkinsParameterType
+        {
+            /// <summary>
+            /// The parameter is a string.
+            /// </summary>
+            String,
+
+            /// <summary>
+            /// The parameter is a boolean.
+            /// </summary>
+            Boolean,
+
+            /// <summary>
+            /// The parameter is a file stream.
+            /// </summary>
+            Stream
         }
     }
 }

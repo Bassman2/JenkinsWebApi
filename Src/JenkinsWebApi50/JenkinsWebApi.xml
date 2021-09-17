@@ -4,16 +4,89 @@
         <name>JenkinsWebApi</name>
     </assembly>
     <members>
+        <member name="M:JenkinsWebApi.JenkinsClient.Dispose">
+            <summary>
+            Release allocated resources.
+            </summary>
+        </member>
         <member name="T:JenkinsWebApi.Jenkins">
             <summary>
             Main class of the Jenkins server API
             </summary>
         </member>
-        <member name="M:JenkinsWebApi.Jenkins.#ctor(System.Uri)">
+        <member name="M:JenkinsWebApi.Jenkins.GetBuildAsync(System.String,System.Int32)">
             <summary>
-            Initializes a new instance of the Jenkins class.
+            Get the Jenkins build data.
             </summary>
-            <param name="host">Host URL of the Jenkins server</param>
+            <param name="jobName">Name of the Jenkins job</param>
+            <param name="buildNum">Number of the Jenkins build</param>
+            <returns>Jenkins build data</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetBuildAsync(System.String,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Get the Jenkins build data.
+            </summary>
+            <param name="jobName">Name of the Jenkins job</param>
+            <param name="buildNum">Number of the Jenkins build</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <returns>Jenkins build data</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetBuildAsync``1(System.String,System.Int32)">
+            <summary>
+            Get the Jenkins build data.
+            </summary>
+            <param name="jobName">Name of the Jenkins job</param>
+            <param name="buildNum">Number of the Jenkins build</param>
+            <returns>Jenkins build data</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetBuildAsync``1(System.String,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Get the Jenkins build data.
+            </summary>
+            <param name="jobName">Name of the Jenkins job</param>
+            <param name="buildNum">Number of the Jenkins build</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <returns>Jenkins build data</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetLastBuildAsync(System.String)">
+            <summary>
+            Get the last build
+            </summary>
+            <param name="jobName">Name of the Jenkins job</param>
+            <returns>Jenkins build data</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetLastBuildAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get the last build
+            </summary>
+            <param name="jobName">Name of the Jenkins job</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <returns>Jenkins build data</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetLastBuildAsync``1(System.String)">
+            <summary>
+            Get the last build
+            </summary>
+            <param name="jobName">Name of the Jenkins job</param>
+            <returns>Jenkins build data</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetLastBuildAsync``1(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get the last build
+            </summary>
+            <param name="jobName">Name of the Jenkins job</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <returns>Jenkins build data</returns>
+        </member>
+        <member name="E:JenkinsWebApi.Jenkins.RunProgress">
+            <summary>
+            JobRunAsync progress event.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Jenkins.RunConfig">
+            <summary>
+            JobRunAsync global configuration.
+            </summary>
         </member>
         <member name="M:JenkinsWebApi.Jenkins.#ctor(System.String)">
             <summary>
@@ -21,13 +94,11 @@
             </summary>
             <param name="host">Host URL of the Jenkins server</param>
         </member>
-        <member name="M:JenkinsWebApi.Jenkins.#ctor(System.Uri,System.String,System.String)">
+        <member name="M:JenkinsWebApi.Jenkins.#ctor(System.Uri)">
             <summary>
             Initializes a new instance of the Jenkins class.
             </summary>
             <param name="host">Host URL of the Jenkins server</param>
-            <param name="login">Login for the Jenkins server</param>
-            <param name="password">Password for the Jenkins server</param>
         </member>
         <member name="M:JenkinsWebApi.Jenkins.#ctor(System.String,System.String,System.String)">
             <summary>
@@ -35,33 +106,23 @@
             </summary>
             <param name="host">Host URL of the Jenkins server</param>
             <param name="login">Login for the Jenkins server</param>
-            <param name="password">Password for the Jenkins server</param>
+            <param name="passwordOrToken">Password or API token  for the Jenkins server</param>
         </member>
-        <member name="M:JenkinsWebApi.Jenkins.Dispose">
+        <member name="M:JenkinsWebApi.Jenkins.#ctor(System.Uri,System.String,System.String)">
             <summary>
-            Release allocated resources.
+            Initializes a new instance of the Jenkins class.
             </summary>
+            <param name="host">Host URL of the Jenkins server</param>
+            <param name="login">Login for the Jenkins server</param>
+            <param name="passwordOrToken">Password or API token for the Jenkins server</param>
         </member>
         <member name="M:JenkinsWebApi.Jenkins.Login(System.String,System.String)">
             <summary>
             Login to the Jenkins server.
             </summary>
-            <param name="login">User login name</param>
-            <param name="password">User login password</param>
+            <param name="login">Login for the Jenkins server</param>
+            <param name="passwordOrToken">Password or API token for the Jenkins server</param>
             <returns>true if login success; false if failed</returns>
-        </member>
-        <member name="M:JenkinsWebApi.Jenkins.GetJenkinsInstancesAsync">
-            <summary>
-            Get a list with all Jenkins servers in the local subnet.
-            </summary>
-            <returns>List with Jenkins servers</returns>
-        </member>
-        <member name="M:JenkinsWebApi.Jenkins.GetJenkinsInstancesAsync(System.Int64)">
-            <summary>
-            Get a list with all Jenkins servers in the local subnet.
-            </summary>
-            <param name="timeout">Timeout of the search.</param>
-            <returns>List with Jenkins servers</returns>
         </member>
         <member name="M:JenkinsWebApi.Jenkins.RunComputerScriptAsync(System.String,System.String)">
             <summary>
@@ -228,124 +289,6 @@
             <returns>Jenkins server credentials</returns>
             <remark>Only in V2 or above</remark>
         </member>
-        <member name="M:JenkinsWebApi.Jenkins.GetPeopleAsync">
-            <summary>
-            Get a list of all Jenkins users.
-            </summary>
-            <returns>List of all Jenkins users</returns>
-            <remarks>For compatibility to old Jenkins version. For new version use GetAsyncPeopleAsync instead.</remarks>
-        </member>
-        <member name="M:JenkinsWebApi.Jenkins.GetPeopleAsync(System.Threading.CancellationToken)">
-            <summary>
-            Get a list of all Jenkins users.
-            </summary>
-            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-            <returns>List of all Jenkins users</returns>
-            <remarks>For compatibility to old Jenkins version. For new version use GetAsyncPeopleAsync instead.</remarks>
-        </member>
-        <member name="M:JenkinsWebApi.Jenkins.GetAsyncPeopleAsync">
-            <summary>
-            Get a list of all Jenkins users.
-            </summary>
-            <returns>List of all Jenkins users</returns>
-        </member>
-        <member name="M:JenkinsWebApi.Jenkins.GetAsyncPeopleAsync(System.Threading.CancellationToken)">
-            <summary>
-            Get a list of all Jenkins users.
-            </summary>
-            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-            <returns>List of all Jenkins users</returns>
-        </member>
-        <member name="M:JenkinsWebApi.Jenkins.GetUserAsync(System.String)">
-            <summary>
-            Get the data of one Jenkins user.
-            </summary>
-            <param name="userName">Name of the Jenkins user</param>
-            <returns>Jenkins user data</returns>
-        </member>
-        <member name="M:JenkinsWebApi.Jenkins.GetUserAsync(System.String,System.Threading.CancellationToken)">
-            <summary>
-            Get the data of one Jenkins user.
-            </summary>
-            <param name="userName">Name of the Jenkins user</param>
-            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-            <returns>Jenkins user data</returns>
-        </member>
-        <member name="M:JenkinsWebApi.Jenkins.GetCurrentUserAsync">
-            <summary>
-            Get the data of the current login user.
-            </summary>
-            <returns>Jenkins user data</returns>
-        </member>
-        <member name="M:JenkinsWebApi.Jenkins.GetCurrentUserAsync(System.Threading.CancellationToken)">
-            <summary>
-            Get the data of the current login user.
-            </summary>
-            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-            <returns>Jenkins user data</returns>
-        </member>
-        <member name="M:JenkinsWebApi.Jenkins.GetJobAsync(System.String)">
-            <summary>
-            Get the Jenkins job data.
-            </summary>
-            <param name="jobName">Name of the job</param>
-            <returns>Jenkins job data</returns>
-        </member>
-        <member name="M:JenkinsWebApi.Jenkins.GetJobAsync(System.String,System.Threading.CancellationToken)">
-            <summary>
-            Get the Jenkins job data.
-            </summary>
-            <param name="jobName">Name of the job</param>
-            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-            <returns>Jenkins job data</returns>
-        </member>
-        <member name="M:JenkinsWebApi.Jenkins.GetViewAsync(System.String)">
-            <summary>
-            Get the Jenkins view data.
-            </summary>
-            <param name="viewName">Name of the view</param>
-            <returns></returns>
-        </member>
-        <member name="M:JenkinsWebApi.Jenkins.GetViewAsync(System.String,System.Threading.CancellationToken)">
-            <summary>
-            Get the Jenkins view data.
-            </summary>
-            <param name="viewName">Name of the view</param>
-            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-            <returns></returns>
-        </member>
-        <member name="M:JenkinsWebApi.Jenkins.GetBuildAsync(System.String,System.Int32)">
-            <summary>
-            Get the Jenkins build data.
-            </summary>
-            <param name="jobName">Name of the Jenkins job</param>
-            <param name="buildNum">Number of the Jenkins build</param>
-            <returns>Jenkins build data</returns>
-        </member>
-        <member name="M:JenkinsWebApi.Jenkins.GetBuildAsync(System.String,System.Int32,System.Threading.CancellationToken)">
-            <summary>
-            Get the Jenkins build data.
-            </summary>
-            <param name="jobName">Name of the Jenkins job</param>
-            <param name="buildNum">Number of the Jenkins build</param>
-            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-            <returns>Jenkins build data</returns>
-        </member>
-        <member name="M:JenkinsWebApi.Jenkins.GetLastBuildAsync(System.String)">
-            <summary>
-            Get the last build
-            </summary>
-            <param name="jobName">Name of the Jenkins job</param>
-            <returns>Jenkins build data</returns>
-        </member>
-        <member name="M:JenkinsWebApi.Jenkins.GetLastBuildAsync(System.String,System.Threading.CancellationToken)">
-            <summary>
-            Get the last build
-            </summary>
-            <param name="jobName">Name of the Jenkins job</param>
-            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-            <returns>Jenkins build data</returns>
-        </member>
         <member name="M:JenkinsWebApi.Jenkins.GetTestReportAsync(System.String,System.Int32)">
             <summary>
             Get the Jenkins build test report.
@@ -430,21 +373,6 @@
             <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
             <returns>Node infos</returns>
         </member>
-        <member name="M:JenkinsWebApi.Jenkins.GetComputerExtAsync(System.String)">
-            <summary>
-            Get extended infos of a Jenkins slave node.
-            </summary>
-            <param name="computerName">Name of the node.</param>
-            <returns>Node infos</returns>
-        </member>
-        <member name="M:JenkinsWebApi.Jenkins.GetComputerExtAsync(System.String,System.Threading.CancellationToken)">
-            <summary>
-            Get extended infos of a Jenkins slave node.
-            </summary>
-            <param name="computerName">Name of the node.</param>
-            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-            <returns>Node infos</returns>
-        </member>
         <member name="M:JenkinsWebApi.Jenkins.GetComputerLogAsync(System.String)">
             <summary>
             Get the log of the computer
@@ -474,6 +402,593 @@
             <param name="labelName">Name of the label</param>
             <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
             <returns>Label info</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetJenkinsInstancesAsync(System.Int64)">
+            <summary>
+            Get a list with all Jenkins servers in the local subnet.
+            </summary>
+            <param name="timeout">Timeout of the search.</param>
+            <returns>List with available Jenkins servers.</returns>
+            <remarks>
+            Since 2.220 the feature has been completely removed.<br/>
+            Since 2.219 und LTS 2.204.2 this feature is deactivated by default, <br/>
+            but can be activated by setting the system property hudson.DNSMultiCast.disabled to false or hudson.udp to 33848.<br/>
+            <see href="https://www.jenkins.io/security/advisory/2020-01-29/"/><br/>
+            <see href="https://www.jenkins.io/doc/book/managing/system-properties/"/> 
+            </remarks>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetJobAsync(System.String)">
+            <summary>
+            Get the Jenkins job data.
+            </summary>
+            <param name="jobName">Name of the job</param>
+            <returns>Jenkins job data</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetJobAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get the Jenkins job data.
+            </summary>
+            <param name="jobName">Name of the job</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <returns>Jenkins job data</returns>
+            <remarks><list type="table">
+      <listheader>
+        <term>Job</term>
+        <term>Class</term>
+        <term>Plugin</term>
+      </listheader>
+      <item>
+        <term>Freestyle Project</term>
+        <term>
+          <see cref="T:JenkinsWebApi.Model.JenkinsModelFreeStyleProject" />
+        </term>
+        <term>-</term>
+      </item>
+      <!--
+      <item>
+        <term>My View</term>
+        <term>
+          <see cref="JenkinsModelMyView"/>
+        </term>
+        <term>-</term>
+      </item>
+      <item>
+        <term>All View</term>
+        <term>
+          <see cref="JenkinsModelAllView"/>
+        </term>
+        <term>-</term>
+      </item>
+      <item>
+        <term>Categorized Jobs View</term>
+        <term>
+          <see cref="JenkinsJenkinsciCategorizedJobsView"/>
+        </term>
+        <term>
+          <see href="https://plugins.jenkins.io/categorized-view/">categorized-view</see>
+        </term>
+      </item>
+      <item>
+        <term>Dashboard</term>
+        <term>
+          <see cref="JenkinsPluginsViewDashboardDashboard"/>
+        </term>
+        <term>
+          <see href="https://plugins.jenkins.io/dashboard-view/">Dashboard View</see>
+        </term>
+      </item>
+      <item>
+        <term>Multijob View</term>
+        <term>
+          <see cref="JenkinsTikalMultiJobView"/>
+        </term>
+        <term>
+          <see href="https://plugins.jenkins.io/jenkins-multijob-plugin/">Multijob</see>
+        </term>
+      </item>
+      -->
+    </list></remarks>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetJobAsync``1(System.String)">
+            <summary>
+            Get the Jenkins job data.
+            </summary>
+            <typeparam name="T">Job class type</typeparam>
+            <param name="jobName">Name of the job</param>
+            <returns>Jenkins job data</returns>
+            <remarks><list type="table">
+      <listheader>
+        <term>Job</term>
+        <term>Class</term>
+        <term>Plugin</term>
+      </listheader>
+      <item>
+        <term>Freestyle Project</term>
+        <term>
+          <see cref="T:JenkinsWebApi.Model.JenkinsModelFreeStyleProject" />
+        </term>
+        <term>-</term>
+      </item>
+      <!--
+      <item>
+        <term>My View</term>
+        <term>
+          <see cref="JenkinsModelMyView"/>
+        </term>
+        <term>-</term>
+      </item>
+      <item>
+        <term>All View</term>
+        <term>
+          <see cref="JenkinsModelAllView"/>
+        </term>
+        <term>-</term>
+      </item>
+      <item>
+        <term>Categorized Jobs View</term>
+        <term>
+          <see cref="JenkinsJenkinsciCategorizedJobsView"/>
+        </term>
+        <term>
+          <see href="https://plugins.jenkins.io/categorized-view/">categorized-view</see>
+        </term>
+      </item>
+      <item>
+        <term>Dashboard</term>
+        <term>
+          <see cref="JenkinsPluginsViewDashboardDashboard"/>
+        </term>
+        <term>
+          <see href="https://plugins.jenkins.io/dashboard-view/">Dashboard View</see>
+        </term>
+      </item>
+      <item>
+        <term>Multijob View</term>
+        <term>
+          <see cref="JenkinsTikalMultiJobView"/>
+        </term>
+        <term>
+          <see href="https://plugins.jenkins.io/jenkins-multijob-plugin/">Multijob</see>
+        </term>
+      </item>
+      -->
+    </list></remarks>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetJobAsync``1(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get the Jenkins job data.
+            </summary>
+            <typeparam name="T">Job class type</typeparam>
+            <param name="jobName">Name of the job</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <returns>Jenkins job data</returns>
+            <remarks><list type="table">
+      <listheader>
+        <term>Job</term>
+        <term>Class</term>
+        <term>Plugin</term>
+      </listheader>
+      <item>
+        <term>Freestyle Project</term>
+        <term>
+          <see cref="T:JenkinsWebApi.Model.JenkinsModelFreeStyleProject" />
+        </term>
+        <term>-</term>
+      </item>
+      <!--
+      <item>
+        <term>My View</term>
+        <term>
+          <see cref="JenkinsModelMyView"/>
+        </term>
+        <term>-</term>
+      </item>
+      <item>
+        <term>All View</term>
+        <term>
+          <see cref="JenkinsModelAllView"/>
+        </term>
+        <term>-</term>
+      </item>
+      <item>
+        <term>Categorized Jobs View</term>
+        <term>
+          <see cref="JenkinsJenkinsciCategorizedJobsView"/>
+        </term>
+        <term>
+          <see href="https://plugins.jenkins.io/categorized-view/">categorized-view</see>
+        </term>
+      </item>
+      <item>
+        <term>Dashboard</term>
+        <term>
+          <see cref="JenkinsPluginsViewDashboardDashboard"/>
+        </term>
+        <term>
+          <see href="https://plugins.jenkins.io/dashboard-view/">Dashboard View</see>
+        </term>
+      </item>
+      <item>
+        <term>Multijob View</term>
+        <term>
+          <see cref="JenkinsTikalMultiJobView"/>
+        </term>
+        <term>
+          <see href="https://plugins.jenkins.io/jenkins-multijob-plugin/">Multijob</see>
+        </term>
+      </item>
+      -->
+    </list></remarks>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.RunJobAsync(System.String)">
+            <summary>
+            Run a Jenkins job.
+            </summary>
+            <param name="jobName">Name of the Jenkins job</param>
+            <returns>Result and number of the Jenkins build</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.RunJobAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Run a Jenkins job.
+            </summary>
+            <param name="jobName">Name of the Jenkins job</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <returns>Result and number of the Jenkins build</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.RunJobAsync(System.String,JenkinsWebApi.JenkinsBuildParameters)">
+            <summary>
+            Run a Jenkins job.
+            </summary>
+            <param name="jobName">Name of the Jenkins job</param>
+            <param name="parameters">Parameters for the Jenkins job</param>
+            <returns>Result and number of the Jenkins build</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.RunJobAsync(System.String,JenkinsWebApi.JenkinsBuildParameters,System.Threading.CancellationToken)">
+            <summary>
+            Run a Jenkins job.
+            </summary>
+            <param name="jobName">Name of the Jenkins job</param>
+            <param name="parameters">Parameters for the Jenkins job</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <returns>Result and number of the Jenkins build</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.RunJobAsync(System.String,JenkinsWebApi.JenkinsBuildParameters,JenkinsWebApi.JenkinsRunConfig,System.IProgress{JenkinsWebApi.JenkinsRunProgress})">
+            <summary>
+            Run a Jenkins job.
+            </summary>
+            <param name="jobName">Name of the Jenkins job</param>
+            <param name="parameters">Parameters for the Jenkins job</param>
+            <param name="runConfig"></param>
+            <param name="progress"></param>
+            <returns>Result and number of the Jenkins build</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.RunJobAsync(System.String,JenkinsWebApi.JenkinsBuildParameters,JenkinsWebApi.JenkinsRunConfig,System.IProgress{JenkinsWebApi.JenkinsRunProgress},System.Threading.CancellationToken)">
+            <summary>
+            Run a Jenkins job.
+            </summary>
+            <param name="jobName">Name of the Jenkins job</param>
+            <param name="parameters">Parameters for the Jenkins job</param>
+            <param name="runConfig"></param>
+            <param name="progress"></param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <returns>Result and number of the Jenkins build</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.StopJobAsync(System.String,System.Int32)">
+            <summary>
+            Stop a running Jenkins build
+            </summary>
+            <param name="jobName">Name of the Jenkins job</param>
+            <param name="buildNum">Number of the Jenkins build</param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.StopJobAsync(System.String,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Stop a running Jenkins build
+            </summary>
+            <param name="jobName">Name of the Jenkins job</param>
+            <param name="buildNum">Number of the Jenkins build</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.CreateJobAsync(System.String,System.IO.Stream,System.String)">
+            <summary>
+            Create a new job from an XML file.
+            </summary>
+            <param name="jobName">Name of the job</param>
+            <param name="stream">XML data of the new job.</param>
+            <param name="fileName">File name of the data</param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.CreateJobAsync(System.String,System.IO.Stream,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Create a new job from an XML file.
+            </summary>
+            <param name="jobName">Name of the job</param>
+            <param name="stream">XML data of the new job.</param>
+            <param name="fileName">File name of the data</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetJobConfigAsync(System.String)">
+            <summary>
+            Create a new job from an XML file.
+            </summary>
+            <param name="jobName">Name of the job</param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetJobConfigAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Create a new job from an XML file.
+            </summary>
+            <param name="jobName">Name of the job</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetJobConfigXmlAsync(System.String)">
+            <summary>
+            Create a new job from an XML file.
+            </summary>
+            <param name="jobName">Name of the job</param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetJobConfigXmlAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Create a new job from an XML file.
+            </summary>
+            <param name="jobName">Name of the job</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.SetJobConfigAsync(System.String,System.String)">
+            <summary>
+            Create a new job from an XML file.
+            </summary>
+            <param name="jobName">Name of the job</param>
+            <param name="config"></param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.SetJobConfigAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Create a new job from an XML file.
+            </summary>
+            <param name="jobName">Name of the job</param>
+            <param name="config"></param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.SetJobConfigXmlAsync(System.String,System.Xml.XmlDocument)">
+            <summary>
+            Create a new job from an XML file.
+            </summary>
+            <param name="jobName">Name of the job</param>
+            <param name="config"></param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.SetJobConfigXmlAsync(System.String,System.Xml.XmlDocument,System.Threading.CancellationToken)">
+            <summary>
+            Create a new job from an XML file.
+            </summary>
+            <param name="jobName">Name of the job</param>
+            <param name="config"></param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.CloneJobAsync(System.String,System.String)">
+            <summary>
+            Clone a new job from an existing.
+            </summary>
+            <param name="fromJobName">Existing job name.</param>
+            <param name="newJobName">Name of the new job.</param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.CloneJobAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Clone a new job from an existing.
+            </summary>
+            <param name="fromJobName">Existing job name.</param>
+            <param name="newJobName">Name of the new job.</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.DeleteJobAsync(System.String)">
+            <summary>
+            Delete an existing job.
+            </summary>
+            <param name="jobName">Name of the job to delete.</param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.DeleteJobAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Delete an existing job.
+            </summary>
+            <param name="jobName">Name of the job to delete.</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.DisableJobAsync(System.String)">
+            <summary>
+            Delete an existing job.
+            </summary>
+            <param name="jobName">Name of the job to delete.</param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.DisableJobAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Delete an existing job.
+            </summary>
+            <param name="jobName">Name of the job to delete.</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.EnableJobAsync(System.String)">
+            <summary>
+            Delete an existing job.
+            </summary>
+            <param name="jobName">Name of the job to delete.</param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.EnableJobAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Delete an existing job.
+            </summary>
+            <param name="jobName">Name of the job to delete.</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetJobDescriptionAsync(System.String)">
+            <summary>
+            Get the Jenkins job data.
+            </summary>
+            <param name="jobName">Name of the job</param>
+            <returns>Jenkins job data</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetJobDescriptionAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get the Jenkins job data.
+            </summary>
+            <param name="jobName">Name of the job</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <returns>Jenkins job data</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.SetJobDescriptionAsync(System.String,System.String)">
+            <summary>
+            Get the Jenkins job data.
+            </summary>
+            <param name="jobName">Name of the job</param>
+            <param name="description"></param>
+            <returns>Jenkins job data</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.SetJobDescriptionAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get the Jenkins job data.
+            </summary>
+            <param name="jobName">Name of the job</param>
+            <param name="description"></param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <returns>Jenkins job data</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.QuiteDownAsync">
+            <summary>
+            Enter into the "quiet down" mode.
+            </summary>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.QuiteDownAsync(System.Threading.CancellationToken)">
+            <summary>
+            Enter into the "quiet down" mode.
+            </summary>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.CancelQuietDown">
+            <summary>
+            Cancel the "quiet down" mode.
+            </summary>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.CancelQuietDown(System.Threading.CancellationToken)">
+            <summary>
+            Cancel the "quiet down" mode.
+            </summary>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.RestartAsync">
+            <summary>
+            Restart the Jenkins Server
+            </summary>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.RestartAsync(System.Threading.CancellationToken)">
+            <summary>
+            Restart the Jenkins Server
+            </summary>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.SaveRestartAsync">
+            <summary>
+            Save restart the Jenkins Server if no job is running
+            </summary>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.SaveRestartAsync(System.Threading.CancellationToken)">
+            <summary>
+            Save restart the Jenkins Server if no job is running
+            </summary>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.LaunchSlaveAgent(System.String)">
+            <summary>
+            Launch slave agent
+            </summary>
+            <param name="hostName">Name of the slave host</param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.LaunchSlaveAgent(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Launch slave agent
+            </summary>
+            <param name="hostName">Name of the slave host</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetPeopleAsync">
+            <summary>
+            Get a list of all Jenkins users.
+            </summary>
+            <returns>List of all Jenkins users</returns>
+            <remarks>For compatibility to old Jenkins version. For new version use GetAsyncPeopleAsync instead.</remarks>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetPeopleAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get a list of all Jenkins users.
+            </summary>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <returns>List of all Jenkins users</returns>
+            <remarks>For compatibility to old Jenkins version. For new version use GetAsyncPeopleAsync instead.</remarks>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetAsyncPeopleAsync">
+            <summary>
+            Get a list of all Jenkins users.
+            </summary>
+            <returns>List of all Jenkins users</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetAsyncPeopleAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get a list of all Jenkins users.
+            </summary>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <returns>List of all Jenkins users</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetUserAsync(System.String)">
+            <summary>
+            Get the data of one Jenkins user.
+            </summary>
+            <param name="userName">Name of the Jenkins user</param>
+            <returns>Jenkins user data</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetUserAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get the data of one Jenkins user.
+            </summary>
+            <param name="userName">Name of the Jenkins user</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <returns>Jenkins user data</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetCurrentUserAsync">
+            <summary>
+            Get the data of the current login user.
+            </summary>
+            <returns>Jenkins user data</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetCurrentUserAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get the data of the current login user.
+            </summary>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <returns>Jenkins user data</returns>
         </member>
         <member name="M:JenkinsWebApi.Jenkins.GetEnvInjectVarListAsync(System.String,System.Int32)">
             <summary>
@@ -513,155 +1028,349 @@
             <returns>Get graph information</returns>
             <remarks>Plugin &quot;buildgraph-view&quot; must be installed </remarks>
         </member>
-        <member name="M:JenkinsWebApi.Jenkins.RunJobAsync(System.String)">
+        <member name="M:JenkinsWebApi.Jenkins.GetViewAsync(System.String)">
             <summary>
-            Run a Jenkins job.
+            Get the Jenkins view data.
             </summary>
-            <param name="jobName">Name of the Jenkins job</param>
-            <returns>Result and number of the Jenkins build</returns>
+            <param name="viewName">Name of the view</param>
+            <returns> Returns view data.</returns>
+            <remarks><list type="table">
+      <listheader>
+        <term>View</term>
+        <term>Class</term>
+        <term>Plugin</term>
+      </listheader>
+      <item>
+        <term>List View</term>
+        <term>
+          <see cref="T:JenkinsWebApi.Model.JenkinsModelListView" />
+        </term>
+        <term>-</term>
+      </item>
+      <item>
+        <term>My View</term>
+        <term>
+          <see cref="T:JenkinsWebApi.Model.JenkinsModelMyView" />
+        </term>
+        <term>-</term>
+      </item>
+      <item>
+        <term>All View</term>
+        <term>
+          <see cref="T:JenkinsWebApi.Model.JenkinsModelAllView" />
+        </term>
+        <term>-</term>
+      </item>
+      <item>
+        <term>Categorized Jobs View</term>
+        <term>
+          <see cref="T:JenkinsWebApi.Model.JenkinsJenkinsciCategorizedJobsView" />
+        </term>
+        <term>
+          <see href="https://plugins.jenkins.io/categorized-view/">categorized-view</see>
+        </term>
+      </item>
+      <item>
+        <term>Dashboard</term>
+        <term>
+          <see cref="T:JenkinsWebApi.Model.JenkinsPluginsViewDashboardDashboard" />
+        </term>
+        <term>
+          <see href="https://plugins.jenkins.io/dashboard-view/">Dashboard View</see>
+        </term>
+      </item>
+      <item>
+        <term>Multijob View</term>
+        <term>
+          <see cref="T:JenkinsWebApi.Model.JenkinsTikalMultiJobView" />
+        </term>
+        <term>
+          <see href="https://plugins.jenkins.io/jenkins-multijob-plugin/">Multijob</see>
+        </term>
+      </item>
+    </list></remarks>
         </member>
-        <member name="M:JenkinsWebApi.Jenkins.RunJobAsync(System.String,JenkinsWebApi.JenkinsBuildParameters)">
+        <member name="M:JenkinsWebApi.Jenkins.GetViewAsync(System.String,System.Threading.CancellationToken)">
             <summary>
-            Run a Jenkins job.
+            Get the Jenkins view data.
             </summary>
-            <param name="jobName">Name of the Jenkins job</param>
-            <param name="parameters">Parameters for the Jenkins job</param>
-            <returns>Result and number of the Jenkins build</returns>
-        </member>
-        <member name="M:JenkinsWebApi.Jenkins.RunJobAsync(System.String,System.Threading.CancellationToken)">
-            <summary>
-            Run a Jenkins job.
-            </summary>
-            <param name="jobName">Name of the Jenkins job</param>
+            <param name="viewName">Name of the view</param>
             <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-            <returns>Result and number of the Jenkins build</returns>
+            <returns> Returns view data.</returns>
+            <remarks><list type="table">
+      <listheader>
+        <term>View</term>
+        <term>Class</term>
+        <term>Plugin</term>
+      </listheader>
+      <item>
+        <term>List View</term>
+        <term>
+          <see cref="T:JenkinsWebApi.Model.JenkinsModelListView" />
+        </term>
+        <term>-</term>
+      </item>
+      <item>
+        <term>My View</term>
+        <term>
+          <see cref="T:JenkinsWebApi.Model.JenkinsModelMyView" />
+        </term>
+        <term>-</term>
+      </item>
+      <item>
+        <term>All View</term>
+        <term>
+          <see cref="T:JenkinsWebApi.Model.JenkinsModelAllView" />
+        </term>
+        <term>-</term>
+      </item>
+      <item>
+        <term>Categorized Jobs View</term>
+        <term>
+          <see cref="T:JenkinsWebApi.Model.JenkinsJenkinsciCategorizedJobsView" />
+        </term>
+        <term>
+          <see href="https://plugins.jenkins.io/categorized-view/">categorized-view</see>
+        </term>
+      </item>
+      <item>
+        <term>Dashboard</term>
+        <term>
+          <see cref="T:JenkinsWebApi.Model.JenkinsPluginsViewDashboardDashboard" />
+        </term>
+        <term>
+          <see href="https://plugins.jenkins.io/dashboard-view/">Dashboard View</see>
+        </term>
+      </item>
+      <item>
+        <term>Multijob View</term>
+        <term>
+          <see cref="T:JenkinsWebApi.Model.JenkinsTikalMultiJobView" />
+        </term>
+        <term>
+          <see href="https://plugins.jenkins.io/jenkins-multijob-plugin/">Multijob</see>
+        </term>
+      </item>
+    </list></remarks>
         </member>
-        <member name="M:JenkinsWebApi.Jenkins.RunJobAsync(System.String,JenkinsWebApi.JenkinsBuildParameters,System.Threading.CancellationToken)">
+        <member name="M:JenkinsWebApi.Jenkins.GetViewAsync``1(System.String)">
             <summary>
-            Run a Jenkins job.
+            Get the Jenkins view data.
             </summary>
-            <param name="jobName">Name of the Jenkins job</param>
-            <param name="parameters">Parameters for the Jenkins job</param>
+            <typeparam name="T">Type of view return data.</typeparam> 
+            <param name="viewName">Name of the view.</param>
+            <returns>Returns view data.</returns>
+            <remarks><list type="table">
+      <listheader>
+        <term>View</term>
+        <term>Class</term>
+        <term>Plugin</term>
+      </listheader>
+      <item>
+        <term>List View</term>
+        <term>
+          <see cref="T:JenkinsWebApi.Model.JenkinsModelListView" />
+        </term>
+        <term>-</term>
+      </item>
+      <item>
+        <term>My View</term>
+        <term>
+          <see cref="T:JenkinsWebApi.Model.JenkinsModelMyView" />
+        </term>
+        <term>-</term>
+      </item>
+      <item>
+        <term>All View</term>
+        <term>
+          <see cref="T:JenkinsWebApi.Model.JenkinsModelAllView" />
+        </term>
+        <term>-</term>
+      </item>
+      <item>
+        <term>Categorized Jobs View</term>
+        <term>
+          <see cref="T:JenkinsWebApi.Model.JenkinsJenkinsciCategorizedJobsView" />
+        </term>
+        <term>
+          <see href="https://plugins.jenkins.io/categorized-view/">categorized-view</see>
+        </term>
+      </item>
+      <item>
+        <term>Dashboard</term>
+        <term>
+          <see cref="T:JenkinsWebApi.Model.JenkinsPluginsViewDashboardDashboard" />
+        </term>
+        <term>
+          <see href="https://plugins.jenkins.io/dashboard-view/">Dashboard View</see>
+        </term>
+      </item>
+      <item>
+        <term>Multijob View</term>
+        <term>
+          <see cref="T:JenkinsWebApi.Model.JenkinsTikalMultiJobView" />
+        </term>
+        <term>
+          <see href="https://plugins.jenkins.io/jenkins-multijob-plugin/">Multijob</see>
+        </term>
+      </item>
+    </list></remarks>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetViewAsync``1(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get the Jenkins view data.
+            </summary>
+            <typeparam name="T">Type of view return data.</typeparam> 
+            <param name="viewName">Name of the view</param>
             <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-            <returns>Result and number of the Jenkins build</returns>
+            <returns>Returns view data.</returns>
+            <remarks><list type="table">
+      <listheader>
+        <term>View</term>
+        <term>Class</term>
+        <term>Plugin</term>
+      </listheader>
+      <item>
+        <term>List View</term>
+        <term>
+          <see cref="T:JenkinsWebApi.Model.JenkinsModelListView" />
+        </term>
+        <term>-</term>
+      </item>
+      <item>
+        <term>My View</term>
+        <term>
+          <see cref="T:JenkinsWebApi.Model.JenkinsModelMyView" />
+        </term>
+        <term>-</term>
+      </item>
+      <item>
+        <term>All View</term>
+        <term>
+          <see cref="T:JenkinsWebApi.Model.JenkinsModelAllView" />
+        </term>
+        <term>-</term>
+      </item>
+      <item>
+        <term>Categorized Jobs View</term>
+        <term>
+          <see cref="T:JenkinsWebApi.Model.JenkinsJenkinsciCategorizedJobsView" />
+        </term>
+        <term>
+          <see href="https://plugins.jenkins.io/categorized-view/">categorized-view</see>
+        </term>
+      </item>
+      <item>
+        <term>Dashboard</term>
+        <term>
+          <see cref="T:JenkinsWebApi.Model.JenkinsPluginsViewDashboardDashboard" />
+        </term>
+        <term>
+          <see href="https://plugins.jenkins.io/dashboard-view/">Dashboard View</see>
+        </term>
+      </item>
+      <item>
+        <term>Multijob View</term>
+        <term>
+          <see cref="T:JenkinsWebApi.Model.JenkinsTikalMultiJobView" />
+        </term>
+        <term>
+          <see href="https://plugins.jenkins.io/jenkins-multijob-plugin/">Multijob</see>
+        </term>
+      </item>
+    </list></remarks>
         </member>
-        <member name="M:JenkinsWebApi.Jenkins.StopJobAsync(System.String,System.Int32)">
+        <member name="M:JenkinsWebApi.Jenkins.GetViewConfigXmlAsync(System.String)">
             <summary>
-            Stop a running Jenkins build
+            
             </summary>
-            <param name="jobName">Name of the Jenkins job</param>
-            <param name="buildNum">Number of the Jenkins build</param>
-        </member>
-        <member name="M:JenkinsWebApi.Jenkins.StopJobAsync(System.String,System.Int32,System.Threading.CancellationToken)">
-            <summary>
-            Stop a running Jenkins build
-            </summary>
-            <param name="jobName">Name of the Jenkins job</param>
-            <param name="buildNum">Number of the Jenkins build</param>
-            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        </member>
-        <member name="M:JenkinsWebApi.Jenkins.CreateJobAsync(System.String,System.IO.Stream,System.String)">
-            <summary>
-            Create a new job from an XML file.
-            </summary>
-            <param name="jobName">Name of the job</param>
-            <param name="stream">XML data of the new job.</param>
-            <param name="fileName">File name of the data</param>
-            <returns>Task handle</returns>        
-        </member>
-        <member name="M:JenkinsWebApi.Jenkins.CreateJobAsync(System.String,System.IO.Stream,System.String,System.Threading.CancellationToken)">
-            <summary>
-            Create a new job from an XML file.
-            </summary>
-            <param name="jobName">Name of the job</param>
-            <param name="stream">XML data of the new job.</param>
-            <param name="fileName">File name of the data</param>
-            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-            <returns>Task handle</returns>        
-        </member>
-        <member name="M:JenkinsWebApi.Jenkins.CloneJobAsync(System.String,System.String)">
-            <summary>
-            Clone a new job from an existing.
-            </summary>
-            <param name="fromJobName">Existing job name.</param>
-            <param name="newJobName">Name of the new job.</param>
-            <returns>Task handle</returns>
-        </member>
-        <member name="M:JenkinsWebApi.Jenkins.CloneJobAsync(System.String,System.String,System.Threading.CancellationToken)">
-            <summary>
-            Clone a new job from an existing.
-            </summary>
-            <param name="fromJobName">Existing job name.</param>
-            <param name="newJobName">Name of the new job.</param>
-            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-            <returns>Task handle</returns>
-        </member>
-        <member name="M:JenkinsWebApi.Jenkins.QuiteDownAsync">
-            <summary>
-            Enter into the "quiet down" mode.
-            </summary>
+            <param name="viewName"></param>
             <returns></returns>
         </member>
-        <member name="M:JenkinsWebApi.Jenkins.QuiteDownAsync(System.Threading.CancellationToken)">
+        <member name="M:JenkinsWebApi.Jenkins.GetViewConfigXmlAsync(System.String,System.Threading.CancellationToken)">
             <summary>
-            Enter into the "quiet down" mode.
+            
             </summary>
+            <param name="viewName"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetViewConfigAsync(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="viewName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetViewConfigAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            
+            </summary>
+            <param name="viewName"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.SetViewConfigXmlAsync(System.String,System.Xml.XmlDocument)">
+            <summary>
+            
+            </summary>
+            <param name="viewName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.SetViewConfigXmlAsync(System.String,System.Xml.XmlDocument,System.Threading.CancellationToken)">
+            <summary>
+            
+            </summary>
+            <param name="viewName"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.SetViewConfigAsync(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="viewName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.SetViewConfigAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            
+            </summary>
+            <param name="viewName"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetMyViewAsync(System.String)">
+            <summary>
+            Get the Jenkins my view data.
+            </summary>
+            <param name="viewName">Name of the view</param>
+            <returns>Returns view data.</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetMyViewAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get the Jenkins my view data.
+            </summary>
+            <param name="viewName">Name of the view</param>
             <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-            <returns></returns>
+            <returns>Returns view data.</returns>
         </member>
-        <member name="M:JenkinsWebApi.Jenkins.CancelQuietDown">
+        <member name="M:JenkinsWebApi.Jenkins.GetMyViewAsync``1(System.String)">
             <summary>
-            Cancel the "quiet down" mode.
+            Get the Jenkins my view data.
             </summary>
-            <returns></returns>
+            <typeparam name="T">Type of view return data.</typeparam> 
+            <param name="viewName">Name of the view.</param>
+            <returns>Returns view data.</returns>
         </member>
-        <member name="M:JenkinsWebApi.Jenkins.CancelQuietDown(System.Threading.CancellationToken)">
+        <member name="M:JenkinsWebApi.Jenkins.GetMyViewAsync``1(System.String,System.Threading.CancellationToken)">
             <summary>
-            Cancel the "quiet down" mode.
+            Get the Jenkins my view data.
             </summary>
+            <typeparam name="T">Type of view return data.</typeparam> 
+            <param name="viewName">Name of the view</param>
             <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-            <returns></returns>
-        </member>
-        <member name="M:JenkinsWebApi.Jenkins.RestartAsync">
-            <summary>
-            Restart the Jenkins Server
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:JenkinsWebApi.Jenkins.RestartAsync(System.Threading.CancellationToken)">
-            <summary>
-            Restart the Jenkins Server
-            </summary>
-            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-            <returns></returns>
-        </member>
-        <member name="M:JenkinsWebApi.Jenkins.SaveRestartAsync">
-            <summary>
-            Save restart the Jenkins Server if no job is running
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:JenkinsWebApi.Jenkins.SaveRestartAsync(System.Threading.CancellationToken)">
-            <summary>
-            Save restart the Jenkins Server if no job is running
-            </summary>
-            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-            <returns></returns>
-        </member>
-        <member name="M:JenkinsWebApi.Jenkins.LaunchSlaveAgent(System.String)">
-            <summary>
-            Launch slave agent
-            </summary>
-            <param name="hostName">Name of the slave host</param>
-            <returns></returns>
-        </member>
-        <member name="M:JenkinsWebApi.Jenkins.LaunchSlaveAgent(System.String,System.Threading.CancellationToken)">
-            <summary>
-            Launch slave agent
-            </summary>
-            <param name="hostName">Name of the slave host</param>
-            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-            <returns></returns>
+            <returns>Returns view data.</returns>
         </member>
         <member name="T:JenkinsWebApi.JenkinsBuildParameters">
             <summary>
@@ -700,70 +1409,268 @@
             Cast JenkinsBuildParameters to HttpContent.
             </summary>
             <param name="param">JenkinsBuildParameters instance to cast</param>
+            <returns>Cast to HttpContent.</returns>
         </member>
-        <member name="T:JenkinsWebApi.JenkinsExtensions">
-            <summary>
-            Extensions for the Jenkins class.
-            </summary>
-        </member>
-        <member name="M:JenkinsWebApi.JenkinsExtensions.RunJobComplete(JenkinsWebApi.Jenkins,System.String,JenkinsWebApi.JenkinsBuildParameters,System.Int32)">
-            <summary>
-            Run Jenkins job and return after job has finished.
-            </summary>
-            <param name="jenkins">Jenkins this parameter</param>
-            <param name="name">Name of the Jenkins job.</param>
-            <param name="parameters">Parameter list for the Jenkins job.</param>
-            <param name="pollingTime">Polling time in milliseconds. The default value is 5 seconds.</param>
-            <returns>Finished build</returns>
-        </member>
-        <member name="T:JenkinsWebApi.JenkinsInstance">
-            <summary>
-            Jenkins server instance information.
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.JenkinsInstance.Version">
-            <summary>
-            Version of the Jenkins server.
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.JenkinsInstance.ServerId">
-            <summary>
-            Id of the Jenkins server.
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.JenkinsInstance.Url">
-            <summary>
-            URL of the Jenkins server.
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.JenkinsInstance.SlavePort">
-            <summary>
-            Port to connect the Jenkins server.
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.JenkinsInstance.Address">
-            <summary>
-            IP of the Jenkins server
-            </summary>
-        </member>
-        <member name="T:JenkinsWebApi.JenkinsParameterType">
+        <member name="T:JenkinsWebApi.JenkinsBuildParameters.JenkinsParameterType">
             <summary>
             Type of the Jenkins start job parameter
             </summary>
         </member>
-        <member name="F:JenkinsWebApi.JenkinsParameterType.String">
+        <member name="F:JenkinsWebApi.JenkinsBuildParameters.JenkinsParameterType.String">
             <summary>
             The parameter is a string.
             </summary>
         </member>
-        <member name="F:JenkinsWebApi.JenkinsParameterType.Boolean">
+        <member name="F:JenkinsWebApi.JenkinsBuildParameters.JenkinsParameterType.Boolean">
             <summary>
             The parameter is a boolean.
             </summary>
         </member>
-        <member name="F:JenkinsWebApi.JenkinsParameterType.Stream">
+        <member name="F:JenkinsWebApi.JenkinsBuildParameters.JenkinsParameterType.Stream">
             <summary>
             The parameter is a file stream.
+            </summary>
+        </member>
+        <member name="M:JenkinsWebApi.JenkinsJob.QueueBuild(JenkinsWebApi.JenkinsBuildParameters)">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:JenkinsWebApi.JenkinsJob.StartBuild(JenkinsWebApi.JenkinsBuildParameters)">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:JenkinsWebApi.JenkinsJob.RunBuild(JenkinsWebApi.JenkinsBuildParameters)">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:JenkinsWebApi.JenkinsRunConfig">
+            <summary>
+            Configuration class for JobRunAsync
+            </summary>
+        </member>
+        <member name="M:JenkinsWebApi.JenkinsRunConfig.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.JenkinsRunConfig.RunMode">
+            <summary>
+            Get or set the JenkinsRunMode. The default value is <see cref="F:JenkinsWebApi.JenkinsRunMode.Finished"/> Ready.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.JenkinsRunConfig.ReturnIfBlocked">
+            <summary>
+            Select the behaviour if a jenkins build blocks. The default value is true.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.JenkinsRunConfig.PollingTime">
+            <summary>
+            Status update polling time in milli seconds. The default value is 1 second.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.JenkinsRunConfig.StartDelay">
+            <summary>
+            RunJobAsync start delay in seconds. Defalut value is 0 seconds.
+            </summary>
+        </member>
+        <member name="T:JenkinsWebApi.JenkinsRunMode">
+            <summary>
+            Jenkins job run mode
+            </summary>
+        </member>
+        <member name="F:JenkinsWebApi.JenkinsRunMode.Immediately">
+            <summary>
+            JobRunAsync returns immediately without and informations about the build.
+            </summary>
+        </member>
+        <member name="F:JenkinsWebApi.JenkinsRunMode.Queued">
+            <summary>
+            JobRunAsync returns after the job was queued.
+            </summary>
+        </member>
+        <member name="F:JenkinsWebApi.JenkinsRunMode.Started">
+            <summary>
+            JobRunAsync returns after the job was started.
+            </summary>
+        </member>
+        <member name="F:JenkinsWebApi.JenkinsRunMode.Finished">
+            <summary>
+            JobRunAsync returns after the job was finished.
+            </summary>
+        </member>
+        <member name="T:JenkinsWebApi.JenkinsRunProgress">
+            <summary>
+            JobRunAsync progress information class
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.JenkinsRunProgress.Status">
+            <summary>
+            Status of the run
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.JenkinsRunProgress.ProblemDescription">
+            <summary>
+            Problem description
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.JenkinsRunProgress.Result">
+            <summary>
+            Result of the run
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.JenkinsRunProgress.JobName">
+            <summary>
+            Name of the Jenkins job which is running.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.JenkinsRunProgress.JobUrl">
+            <summary>
+            Url of the Jenkins job which is running.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.JenkinsRunProgress.QueueId">
+            <summary>
+            Id of the queue
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.JenkinsRunProgress.QueueUrl">
+            <summary>
+            Url of the queue
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.JenkinsRunProgress.BuildNum">
+            <summary>
+            Number of the build
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.JenkinsRunProgress.BuildUrl">
+            <summary>
+            Url of the build
+            </summary>
+        </member>
+        <member name="M:JenkinsWebApi.JenkinsRunProgress.Equals(JenkinsWebApi.JenkinsRunProgress)">
+            <summary>
+            
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JenkinsWebApi.JenkinsRunProgress.Equals(System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JenkinsWebApi.JenkinsRunProgress.GetHashCode">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:JenkinsWebApi.JenkinsRunStatus">
+            <summary>
+            Status of a run
+            </summary>
+        </member>
+        <member name="F:JenkinsWebApi.JenkinsRunStatus.Queued">
+            <summary>
+            The build is queued.
+            </summary>
+        </member>
+        <member name="F:JenkinsWebApi.JenkinsRunStatus.Building">
+            <summary>
+            The build is building.
+            </summary>
+        </member>
+        <member name="F:JenkinsWebApi.JenkinsRunStatus.Finished">
+            <summary>
+            The build has finished.
+            </summary>
+        </member>
+        <member name="F:JenkinsWebApi.JenkinsRunStatus.Stuck">
+            <summary>
+            The build is stucked.
+            </summary>
+            <remarks>
+            This can occure if the nodes are offline.<br/>
+            See JenkinsRunProgress
+            </remarks>
+        </member>
+        <member name="F:JenkinsWebApi.JenkinsRunStatus.Blocked">
+            <summary>
+            The build is blocked.
+            </summary>
+        </member>
+        <member name="F:JenkinsWebApi.JenkinsRunStatus.Disabled">
+            <summary>
+            The Jenkins job is disabled.
+            </summary>
+        </member>
+        <member name="F:JenkinsWebApi.JenkinsRunStatus.Canceled">
+            <summary>
+            The build has been canceled.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsCloudbeesCredentialsStoreAction.Class">
+            <summary>
+            Jenkins Java class name.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsCloudbeesViewCredentialsAction.Class">
+            <summary>
+            Jenkins Java class name.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsJenkinsciBuildGraph.Class">
+            <summary>
+            Jenkins Java class name.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsJenkinsciEnvInjectVarList.Class">
+            <summary>
+            Jenkins Java class name.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsTikalMultiJobBuildSubBuild.Class">
+            <summary>
+            Jenkins Java class name.
+            </summary>
+        </member>
+        <member name="T:JenkinsWebApi.Model.JenkinsInstance">
+            <summary>
+            Jenkins server instance information.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsInstance.Version">
+            <summary>
+            Version of the Jenkins server.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsInstance.ServerId">
+            <summary>
+            Id of the Jenkins server.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsInstance.Url">
+            <summary>
+            URL of the Jenkins server.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsInstance.SlavePort">
+            <summary>
+            Port to connect the Jenkins server.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsInstance.Address">
+            <summary>
+            IP of the Jenkins server
             </summary>
         </member>
         <member name="P:JenkinsWebApi.Model.JenkinsBranchBranchSource.Class">
@@ -771,17 +1678,17 @@
             Jenkins Java class name.
             </summary>
         </member>
-        <member name="P:JenkinsWebApi.Model.JenkinsComCloudbeesPluginsCredentialsCredentialsStoreAction.Class">
+        <member name="P:JenkinsWebApi.Model.JenkinsMavenReportersMavenAggregatedArtifactRecord.Class">
             <summary>
             Jenkins Java class name.
             </summary>
         </member>
-        <member name="P:JenkinsWebApi.Model.JenkinsComCloudbeesPluginsCredentialsViewCredentialsAction.Class">
+        <member name="P:JenkinsWebApi.Model.JenkinsMavenReportersMavenArtifact.Class">
             <summary>
             Jenkins Java class name.
             </summary>
         </member>
-        <member name="P:JenkinsWebApi.Model.JenkinsComTikalJenkinsPluginsMultijobMultiJobBuildSubBuild.Class">
+        <member name="P:JenkinsWebApi.Model.JenkinsMavenReportersMavenArtifactRecord.Class">
             <summary>
             Jenkins Java class name.
             </summary>
@@ -916,16 +1823,6 @@
             Jenkins Java class name.
             </summary>
         </member>
-        <member name="P:JenkinsWebApi.Model.JenkinsOrgJenkinsciPluginsBuildgraphviewBuildGraph.Class">
-            <summary>
-            Jenkins Java class name.
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.Model.JenkinsOrgJenkinsciPluginsEnvinjectEnvInjectVarList.Class">
-            <summary>
-            Jenkins Java class name.
-            </summary>
-        </member>
         <member name="P:JenkinsWebApi.Model.JenkinsPluginManager.Class">
             <summary>
             Jenkins Java class name.
@@ -999,6 +1896,41 @@
         <member name="P:JenkinsWebApi.Model.JenkinsComputerExt.Label">
             <summary>
             Label list of a node.
+            </summary>
+        </member>
+        <member name="T:JenkinsWebApi.Model.JenkinsExecutable">
+            <summary>
+            Job executable
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsExecutable.Number">
+            <summary>
+            Build number
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsExecutable.Url">
+            <summary>
+            Build URL
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsExecutable.Class">
+            <summary>
+            Jenkins Java class name.
+            </summary>
+        </member>
+        <member name="T:JenkinsWebApi.Model.JenkinsResult">
+            <summary>
+            Jenkins Result
+            </summary>
+        </member>
+        <member name="F:JenkinsWebApi.Model.JenkinsResult.Success">
+            <summary>
+            Success
+            </summary>
+        </member>
+        <member name="F:JenkinsWebApi.Model.JenkinsResult.Failure">
+            <summary>
+            Failure
             </summary>
         </member>
     </members>

@@ -9,36 +9,66 @@
     <Import_RootNamespace>JenkinsWebApi</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\JenkinsDeserializer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\PostRunRes.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JenkinsClient.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internal\MessageEnsure.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internal\XmlConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Jenkins.Build.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Jenkins.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Jenkins.Groovy.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Jenkins.Helper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Jenkins.Info.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Jenkins.Instances.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Jenkins.Job.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Jenkins.System.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Jenkins.User.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JenkinsBuild.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JenkinsBuildParameters.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)JenkinsExtensions.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)JenkinsInstance.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)JenkinsParameterType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JenkinsJob.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JenkinsRunConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JenkinsRunMode.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JenkinsRunProgress.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JenkinsRunStatus.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JenkinsView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsCloudbeesAbstractFolder.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsCloudbeesComputedComputedFolder.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsCloudbeesCredentialsStoreAction.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsCloudbeesFolder.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsCloudbeesSystemCredentialsProviderUserFacingAction.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsCloudbeesViewCredentialsAction.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsCloudbeesViewCredentialsActionRootActionImpl.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsJenkinsciBuildGraph.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsJenkinsciCategorizedJobsView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsJenkinsciEnvInjectVarList.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsJenkinsciWorkflowJob.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsJenkinsciWorkflowMultiBranchProject.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsJenkinsciWorkflowRun.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsModelProxyView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsModelQueueBlockedItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsModelQueueBuildableItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsModelQueueNotWaitingItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsTikalMultiJobBuild.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsTikalMultiJobBuildSubBuild.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsTikalMultiJobProject.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsTikalMultiJobView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\JenkinsInstance.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsBranchBranchSource.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsBranchMultiBranchProject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsBranchOrganizationFolder.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsComCloudbeesHudsonPluginsFolderAbstractFolder.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsComCloudbeesHudsonPluginsFolderComputedComputedFolder.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsComCloudbeesHudsonPluginsFolderFolder.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsComCloudbeesPluginsCredentialsCredentialsStoreAction.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsComCloudbeesPluginsCredentialsSystemCredentialsProviderUserFacingAction.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsComCloudbeesPluginsCredentialsViewCredentialsAction.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsComCloudbeesPluginsCredentialsViewCredentialsActionRootActionImpl.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsComTikalJenkinsPluginsMultijobMultiJobBuild.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsComTikalJenkinsPluginsMultijobMultiJobBuildSubBuild.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsComTikalJenkinsPluginsMultijobMultiJobProject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsLocalPluginManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsMatrixMatrixBuild.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsMatrixMatrixConfiguration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsMatrixMatrixProject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsMatrixMatrixRun.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsMavenAbstractMavenBuild.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsMavenAbstractMavenProject.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsMavenMavenBuild.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsMavenMavenModule.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsMavenMavenModuleSet.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsMavenMavenModuleSetBuild.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsMavenReportersMavenAggregatedArtifactRecord.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsMavenReportersMavenArtifact.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsMavenReportersMavenArtifactRecord.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsModelAbstractBuild.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsModelAbstractCIBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsModelAbstractItem.cs" />
@@ -79,6 +109,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsModelProject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsModelQueue.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsModelQueueItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsModelQueueLeftItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsModelQueueStubItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsModelQueueStubTask.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsModelRun.cs" />
@@ -91,12 +122,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsModelViewJob.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsModelViewPeople.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsModelViewUserInfo.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsOrgJenkinsciPluginsBuildgraphviewBuildGraph.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsOrgJenkinsciPluginsCategorizedviewCategorizedJobsView.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsOrgJenkinsciPluginsEnvinjectEnvInjectVarList.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsOrgJenkinsciPluginsWorkflowJobWorkflowJob.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsOrgJenkinsciPluginsWorkflowJobWorkflowRun.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsOrgJenkinsciPluginsWorkflowMultibranchWorkflowMultiBranchProject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsPluginManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsPluginsViewDashboardDashboard.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsPluginWrapper.cs" />
@@ -124,6 +149,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsTasksTestTestResult.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Generated\JenkinsYesNoMaybe.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\JenkinsComputerExt.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\JenkinsExecutable.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\JenkinsModelComputer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\JenkinsModelRun.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\JenkinsNodeMonitorsArchitectureMonitor.cs" />
@@ -132,5 +158,21 @@
     <Compile Include="$(MSBuildThisFileDirectory)Model\JenkinsNodeMonitorsResponseTimeMonitor.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\JenkinsNodeMonitorsSwapSpaceMonitor.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\JenkinsNodeMonitorsTemporarySpaceMonitor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\JenkinsResult.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Jenkins.Plugins.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Jenkins.View.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)Model\Generated\stat.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)Comments.xml">
+      <SubType>Designer</SubType>
+    </None>
+    <Compile Include="$(MSBuildThisFileDirectory)Jenkins.MyView.cs" />
   </ItemGroup>
 </Project>

@@ -9,6 +9,7 @@
     <Import_RootNamespace>JenkinsWebApiUnitTestShare</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)JenkinsWebApiUnitTest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JenkinsWebApiAsyncUnitTest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JenkinsWebApiDomUnitTest.cs" />
   </ItemGroup>
 </Project>

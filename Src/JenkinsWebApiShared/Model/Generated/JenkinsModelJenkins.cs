@@ -17,6 +17,9 @@ namespace JenkinsWebApi.Model
         [JsonPropertyName("primaryView")]
         public JenkinsModelView PrimaryView { get; set; }
 
+        [JsonPropertyName("quietDownReason")]
+        public string QuietDownReason { get; set; }
+
         [JsonPropertyName("quietingDown")]
         public bool IsQuietingDown { get; set; }
 

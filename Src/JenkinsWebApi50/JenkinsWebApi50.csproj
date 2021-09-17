@@ -17,17 +17,13 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>C:\Projects\JenkinsWebApi.json\JenkinsWebApi50\JenkinsWebApi.xml</DocumentationFile>
+    <DocumentationFile>JenkinsWebApi.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>C:\Projects\JenkinsWebApi.json\JenkinsWebApi50\JenkinsWebApi.xml</DocumentationFile>
+    <DocumentationFile>JenkinsWebApi.xml</DocumentationFile>
   </PropertyGroup>
 
   <Import Project="..\JenkinsWebApiShared\JenkinsWebApiShared.projitems" Label="Shared" />
-
-  <ItemGroup>
-    <PackageReference Include="HtmlAgilityPack" Version="1.11.33" />
-  </ItemGroup>
 
 </Project>

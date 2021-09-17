@@ -45,7 +45,7 @@ namespace JenkinsWebApi.Model
         public long QueueId { get; set; }
 
         [JsonPropertyName("result")]
-        public JenkinsTasksTestTestResult Result { get; set; }
+        public JenkinsResult Result { get; set; }
 
         [JsonPropertyName("timestamp")]
         public long Timestamp { get; set; }
