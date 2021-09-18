@@ -34,8 +34,7 @@ namespace JenkinsWebApi.Internal
 
         public static T Deserialize<T>(string text) where T : class
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(T));
-            return serializer.Deserialize(new StringReader(text)) as T;
+            return new XmlSerializer(typeof(T)).Deserialize(new StringReader(text)) as T;
         }
 
         public static T DeserializeView<T>(string text) where T : JenkinsModelView
@@ -62,11 +61,10 @@ namespace JenkinsWebApi.Internal
 
             if (classTypes.TryGetValue(typeValue, out Type type))
             {
-                XmlSerializer serializer = new XmlSerializer(type);
-                return serializer.Deserialize(new StringReader(text)) as T;
+                return new XmlSerializer(type).Deserialize(new StringReader(text)) as T;
             }
             
-            return default(T);
+            return default;
         }
     }
 }

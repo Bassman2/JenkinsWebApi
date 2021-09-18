@@ -278,33 +278,34 @@ namespace JenkinsWebApi
         }
 
         /// <summary>
-        /// Create a new job from an XML file.
+        /// Create a new job.
         /// </summary>
         /// <param name="jobName">Name of the job</param>
-        /// <param name="stream">XML data of the new job.</param>
-        /// <param name="fileName">File name of the data</param>
+        /// <param name="viewName">Nameof the view.</param>
+        /// <param name="type">Type of the class to create.</param>
         /// <returns>The task object representing the asynchronous operation.</returns>
-        public async Task CreateJobAsync(string jobName, Stream stream, string fileName)
+        /// <remarks><include file="Comments.xml" path="comments/comment[@id='job']/*"/></remarks>
+        public async Task CreateJobAsync(string jobName, string viewName, Type type)
         {
-            await CreateJobAsync(jobName, stream, fileName, CancellationToken.None);
+            await CreateJobAsync(jobName, viewName, type, CancellationToken.None);
         }
 
         /// <summary>
-        /// Create a new job from an XML file.
+        /// Create a new job.
         /// </summary>
         /// <param name="jobName">Name of the job</param>
-        /// <param name="stream">XML data of the new job.</param>
-        /// <param name="fileName">File name of the data</param>
+        /// <param name="viewName">Nameof the view.</param>
+        /// <param name="type">Type of the class to create.</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>The task object representing the asynchronous operation.</returns>
-        public async Task CreateJobAsync(string jobName, Stream stream, string fileName, CancellationToken cancellationToken)
+        /// <remarks><include file="Comments.xml" path="comments/comment[@id='job']/*"/></remarks>
+        public async Task CreateJobAsync(string jobName, string viewName, Type type, CancellationToken cancellationToken)
         {
-            MultipartFormDataContent content = new MultipartFormDataContent
-            {
-                { new StringContent(jobName), "name" },
-                { new StreamContent(stream), "file0", fileName }
-            };
-            await PostRunAsync("createItem", content, cancellationToken);
+            var content = new Dictionary<string, string>();
+            content.Add("name", jobName);
+            content.Add("mode", SerializableClassAttribute.GetClassName(type));
+            // http://tiny:8080/view/all/createItem
+            await PostAsync("/view/{viewName}/createItem", content, cancellationToken);
         }
 
         /// <summary>
