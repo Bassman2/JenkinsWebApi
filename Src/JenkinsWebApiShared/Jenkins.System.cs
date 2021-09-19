@@ -21,7 +21,7 @@ namespace JenkinsWebApi
         /// <returns>The task object representing the asynchronous operation.</returns>
         public async Task QuiteDownAsync(CancellationToken cancellationToken)
         {
-            await PostRunAsync("quietDown", null, cancellationToken);
+            await PostRunJobAsync("quietDown", null, cancellationToken);
         }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace JenkinsWebApi
         /// <returns>The task object representing the asynchronous operation.</returns>
         public async Task CancelQuietDown(CancellationToken cancellationToken)
         {
-            await PostRunAsync("cancelQuietDown", null, cancellationToken);
+            await PostRunJobAsync("cancelQuietDown", null, cancellationToken);
         }
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace JenkinsWebApi
         /// <returns>The task object representing the asynchronous operation.</returns>
         public async Task RestartAsync(CancellationToken cancellationToken)
         {
-            await PostRunAsync("restart", null, cancellationToken);
+            await PostRunJobAsync("restart", null, cancellationToken);
         }
 
         /// <summary>
@@ -78,7 +78,7 @@ namespace JenkinsWebApi
         /// <returns>The task object representing the asynchronous operation.</returns>
         public async Task SaveRestartAsync(CancellationToken cancellationToken)
         {
-            await PostRunAsync("safeRestart", null, cancellationToken);
+            await PostRunJobAsync("safeRestart", null, cancellationToken);
         }
 
         /// <summary>

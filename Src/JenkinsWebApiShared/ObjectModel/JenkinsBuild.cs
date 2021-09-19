@@ -2,7 +2,7 @@
 using JenkinsWebApi.Model;
 using System;
 
-namespace JenkinsWebApi
+namespace JenkinsWebApi.ObjectModel
 {
     /// <summary>
     /// 

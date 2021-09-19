@@ -115,29 +115,29 @@
             <summary>
             Initializes a new instance of the Jenkins class.
             </summary>
-            <param name="host">Host URL of the Jenkins server</param>
+            <param name="host">Host URL of the Jenkins server.</param>
         </member>
         <member name="M:JenkinsWebApi.Jenkins.#ctor(System.Uri)">
             <summary>
             Initializes a new instance of the Jenkins class.
             </summary>
-            <param name="host">Host URL of the Jenkins server</param>
+            <param name="host">Host URL of the Jenkins server.</param>
         </member>
         <member name="M:JenkinsWebApi.Jenkins.#ctor(System.String,System.String,System.String)">
             <summary>
             Initializes a new instance of the Jenkins class.
             </summary>
-            <param name="host">Host URL of the Jenkins server</param>
-            <param name="login">Login for the Jenkins server</param>
-            <param name="passwordOrToken">Password or API token for the Jenkins server</param>
+            <param name="host">Host URL of the Jenkins server.</param>
+            <param name="login">Login for the Jenkins server.</param>
+            <param name="passwordOrToken">Password or API token for the Jenkins server.</param>
         </member>
         <member name="M:JenkinsWebApi.Jenkins.#ctor(System.Uri,System.String,System.String)">
             <summary>
             Initializes a new instance of the Jenkins class.
             </summary>
-            <param name="host">Host URL of the Jenkins server</param>
-            <param name="login">Login for the Jenkins server</param>
-            <param name="passwordOrToken">Password or API token for the Jenkins server</param>
+            <param name="host">Host URL of the Jenkins server.</param>
+            <param name="login">Login for the Jenkins server.</param>
+            <param name="passwordOrToken">Password or API token for the Jenkins server.</param>
         </member>
         <member name="M:JenkinsWebApi.Jenkins.Login(System.String,System.String)">
             <summary>
@@ -146,20 +146,6 @@
             <param name="login">Login for the Jenkins server</param>
             <param name="passwordOrToken">Password or API token for the Jenkins server</param>
             <returns>true if login success; false if failed</returns>
-        </member>
-        <member name="M:JenkinsWebApi.Jenkins.GetView(System.String)">
-            <summary>
-            Get a view.
-            </summary>
-            <param name="viewName">Name of the view to get.</param>
-            <returns></returns>
-        </member>
-        <member name="M:JenkinsWebApi.Jenkins.GetJob(System.String)">
-            <summary>
-            Get a job.
-            </summary>
-            <param name="jobName">>Name of the job to get.</param>
-            <returns></returns>
         </member>
         <member name="M:JenkinsWebApi.Jenkins.RunComputerScriptAsync(System.String,System.String)">
             <summary>
@@ -727,13 +713,12 @@
             <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
             <returns>The task object representing the asynchronous operation.</returns>
         </member>
-        <member name="M:JenkinsWebApi.Jenkins.CreateJobAsync(System.String,System.String,System.Type)">
+        <member name="M:JenkinsWebApi.Jenkins.CreateJobAsync(System.String,System.Xml.XmlDocument)">
             <summary>
             Create a new job.
             </summary>
             <param name="jobName">Name of the job</param>
-            <param name="viewName">Nameof the view.</param>
-            <param name="type">Type of the class to create.</param>
+            <param name="config">String with the XML configuration of the job.</param>
             <returns>The task object representing the asynchronous operation.</returns>
             <remarks><list type="table">
       <listheader>
@@ -793,13 +778,143 @@
       -->
     </list></remarks>
         </member>
-        <member name="M:JenkinsWebApi.Jenkins.CreateJobAsync(System.String,System.String,System.Type,System.Threading.CancellationToken)">
+        <member name="M:JenkinsWebApi.Jenkins.CreateJobAsync(System.String,System.Xml.XmlDocument,System.Threading.CancellationToken)">
             <summary>
             Create a new job.
             </summary>
             <param name="jobName">Name of the job</param>
-            <param name="viewName">Nameof the view.</param>
-            <param name="type">Type of the class to create.</param>
+            <param name="config">String with the XML configuration of the job.</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <returns>The task object representing the asynchronous operation.</returns>
+            <remarks><list type="table">
+      <listheader>
+        <term>Job</term>
+        <term>Class</term>
+        <term>Plugin</term>
+      </listheader>
+      <item>
+        <term>Freestyle Project</term>
+        <term>
+          <see cref="T:JenkinsWebApi.Model.JenkinsModelFreeStyleProject" />
+        </term>
+        <term>-</term>
+      </item>
+      <!--
+      <item>
+        <term>My View</term>
+        <term>
+          <see cref="JenkinsModelMyView"/>
+        </term>
+        <term>-</term>
+      </item>
+      <item>
+        <term>All View</term>
+        <term>
+          <see cref="JenkinsModelAllView"/>
+        </term>
+        <term>-</term>
+      </item>
+      <item>
+        <term>Categorized Jobs View</term>
+        <term>
+          <see cref="JenkinsJenkinsciCategorizedJobsView"/>
+        </term>
+        <term>
+          <see href="https://plugins.jenkins.io/categorized-view/">categorized-view</see>
+        </term>
+      </item>
+      <item>
+        <term>Dashboard</term>
+        <term>
+          <see cref="JenkinsPluginsViewDashboardDashboard"/>
+        </term>
+        <term>
+          <see href="https://plugins.jenkins.io/dashboard-view/">Dashboard View</see>
+        </term>
+      </item>
+      <item>
+        <term>Multijob View</term>
+        <term>
+          <see cref="JenkinsTikalMultiJobView"/>
+        </term>
+        <term>
+          <see href="https://plugins.jenkins.io/jenkins-multijob-plugin/">Multijob</see>
+        </term>
+      </item>
+      -->
+    </list></remarks>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.CreateJobAsync(System.String,System.String)">
+            <summary>
+            Create a new job.
+            </summary>
+            <param name="jobName">Name of the job</param>
+            <param name="config">String with the XML configuration of the job.</param>
+            <returns>The task object representing the asynchronous operation.</returns>
+            <remarks><list type="table">
+      <listheader>
+        <term>Job</term>
+        <term>Class</term>
+        <term>Plugin</term>
+      </listheader>
+      <item>
+        <term>Freestyle Project</term>
+        <term>
+          <see cref="T:JenkinsWebApi.Model.JenkinsModelFreeStyleProject" />
+        </term>
+        <term>-</term>
+      </item>
+      <!--
+      <item>
+        <term>My View</term>
+        <term>
+          <see cref="JenkinsModelMyView"/>
+        </term>
+        <term>-</term>
+      </item>
+      <item>
+        <term>All View</term>
+        <term>
+          <see cref="JenkinsModelAllView"/>
+        </term>
+        <term>-</term>
+      </item>
+      <item>
+        <term>Categorized Jobs View</term>
+        <term>
+          <see cref="JenkinsJenkinsciCategorizedJobsView"/>
+        </term>
+        <term>
+          <see href="https://plugins.jenkins.io/categorized-view/">categorized-view</see>
+        </term>
+      </item>
+      <item>
+        <term>Dashboard</term>
+        <term>
+          <see cref="JenkinsPluginsViewDashboardDashboard"/>
+        </term>
+        <term>
+          <see href="https://plugins.jenkins.io/dashboard-view/">Dashboard View</see>
+        </term>
+      </item>
+      <item>
+        <term>Multijob View</term>
+        <term>
+          <see cref="JenkinsTikalMultiJobView"/>
+        </term>
+        <term>
+          <see href="https://plugins.jenkins.io/jenkins-multijob-plugin/">Multijob</see>
+        </term>
+      </item>
+      -->
+    </list></remarks>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.CreateJobAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Create a new job.
+            </summary>
+            <param name="jobName">Name of the job</param>
+            <param name="config">String with the XML configuration of the job.</param>
             <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
             <returns>The task object representing the asynchronous operation.</returns>
             <remarks><list type="table">
@@ -1017,6 +1132,21 @@
             <param name="description"></param>
             <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
             <returns>Jenkins job data</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.JobExists(System.String)">
+            <summary>
+            Check if job exists.
+            </summary>
+            <param name="jobName">Name of the job to check.</param>
+            <returns>True if job exists. False if not.</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.JobExists(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Check if job exists.
+            </summary>
+            <param name="jobName">Name of the job to check.</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <returns>True if job exists. False if not.</returns>
         </member>
         <member name="M:JenkinsWebApi.Jenkins.QuiteDownAsync">
             <summary>
@@ -1527,94 +1657,339 @@
             <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
             <returns>Returns view data.</returns>
         </member>
-        <member name="T:JenkinsWebApi.JenkinsBuild">
+        <member name="T:JenkinsWebApi.ObjectModel.JenkinsBuild">
             <summary>
             
             </summary>
         </member>
-        <member name="P:JenkinsWebApi.JenkinsBuild.Jenkins">
+        <member name="P:JenkinsWebApi.ObjectModel.JenkinsBuild.Jenkins">
             <summary>
             
             </summary>
         </member>
-        <member name="P:JenkinsWebApi.JenkinsBuild.Job">
+        <member name="P:JenkinsWebApi.ObjectModel.JenkinsBuild.Job">
             <summary>
             
             </summary>
         </member>
-        <member name="P:JenkinsWebApi.JenkinsBuild.JobName">
+        <member name="P:JenkinsWebApi.ObjectModel.JenkinsBuild.JobName">
             <summary>
             
             </summary>
         </member>
-        <member name="P:JenkinsWebApi.JenkinsBuild.IsBuilding">
+        <member name="P:JenkinsWebApi.ObjectModel.JenkinsBuild.IsBuilding">
             <summary>
             
             </summary>
         </member>
-        <member name="P:JenkinsWebApi.JenkinsBuild.Description">
+        <member name="P:JenkinsWebApi.ObjectModel.JenkinsBuild.Description">
             <summary>
             
             </summary>
         </member>
-        <member name="P:JenkinsWebApi.JenkinsBuild.DisplayName">
+        <member name="P:JenkinsWebApi.ObjectModel.JenkinsBuild.DisplayName">
             <summary>
             
             </summary>
         </member>
-        <member name="P:JenkinsWebApi.JenkinsBuild.Duration">
+        <member name="P:JenkinsWebApi.ObjectModel.JenkinsBuild.Duration">
             <summary>
             
             </summary>
         </member>
-        <member name="P:JenkinsWebApi.JenkinsBuild.EstimatedDuration">
+        <member name="P:JenkinsWebApi.ObjectModel.JenkinsBuild.EstimatedDuration">
             <summary>
             
             </summary>
         </member>
-        <member name="P:JenkinsWebApi.JenkinsBuild.FullDisplayName">
+        <member name="P:JenkinsWebApi.ObjectModel.JenkinsBuild.FullDisplayName">
             <summary>
             
             </summary>
         </member>
-        <member name="P:JenkinsWebApi.JenkinsBuild.Id">
+        <member name="P:JenkinsWebApi.ObjectModel.JenkinsBuild.Id">
             <summary>
             
             </summary>
         </member>
-        <member name="P:JenkinsWebApi.JenkinsBuild.IsKeepLog">
+        <member name="P:JenkinsWebApi.ObjectModel.JenkinsBuild.IsKeepLog">
             <summary>
             
             </summary>
         </member>
-        <member name="P:JenkinsWebApi.JenkinsBuild.Number">
+        <member name="P:JenkinsWebApi.ObjectModel.JenkinsBuild.Number">
             <summary>
             
             </summary>
         </member>
-        <member name="P:JenkinsWebApi.JenkinsBuild.QueueId">
+        <member name="P:JenkinsWebApi.ObjectModel.JenkinsBuild.QueueId">
             <summary>
             
             </summary>
         </member>
-        <member name="P:JenkinsWebApi.JenkinsBuild.Result">
+        <member name="P:JenkinsWebApi.ObjectModel.JenkinsBuild.Result">
             <summary>
             
             </summary>
         </member>
-        <member name="P:JenkinsWebApi.JenkinsBuild.Timestamp">
+        <member name="P:JenkinsWebApi.ObjectModel.JenkinsBuild.Timestamp">
             <summary>
             
             </summary>
         </member>
-        <member name="P:JenkinsWebApi.JenkinsBuild.Url">
+        <member name="P:JenkinsWebApi.ObjectModel.JenkinsBuild.Url">
             <summary>
             
             </summary>
         </member>
-        <member name="M:JenkinsWebApi.JenkinsBuild.Update">
+        <member name="M:JenkinsWebApi.ObjectModel.JenkinsBuild.Update">
             <summary>
             
+            </summary>
+        </member>
+        <member name="T:JenkinsWebApi.ObjectModel.JenkinsJob">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="E:JenkinsWebApi.ObjectModel.JenkinsJob.RunProgress">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.ObjectModel.JenkinsJob.Description">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.ObjectModel.JenkinsJob.DisplayName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.ObjectModel.JenkinsJob.DisplayNameOrNull">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.ObjectModel.JenkinsJob.FullDisplayName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.ObjectModel.JenkinsJob.FullName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.ObjectModel.JenkinsJob.Name">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.ObjectModel.JenkinsJob.Url">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.ObjectModel.JenkinsJob.IsBuildable">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.ObjectModel.JenkinsJob.FirstBuild">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.ObjectModel.JenkinsJob.IsInQueue">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.ObjectModel.JenkinsJob.IsKeepDependencies">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.ObjectModel.JenkinsJob.LastBuild">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.ObjectModel.JenkinsJob.LastCompletedBuild">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.ObjectModel.JenkinsJob.LastFailedBuild">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.ObjectModel.JenkinsJob.LastStableBuild">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.ObjectModel.JenkinsJob.LastSuccessfulBuild">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.ObjectModel.JenkinsJob.LastUnstableBuild">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.ObjectModel.JenkinsJob.LastUnsuccessfulBuild">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.ObjectModel.JenkinsJob.NextBuildNumber">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.ObjectModel.JenkinsJob.Config">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.ObjectModel.JenkinsJob.ConfigXml">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:JenkinsWebApi.ObjectModel.JenkinsJob.QueueBuild(JenkinsWebApi.JenkinsBuildParameters)">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:JenkinsWebApi.ObjectModel.JenkinsJob.StartBuild(JenkinsWebApi.JenkinsBuildParameters)">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:JenkinsWebApi.ObjectModel.JenkinsJob.RunBuild(JenkinsWebApi.JenkinsBuildParameters)">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:JenkinsWebApi.ObjectModel.JenkinsJob.StopBuild">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:JenkinsWebApi.ObjectModel.JenkinsJob.System#IProgress{JenkinsWebApi#JenkinsRunProgress}#Report(JenkinsWebApi.JenkinsRunProgress)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:JenkinsWebApi.ObjectModel.JenkinsJob.Update">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:JenkinsWebApi.ObjectModel.JenkinsServer.#ctor(JenkinsWebApi.Jenkins)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="jenkins"></param>
+        </member>
+        <member name="M:JenkinsWebApi.ObjectModel.JenkinsServer.#ctor(System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="host">Host URL of the Jenkins server.</param>
+        </member>
+        <member name="M:JenkinsWebApi.ObjectModel.JenkinsServer.#ctor(System.Uri)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="host">Host URL of the Jenkins server.</param>
+        </member>
+        <member name="M:JenkinsWebApi.ObjectModel.JenkinsServer.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="host">Host URL of the Jenkins server.</param>
+            <param name="login">Login for the Jenkins server.</param>
+            <param name="passwordOrToken">Password or API token for the Jenkins server</param>
+        </member>
+        <member name="M:JenkinsWebApi.ObjectModel.JenkinsServer.#ctor(System.Uri,System.String,System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="host">Host URL of the Jenkins server.</param>
+            <param name="login">Login for the Jenkins server.</param>
+            <param name="passwordOrToken">Password or API token for the Jenkins server.</param>
+        </member>
+        <member name="P:JenkinsWebApi.ObjectModel.JenkinsServer.Description">
+            <summary>
+            Description of the Jenkins server
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.ObjectModel.JenkinsServer.Url">
+            <summary>
+            Url address of the Jenkins server
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:JenkinsWebApi.ObjectModel.JenkinsServer.GetView(System.String)" -->
+        <member name="M:JenkinsWebApi.ObjectModel.JenkinsServer.GetJob(System.String)">
+            <summary>
+            Get a job.
+            </summary>
+            <param name="jobName">>Name of the job to get.</param>
+            <returns></returns>
+        </member>
+        <member name="T:JenkinsWebApi.ObjectModel.JenkinsView">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.ObjectModel.JenkinsView.Description">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.ObjectModel.JenkinsView.Jobs">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.ObjectModel.JenkinsView.JobNames">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.ObjectModel.JenkinsView.Name">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.ObjectModel.JenkinsView.Url">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.ObjectModel.JenkinsView.Config">
+            <summary>
+            Get and set the view configuration as text.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.ObjectModel.JenkinsView.ConfigXml">
+            <summary>
+            Get and set the view configuration as XmlDocument.
+            </summary>
+        </member>
+        <member name="M:JenkinsWebApi.ObjectModel.JenkinsView.Update">
+            <summary>
+            Update view data.
             </summary>
         </member>
         <member name="T:JenkinsWebApi.JenkinsBuildParameters">
@@ -1674,154 +2049,6 @@
         <member name="F:JenkinsWebApi.JenkinsBuildParameters.JenkinsParameterType.Stream">
             <summary>
             The parameter is a file stream.
-            </summary>
-        </member>
-        <member name="T:JenkinsWebApi.JenkinsJob">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="E:JenkinsWebApi.JenkinsJob.RunProgress">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.JenkinsJob.Description">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.JenkinsJob.DisplayName">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.JenkinsJob.DisplayNameOrNull">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.JenkinsJob.FullDisplayName">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.JenkinsJob.FullName">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.JenkinsJob.Name">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.JenkinsJob.Url">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.JenkinsJob.IsBuildable">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.JenkinsJob.FirstBuild">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.JenkinsJob.IsInQueue">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.JenkinsJob.IsKeepDependencies">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.JenkinsJob.LastBuild">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.JenkinsJob.LastCompletedBuild">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.JenkinsJob.LastFailedBuild">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.JenkinsJob.LastStableBuild">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.JenkinsJob.LastSuccessfulBuild">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.JenkinsJob.LastUnstableBuild">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.JenkinsJob.LastUnsuccessfulBuild">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.JenkinsJob.NextBuildNumber">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.JenkinsJob.Config">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.JenkinsJob.ConfigXml">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:JenkinsWebApi.JenkinsJob.QueueBuild(JenkinsWebApi.JenkinsBuildParameters)">
-            <summary>
-            
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:JenkinsWebApi.JenkinsJob.StartBuild(JenkinsWebApi.JenkinsBuildParameters)">
-            <summary>
-            
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:JenkinsWebApi.JenkinsJob.RunBuild(JenkinsWebApi.JenkinsBuildParameters)">
-            <summary>
-            
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:JenkinsWebApi.JenkinsJob.StopBuild">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:JenkinsWebApi.JenkinsJob.System#IProgress{JenkinsWebApi#JenkinsRunProgress}#Report(JenkinsWebApi.JenkinsRunProgress)">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:JenkinsWebApi.JenkinsJob.Update">
-            <summary>
-            
             </summary>
         </member>
         <member name="T:JenkinsWebApi.JenkinsRunConfig">
@@ -1997,51 +2224,6 @@
         <member name="F:JenkinsWebApi.JenkinsRunStatus.Canceled">
             <summary>
             The build has been canceled.
-            </summary>
-        </member>
-        <member name="T:JenkinsWebApi.JenkinsView">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.JenkinsView.Description">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.JenkinsView.Jobs">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.JenkinsView.JobNames">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.JenkinsView.Name">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.JenkinsView.Url">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.JenkinsView.Config">
-            <summary>
-            Get and set the view configuration as text.
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.JenkinsView.ConfigXml">
-            <summary>
-            Get and set the view configuration as XmlDocument.
-            </summary>
-        </member>
-        <member name="M:JenkinsWebApi.JenkinsView.Update">
-            <summary>
-            Update view data.
             </summary>
         </member>
         <member name="P:JenkinsWebApi.Model.JenkinsCloudbeesCredentialsStoreAction.Class">

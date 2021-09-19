@@ -4,11 +4,14 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
+
+#pragma warning disable IDE0090 // Use 'new(...)'
 
 namespace JenkinsWebApi
 {
@@ -151,7 +154,7 @@ namespace JenkinsWebApi
             runConfig = runConfig ?? this.RunConfig ?? throw new Exception("No JenkinsRunConfig available.");
 
             string path = $"/job/{jobName}/{(parameters == null ? "build" : "buildWithParameters")}?delay={runConfig.StartDelay}sec";
-            var res = await PostRunAsync(path, null, cancellationToken);
+            var res = await PostRunJobAsync(path, null, cancellationToken);
 
             //Uri location =
             // store last progress info to compare for changes
@@ -274,40 +277,59 @@ namespace JenkinsWebApi
                 throw new ArgumentNullException(nameof(jobName));
             }
 
-            await PostRunAsync($"/job/{jobName}/{buildNum}/stop", null, cancellationToken);
+            await PostRunJobAsync($"/job/{jobName}/{buildNum}/stop", null, cancellationToken);
         }
 
         /// <summary>
         /// Create a new job.
         /// </summary>
         /// <param name="jobName">Name of the job</param>
-        /// <param name="viewName">Nameof the view.</param>
-        /// <param name="type">Type of the class to create.</param>
+        /// <param name="config">String with the XML configuration of the job.</param>
         /// <returns>The task object representing the asynchronous operation.</returns>
         /// <remarks><include file="Comments.xml" path="comments/comment[@id='job']/*"/></remarks>
-        public async Task CreateJobAsync(string jobName, string viewName, Type type)
+        public async Task CreateJobAsync(string jobName, XmlDocument config)
         {
-            await CreateJobAsync(jobName, viewName, type, CancellationToken.None);
+            await CreateJobAsync(jobName, config.ToString(), CancellationToken.None);
         }
 
         /// <summary>
         /// Create a new job.
         /// </summary>
         /// <param name="jobName">Name of the job</param>
-        /// <param name="viewName">Nameof the view.</param>
-        /// <param name="type">Type of the class to create.</param>
+        /// <param name="config">String with the XML configuration of the job.</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>The task object representing the asynchronous operation.</returns>
         /// <remarks><include file="Comments.xml" path="comments/comment[@id='job']/*"/></remarks>
-        public async Task CreateJobAsync(string jobName, string viewName, Type type, CancellationToken cancellationToken)
+        public async Task CreateJobAsync(string jobName, XmlDocument config, CancellationToken cancellationToken)
         {
-            var content = new Dictionary<string, string>();
-            content.Add("name", jobName);
-            content.Add("mode", SerializableClassAttribute.GetClassName(type));
-            // http://tiny:8080/view/all/createItem
-            await PostAsync("/view/{viewName}/createItem", content, cancellationToken);
+            await CreateJobAsync(jobName, config.ToString(), cancellationToken);
         }
 
+        /// <summary>
+        /// Create a new job.
+        /// </summary>
+        /// <param name="jobName">Name of the job</param>
+        /// <param name="config">String with the XML configuration of the job.</param>
+        /// <returns>The task object representing the asynchronous operation.</returns>
+        /// <remarks><include file="Comments.xml" path="comments/comment[@id='job']/*"/></remarks>
+        public async Task CreateJobAsync(string jobName, string config)
+        {
+            await CreateJobAsync(jobName, config, CancellationToken.None);
+        }
+
+        /// <summary>
+        /// Create a new job.
+        /// </summary>
+        /// <param name="jobName">Name of the job</param>
+        /// <param name="config">String with the XML configuration of the job.</param>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>The task object representing the asynchronous operation.</returns>
+        /// <remarks><include file="Comments.xml" path="comments/comment[@id='job']/*"/></remarks>
+        public async Task CreateJobAsync(string jobName, string config, CancellationToken cancellationToken)
+        {
+            await PostCreateJobAsync($"createItem?name={jobName}", config, cancellationToken);
+        }
+        
         /// <summary>
         /// Create a new job from an XML file.
         /// </summary>
@@ -427,7 +449,7 @@ namespace JenkinsWebApi
                 new KeyValuePair<string, string>("from", fromJobName)
             };
             FormUrlEncodedContent content = new FormUrlEncodedContent(param);
-            await PostRunAsync("createItem", content, cancellationToken);
+            await PostRunJobAsync("createItem", content, cancellationToken);
         }
 
         /// <summary>
@@ -555,6 +577,28 @@ namespace JenkinsWebApi
             await PostAsync($"job/{jobName}/description", content, cancellationToken);
         }
 
+        /// <summary>
+        /// Check if job exists.
+        /// </summary>
+        /// <param name="jobName">Name of the job to check.</param>
+        /// <returns>True if job exists. False if not.</returns>
+        public async Task<bool> JobExists(string jobName)
+        {
+            return await JobExists(jobName, CancellationToken.None);
+
+        }
+
+        /// <summary>
+        /// Check if job exists.
+        /// </summary>
+        /// <param name="jobName">Name of the job to check.</param>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>True if job exists. False if not.</returns>
+        public async Task<bool> JobExists(string jobName, CancellationToken cancellationToken)
+        {
+            JenkinsModelHudson server = await GetApiAsync<JenkinsModelHudson>("", cancellationToken);
+            return server.Jobs.Any(j => j.Name == jobName);
+        }
     }
 }
 

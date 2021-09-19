@@ -333,16 +333,41 @@ namespace JenkinsTest
         }
 
         [TestMethod]
-        public void JobCreateDeleteTest()
+        public void JobCreateDeleteTextTest()
         {
             // Arrange
+            string config;
+            JenkinsModelFreeStyleProject freeStyleJob = null;
+            bool exists;
+
+            // Act
+            using (Jenkins jenkins = new Jenkins(host, this.login, this.password))
+            {
+                config = jenkins.GetJobConfigAsync("Freestyle").Result;
+                jenkins.CreateJobAsync("Dummy", config).Wait();
+                freeStyleJob = jenkins.GetJobAsync<JenkinsModelFreeStyleProject>("Dummy").Result;
+                jenkins.DeleteJobAsync("Dummy").Wait();
+                exists = jenkins.JobExists("Dummy").Result;
+            }
+
+            // Assert
+            Assert.IsNotNull(freeStyleJob, nameof(freeStyleJob));
+            Assert.IsFalse(exists, nameof(exists));
+        }
+
+        [TestMethod]
+        public void JobCreateDeleteXmlTest()
+        {
+            // Arrange
+            XmlDocument config;
             JenkinsModelFreeStyleProject freeStyleJobNew = null;
             JenkinsModelFreeStyleProject freeStyleJobDel = null;
 
             // Act
             using (Jenkins jenkins = new Jenkins(host, this.login, this.password))
             {
-                jenkins.CreateJobAsync("Dummy", "all", typeof(JenkinsModelFreeStyleProject)).Wait();
+                config = jenkins.GetJobConfigXmlAsync("Freestyle").Result;
+                jenkins.CreateJobAsync("Dummy", config).Wait();
                 freeStyleJobNew = jenkins.GetJobAsync<JenkinsModelFreeStyleProject>("Dummy").Result;
                 jenkins.DeleteJobAsync("Dummy").Wait();
                 freeStyleJobDel = jenkins.GetJobAsync<JenkinsModelFreeStyleProject>("Dummy").Result;
@@ -352,7 +377,6 @@ namespace JenkinsTest
             Assert.IsNotNull(freeStyleJobNew, nameof(freeStyleJobNew));
             Assert.IsNull(freeStyleJobDel, nameof(freeStyleJobDel));
         }
-
         // Feature removed in newer Jenkins versions
         //[TestMethod]
         //public void InstancesTest()

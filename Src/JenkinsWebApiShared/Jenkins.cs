@@ -20,32 +20,32 @@ namespace JenkinsWebApi
         /// <summary>
         /// Initializes a new instance of the Jenkins class.
         /// </summary>
-        /// <param name="host">Host URL of the Jenkins server</param>
+        /// <param name="host">Host URL of the Jenkins server.</param>
         public Jenkins(string host) : this(new Uri(host), null, null)
         { }
 
         /// <summary>
         /// Initializes a new instance of the Jenkins class.
         /// </summary>
-        /// <param name="host">Host URL of the Jenkins server</param>
+        /// <param name="host">Host URL of the Jenkins server.</param>
         public Jenkins(Uri host) : this(host, null, null)
         { }
 
         /// <summary>
         /// Initializes a new instance of the Jenkins class.
         /// </summary>
-        /// <param name="host">Host URL of the Jenkins server</param>
-        /// <param name="login">Login for the Jenkins server</param>
-        /// <param name="passwordOrToken">Password or API token for the Jenkins server</param>
+        /// <param name="host">Host URL of the Jenkins server.</param>
+        /// <param name="login">Login for the Jenkins server.</param>
+        /// <param name="passwordOrToken">Password or API token for the Jenkins server.</param>
         public Jenkins(string host, string login, string passwordOrToken) : this(new Uri(host), login, passwordOrToken)
         { }
 
         /// <summary>
         /// Initializes a new instance of the Jenkins class.
         /// </summary>
-        /// <param name="host">Host URL of the Jenkins server</param>
-        /// <param name="login">Login for the Jenkins server</param>
-        /// <param name="passwordOrToken">Password or API token for the Jenkins server</param>
+        /// <param name="host">Host URL of the Jenkins server.</param>
+        /// <param name="login">Login for the Jenkins server.</param>
+        /// <param name="passwordOrToken">Password or API token for the Jenkins server.</param>
         public Jenkins(Uri host, string login, string passwordOrToken) 
         {
             Connect(host, login, passwordOrToken);
@@ -77,26 +77,6 @@ namespace JenkinsWebApi
 
             // check if login success            
             return GetCurrentUserAsync().Result != null;
-        }
-        
-        /// <summary>
-        /// Get a view.
-        /// </summary>
-        /// <param name="viewName">Name of the view to get.</param>
-        /// <returns></returns>
-        public JenkinsView GetView(string viewName)
-        {
-            return new JenkinsView(this, viewName);
-        }
-
-        /// <summary>
-        /// Get a job.
-        /// </summary>
-        /// <param name="jobName">>Name of the job to get.</param>
-        /// <returns></returns>
-        public JenkinsJob GetJob(string jobName)
-        {
-            return new JenkinsJob(this, jobName);
         }
     }
 }
