@@ -125,5 +125,41 @@ namespace JenkinsWebApi
             return build;
         }
 
+        /// <summary>
+        /// Get the Console Output text of a build.
+        /// </summary>
+        /// <param name="jobName">Name of the Jenkins job.</param>
+        /// <param name="buildNum">Number of the Jenkins build.</param>
+        /// <param name="start">Line number to start with. Use 0 to start from begin.</param>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>Console Output text.</returns>
+        public async Task<string> GetBuildConsoleOutputAsync(string jobName, int buildNum, int start = 0)
+        {
+            return await GetBuildConsoleOutputAsync(jobName, buildNum, start, CancellationToken.None);
+        }
+
+        /// <summary>
+        /// Get the Console Output text of a build.
+        /// </summary>
+        /// <param name="jobName">Name of the Jenkins job.</param>
+        /// <param name="buildNum">Number of the Jenkins build.</param>
+        /// <param name="start">Line number to start with. Use 0 to start from begin.</param>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>Console Output text.</returns>
+        public async Task<string> GetBuildConsoleOutputAsync(string jobName, int buildNum, int start, CancellationToken cancellationToken)
+        {
+            if (string.IsNullOrEmpty(jobName))
+            {
+                throw new ArgumentException(nameof(jobName));
+            }
+
+            if (buildNum < 1)
+            {
+                throw new ArgumentOutOfRangeException(nameof(buildNum));
+            }
+            string str = await GetStringAsync($"/job/{jobName}/{buildNum}/logText/progressiveText?start={start}", cancellationToken);
+            return str;
+        }
+
     }
 }

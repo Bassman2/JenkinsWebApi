@@ -101,6 +101,26 @@
             <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
             <returns>Jenkins build data</returns>
         </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetBuildConsoleOutputAsync(System.String,System.Int32,System.Int32)">
+            <summary>
+            Get the Console Output text of a build.
+            </summary>
+            <param name="jobName">Name of the Jenkins job.</param>
+            <param name="buildNum">Number of the Jenkins build.</param>
+            <param name="start">Line number to start with. Use 0 to start from begin.</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <returns>Console Output text.</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.GetBuildConsoleOutputAsync(System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Get the Console Output text of a build.
+            </summary>
+            <param name="jobName">Name of the Jenkins job.</param>
+            <param name="buildNum">Number of the Jenkins build.</param>
+            <param name="start">Line number to start with. Use 0 to start from begin.</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <returns>Console Output text.</returns>
+        </member>
         <member name="E:JenkinsWebApi.Jenkins.RunProgress">
             <summary>
             JobRunAsync progress event.

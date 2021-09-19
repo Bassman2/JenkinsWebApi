@@ -802,6 +802,26 @@ namespace JenkinsTest
 
         }
 
+        [TestMethod]
+        public void BuildConsoleOutputTest()
+        {
+            // Arrange
+            JenkinsModelFreeStyleBuild freeStyleBuild = null;
+            string consoleOutput = null;
+
+            // Act
+            using (Jenkins jenkins = new Jenkins(this.host, this.login, this.password))
+            {
+                freeStyleBuild = jenkins.GetLastBuildAsync<JenkinsModelFreeStyleBuild>("FreeStyle").Result;
+
+                consoleOutput = jenkins.GetBuildConsoleOutputAsync("FreeStyle", freeStyleBuild.Number, 0).Result;
+            }
+
+            // Assert
+            Assert.IsNotNull(consoleOutput, nameof(consoleOutput));
+            StringAssert.StartsWith(consoleOutput, "Started by user Tester");  
+        }
+
         //[TestMethod]
         //public void RunTestXXXXX()
         //{
