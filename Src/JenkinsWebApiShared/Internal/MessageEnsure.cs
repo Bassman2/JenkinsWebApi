@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Net;
 using System.Net.Http;
 
 namespace JenkinsWebApi.Internal
@@ -7,9 +7,9 @@ namespace JenkinsWebApi.Internal
     {
         internal static void EnsureSuccess(this HttpResponseMessage response)
         {
-            if (!response.IsSuccessStatusCode)
+            if (!response.IsSuccessStatusCode && response.StatusCode != HttpStatusCode.Forbidden )
             {
-                throw new Exception(response.ReasonPhrase);
+                throw new JenkinsException(response);
             }
         }
     }

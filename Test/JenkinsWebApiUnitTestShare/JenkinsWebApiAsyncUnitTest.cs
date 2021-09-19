@@ -4,6 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Threading;
 using System.Xml;
 
@@ -47,6 +48,22 @@ namespace JenkinsTest
 
             // Assert
             Assert.IsNotNull(server);
+        }
+
+        [TestMethod]
+        [ExpectedJenkinsException(HttpStatusCode.Unauthorized)]
+        public void LoginFailedTest()
+        {
+            // Arrange
+            JenkinsModelHudson server = null;
+
+            // Act
+            using (Jenkins jenkins = new Jenkins(this.host, "Mustermann", "Max"))
+            {
+                server = jenkins.GetServerAsync().Result;
+            }
+
+            // Assert
         }
 
         private void OnRunProgress(object sender, JenkinsRunProgress e)
@@ -663,6 +680,22 @@ namespace JenkinsTest
             Assert.IsNotNull(freeStyleJob.FirstBuild, nameof(freeStyleJob.FirstBuild));
 
             Assert.IsNotNull(freeStyleJob.HealthReports, nameof(freeStyleJob.HealthReports));
+        }
+
+        [TestMethod]
+        [ExpectedJenkinsException(HttpStatusCode.NotFound)]
+        public void JobGetFailedTest()
+        {
+            // Arrange
+            JenkinsModelFreeStyleProject freeStyleJob = null;
+
+            // Act
+            using (Jenkins jenkins = new Jenkins(this.host, this.login, this.password))
+            {
+                freeStyleJob = jenkins.GetJobAsync("FreeStyleNotExists").Result as JenkinsModelFreeStyleProject;
+            }
+
+            // Assert
         }
 
         [TestMethod]

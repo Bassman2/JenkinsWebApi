@@ -23,6 +23,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Jenkins.Job.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Jenkins.System.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Jenkins.User.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JenkinsException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ObjectModel\JenkinsBuild.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JenkinsBuildParameters.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ObjectModel\JenkinsJob.cs" />

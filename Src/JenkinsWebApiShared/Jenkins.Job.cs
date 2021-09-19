@@ -498,7 +498,9 @@ namespace JenkinsWebApi
             //Dictionary<string, string> content = new Dictionary<string, string>();
             //content.Add("Submit", "Disable Project");
             //await PostAsync($"job/{jobName}/disable", content, cancellationToken);
-            await PostAsync($"/job/{jobName}/disable", cancellationToken);
+
+            var content = new StringContent("", Encoding.UTF8, "application/xml");
+            await PostAsync($"/job/{jobName}/disable", content, cancellationToken);
         }
 
         /// <summary>
