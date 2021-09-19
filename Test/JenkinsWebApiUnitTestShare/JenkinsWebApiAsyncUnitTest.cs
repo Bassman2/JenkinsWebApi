@@ -360,23 +360,24 @@ namespace JenkinsTest
         {
             // Arrange
             XmlDocument config;
-            JenkinsModelFreeStyleProject freeStyleJobNew = null;
-            JenkinsModelFreeStyleProject freeStyleJobDel = null;
+            JenkinsModelFreeStyleProject freeStyleJob = null;
+            bool exists;
 
             // Act
             using (Jenkins jenkins = new Jenkins(host, this.login, this.password))
             {
                 config = jenkins.GetJobConfigXmlAsync("Freestyle").Result;
                 jenkins.CreateJobAsync("Dummy", config).Wait();
-                freeStyleJobNew = jenkins.GetJobAsync<JenkinsModelFreeStyleProject>("Dummy").Result;
+                freeStyleJob = jenkins.GetJobAsync<JenkinsModelFreeStyleProject>("Dummy").Result;
                 jenkins.DeleteJobAsync("Dummy").Wait();
-                freeStyleJobDel = jenkins.GetJobAsync<JenkinsModelFreeStyleProject>("Dummy").Result;
+                exists = jenkins.JobExists("Dummy").Result;
             }
 
             // Assert
-            Assert.IsNotNull(freeStyleJobNew, nameof(freeStyleJobNew));
-            Assert.IsNull(freeStyleJobDel, nameof(freeStyleJobDel));
+            Assert.IsNotNull(freeStyleJob, nameof(freeStyleJob));
+            Assert.IsFalse(exists, nameof(exists));
         }
+
         // Feature removed in newer Jenkins versions
         //[TestMethod]
         //public void InstancesTest()

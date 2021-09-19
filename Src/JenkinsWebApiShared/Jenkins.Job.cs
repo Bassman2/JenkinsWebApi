@@ -289,7 +289,7 @@ namespace JenkinsWebApi
         /// <remarks><include file="Comments.xml" path="comments/comment[@id='job']/*"/></remarks>
         public async Task CreateJobAsync(string jobName, XmlDocument config)
         {
-            await CreateJobAsync(jobName, config.ToString(), CancellationToken.None);
+            await CreateJobAsync(jobName, config, CancellationToken.None);
         }
 
         /// <summary>
@@ -302,7 +302,7 @@ namespace JenkinsWebApi
         /// <remarks><include file="Comments.xml" path="comments/comment[@id='job']/*"/></remarks>
         public async Task CreateJobAsync(string jobName, XmlDocument config, CancellationToken cancellationToken)
         {
-            await CreateJobAsync(jobName, config.ToString(), cancellationToken);
+            await CreateJobAsync(jobName, config.OuterXml, cancellationToken);
         }
 
         /// <summary>
@@ -371,6 +371,8 @@ namespace JenkinsWebApi
         public async Task<XmlDocument> GetJobConfigXmlAsync(string jobName, CancellationToken cancellationToken)
         {
             string str = await GetJobConfigAsync(jobName, cancellationToken);
+            // XmlDocument does not support XML version 1.1
+            str = str.Replace("<?xml version=\"1.1\"", "<?xml version=\"1.0\"");
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(str);
             return doc;
