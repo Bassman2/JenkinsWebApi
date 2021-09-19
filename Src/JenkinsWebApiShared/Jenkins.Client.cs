@@ -159,13 +159,13 @@ namespace JenkinsWebApi
             }
         }
 
-        //private async Task PostAsync(string path, HttpContent content, CancellationToken cancellationToken)
-        //{
-        //    using (HttpResponseMessage response = await this.client.PostAsync(path, content, cancellationToken))
-        //    {
-        //        response.EnsureSuccess();
-        //    }
-        //}
+        private async Task PostAsync(string path, HttpContent content, CancellationToken cancellationToken)
+        {
+            using (HttpResponseMessage response = await this.client.PostAsync(path, content, cancellationToken))
+            {
+                response.EnsureSuccess();
+            }
+        }
 
         private async Task PostAsync(string path, IEnumerable<KeyValuePair<string, string>> content, CancellationToken cancellationToken)
         {
@@ -188,9 +188,7 @@ namespace JenkinsWebApi
                 return str;
             }
         }
-
         
-
         private async Task<PostRunRes> PostRunJobAsync(string path, HttpContent content, CancellationToken cancellationToken)
         {
             using (HttpResponseMessage response = await this.client.PostAsync(path, content, cancellationToken))
@@ -204,86 +202,6 @@ namespace JenkinsWebApi
             }
         }
 
-        private async Task PostCreateJobAsync(string path, string config, CancellationToken cancellationToken)
-        {
-            //HttpRequestHeaders defHeader = this.client.DefaultRequestHeaders;
-
-            //HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, path);
-            ////request.Content = header;
-            //request.Headers.Authorization = defHeader.Authorization;
-
-            //request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/xml");
-
-            var content = new StringContent(config, Encoding.UTF8, "application/xml");
-            using (HttpResponseMessage response = await this.client.PostAsync(path, content, cancellationToken))
-            {
-                response.EnsureSuccess();
-            }
-        }
-
-        //private async Task PostCreateJobAsync2(string path, string config, CancellationToken cancellationToken)
-        //{
-        //    await Task.Run(() =>
-        //    {
-        //        var authorization = this.client.DefaultRequestHeaders.Authorization;
-        //        string auth = authorization.ToString(); // TODO check if equal
-
-        //        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(this.client.BaseAddress + path);
-        //        //string mergedCredentials = string.Format("{0}:{1}", "username", "password");
-        //        //byte[] byteCredentials = UTF8Encoding.UTF8.GetBytes(mergedCredentials);
-        //        //string base64Credentials = Convert.ToBase64String(byteCredentials);
-
-        //        request.Headers.Add("Authorization", authorization.Scheme + authorization.Parameter);
-        //        request.Method = "POST";
-        //        request.ContentType = "application/xml";
-        //        request.CookieContainer = this.handler.CookieContainer;
-
-        //        byte[] byteArray = Encoding.UTF8.GetBytes(config);
-        //        request.ContentLength = byteArray.Length;
-
-        //        Stream dataStream = request.GetRequestStream();
-        //        dataStream.Write(byteArray, 0, byteArray.Length);
-        //        dataStream.Close();
-
-        //        using (HttpWebResponse response = request.GetResponse() as HttpWebResponse)
-        //        {
-        //            HttpStatusCode statusCode = response.StatusCode;
-        //            if (statusCode != HttpStatusCode.OK)
-        //            {
-        //                throw new Exception();
-        //            }
-        //        }
-        //    }, cancellationToken);
-        //}
-
-        /*
-        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
-        string mergedCredentials = string.Format("{0}:{1}", "username", "password");
-        byte[] byteCredentials = UTF8Encoding.UTF8.GetBytes(mergedCredentials);
-        string base64Credentials = Convert.ToBase64String(byteCredentials);
-        request.Headers.Add("Authorization", "Basic " + base64Credentials);
-        request.Method = "POST";
-        request.ContentType = "application/xml";
-
-        StreamReader reader = new StreamReader(fileName);
-        string ret = reader.ReadToEnd();
-        reader.Close();
-        string postData = ret;
-        byte[] byteArray = Encoding.UTF8.GetBytes(postData);
-        request.ContentLength = byteArray.Length;
-
-        Stream dataStream = request.GetRequestStream();
-        dataStream.Write(byteArray, 0, byteArray.Length);
-        dataStream.Close();
-
-        HttpWebResponse response = request.GetResponse() as HttpWebResponse;
-        string result = string.Empty;
-        using (StreamReader reader = new StreamReader(response.GetResponseStream()))
-        {
-            result = reader.ReadToEnd();
-        }
-        */ 
-        
         private async Task DeleteAsync(string path, CancellationToken cancellationToken)
         {
             using (HttpResponseMessage response = await this.client.DeleteAsync(path, cancellationToken))

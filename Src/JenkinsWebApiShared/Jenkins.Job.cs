@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
@@ -327,7 +328,8 @@ namespace JenkinsWebApi
         /// <remarks><include file="Comments.xml" path="comments/comment[@id='job']/*"/></remarks>
         public async Task CreateJobAsync(string jobName, string config, CancellationToken cancellationToken)
         {
-            await PostCreateJobAsync($"createItem?name={jobName}", config, cancellationToken);
+            var content = new StringContent(config, Encoding.UTF8, "application/xml");
+            await PostAsync($"createItem?name={jobName}", content, cancellationToken);
         }
         
         /// <summary>
