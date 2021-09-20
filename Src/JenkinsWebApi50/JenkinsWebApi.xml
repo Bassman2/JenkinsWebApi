@@ -101,6 +101,23 @@
             <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
             <returns>Jenkins build data</returns>
         </member>
+        <member name="M:JenkinsWebApi.Jenkins.DeleteBuildAsync(System.String,System.Int32)">
+            <summary>
+            Delete selcted build.
+            </summary>
+            <param name="jobName">Name of the Jenkins job.</param>
+            <param name="buildNum">Number of the Jenkins build.</param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:JenkinsWebApi.Jenkins.DeleteBuildAsync(System.String,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Delete selcted build.
+            </summary>
+            <param name="jobName">Name of the Jenkins job.</param>
+            <param name="buildNum">Number of the Jenkins build.</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
         <member name="M:JenkinsWebApi.Jenkins.GetBuildConsoleOutputAsync(System.String,System.Int32,System.Int32)">
             <summary>
             Get the Console Output text of a build.
@@ -108,7 +125,6 @@
             <param name="jobName">Name of the Jenkins job.</param>
             <param name="buildNum">Number of the Jenkins build.</param>
             <param name="start">Line number to start with. Use 0 to start from begin.</param>
-            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
             <returns>Console Output text.</returns>
         </member>
         <member name="M:JenkinsWebApi.Jenkins.GetBuildConsoleOutputAsync(System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
@@ -2300,7 +2316,13 @@
             Url address of the Jenkins server
             </summary>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:JenkinsWebApi.ObjectModel.JenkinsServer.GetView(System.String)" -->
+        <member name="M:JenkinsWebApi.ObjectModel.JenkinsServer.GetView(System.String)">
+            <summary>
+            Get a view.
+            </summary>
+            <param name="viewName">Name of the view to get.</param>
+            <returns></returns>
+        </member>
         <member name="M:JenkinsWebApi.ObjectModel.JenkinsServer.GetJob(System.String)">
             <summary>
             Get a job.

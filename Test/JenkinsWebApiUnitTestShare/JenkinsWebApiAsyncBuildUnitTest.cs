@@ -81,6 +81,27 @@ namespace JenkinsTest
         }
 
         [TestMethod]
+        public void BuildDeleteTest()
+        {
+            // Arrange
+            JenkinsModelFreeStyleProject freeStyleJob = null;
+            int delBuildNum = 0;
+
+            // Act
+            using (Jenkins jenkins = new Jenkins(this.host, this.login, this.password))
+            {
+                freeStyleJob = jenkins.GetJobAsync<JenkinsModelFreeStyleProject>("FreeStyle").Result;
+                delBuildNum = freeStyleJob.FirstBuild.Number;
+                jenkins.DeleteBuildAsync("FreeStyle", delBuildNum).Wait();
+                freeStyleJob = jenkins.GetJobAsync<JenkinsModelFreeStyleProject>("FreeStyle").Result;
+            }
+
+            // Assert
+            Assert.IsNotNull(freeStyleJob, nameof(freeStyleJob));
+            Assert.IsTrue(delBuildNum < freeStyleJob.FirstBuild.Number);
+        }
+
+        [TestMethod]
         public void BuildConsoleOutputTest()
         {
             // Arrange
@@ -98,6 +119,28 @@ namespace JenkinsTest
             // Assert
             Assert.IsNotNull(consoleOutput, nameof(consoleOutput));
             StringAssert.StartsWith(consoleOutput, "Started by user Tester");
+        }
+
+        [TestMethod]
+        public void BuildSetInformationTest()
+        {
+            // Arrange
+            JenkinsModelFreeStyleBuild freeStyleBuild = null;
+
+            // Act
+            using (Jenkins jenkins = new Jenkins(this.host, this.login, this.password))
+            {
+                freeStyleBuild = jenkins.GetLastBuildAsync<JenkinsModelFreeStyleBuild>("FreeStyle").Result;
+                jenkins.SetBuildInformation("FreeStyle", freeStyleBuild.Number, "Build name", "Build description").Wait();
+                freeStyleBuild = jenkins.GetBuildAsync<JenkinsModelFreeStyleBuild>("FreeStyle", freeStyleBuild.Number).Result;
+                jenkins.SetBuildInformation("FreeStyle", freeStyleBuild.Number, "", "").Wait();
+            }
+
+            // Assert
+            Assert.IsNotNull(freeStyleBuild, nameof(freeStyleBuild));
+
+            Assert.AreEqual("Build name", freeStyleBuild.DisplayName, nameof(freeStyleBuild.DisplayName));
+            Assert.AreEqual("Build description", freeStyleBuild.Description, nameof(freeStyleBuild.Description));
         }
 
         [TestMethod]
@@ -122,26 +165,25 @@ namespace JenkinsTest
             Assert.AreEqual(@"C:\Users\Public", dict["PUBLIC"]);
         }
 
+
         [TestMethod]
-        public void BuildSetInformationTest()
+        public void BuildGraphTest()
         {
             // Arrange
             JenkinsModelFreeStyleBuild freeStyleBuild = null;
+            JenkinsJenkinsciBuildGraph buildGraph = null;
 
             // Act
             using (Jenkins jenkins = new Jenkins(this.host, this.login, this.password))
             {
-                freeStyleBuild = jenkins.GetLastBuildAsync<JenkinsModelFreeStyleBuild>("FreeStyle").Result;
-                jenkins.SetBuildInformation("FreeStyle", freeStyleBuild.Number, "Build name", "Build description").Wait();
-                freeStyleBuild = jenkins.GetBuildAsync<JenkinsModelFreeStyleBuild>("FreeStyle", freeStyleBuild.Number).Result;
-                jenkins.SetBuildInformation("FreeStyle", freeStyleBuild.Number, "", "").Wait();
+                freeStyleBuild = jenkins.GetLastBuildAsync<JenkinsModelFreeStyleBuild>("FreestyleTree").Result;
+
+                buildGraph = jenkins.GetBuildGraph("FreestyleTree", freeStyleBuild.Number).Result;
             }
 
             // Assert
-            Assert.IsNotNull(freeStyleBuild, nameof(freeStyleBuild));
-            
-            Assert.AreEqual("Build name", freeStyleBuild.DisplayName, nameof(freeStyleBuild.DisplayName));
-            Assert.AreEqual("Build description", freeStyleBuild.Description, nameof(freeStyleBuild.Description));
+            Assert.IsNotNull(buildGraph, nameof(buildGraph));
+            Assert.IsNotNull(buildGraph.BuildGraph, nameof(buildGraph.BuildGraph));
         }
     }
 }

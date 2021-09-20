@@ -63,7 +63,7 @@ namespace JenkinsWebApi.ObjectModel
         /// </summary>
         public Uri Url { get { return new Uri(this.modelJenkins.Url); } }
 
-        // <summary>
+        /// <summary>
         /// Get a view.
         /// </summary>
         /// <param name="viewName">Name of the view to get.</param>
