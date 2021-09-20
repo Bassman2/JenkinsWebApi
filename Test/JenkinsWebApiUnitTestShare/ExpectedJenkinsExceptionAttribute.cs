@@ -21,15 +21,16 @@ namespace JenkinsTest
                 e = e.InnerException;
             }
 
-            if (e.GetType() != typeof(JenkinsException))
+            if (e is JenkinsException ex)
+            {
+                if (ex.StatusCode != this.StatusCode)
+                {
+                    Assert.Fail($"ExpectedJenkinsExceptionAttribute failed. Expected status code: <{this.StatusCode}>. Actual status code: <{ex.StatusCode}>. Exception reason: <{ex.Reason}>. Exception message: <{ex.Message}>");
+                }
+            }
+            else
             {
                 Assert.Fail($"ExpectedJenkinsExceptionAttribute failed. Expected exception type: <{typeof(JenkinsException).FullName}>. Actual exception type: <{e.GetType().FullName}>. Exception message: <{e.Message}>");
-            }
-
-            JenkinsException ex = e as JenkinsException;
-            if (ex.StatusCode != this.StatusCode)
-            {
-                Assert.Fail($"ExpectedJenkinsExceptionAttribute failed. Expected status code: <{this.StatusCode}>. Actual status code: <{ex.StatusCode}>. Exception reason: <{ex.Reason}>. Exception message: <{ex.Message}>");
             }
         }
     }

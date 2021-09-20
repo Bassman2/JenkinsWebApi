@@ -11,7 +11,12 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)ExpectedJenkinsExceptionAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JenkinsWebApiAsyncBuildUnitTest.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)JenkinsWebApiAsyncUnitTest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JenkinsWebApiAsyncComputerUnitTest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JenkinsWebApiAsyncReportUnitTest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JenkinsWebApiAsyncUserUnitTest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JenkinsWebApiAsyncViewUnitTest.cs" />
+    <Compile Include="..\JenkinsWebApiUnitTestShare\JenkinsWebApiAsyncSystemUnitTest.cs" />
+    <Compile Include="..\JenkinsWebApiUnitTestShare\JenkinsWebApiAsyncJobUnitTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JenkinsWebApiBaseUnitTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JenkinsWebApiDomUnitTest.cs" />
   </ItemGroup>

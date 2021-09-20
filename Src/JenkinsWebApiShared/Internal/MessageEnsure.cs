@@ -7,8 +7,20 @@ namespace JenkinsWebApi.Internal
     {
         internal static void EnsureSuccess(this HttpResponseMessage response)
         {
-            if (!response.IsSuccessStatusCode && response.StatusCode != HttpStatusCode.Forbidden )
+            if (response.IsSuccessStatusCode)
             {
+                return;
+            }
+            switch (response.StatusCode)
+            {
+            case HttpStatusCode.Forbidden:
+                // ignore, enable/disable job sends forbidden because of link to get without crumb
+                break;
+            case HttpStatusCode.Unauthorized:
+                throw new JenkinsUnauthorizedException(response);
+            case HttpStatusCode.NotFound:
+                throw new JenkinsNotFoundException(response);
+            default:
                 throw new JenkinsException(response);
             }
         }
