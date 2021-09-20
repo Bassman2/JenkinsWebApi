@@ -61,6 +61,8 @@ namespace JenkinsWebApi
             }
             else if (this.list.Any(p => p.Type == JenkinsParameterType.Stream))
             {
+                // multipart/form-data
+
                 MultipartFormDataContent content = new MultipartFormDataContent();
 
                 StringBuilder json = new StringBuilder();
@@ -109,6 +111,8 @@ namespace JenkinsWebApi
             }
             else
             {
+                // application/x-www-form-urlencoded
+
                 List<KeyValuePair<string, string>> param = new List<KeyValuePair<string, string>>();
 
                 StringBuilder json = new StringBuilder();
@@ -146,6 +150,7 @@ namespace JenkinsWebApi
                 param.Add(new KeyValuePair<string, string>("json", json.ToString()));
                 param.Add(new KeyValuePair<string, string>("Submit", "Build"));
 
+                // application/x-www-form-urlencoded
                 return new FormUrlEncodedContent(param);
             }
         }
@@ -217,5 +222,7 @@ namespace JenkinsWebApi
             /// </summary>
             Stream
         }
+
+        
     }
 }

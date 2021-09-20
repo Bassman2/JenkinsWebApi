@@ -11,12 +11,12 @@ using System.Xml;
 namespace JenkinsTest
 {
     [TestClass]
-    public class JenkinsWebApiAsyncUnitTest 
+    public class JenkinsWebApiAsyncUnitTest : JenkinsWebApiBaseUnitTest
     {
-        protected readonly Uri host = new Uri("http://tiny:8080");
-        protected readonly string login = "Tester";
-        protected readonly string password = "tester";
-        protected readonly string token = "11096e7fa3b687e849ee95908b869058bc";
+        //protected readonly Uri host = new Uri("http://tiny:8080");
+        //protected readonly string login = "Tester";
+        //protected readonly string password = "tester";
+        //protected readonly string token = "11096e7fa3b687e849ee95908b869058bc";
 
         [TestMethod]
         public void LoginPasswordTest()
@@ -732,117 +732,7 @@ namespace JenkinsTest
             //Assert.IsNotNull(organizationFolderJob);
         }
 
-        [TestMethod]
-        public void BuildTest()
-        {
-            // Arrange
-            JenkinsModelFreeStyleBuild freeStyleBuild = null;
-            //JenkinsBuildExternal externalBuild = null;
-            JenkinsMatrixMatrixBuild matrixBuild = null;
-            JenkinsJenkinsciWorkflowRun workflowBuild = null;
-            //JenkinsBuildWorkflowMultiBranch multiBranchBuild = null;
-            //JenkinsBuildFolder folderBuild = null;
-            //JenkinsBuildOrganizationFolder organizationFolderBuild = null;
-
-            // Act
-            using (Jenkins jenkins = new Jenkins(this.host, this.login, this.password))
-            {
-                freeStyleBuild = jenkins.GetLastBuildAsync("Freestyle Test Pure").Result as JenkinsModelFreeStyleBuild;
-                //externalBuild = jenkins.GetBuildAsync("External Job", 1).Result as JenkinsBuildExternal;
-                matrixBuild = jenkins.GetBuildAsync("Multiconfiguration", 1).Result as JenkinsMatrixMatrixBuild;
-                workflowBuild = jenkins.GetBuildAsync("Pipeline", 1).Result as JenkinsJenkinsciWorkflowRun;
-                //multiBranchBuild = jenkins.GetBuildAsync("Multibranch", 1).Result as JenkinsBuildWorkflowMultiBranch;
-                //folderBuild = jenkins.GetBuildAsync("Folder", 1).Result as JenkinsBuildFolder;
-                //organizationFolderBuild = jenkins.GetBuildAsync("GitHub", 1).Result as JenkinsBuildOrganizationFolder;
-            }
-
-            // Assert
-            Assert.IsNotNull(freeStyleBuild);
-            //Assert.IsNotNull(externalBuild);
-            Assert.IsNotNull(matrixBuild);
-            Assert.IsNotNull(workflowBuild);
-            //Assert.IsNotNull(multiBranchBuild);
-            //Assert.IsNotNull(folderBuild);
-            //Assert.IsNotNull(organizationFolderBuild);
-                        
-        }
-
-        [TestMethod]
-        public void BuildGenericTest()
-        {
-            // Arrange
-            JenkinsModelFreeStyleBuild freeStyleBuild = null;
-            //JenkinsBuildExternal externalBuild = null;
-            JenkinsMatrixMatrixBuild matrixBuild = null;
-            JenkinsJenkinsciWorkflowRun workflowBuild = null;
-            //JenkinsBuildWorkflowMultiBranch multiBranchBuild = null;
-            //JenkinsBuildFolder folderBuild = null;
-            //JenkinsBuildOrganizationFolder organizationFolderBuild = null;
-
-            // Act
-            using (Jenkins jenkins = new Jenkins(this.host, this.login, this.password))
-            {
-                freeStyleBuild = jenkins.GetLastBuildAsync<JenkinsModelFreeStyleBuild>("Freestyle Test Pure").Result;
-                //externalBuild = jenkins.GetBuildAsync("External Job", 1).Result as JenkinsBuildExternal;
-                matrixBuild = jenkins.GetBuildAsync<JenkinsMatrixMatrixBuild>("Multiconfiguration", 1).Result;
-                workflowBuild = jenkins.GetBuildAsync<JenkinsJenkinsciWorkflowRun>("Pipeline", 1).Result;
-                //multiBranchBuild = jenkins.GetBuildAsync("Multibranch", 1).Result as JenkinsBuildWorkflowMultiBranch;
-                //folderBuild = jenkins.GetBuildAsync("Folder", 1).Result as JenkinsBuildFolder;
-                //organizationFolderBuild = jenkins.GetBuildAsync("GitHub", 1).Result as JenkinsBuildOrganizationFolder;
-            }
-
-            // Assert
-            Assert.IsNotNull(freeStyleBuild);
-            //Assert.IsNotNull(externalBuild);
-            Assert.IsNotNull(matrixBuild);
-            //Assert.IsNotNull(workflowBuild);
-            //Assert.IsNotNull(multiBranchBuild);
-            //Assert.IsNotNull(folderBuild);
-            //Assert.IsNotNull(organizationFolderBuild);
-
-        }
-
-        [TestMethod]
-        public void BuildConsoleOutputTest()
-        {
-            // Arrange
-            JenkinsModelFreeStyleBuild freeStyleBuild = null;
-            string consoleOutput = null;
-
-            // Act
-            using (Jenkins jenkins = new Jenkins(this.host, this.login, this.password))
-            {
-                freeStyleBuild = jenkins.GetLastBuildAsync<JenkinsModelFreeStyleBuild>("FreeStyle").Result;
-
-                consoleOutput = jenkins.GetBuildConsoleOutputAsync("FreeStyle", freeStyleBuild.Number, 0).Result;
-            }
-
-            // Assert
-            Assert.IsNotNull(consoleOutput, nameof(consoleOutput));
-            StringAssert.StartsWith(consoleOutput, "Started by user Tester");  
-        }
-
-        [TestMethod]
-        public void BuildEnvInjectVarListTest()
-        {
-            // Arrange
-            JenkinsModelFreeStyleBuild freeStyleBuild = null;
-            JenkinsJenkinsciEnvInjectVarList varList = null;
-
-            // Act
-            using (Jenkins jenkins = new Jenkins(this.host, this.login, this.password))
-            {
-                freeStyleBuild = jenkins.GetLastBuildAsync<JenkinsModelFreeStyleBuild>("FreeStyle").Result;
-
-                varList = jenkins.GetEnvInjectVarListAsync("FreeStyle", freeStyleBuild.Number).Result;
-            }
-
-            // Assert
-            Assert.IsNotNull(varList, nameof(varList));
-            var dict = varList.EnvMapDict;
-            Assert.AreEqual("FreeStyle", dict["JOB_NAME"]);
-            Assert.AreEqual(@"C:\Users\Public", dict["PUBLIC"]);
-        }
+        
 
 
         //[TestMethod]

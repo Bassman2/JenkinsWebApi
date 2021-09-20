@@ -6,11 +6,13 @@
     <SharedGUID>641dbfca-95fe-4b32-8c2c-f18b5b7dd01e</SharedGUID>
   </PropertyGroup>
   <PropertyGroup Label="Configuration">
-    <Import_RootNamespace>JenkinsWebApiUnitTestShare</Import_RootNamespace>
+    <Import_RootNamespace>JenkinsTest</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)ExpectedJenkinsExceptionAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JenkinsWebApiAsyncBuildUnitTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JenkinsWebApiAsyncUnitTest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JenkinsWebApiBaseUnitTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JenkinsWebApiDomUnitTest.cs" />
   </ItemGroup>
 </Project>

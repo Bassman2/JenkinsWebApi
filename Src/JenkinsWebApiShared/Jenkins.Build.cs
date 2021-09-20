@@ -1,6 +1,7 @@
 ﻿using JenkinsWebApi.Internal;
 using JenkinsWebApi.Model;
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -161,5 +162,46 @@ namespace JenkinsWebApi
             return str;
         }
 
+        /// <summary>
+        /// Set name and description for a build
+        /// </summary>
+        /// <param name="jobName">Name of the Jenkins job.</param>
+        /// <param name="buildNum">Number of the Jenkins build.</param>
+        /// <param name="displayName">Build display name to set.</param>
+        /// <param name="description">Build description to set.</param>
+        /// <returns>The task object representing the asynchronous operation.</returns>
+        public async Task SetBuildInformation(string jobName, int buildNum, string displayName, string description)
+        {
+            await SetBuildInformation(jobName, buildNum, displayName, description, CancellationToken.None);
+        }
+
+        /// <summary>
+        /// Set name and description for a build
+        /// </summary>
+        /// <param name="jobName">Name of the Jenkins job.</param>
+        /// <param name="buildNum">Number of the Jenkins build.</param>
+        /// <param name="displayName">Build display name to set.</param>
+        /// <param name="description">Build description to set.</param>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>The task object representing the asynchronous operation.</returns>
+        public async Task SetBuildInformation(string jobName, int buildNum, string displayName, string description, CancellationToken cancellationToken)
+        {
+            if (string.IsNullOrEmpty(jobName))
+            {
+                throw new ArgumentException(nameof(jobName));
+            }
+
+            if (buildNum < 1)
+            {
+                throw new ArgumentOutOfRangeException(nameof(buildNum));
+            }
+
+            var content = new Dictionary<string, string>();
+            content.Add("displayName", displayName);
+            content.Add("description", description);
+            content.Add("core:apply", "true");
+            content.Add("json", content.ToJson());  // without json bad request
+            await PostAsync($"/job/{jobName}/{buildNum}/configSubmit", content, cancellationToken);
+        }
     }
 }

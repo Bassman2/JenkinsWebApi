@@ -159,6 +159,9 @@ namespace JenkinsWebApi
             }
         }
 
+        // StringContent for application/xml, ...
+        // MultipartFormDataContent for multipart/form-data
+        // FormUrlEncodedContent for application/x-www-form-urlencoded
         private async Task PostAsync(string path, HttpContent content, CancellationToken cancellationToken)
         {
             using (HttpResponseMessage response = await this.client.PostAsync(path, content, cancellationToken))

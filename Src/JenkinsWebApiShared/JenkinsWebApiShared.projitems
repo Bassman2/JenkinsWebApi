@@ -10,6 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Internal\JenkinsDeserializer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\JsonConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internal\PostRunRes.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internal\SerializableClassAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Jenkins.Client.cs" />
