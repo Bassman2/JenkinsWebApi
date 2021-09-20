@@ -1677,6 +1677,326 @@
             <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
             <returns>Returns view data.</returns>
         </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsJenkinsciEnvInjectVarList.EnvMapDict">
+            <summary>
+            Environment variable list as dictionary.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsJenkinsciEnvInjectVarList.Class">
+            <summary>
+            Jenkins Java class name.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsCloudbeesCredentialsStoreAction.Class">
+            <summary>
+            Jenkins Java class name.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsCloudbeesViewCredentialsAction.Class">
+            <summary>
+            Jenkins Java class name.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsJenkinsciBuildGraph.Class">
+            <summary>
+            Jenkins Java class name.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsTikalMultiJobBuildSubBuild.Class">
+            <summary>
+            Jenkins Java class name.
+            </summary>
+        </member>
+        <member name="T:JenkinsWebApi.Model.JenkinsInstance">
+            <summary>
+            Jenkins server instance information.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsInstance.Version">
+            <summary>
+            Version of the Jenkins server.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsInstance.ServerId">
+            <summary>
+            Id of the Jenkins server.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsInstance.Url">
+            <summary>
+            URL of the Jenkins server.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsInstance.SlavePort">
+            <summary>
+            Port to connect the Jenkins server.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsInstance.Address">
+            <summary>
+            IP of the Jenkins server
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsBranchBranchSource.Class">
+            <summary>
+            Jenkins Java class name.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsMavenReportersMavenAggregatedArtifactRecord.Class">
+            <summary>
+            Jenkins Java class name.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsMavenReportersMavenArtifact.Class">
+            <summary>
+            Jenkins Java class name.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsMavenReportersMavenArtifactRecord.Class">
+            <summary>
+            Jenkins Java class name.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsModelActionable.Class">
+            <summary>
+            Jenkins Java class name.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsModelComputer.MonitorData">
+            <summary>
+            Access to moitors.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsModelComputerSet.Class">
+            <summary>
+            Jenkins Java class name.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsModelExecutor.Class">
+            <summary>
+            Jenkins Java class name.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsModelFingerprint.Class">
+            <summary>
+            Jenkins Java class name.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsModelFingerprintBuildPtr.Class">
+            <summary>
+            Jenkins Java class name.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsModelFingerprintRange.Class">
+            <summary>
+            Jenkins Java class name.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsModelFingerprintRangeItem.Class">
+            <summary>
+            Jenkins Java class name.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsModelFingerprintRangeSet.Class">
+            <summary>
+            Jenkins Java class name.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsModelHealthReport.Class">
+            <summary>
+            Jenkins Java class name.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsModelJobProperty.Class">
+            <summary>
+            Jenkins Java class name.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsModelLabelsLabelAtomProperty.Class">
+            <summary>
+            Jenkins Java class name.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsModelLoadStatistics.Class">
+            <summary>
+            Jenkins Java class name.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsModelMultiStageTimeSeries.Class">
+            <summary>
+            Jenkins Java class name.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsModelNode.Class">
+            <summary>
+            Jenkins Java class name.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsModelQueue.Class">
+            <summary>
+            Jenkins Java class name.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsModelQueueStubItem.Class">
+            <summary>
+            Jenkins Java class name.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsModelQueueStubTask.Class">
+            <summary>
+            Jenkins Java class name.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsModelRunArtifact.Class">
+            <summary>
+            Jenkins Java class name.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsModelTimeSeries.Class">
+            <summary>
+            Jenkins Java class name.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsModelUser.Class">
+            <summary>
+            Jenkins Java class name.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsModelUserProperty.Class">
+            <summary>
+            Jenkins Java class name.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsModelView.Class">
+            <summary>
+            Jenkins Java class name.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsModelViewAsynchPeoplePeople.Class">
+            <summary>
+            Jenkins Java class name.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsModelViewPeople.Class">
+            <summary>
+            Jenkins Java class name.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsModelViewUserInfo.Class">
+            <summary>
+            Jenkins Java class name.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsPluginManager.Class">
+            <summary>
+            Jenkins Java class name.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsPluginWrapper.Class">
+            <summary>
+            Jenkins Java class name.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsPluginWrapperDependency.Class">
+            <summary>
+            Jenkins Java class name.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsScmApiSCMSource.Class">
+            <summary>
+            Jenkins Java class name.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsScmChangeLogSet.Class">
+            <summary>
+            Jenkins Java class name.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsScmRepositoryBrowser.Class">
+            <summary>
+            Jenkins Java class name.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsScmSCM.Class">
+            <summary>
+            Jenkins Java class name.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsSecurityCsrfCrumbIssuer.Class">
+            <summary>
+            Jenkins Java class name.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsSlavesOfflineCause.Class">
+            <summary>
+            Jenkins Java class name.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsTasksJunitSuiteResult.Class">
+            <summary>
+            Jenkins Java class name.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsTasksJunitTestAction.Class">
+            <summary>
+            Jenkins Java class name.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsTasksJunitTestObject.Class">
+            <summary>
+            Jenkins Java class name.
+            </summary>
+        </member>
+        <member name="T:JenkinsWebApi.Model.JenkinsComputerExt">
+            <summary>
+            Class for extendet computer info data.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsComputerExt.Description">
+            <summary>
+            Description text of a node
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsComputerExt.Label">
+            <summary>
+            Label list of a node.
+            </summary>
+        </member>
+        <member name="T:JenkinsWebApi.Model.JenkinsExecutable">
+            <summary>
+            Job executable
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsExecutable.Number">
+            <summary>
+            Build number
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsExecutable.Url">
+            <summary>
+            Build URL
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.Model.JenkinsExecutable.Class">
+            <summary>
+            Jenkins Java class name.
+            </summary>
+        </member>
+        <member name="T:JenkinsWebApi.Model.JenkinsResult">
+            <summary>
+            Jenkins Result
+            </summary>
+        </member>
+        <member name="F:JenkinsWebApi.Model.JenkinsResult.Success">
+            <summary>
+            Success
+            </summary>
+        </member>
+        <member name="F:JenkinsWebApi.Model.JenkinsResult.Failure">
+            <summary>
+            Failure
+            </summary>
+        </member>
         <member name="T:JenkinsWebApi.ObjectModel.JenkinsBuild">
             <summary>
             
@@ -2244,321 +2564,6 @@
         <member name="F:JenkinsWebApi.JenkinsRunStatus.Canceled">
             <summary>
             The build has been canceled.
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.Model.JenkinsCloudbeesCredentialsStoreAction.Class">
-            <summary>
-            Jenkins Java class name.
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.Model.JenkinsCloudbeesViewCredentialsAction.Class">
-            <summary>
-            Jenkins Java class name.
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.Model.JenkinsJenkinsciBuildGraph.Class">
-            <summary>
-            Jenkins Java class name.
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.Model.JenkinsJenkinsciEnvInjectVarList.Class">
-            <summary>
-            Jenkins Java class name.
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.Model.JenkinsTikalMultiJobBuildSubBuild.Class">
-            <summary>
-            Jenkins Java class name.
-            </summary>
-        </member>
-        <member name="T:JenkinsWebApi.Model.JenkinsInstance">
-            <summary>
-            Jenkins server instance information.
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.Model.JenkinsInstance.Version">
-            <summary>
-            Version of the Jenkins server.
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.Model.JenkinsInstance.ServerId">
-            <summary>
-            Id of the Jenkins server.
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.Model.JenkinsInstance.Url">
-            <summary>
-            URL of the Jenkins server.
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.Model.JenkinsInstance.SlavePort">
-            <summary>
-            Port to connect the Jenkins server.
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.Model.JenkinsInstance.Address">
-            <summary>
-            IP of the Jenkins server
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.Model.JenkinsBranchBranchSource.Class">
-            <summary>
-            Jenkins Java class name.
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.Model.JenkinsMavenReportersMavenAggregatedArtifactRecord.Class">
-            <summary>
-            Jenkins Java class name.
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.Model.JenkinsMavenReportersMavenArtifact.Class">
-            <summary>
-            Jenkins Java class name.
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.Model.JenkinsMavenReportersMavenArtifactRecord.Class">
-            <summary>
-            Jenkins Java class name.
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.Model.JenkinsModelActionable.Class">
-            <summary>
-            Jenkins Java class name.
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.Model.JenkinsModelComputer.MonitorData">
-            <summary>
-            Access to moitors.
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.Model.JenkinsModelComputerSet.Class">
-            <summary>
-            Jenkins Java class name.
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.Model.JenkinsModelExecutor.Class">
-            <summary>
-            Jenkins Java class name.
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.Model.JenkinsModelFingerprint.Class">
-            <summary>
-            Jenkins Java class name.
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.Model.JenkinsModelFingerprintBuildPtr.Class">
-            <summary>
-            Jenkins Java class name.
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.Model.JenkinsModelFingerprintRange.Class">
-            <summary>
-            Jenkins Java class name.
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.Model.JenkinsModelFingerprintRangeItem.Class">
-            <summary>
-            Jenkins Java class name.
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.Model.JenkinsModelFingerprintRangeSet.Class">
-            <summary>
-            Jenkins Java class name.
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.Model.JenkinsModelHealthReport.Class">
-            <summary>
-            Jenkins Java class name.
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.Model.JenkinsModelJobProperty.Class">
-            <summary>
-            Jenkins Java class name.
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.Model.JenkinsModelLabelsLabelAtomProperty.Class">
-            <summary>
-            Jenkins Java class name.
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.Model.JenkinsModelLoadStatistics.Class">
-            <summary>
-            Jenkins Java class name.
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.Model.JenkinsModelMultiStageTimeSeries.Class">
-            <summary>
-            Jenkins Java class name.
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.Model.JenkinsModelNode.Class">
-            <summary>
-            Jenkins Java class name.
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.Model.JenkinsModelQueue.Class">
-            <summary>
-            Jenkins Java class name.
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.Model.JenkinsModelQueueStubItem.Class">
-            <summary>
-            Jenkins Java class name.
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.Model.JenkinsModelQueueStubTask.Class">
-            <summary>
-            Jenkins Java class name.
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.Model.JenkinsModelRunArtifact.Class">
-            <summary>
-            Jenkins Java class name.
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.Model.JenkinsModelTimeSeries.Class">
-            <summary>
-            Jenkins Java class name.
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.Model.JenkinsModelUser.Class">
-            <summary>
-            Jenkins Java class name.
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.Model.JenkinsModelUserProperty.Class">
-            <summary>
-            Jenkins Java class name.
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.Model.JenkinsModelView.Class">
-            <summary>
-            Jenkins Java class name.
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.Model.JenkinsModelViewAsynchPeoplePeople.Class">
-            <summary>
-            Jenkins Java class name.
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.Model.JenkinsModelViewPeople.Class">
-            <summary>
-            Jenkins Java class name.
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.Model.JenkinsModelViewUserInfo.Class">
-            <summary>
-            Jenkins Java class name.
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.Model.JenkinsPluginManager.Class">
-            <summary>
-            Jenkins Java class name.
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.Model.JenkinsPluginWrapper.Class">
-            <summary>
-            Jenkins Java class name.
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.Model.JenkinsPluginWrapperDependency.Class">
-            <summary>
-            Jenkins Java class name.
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.Model.JenkinsScmApiSCMSource.Class">
-            <summary>
-            Jenkins Java class name.
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.Model.JenkinsScmChangeLogSet.Class">
-            <summary>
-            Jenkins Java class name.
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.Model.JenkinsScmRepositoryBrowser.Class">
-            <summary>
-            Jenkins Java class name.
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.Model.JenkinsScmSCM.Class">
-            <summary>
-            Jenkins Java class name.
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.Model.JenkinsSecurityCsrfCrumbIssuer.Class">
-            <summary>
-            Jenkins Java class name.
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.Model.JenkinsSlavesOfflineCause.Class">
-            <summary>
-            Jenkins Java class name.
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.Model.JenkinsTasksJunitSuiteResult.Class">
-            <summary>
-            Jenkins Java class name.
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.Model.JenkinsTasksJunitTestAction.Class">
-            <summary>
-            Jenkins Java class name.
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.Model.JenkinsTasksJunitTestObject.Class">
-            <summary>
-            Jenkins Java class name.
-            </summary>
-        </member>
-        <member name="T:JenkinsWebApi.Model.JenkinsComputerExt">
-            <summary>
-            Class for extendet computer info data.
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.Model.JenkinsComputerExt.Description">
-            <summary>
-            Description text of a node
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.Model.JenkinsComputerExt.Label">
-            <summary>
-            Label list of a node.
-            </summary>
-        </member>
-        <member name="T:JenkinsWebApi.Model.JenkinsExecutable">
-            <summary>
-            Job executable
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.Model.JenkinsExecutable.Number">
-            <summary>
-            Build number
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.Model.JenkinsExecutable.Url">
-            <summary>
-            Build URL
-            </summary>
-        </member>
-        <member name="P:JenkinsWebApi.Model.JenkinsExecutable.Class">
-            <summary>
-            Jenkins Java class name.
-            </summary>
-        </member>
-        <member name="T:JenkinsWebApi.Model.JenkinsResult">
-            <summary>
-            Jenkins Result
-            </summary>
-        </member>
-        <member name="F:JenkinsWebApi.Model.JenkinsResult.Success">
-            <summary>
-            Success
-            </summary>
-        </member>
-        <member name="F:JenkinsWebApi.Model.JenkinsResult.Failure">
-            <summary>
-            Failure
             </summary>
         </member>
     </members>

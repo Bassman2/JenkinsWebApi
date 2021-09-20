@@ -28,8 +28,11 @@
                     "job" => "JenkinsModelJob",
                     "task" => "object",
                     "action" => "object",
+                    "envMap" => "object",     // Use as XmlNode[] does not work. In this case only the first entry is available.  "System.Xml.XmlNode[]",
+
+
                     //"result" => "JenkinsResult",
-                    
+
                     "result" => className switch
                     {
                         "hudson.model.Run" => "JenkinsResult",

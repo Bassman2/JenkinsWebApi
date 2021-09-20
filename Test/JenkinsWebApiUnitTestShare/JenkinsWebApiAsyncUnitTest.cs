@@ -822,6 +822,29 @@ namespace JenkinsTest
             StringAssert.StartsWith(consoleOutput, "Started by user Tester");  
         }
 
+        [TestMethod]
+        public void BuildEnvInjectVarListTest()
+        {
+            // Arrange
+            JenkinsModelFreeStyleBuild freeStyleBuild = null;
+            JenkinsJenkinsciEnvInjectVarList varList = null;
+
+            // Act
+            using (Jenkins jenkins = new Jenkins(this.host, this.login, this.password))
+            {
+                freeStyleBuild = jenkins.GetLastBuildAsync<JenkinsModelFreeStyleBuild>("FreeStyle").Result;
+
+                varList = jenkins.GetEnvInjectVarListAsync("FreeStyle", freeStyleBuild.Number).Result;
+            }
+
+            // Assert
+            Assert.IsNotNull(varList, nameof(varList));
+            var dict = varList.EnvMapDict;
+            Assert.AreEqual("FreeStyle", dict["JOB_NAME"]);
+            Assert.AreEqual(@"C:\Users\Public", dict["PUBLIC"]);
+        }
+
+
         //[TestMethod]
         //public void RunTestXXXXX()
         //{
