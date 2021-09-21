@@ -41,7 +41,7 @@ namespace JenkinsTest
         }
 
         [TestMethod]
-        [ExpectedJenkinsException(HttpStatusCode.Unauthorized)]
+        [ExpectedAggregateException(typeof(JenkinsUnauthorizedException))]
         public void LoginFailedTest()
         {
             // Arrange

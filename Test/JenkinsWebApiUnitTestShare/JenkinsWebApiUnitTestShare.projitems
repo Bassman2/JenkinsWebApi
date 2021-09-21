@@ -9,6 +9,7 @@
     <Import_RootNamespace>JenkinsTest</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)ExpectedAggregateExceptionAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ExpectedJenkinsExceptionAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JenkinsWebApiAsyncBuildUnitTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JenkinsWebApiAsyncComputerUnitTest.cs" />

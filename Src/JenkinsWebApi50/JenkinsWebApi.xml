@@ -2272,6 +2272,11 @@
             
             </summary>
         </member>
+        <member name="T:JenkinsWebApi.ObjectModel.JenkinsServer">
+            <summary>
+            Main class of the Jenkins server Object Model
+            </summary>
+        </member>
         <member name="M:JenkinsWebApi.ObjectModel.JenkinsServer.#ctor(JenkinsWebApi.Jenkins)">
             <summary>
             Constructor
@@ -2306,6 +2311,11 @@
             <param name="login">Login for the Jenkins server.</param>
             <param name="passwordOrToken">Password or API token for the Jenkins server.</param>
         </member>
+        <member name="M:JenkinsWebApi.ObjectModel.JenkinsServer.Dispose">
+            <summary>
+            Release allocated resources.
+            </summary>
+        </member>
         <member name="P:JenkinsWebApi.ObjectModel.JenkinsServer.Description">
             <summary>
             Description of the Jenkins server
@@ -2329,6 +2339,11 @@
             </summary>
             <param name="jobName">>Name of the job to get.</param>
             <returns></returns>
+        </member>
+        <member name="M:JenkinsWebApi.ObjectModel.JenkinsServer.Update">
+            <summary>
+            Reload server properties.
+            </summary>
         </member>
         <member name="T:JenkinsWebApi.ObjectModel.JenkinsView">
             <summary>

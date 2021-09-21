@@ -6,7 +6,10 @@ using System.Text;
 
 namespace JenkinsWebApi.ObjectModel
 {
-    public class JenkinsServer
+    /// <summary>
+    /// Main class of the Jenkins server Object Model
+    /// </summary>
+    public sealed class JenkinsServer : IDisposable
     {
         private readonly Jenkins jenkins;
         private JenkinsModelJenkins modelJenkins;
@@ -25,14 +28,14 @@ namespace JenkinsWebApi.ObjectModel
         /// Constructor
         /// </summary>
         /// <param name="host">Host URL of the Jenkins server.</param>
-        public JenkinsServer(string host) : this(new Jenkins(host)) 
+        public JenkinsServer(string host) : this(new Uri(host), null, null) 
         { }
 
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="host">Host URL of the Jenkins server.</param>
-        public JenkinsServer(Uri host) : this(new Jenkins(host))
+        public JenkinsServer(Uri host) : this(host, null, null)
         { }
 
         /// <summary>
@@ -41,7 +44,7 @@ namespace JenkinsWebApi.ObjectModel
         /// <param name="host">Host URL of the Jenkins server.</param>
         /// <param name="login">Login for the Jenkins server.</param>
         /// <param name="passwordOrToken">Password or API token for the Jenkins server</param>
-        public JenkinsServer(string host, string login, string passwordOrToken) : this(new Jenkins(host, login, passwordOrToken))
+        public JenkinsServer(string host, string login, string passwordOrToken) : this(new Uri(host), login, passwordOrToken)
         { }
 
         /// <summary>
@@ -50,8 +53,26 @@ namespace JenkinsWebApi.ObjectModel
         /// <param name="host">Host URL of the Jenkins server.</param>
         /// <param name="login">Login for the Jenkins server.</param>
         /// <param name="passwordOrToken">Password or API token for the Jenkins server.</param>
-        public JenkinsServer(Uri host, string login, string passwordOrToken) : this(new Jenkins(host, login, passwordOrToken))
-        { }
+        public JenkinsServer(Uri host, string login, string passwordOrToken)
+        { 
+            try
+            {
+                this.jenkins = new Jenkins(host, login, passwordOrToken);
+                Update();
+            }
+            catch (AggregateException ex)
+            {
+                throw ex.InnerException;
+            }
+        }
+
+        /// <summary>
+        /// Release allocated resources.
+        /// </summary>
+        public void Dispose()
+        {
+            this.jenkins?.Dispose();
+        }
 
         /// <summary>
         /// Description of the Jenkins server
@@ -83,9 +104,14 @@ namespace JenkinsWebApi.ObjectModel
             return new JenkinsJob(this.jenkins, jobName);
         }
 
+        /// <summary>
+        /// Reload server properties.
+        /// </summary>
         public void Update()
         {
             this.modelJenkins = this.jenkins.GetServerAsync().Result;
         }
+
+        
     }
 }

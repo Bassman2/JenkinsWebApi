@@ -56,10 +56,19 @@ namespace JenkinsWebApi
             if (!string.IsNullOrEmpty(login) && !string.IsNullOrEmpty(passwordOrToken))
             {
                 this.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.ASCII.GetBytes($"{login}:{passwordOrToken}")));
-            }
 
-            // set crumb
-            Crumb();
+                Crumb();
+            }
+            else
+            {
+                // ignore Unauthorized for later login
+                try
+                {
+                    Crumb();
+                }
+                catch (JenkinsUnauthorizedException)
+                { }
+            }
         }
 
         /// <summary>
@@ -92,15 +101,15 @@ namespace JenkinsWebApi
         {
             // only on newer Jenkins versions
             // handle CSRF Protection
-            try
-            {
+            //try
+            //{
                 JenkinsSecurityCsrfDefaultCrumbIssuer crumb = GetApiAsync<JenkinsSecurityCsrfDefaultCrumbIssuer>("crumbIssuer", CancellationToken.None).Result;
                 this.client.DefaultRequestHeaders.Add(crumb.CrumbRequestField, crumb.Crumb);
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    Debug.WriteLine(ex.Message);
+            //}
         }
 
         private async Task<T> GetApiAsync<T>(string path, CancellationToken cancellationToken) where T : class
