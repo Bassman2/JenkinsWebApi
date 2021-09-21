@@ -1,7 +1,9 @@
-﻿using JenkinsWebApi.Model;
+﻿using JenkinsWebApi.Internal;
+using JenkinsWebApi.Model;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Text;
 
 namespace JenkinsWebApi.ObjectModel
@@ -55,15 +57,8 @@ namespace JenkinsWebApi.ObjectModel
         /// <param name="passwordOrToken">Password or API token for the Jenkins server.</param>
         public JenkinsServer(Uri host, string login, string passwordOrToken)
         { 
-            try
-            {
-                this.jenkins = new Jenkins(host, login, passwordOrToken);
-                Update();
-            }
-            catch (AggregateException ex)
-            {
-                throw ex.InnerException;
-            }
+            this.jenkins = JenkinsRun.Run(() => new Jenkins(host, login, passwordOrToken));
+            Update();
         }
 
         /// <summary>
@@ -83,6 +78,22 @@ namespace JenkinsWebApi.ObjectModel
         /// Url address of the Jenkins server
         /// </summary>
         public Uri Url { get { return new Uri(this.modelJenkins.Url); } }
+
+        /// <summary>
+        /// Primary view of the Jenkins server.
+        /// </summary>
+        public JenkinsView PrimaryView { get { return new JenkinsView(this.jenkins, this.modelJenkins.PrimaryView); } }
+
+        /// <summary>
+        /// Get all global views.
+        /// </summary>
+        public IEnumerable<JenkinsView> Views { get { return this.modelJenkins.Views.Select(v => new JenkinsView(this.jenkins, v)); } }
+
+        /// <summary>
+        /// Get all jobs.
+        /// </summary>
+        public IEnumerable<JenkinsJob> Jobs { get { return this.modelJenkins.Jobs.Select(j => new JenkinsJob(this.jenkins, j)); } }
+
 
         /// <summary>
         /// Get a view.
@@ -109,7 +120,7 @@ namespace JenkinsWebApi.ObjectModel
         /// </summary>
         public void Update()
         {
-            this.modelJenkins = this.jenkins.GetServerAsync().Result;
+            JenkinsRun.Run(() => this.modelJenkins = this.jenkins.GetServerAsync().Result);
         }
 
         

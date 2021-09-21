@@ -1,4 +1,5 @@
-﻿using JenkinsWebApi.Model;
+﻿using JenkinsWebApi.Internal;
+using JenkinsWebApi.Model;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -15,6 +16,7 @@ namespace JenkinsWebApi.ObjectModel
     {
         private readonly Jenkins jenkins;
         private JenkinsModelJob modelJob;
+        private bool isCompleteLoaded;
 
         private CancellationTokenSource token = null;
         
@@ -23,10 +25,19 @@ namespace JenkinsWebApi.ObjectModel
         /// </summary>
         public event EventHandler<JenkinsRunProgress> RunProgress;
 
+        internal JenkinsJob(Jenkins jenkins, JenkinsModelJob modelJob)
+        {
+            this.jenkins = jenkins;
+            this.modelJob = modelJob;
+            this.isCompleteLoaded = false;
+
+        }
+
         internal JenkinsJob(Jenkins jenkins, string jobName)
         {
             this.jenkins = jenkins;
-            this.modelJob = jenkins.GetJobAsync<JenkinsModelJob>(jobName).Result;
+            this.modelJob = JenkinsRun.Run(() => jenkins.GetJobAsync<JenkinsModelJob>(jobName).Result);
+            this.isCompleteLoaded = true;
         }
 
         #region Properties
@@ -36,27 +47,27 @@ namespace JenkinsWebApi.ObjectModel
         /// <summary>
         /// 
         /// </summary>
-        public string Description { get { return this.modelJob.Description; } }
+        public string Description { get { CheckUpdate(); return this.modelJob.Description; } }
 
         /// <summary>
         /// 
         /// </summary>
-        public string DisplayName { get { return this.modelJob.DisplayName; } }
+        public string DisplayName { get { CheckUpdate(); return this.modelJob.DisplayName; } }
 
         /// <summary>
         /// 
         /// </summary>
-        public string DisplayNameOrNull { get { return this.modelJob.DisplayNameOrNull; } }
+        public string DisplayNameOrNull { get { CheckUpdate(); return this.modelJob.DisplayNameOrNull; } }
 
         /// <summary>
         /// 
         /// </summary>
-        public string FullDisplayName { get { return this.modelJob.FullDisplayName; } }
+        public string FullDisplayName { get { CheckUpdate(); return this.modelJob.FullDisplayName; } }
 
         /// <summary>
         /// 
         /// </summary>
-        public string FullName { get { return this.modelJob.FullName; } }
+        public string FullName { get { CheckUpdate(); return this.modelJob.FullName; } }
 
         /// <summary>
         /// 
@@ -74,70 +85,70 @@ namespace JenkinsWebApi.ObjectModel
         /// <summary>
         /// 
         /// </summary>
-        public bool IsBuildable { get { return this.modelJob.IsBuildable; } }
+        public bool IsBuildable { get { CheckUpdate(); return this.modelJob.IsBuildable; } }
 
         /// <summary>
         /// 
         /// </summary>
-        public JenkinsBuild FirstBuild { get { return new JenkinsBuild(this.jenkins, this, this.modelJob.FirstBuild); } }
+        public JenkinsBuild FirstBuild { get { CheckUpdate(); return new JenkinsBuild(this.jenkins, this, this.modelJob.FirstBuild); } }
 
         /// <summary>
         /// 
         /// </summary>
-        public bool IsInQueue { get { return this.modelJob.IsInQueue; } }
+        public bool IsInQueue { get { CheckUpdate(); return this.modelJob.IsInQueue; } }
 
         /// <summary>
         /// 
         /// </summary>
-        public bool IsKeepDependencies { get { return this.modelJob.IsKeepDependencies; } }
-
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public JenkinsBuild LastBuild { get { return new JenkinsBuild(this.jenkins, this, this.modelJob.LastBuild); } }
+        public bool IsKeepDependencies { get { CheckUpdate(); return this.modelJob.IsKeepDependencies; } }
 
 
         /// <summary>
         /// 
         /// </summary>
-        public JenkinsBuild LastCompletedBuild { get { return new JenkinsBuild(this.jenkins, this, this.modelJob.LastCompletedBuild); } }
+        public JenkinsBuild LastBuild { get { CheckUpdate(); return new JenkinsBuild(this.jenkins, this, this.modelJob.LastBuild); } }
 
 
         /// <summary>
         /// 
         /// </summary>
-        public JenkinsBuild LastFailedBuild { get { return new JenkinsBuild(this.jenkins, this, this.modelJob.LastFailedBuild); } }
+        public JenkinsBuild LastCompletedBuild { get { CheckUpdate(); return new JenkinsBuild(this.jenkins, this, this.modelJob.LastCompletedBuild); } }
 
 
         /// <summary>
         /// 
         /// </summary>
-        public JenkinsBuild LastStableBuild { get { return new JenkinsBuild(this.jenkins, this, this.modelJob.LastStableBuild); } }
+        public JenkinsBuild LastFailedBuild { get { CheckUpdate(); return new JenkinsBuild(this.jenkins, this, this.modelJob.LastFailedBuild); } }
 
 
         /// <summary>
         /// 
         /// </summary>
-        public JenkinsBuild LastSuccessfulBuild { get { return new JenkinsBuild(this.jenkins, this, this.modelJob.LastSuccessfulBuild); } }
+        public JenkinsBuild LastStableBuild { get { CheckUpdate(); return new JenkinsBuild(this.jenkins, this, this.modelJob.LastStableBuild); } }
 
 
         /// <summary>
         /// 
         /// </summary>
-        public JenkinsBuild LastUnstableBuild { get { return new JenkinsBuild(this.jenkins, this, this.modelJob.LastUnstableBuild); } }
+        public JenkinsBuild LastSuccessfulBuild { get { CheckUpdate(); return new JenkinsBuild(this.jenkins, this, this.modelJob.LastSuccessfulBuild); } }
 
 
         /// <summary>
         /// 
         /// </summary>
-        public JenkinsBuild LastUnsuccessfulBuild { get { return new JenkinsBuild(this.jenkins, this, this.modelJob.LastUnsuccessfulBuild); } }
+        public JenkinsBuild LastUnstableBuild { get { CheckUpdate(); return new JenkinsBuild(this.jenkins, this, this.modelJob.LastUnstableBuild); } }
 
 
         /// <summary>
         /// 
         /// </summary>
-        public int NextBuildNumber { get { return this.modelJob.NextBuildNumber; } }
+        public JenkinsBuild LastUnsuccessfulBuild { get { CheckUpdate(); return new JenkinsBuild(this.jenkins, this, this.modelJob.LastUnsuccessfulBuild); } }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public int NextBuildNumber { get { CheckUpdate(); return this.modelJob.NextBuildNumber; } }
 
 
 
@@ -182,14 +193,17 @@ namespace JenkinsWebApi.ObjectModel
         /// <returns></returns>
         public JenkinsBuild QueueBuild(JenkinsBuildParameters parameters = null)
         {
-            this.token = new CancellationTokenSource();
-            return Task.Run(() =>
+            return JenkinsRun.Run(() =>
             {
-                JenkinsRunConfig runConfig = this.jenkins.RunConfig.Clone();
-                runConfig.RunMode = JenkinsRunMode.Queued;
-                JenkinsRunProgress res = this.jenkins.RunJobAsync(this.modelJob.Name, parameters, runConfig, this, this.token.Token).Result;
-                return new JenkinsBuild(this.jenkins, this, res.BuildNum);
-            }, this.token.Token).Result;
+                this.token = new CancellationTokenSource();
+                return Task.Run(() =>
+                {
+                    JenkinsRunConfig runConfig = this.jenkins.RunConfig.Clone();
+                    runConfig.RunMode = JenkinsRunMode.Queued;
+                    JenkinsRunProgress res = this.jenkins.RunJobAsync(this.modelJob.Name, parameters, runConfig, this, this.token.Token).Result;
+                    return new JenkinsBuild(this.jenkins, this, res.BuildNum);
+                }, this.token.Token).Result;
+            });
         }
 
         /// <summary>
@@ -198,14 +212,17 @@ namespace JenkinsWebApi.ObjectModel
         /// <returns></returns>
         public JenkinsBuild StartBuild(JenkinsBuildParameters parameters = null)
         {
-            this.token = new CancellationTokenSource();
-            return Task.Run(() =>
+            return JenkinsRun.Run(() =>
             {
-                JenkinsRunConfig runConfig = this.jenkins.RunConfig.Clone();
-                runConfig.RunMode = JenkinsRunMode.Started;
-                JenkinsRunProgress res = this.jenkins.RunJobAsync(this.modelJob.Name, parameters, runConfig, this, this.token.Token).Result;
-                return new JenkinsBuild(this.jenkins, this, res.BuildNum);
-            }, this.token.Token).Result;
+                this.token = new CancellationTokenSource();
+                return Task.Run(() =>
+                {
+                    JenkinsRunConfig runConfig = this.jenkins.RunConfig.Clone();
+                    runConfig.RunMode = JenkinsRunMode.Started;
+                    JenkinsRunProgress res = this.jenkins.RunJobAsync(this.modelJob.Name, parameters, runConfig, this, this.token.Token).Result;
+                    return new JenkinsBuild(this.jenkins, this, res.BuildNum);
+                }, this.token.Token).Result;
+            });
         }
 
         /// <summary>
@@ -214,14 +231,17 @@ namespace JenkinsWebApi.ObjectModel
         /// <returns></returns>
         public JenkinsBuild RunBuild(JenkinsBuildParameters parameters = null)
         {
-            this.token = new CancellationTokenSource();
-            return Task.Run(() =>
+            return JenkinsRun.Run(() =>
             {
-                JenkinsRunConfig runConfig = this.jenkins.RunConfig.Clone();
-                runConfig.RunMode = JenkinsRunMode.Finished;
-                JenkinsRunProgress res = this.jenkins.RunJobAsync(this.modelJob.Name, parameters, runConfig, this, this.token.Token).Result;
-                return new JenkinsBuild(this.jenkins, this, res.BuildNum);
-            }, this.token.Token).Result;
+                this.token = new CancellationTokenSource();
+                return Task.Run(() =>
+                {
+                    JenkinsRunConfig runConfig = this.jenkins.RunConfig.Clone();
+                    runConfig.RunMode = JenkinsRunMode.Finished;
+                    JenkinsRunProgress res = this.jenkins.RunJobAsync(this.modelJob.Name, parameters, runConfig, this, this.token.Token).Result;
+                    return new JenkinsBuild(this.jenkins, this, res.BuildNum);
+                }, this.token.Token).Result;
+            });
         }
 
 
@@ -248,7 +268,15 @@ namespace JenkinsWebApi.ObjectModel
         /// </summary>
         public void Update()
         {
-            this.modelJob = jenkins.GetJobAsync<JenkinsModelJob>(this.Name).Result;
+            this.modelJob = JenkinsRun.Run(() => jenkins.GetJobAsync<JenkinsModelJob>(this.Name).Result);
+        }
+
+        private void CheckUpdate()
+        {
+            if (!isCompleteLoaded)
+            {
+                Update();
+            }
         }
     }
 }

@@ -1714,6 +1714,54 @@
             <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
             <returns>Returns view data.</returns>
         </member>
+        <member name="T:JenkinsWebApi.JenkinsException">
+            <summary>
+            Base class for Jenkins exception
+            </summary>
+        </member>
+        <member name="M:JenkinsWebApi.JenkinsException.#ctor(System.Net.Http.HttpResponseMessage)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="response">HTTP response message.</param>
+        </member>
+        <member name="P:JenkinsWebApi.JenkinsException.StatusCode">
+            <summary>
+            HTTP status code.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.JenkinsException.Reason">
+            <summary>
+            Reason for HTTP status code.
+            </summary>
+        </member>
+        <member name="T:JenkinsWebApi.JenkinsNotFoundException">
+            <summary>
+            Jenkins exception for HTTP not found error
+            </summary>
+        </member>
+        <member name="M:JenkinsWebApi.JenkinsNotFoundException.#ctor(System.Net.Http.HttpResponseMessage)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="response">HTTP response message.</param>
+        </member>
+        <member name="T:JenkinsWebApi.JenkinsUnauthorizedException">
+            <summary>
+            Jenkins exception for HTTP unauthorized error
+            </summary>
+        </member>
+        <member name="M:JenkinsWebApi.JenkinsUnauthorizedException.#ctor(System.Net.Http.HttpResponseMessage)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="response">HTTP response message.</param>
+        </member>
+        <member name="T:JenkinsWebApi.Model.JenkinsJenkinsciEnvInjectVarList">
+            <summary>
+            Plugin jenkinsci envinject list with environment variables.
+            </summary>
+        </member>
         <member name="P:JenkinsWebApi.Model.JenkinsJenkinsciEnvInjectVarList.EnvMapDict">
             <summary>
             Environment variable list as dictionary.
@@ -2324,6 +2372,21 @@
         <member name="P:JenkinsWebApi.ObjectModel.JenkinsServer.Url">
             <summary>
             Url address of the Jenkins server
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.ObjectModel.JenkinsServer.PrimaryView">
+            <summary>
+            Primary view of the Jenkins server.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.ObjectModel.JenkinsServer.Views">
+            <summary>
+            Get all global views.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.ObjectModel.JenkinsServer.Jobs">
+            <summary>
+            Get all jobs.
             </summary>
         </member>
         <member name="M:JenkinsWebApi.ObjectModel.JenkinsServer.GetView(System.String)">

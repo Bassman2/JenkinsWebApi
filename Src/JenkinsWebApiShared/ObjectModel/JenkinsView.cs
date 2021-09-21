@@ -1,4 +1,5 @@
-﻿using JenkinsWebApi.Model;
+﻿using JenkinsWebApi.Internal;
+using JenkinsWebApi.Model;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,27 +15,36 @@ namespace JenkinsWebApi.ObjectModel
     {
         private readonly Jenkins jenkins;
         private JenkinsModelView modelView;
+        private bool isCompleteLoaded;
+
+        internal JenkinsView(Jenkins jenkins, JenkinsModelView modelView)
+        {
+            this.jenkins = jenkins;
+            this.modelView = modelView;
+            this.isCompleteLoaded = false;
+        }
 
         internal JenkinsView(Jenkins jenkins, string viewName)
         {
             this.jenkins = jenkins;
-            this.modelView = jenkins.GetViewAsync<JenkinsModelView>(viewName).Result;
+            this.modelView = JenkinsRun.Run(() => jenkins.GetViewAsync<JenkinsModelView>(viewName).Result);
+            this.isCompleteLoaded = true;
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public string Description { get { return this.modelView.Description; } }
+        public string Description { get { CheckUpdate(); return this.modelView.Description; } }
 
         /// <summary>
         /// 
         /// </summary>
-        public IEnumerable<JenkinsJob> Jobs { get { return this.modelView.Jobs.Select(j => new JenkinsJob(this.jenkins, j.Name)); } }
+        public IEnumerable<JenkinsJob> Jobs { get { CheckUpdate(); return this.modelView.Jobs.Select(j => new JenkinsJob(this.jenkins, j.Name)); } }
 
         /// <summary>
         /// 
         /// </summary>
-        public IEnumerable<string> JobNames { get { return this.modelView.Jobs.Select(j => j.Name); } }
+        public IEnumerable<string> JobNames { get { CheckUpdate(); return this.modelView.Jobs.Select(j => j.Name); } }
 
         /// <summary>
         /// 
@@ -83,7 +93,15 @@ namespace JenkinsWebApi.ObjectModel
         /// </summary>
         public void Update()
         {
-            this.modelView = jenkins.GetViewAsync<JenkinsModelView>(this.Name).Result;
+            this.modelView = JenkinsRun.Run(() => jenkins.GetViewAsync<JenkinsModelView>(this.Name).Result);
+        }
+
+        private void CheckUpdate()
+        {
+            if (!isCompleteLoaded)
+            {
+                Update();
+            }
         }
     }
 }

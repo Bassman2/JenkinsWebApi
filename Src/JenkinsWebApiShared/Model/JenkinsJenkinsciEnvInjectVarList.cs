@@ -5,6 +5,10 @@ using System.Xml.Serialization;
 
 namespace JenkinsWebApi.Model
 {
+
+    /// <summary>
+    /// Plugin jenkinsci envinject list with environment variables.
+    /// </summary>
     public partial class JenkinsJenkinsciEnvInjectVarList
     {
         /// <summary>
