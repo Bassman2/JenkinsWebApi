@@ -8,34 +8,51 @@
 		<section>
 			<title>Getting Started</title>
 			<content>
+        <para>There are two ways to communicate with jenkins. On the one hand the Jenkins class with async methods and on the other hand a object model with roots on the JenkinsServer class.</para>
 				<para>To get started, add the JenkinsWebApi package to your project.</para>
 
         <para>
-          Example:
+          Example with async methods:
 
           <code language="C#">
-
-            JenkinsJob job;
-            (JenkinsBuildStatus status, int number) res;
-
-            using (Jenkins jenkins = new Jenkins(new Uri(host), login, password))
-            {
-                job = await jenkins.GetJobAsync(jobName);
-                using (FileStream file = File.OpenRead(filePath))
-                {
-                    var par = new List&lt;JenkinsParameter&gt;()
-                    {
-                        JenkinsParameter.StreamParameter("File", file, filePath),
-                        JenkinsParameter.StringParameter("ParameterA", "xxx"),
-                        JenkinsParameter.StringParameter("ParameterB", "yyy")
-
-                    };
-                    res = await jenkins.RunJobCompleteAsync(jobName, par);
-                }
-            }
+              using (Jenkins jenkins = new Jenkins(host, login, password))
+              {
+                  JenkinsJob job = await jenkins.GetJobAsync(jobName);
+                  using (FileStream file = File.OpenRead(filePath))
+                  {
+                      var parameters = new List&lt;JenkinsParameter&gt;()
+                      {
+                          JenkinsParameter.StreamParameter("File", file, filePath),
+                          JenkinsParameter.StringParameter("ParameterA", "xxx"),
+                          JenkinsParameter.StringParameter("ParameterB", "yyy")
+                      };
+                      res = await jenkins.RunJobAsync(jobName, parameters);
+                  }
+              }
           </code>
         </para>
 
+        <para>
+          Example with object model:
+
+          <code language="C#">
+              using (JenkinsServer server = new JenkinsServer(host, login, password))
+              {
+                  JenkinsJob job = server.GetJob(jobName);
+                  using (FileStream file = File.OpenRead(filePath))
+                  {
+                      var parameters = new List&lt;JenkinsParameter&gt;()
+                      {
+                          JenkinsParameter.StreamParameter("File", file, filePath),
+                          JenkinsParameter.StringParameter("ParameterA", "xxx"),
+                          JenkinsParameter.StringParameter("ParameterB", "yyy")
+                      };
+                      res = job.RunBuild(parameters);
+                  }
+              }
+          </code>
+        </para>
+        
         <para>
           See the <legacyBold>JenkinsWebApi</legacyBold> topics for more information.
         </para>

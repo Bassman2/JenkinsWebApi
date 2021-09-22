@@ -261,7 +261,7 @@ namespace JenkinsWebApi.ObjectModel
         }
 
         /// <summary>
-        /// Update the job data.
+        /// Refresh the properties of the Jenkins job.
         /// </summary>
         public void Update()
         {

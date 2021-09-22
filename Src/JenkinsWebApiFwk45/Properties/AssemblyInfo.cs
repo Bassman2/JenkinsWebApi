@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Ralf Beckers")]
 [assembly: AssemblyProduct("JenkinsWebApi")]
-[assembly: AssemblyCopyright("Copyright © Ralf Beckers 2017 - 2020")]
+[assembly: AssemblyCopyright("Copyright © Ralf Beckers 2017 - 2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
