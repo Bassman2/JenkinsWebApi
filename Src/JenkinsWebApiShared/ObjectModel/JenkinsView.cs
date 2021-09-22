@@ -9,7 +9,7 @@ using System.Xml;
 namespace JenkinsWebApi.ObjectModel
 {
     /// <summary>
-    /// 
+    /// Jenkins view class.
     /// </summary>
     public sealed class JenkinsView
     {
@@ -32,34 +32,34 @@ namespace JenkinsWebApi.ObjectModel
         }
 
         /// <summary>
-        /// 
+        /// Description of the Jenkins view.
         /// </summary>
         public string Description { get { CheckUpdate(); return this.modelView.Description; } }
 
         /// <summary>
-        /// 
+        /// All Jenkins jobs included in this view.
         /// </summary>
         public IEnumerable<JenkinsJob> Jobs { get { CheckUpdate(); return this.modelView.Jobs.Select(j => new JenkinsJob(this.jenkins, j.Name)); } }
 
         /// <summary>
-        /// 
+        /// The names of all jobs included in this view.
         /// </summary>
         public IEnumerable<string> JobNames { get { CheckUpdate(); return this.modelView.Jobs.Select(j => j.Name); } }
 
         /// <summary>
-        /// 
+        /// The name of this Jenkins view.
         /// </summary>
         public string Name { get { return this.modelView.Name; } }
 
         /// <summary>
-        /// 
+        ///  The URL of this Jenkins view. 
         /// </summary>
         public Uri Url { get { return new Uri(this.modelView.Url); } }
 
         /// <summary>
         /// Get and set the view configuration as text.
         /// </summary>
-        public string Config 
+        public string ConfigText 
         { 
             get
             {
@@ -89,7 +89,7 @@ namespace JenkinsWebApi.ObjectModel
         }
 
         /// <summary>
-        /// Update view data.
+        /// Update the view data.
         /// </summary>
         public void Update()
         {

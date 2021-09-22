@@ -2,7 +2,7 @@
 using JenkinsWebApi.Model;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
@@ -10,7 +10,7 @@ using System.Xml;
 namespace JenkinsWebApi.ObjectModel
 {
     /// <summary>
-    /// 
+    /// Jenkins job class.
     /// </summary>
     public sealed class JenkinsJob : IProgress<JenkinsRunProgress>
     {
@@ -21,7 +21,7 @@ namespace JenkinsWebApi.ObjectModel
         private CancellationTokenSource token = null;
         
         /// <summary>
-        /// 
+        /// Event to signal the progress of the running job.
         /// </summary>
         public event EventHandler<JenkinsRunProgress> RunProgress;
 
@@ -45,37 +45,37 @@ namespace JenkinsWebApi.ObjectModel
         // JenkinsModelAbstractItem
 
         /// <summary>
-        /// 
+        /// The description of this Jenkins job.
         /// </summary>
         public string Description { get { CheckUpdate(); return this.modelJob.Description; } }
 
         /// <summary>
-        /// 
+        /// The display name of this Jenkins job.
         /// </summary>
         public string DisplayName { get { CheckUpdate(); return this.modelJob.DisplayName; } }
 
         /// <summary>
-        /// 
+        /// The display name or null of this Jenkins job.
         /// </summary>
         public string DisplayNameOrNull { get { CheckUpdate(); return this.modelJob.DisplayNameOrNull; } }
 
         /// <summary>
-        /// 
+        /// The full display name of this Jenkins job.
         /// </summary>
         public string FullDisplayName { get { CheckUpdate(); return this.modelJob.FullDisplayName; } }
 
         /// <summary>
-        /// 
+        /// The full name of this Jenkins job.
         /// </summary>
         public string FullName { get { CheckUpdate(); return this.modelJob.FullName; } }
 
         /// <summary>
-        /// 
+        /// The name of this Jenkins job.
         /// </summary>
         public string Name { get { return this.modelJob.Name; } }
 
         /// <summary>
-        /// 
+        /// The URL of this Jenkins job.
         /// </summary>
         public Uri Url { get { return new Uri(this.modelJob.Url); } }
 
@@ -83,79 +83,75 @@ namespace JenkinsWebApi.ObjectModel
 
 
         /// <summary>
-        /// 
+        /// Show if the Jenkins job is buildable.
         /// </summary>
         public bool IsBuildable { get { CheckUpdate(); return this.modelJob.IsBuildable; } }
 
         /// <summary>
-        /// 
+        /// Get the first Jenkins build.
         /// </summary>
         public JenkinsBuild FirstBuild { get { CheckUpdate(); return new JenkinsBuild(this.jenkins, this, this.modelJob.FirstBuild); } }
 
         /// <summary>
-        /// 
+        /// Signal if a jenkins job is in build queue.
         /// </summary>
         public bool IsInQueue { get { CheckUpdate(); return this.modelJob.IsInQueue; } }
 
         /// <summary>
-        /// 
+        /// Signal if a Jenkins job keep dependencies.
         /// </summary>
         public bool IsKeepDependencies { get { CheckUpdate(); return this.modelJob.IsKeepDependencies; } }
 
-
         /// <summary>
-        /// 
+        /// Get the last Jenkins build.
         /// </summary>
         public JenkinsBuild LastBuild { get { CheckUpdate(); return new JenkinsBuild(this.jenkins, this, this.modelJob.LastBuild); } }
 
-
         /// <summary>
-        /// 
+        /// Get the last completed Jenkins build.
         /// </summary>
         public JenkinsBuild LastCompletedBuild { get { CheckUpdate(); return new JenkinsBuild(this.jenkins, this, this.modelJob.LastCompletedBuild); } }
 
-
         /// <summary>
-        /// 
+        /// Get the last failed Jenkins build.
         /// </summary>
         public JenkinsBuild LastFailedBuild { get { CheckUpdate(); return new JenkinsBuild(this.jenkins, this, this.modelJob.LastFailedBuild); } }
 
-
         /// <summary>
-        /// 
+        /// Get the last stable Jenkins build.
         /// </summary>
         public JenkinsBuild LastStableBuild { get { CheckUpdate(); return new JenkinsBuild(this.jenkins, this, this.modelJob.LastStableBuild); } }
 
 
         /// <summary>
-        /// 
+        /// Get the last successful Jenkins build.
         /// </summary>
         public JenkinsBuild LastSuccessfulBuild { get { CheckUpdate(); return new JenkinsBuild(this.jenkins, this, this.modelJob.LastSuccessfulBuild); } }
 
 
         /// <summary>
-        /// 
+        /// Get the last unstable Jenkins build.
         /// </summary>
         public JenkinsBuild LastUnstableBuild { get { CheckUpdate(); return new JenkinsBuild(this.jenkins, this, this.modelJob.LastUnstableBuild); } }
 
 
         /// <summary>
-        /// 
+        /// Get the last unsuccessful Jenkins build.
         /// </summary>
         public JenkinsBuild LastUnsuccessfulBuild { get { CheckUpdate(); return new JenkinsBuild(this.jenkins, this, this.modelJob.LastUnsuccessfulBuild); } }
 
 
         /// <summary>
-        /// 
+        /// Get the next build number.
         /// </summary>
         public int NextBuildNumber { get { CheckUpdate(); return this.modelJob.NextBuildNumber; } }
 
 
 
         /// <summary>
-        /// 
+        /// Get and set the job configuration as text.
         /// </summary>
-        public string Config
+        public string ConfigText
         {
             get
             {
@@ -170,7 +166,7 @@ namespace JenkinsWebApi.ObjectModel
 
 
         /// <summary>
-        /// 
+        /// Get and set the job configuration as XmlDocument.
         /// </summary>
         public XmlDocument ConfigXml
         {
@@ -185,10 +181,16 @@ namespace JenkinsWebApi.ObjectModel
             }
         }
 
+        /// <summary>
+        /// All builds.
+        /// </summary>
+        public IEnumerable<JenkinsBuild> Builds { get { CheckUpdate();  return this.modelJob.Builds.Select(j => new JenkinsBuild(this.jenkins, this, j)); } }
+
+
         #endregion
 
         /// <summary>
-        /// 
+        /// Start this Jenkins job and return after it is queued.
         /// </summary>
         /// <returns></returns>
         public JenkinsBuild QueueBuild(JenkinsBuildParameters parameters = null)
@@ -207,7 +209,7 @@ namespace JenkinsWebApi.ObjectModel
         }
 
         /// <summary>
-        /// 
+        /// Start this Jenkins job and return after it is startet.
         /// </summary>
         /// <returns></returns>
         public JenkinsBuild StartBuild(JenkinsBuildParameters parameters = null)
@@ -226,7 +228,7 @@ namespace JenkinsWebApi.ObjectModel
         }
 
         /// <summary>
-        /// 
+        /// Start this Jenkins job and return after it has finished.
         /// </summary>
         /// <returns></returns>
         public JenkinsBuild RunBuild(JenkinsBuildParameters parameters = null)
@@ -246,25 +248,20 @@ namespace JenkinsWebApi.ObjectModel
 
 
         /// <summary>
-        /// 
+        /// Breaks the QueueBuild, StartBuild and RunBuild.
         /// </summary>
         public void StopBuild()
         {
             this.token?.Cancel();
         }
-
-
-        /// <summary>
-        /// 
-        /// </summary>
+                
         void IProgress<JenkinsRunProgress>.Report(JenkinsRunProgress value)
         {
             RunProgress?.Invoke(this, value);
         }
 
-
         /// <summary>
-        /// 
+        /// Update the job data.
         /// </summary>
         public void Update()
         {

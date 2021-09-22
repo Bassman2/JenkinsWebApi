@@ -12,25 +12,28 @@ namespace JenkinsWebApi.ObjectModel
         private readonly Jenkins jenkins;
         private readonly JenkinsJob job;
         private JenkinsModelRun modelRun;
+        private bool isCompleteLoaded;
 
         internal JenkinsBuild(Jenkins jenkins, JenkinsJob job, JenkinsModelRun modelRun)
         {
             this.jenkins = jenkins;
             this.job = job;
             this.modelRun = modelRun;
+            this.isCompleteLoaded = false;
         }
 
         internal JenkinsBuild(Jenkins jenkins, JenkinsJob job, int buildNum)
         {
             this.jenkins = jenkins;
             this.job = job;
-            this.modelRun = jenkins.GetBuildAsync<JenkinsModelRun>(this.JobName, buildNum).Result;
+            this.modelRun = JenkinsRun.Run(() => jenkins.GetBuildAsync<JenkinsModelRun>(this.JobName, buildNum).Result);
+            this.isCompleteLoaded = true;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public Jenkins Jenkins { get { return this.jenkins; } }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //public Jenkins Jenkins { get { return this.jenkins; } }
 
         /// <summary>
         /// 
@@ -45,42 +48,42 @@ namespace JenkinsWebApi.ObjectModel
         /// <summary>
         /// 
         /// </summary>
-        public bool IsBuilding { get { return this.modelRun.IsBuilding; } }
+        public bool IsBuilding { get { CheckUpdate(); return this.modelRun.IsBuilding; } }
         
         /// <summary>
         /// 
         /// </summary>
-        public string Description { get { return this.modelRun.Description; } }
+        public string Description { get { CheckUpdate(); return this.modelRun.Description; } }
         
         /// <summary>
         /// 
         /// </summary>
-        public string DisplayName { get { return this.modelRun.DisplayName; } }
+        public string DisplayName { get { CheckUpdate(); return this.modelRun.DisplayName; } }
 
         /// <summary>
         /// 
         /// </summary>
-        public TimeSpan? Duration { get { return XmlConverter.ToTimeSpan(this.modelRun.Duration); } }
+        public TimeSpan? Duration { get { CheckUpdate(); return XmlConverter.ToTimeSpan(this.modelRun.Duration); } }
         
         /// <summary>
         /// 
         /// </summary>
-        public TimeSpan? EstimatedDuration { get { return XmlConverter.ToTimeSpan(this.modelRun.EstimatedDuration); } }
+        public TimeSpan? EstimatedDuration { get { CheckUpdate(); return XmlConverter.ToTimeSpan(this.modelRun.EstimatedDuration); } }
 
         /// <summary>
         /// 
         /// </summary>
-        public string FullDisplayName { get { return this.modelRun.FullDisplayName; } }
+        public string FullDisplayName { get { CheckUpdate(); return this.modelRun.FullDisplayName; } }
 
         /// <summary>
         /// 
         /// </summary>
-        public string Id { get { return this.modelRun.Id; } }
+        public string Id { get { CheckUpdate(); return this.modelRun.Id; } }
 
         /// <summary>
         /// 
         /// </summary>
-        public bool IsKeepLog { get { return this.modelRun.IsKeepLog; } }
+        public bool IsKeepLog { get { CheckUpdate(); return this.modelRun.IsKeepLog; } }
 
         /// <summary>
         /// 
@@ -90,17 +93,17 @@ namespace JenkinsWebApi.ObjectModel
         /// <summary>
         /// 
         /// </summary>
-        public long QueueId { get { return this.modelRun.QueueId; } }
+        public long QueueId { get { CheckUpdate(); return this.modelRun.QueueId; } }
 
         /// <summary>
         /// 
         /// </summary>
-        public JenkinsResult Result { get { return this.modelRun.Result; } }
+        public JenkinsResult Result { get { CheckUpdate(); return this.modelRun.Result; } }
 
         /// <summary>
         /// 
         /// </summary>
-        public DateTime? Timestamp { get { return XmlConverter.ToDateTime(this.modelRun.Timestamp); } }
+        public DateTime? Timestamp { get { CheckUpdate(); return XmlConverter.ToDateTime(this.modelRun.Timestamp); } }
 
         /// <summary>
         /// 
@@ -112,7 +115,15 @@ namespace JenkinsWebApi.ObjectModel
         /// </summary>
         public void Update()
         {
-            this.modelRun = jenkins.GetBuildAsync<JenkinsModelRun>(this.JobName, this.modelRun.Number).Result;
+            this.modelRun = JenkinsRun.Run(() => jenkins.GetBuildAsync<JenkinsModelRun>(this.JobName, this.modelRun.Number).Result);
+        }
+
+        private void CheckUpdate()
+        {
+            if (!isCompleteLoaded)
+            {
+                Update();
+            }
         }
     }
 }

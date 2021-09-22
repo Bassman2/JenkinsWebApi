@@ -2087,11 +2087,6 @@
             
             </summary>
         </member>
-        <member name="P:JenkinsWebApi.ObjectModel.JenkinsBuild.Jenkins">
-            <summary>
-            
-            </summary>
-        </member>
         <member name="P:JenkinsWebApi.ObjectModel.JenkinsBuild.Job">
             <summary>
             
@@ -2174,150 +2169,150 @@
         </member>
         <member name="T:JenkinsWebApi.ObjectModel.JenkinsJob">
             <summary>
-            
+            Jenkins job class.
             </summary>
         </member>
         <member name="E:JenkinsWebApi.ObjectModel.JenkinsJob.RunProgress">
             <summary>
-            
+            Event to signal the progress of the running job.
             </summary>
         </member>
         <member name="P:JenkinsWebApi.ObjectModel.JenkinsJob.Description">
             <summary>
-            
+            The description of this Jenkins job.
             </summary>
         </member>
         <member name="P:JenkinsWebApi.ObjectModel.JenkinsJob.DisplayName">
             <summary>
-            
+            The display name of this Jenkins job.
             </summary>
         </member>
         <member name="P:JenkinsWebApi.ObjectModel.JenkinsJob.DisplayNameOrNull">
             <summary>
-            
+            The display name or null of this Jenkins job.
             </summary>
         </member>
         <member name="P:JenkinsWebApi.ObjectModel.JenkinsJob.FullDisplayName">
             <summary>
-            
+            The full display name of this Jenkins job.
             </summary>
         </member>
         <member name="P:JenkinsWebApi.ObjectModel.JenkinsJob.FullName">
             <summary>
-            
+            The full name of this Jenkins job.
             </summary>
         </member>
         <member name="P:JenkinsWebApi.ObjectModel.JenkinsJob.Name">
             <summary>
-            
+            The name of this Jenkins job.
             </summary>
         </member>
         <member name="P:JenkinsWebApi.ObjectModel.JenkinsJob.Url">
             <summary>
-            
+            The URL of this Jenkins job.
             </summary>
         </member>
         <member name="P:JenkinsWebApi.ObjectModel.JenkinsJob.IsBuildable">
             <summary>
-            
+            Show if the Jenkins job is buildable.
             </summary>
         </member>
         <member name="P:JenkinsWebApi.ObjectModel.JenkinsJob.FirstBuild">
             <summary>
-            
+            Get the first Jenkins build.
             </summary>
         </member>
         <member name="P:JenkinsWebApi.ObjectModel.JenkinsJob.IsInQueue">
             <summary>
-            
+            Signal if a jenkins job is in build queue.
             </summary>
         </member>
         <member name="P:JenkinsWebApi.ObjectModel.JenkinsJob.IsKeepDependencies">
             <summary>
-            
+            Signal if a Jenkins job keep dependencies.
             </summary>
         </member>
         <member name="P:JenkinsWebApi.ObjectModel.JenkinsJob.LastBuild">
             <summary>
-            
+            Get the last Jenkins build.
             </summary>
         </member>
         <member name="P:JenkinsWebApi.ObjectModel.JenkinsJob.LastCompletedBuild">
             <summary>
-            
+            Get the last completed Jenkins build.
             </summary>
         </member>
         <member name="P:JenkinsWebApi.ObjectModel.JenkinsJob.LastFailedBuild">
             <summary>
-            
+            Get the last failed Jenkins build.
             </summary>
         </member>
         <member name="P:JenkinsWebApi.ObjectModel.JenkinsJob.LastStableBuild">
             <summary>
-            
+            Get the last stable Jenkins build.
             </summary>
         </member>
         <member name="P:JenkinsWebApi.ObjectModel.JenkinsJob.LastSuccessfulBuild">
             <summary>
-            
+            Get the last successful Jenkins build.
             </summary>
         </member>
         <member name="P:JenkinsWebApi.ObjectModel.JenkinsJob.LastUnstableBuild">
             <summary>
-            
+            Get the last unstable Jenkins build.
             </summary>
         </member>
         <member name="P:JenkinsWebApi.ObjectModel.JenkinsJob.LastUnsuccessfulBuild">
             <summary>
-            
+            Get the last unsuccessful Jenkins build.
             </summary>
         </member>
         <member name="P:JenkinsWebApi.ObjectModel.JenkinsJob.NextBuildNumber">
             <summary>
-            
+            Get the next build number.
             </summary>
         </member>
-        <member name="P:JenkinsWebApi.ObjectModel.JenkinsJob.Config">
+        <member name="P:JenkinsWebApi.ObjectModel.JenkinsJob.ConfigText">
             <summary>
-            
+            Get and set the job configuration as text.
             </summary>
         </member>
         <member name="P:JenkinsWebApi.ObjectModel.JenkinsJob.ConfigXml">
             <summary>
-            
+            Get and set the job configuration as XmlDocument.
+            </summary>
+        </member>
+        <member name="P:JenkinsWebApi.ObjectModel.JenkinsJob.Builds">
+            <summary>
+            All builds.
             </summary>
         </member>
         <member name="M:JenkinsWebApi.ObjectModel.JenkinsJob.QueueBuild(JenkinsWebApi.JenkinsBuildParameters)">
             <summary>
-            
+            Start this Jenkins job and return after it is queued.
             </summary>
             <returns></returns>
         </member>
         <member name="M:JenkinsWebApi.ObjectModel.JenkinsJob.StartBuild(JenkinsWebApi.JenkinsBuildParameters)">
             <summary>
-            
+            Start this Jenkins job and return after it is startet.
             </summary>
             <returns></returns>
         </member>
         <member name="M:JenkinsWebApi.ObjectModel.JenkinsJob.RunBuild(JenkinsWebApi.JenkinsBuildParameters)">
             <summary>
-            
+            Start this Jenkins job and return after it has finished.
             </summary>
             <returns></returns>
         </member>
         <member name="M:JenkinsWebApi.ObjectModel.JenkinsJob.StopBuild">
             <summary>
-            
-            </summary>
-        </member>
-        <member name="M:JenkinsWebApi.ObjectModel.JenkinsJob.System#IProgress{JenkinsWebApi#JenkinsRunProgress}#Report(JenkinsWebApi.JenkinsRunProgress)">
-            <summary>
-            
+            Breaks the QueueBuild, StartBuild and RunBuild.
             </summary>
         </member>
         <member name="M:JenkinsWebApi.ObjectModel.JenkinsJob.Update">
             <summary>
-            
+            Update the job data.
             </summary>
         </member>
         <member name="T:JenkinsWebApi.ObjectModel.JenkinsServer">
@@ -2410,35 +2405,35 @@
         </member>
         <member name="T:JenkinsWebApi.ObjectModel.JenkinsView">
             <summary>
-            
+            Jenkins view class.
             </summary>
         </member>
         <member name="P:JenkinsWebApi.ObjectModel.JenkinsView.Description">
             <summary>
-            
+            Description of the Jenkins view.
             </summary>
         </member>
         <member name="P:JenkinsWebApi.ObjectModel.JenkinsView.Jobs">
             <summary>
-            
+            All Jenkins jobs included in this view.
             </summary>
         </member>
         <member name="P:JenkinsWebApi.ObjectModel.JenkinsView.JobNames">
             <summary>
-            
+            The names of all jobs included in this view.
             </summary>
         </member>
         <member name="P:JenkinsWebApi.ObjectModel.JenkinsView.Name">
             <summary>
-            
+            The name of this Jenkins view.
             </summary>
         </member>
         <member name="P:JenkinsWebApi.ObjectModel.JenkinsView.Url">
             <summary>
-            
+             The URL of this Jenkins view. 
             </summary>
         </member>
-        <member name="P:JenkinsWebApi.ObjectModel.JenkinsView.Config">
+        <member name="P:JenkinsWebApi.ObjectModel.JenkinsView.ConfigText">
             <summary>
             Get and set the view configuration as text.
             </summary>
@@ -2450,7 +2445,7 @@
         </member>
         <member name="M:JenkinsWebApi.ObjectModel.JenkinsView.Update">
             <summary>
-            Update view data.
+            Update the view data.
             </summary>
         </member>
         <member name="T:JenkinsWebApi.JenkinsBuildParameters">
