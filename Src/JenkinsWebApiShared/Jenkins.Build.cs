@@ -2,6 +2,7 @@
 using JenkinsWebApi.Model;
 using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -155,7 +156,8 @@ namespace JenkinsWebApi
                 throw new ArgumentOutOfRangeException(nameof(buildNum));
             }
 
-            await PostAsync($"job/{jobName}/{buildNum}/doDelete", cancellationToken);
+            // ignore Forbidden, Jenkins returns forbidden because of link to get without crumb
+            await PostAsync($"job/{jobName}/{buildNum}/doDelete", HttpStatusCode.Forbidden, cancellationToken);
         }
 
         /// <summary>

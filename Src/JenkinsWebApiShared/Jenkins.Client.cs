@@ -168,6 +168,19 @@ namespace JenkinsWebApi
             }
         }
 
+        private async Task PostAsync(string path, HttpStatusCode ignoreStatusCode, CancellationToken cancellationToken)
+        {
+            using (HttpResponseMessage response = await this.client.PostAsync(path, null, cancellationToken))
+            {
+                string str = await response.Content.ReadAsStringAsync(
+#if NET
+                    cancellationToken
+#endif
+                    );
+                response.EnsureSuccess(ignoreStatusCode);
+            }
+        }
+
         // StringContent for application/xml, ...
         // MultipartFormDataContent for multipart/form-data
         // FormUrlEncodedContent for application/x-www-form-urlencoded

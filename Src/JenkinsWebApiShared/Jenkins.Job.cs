@@ -494,7 +494,8 @@ namespace JenkinsWebApi
         /// <returns>The task object representing the asynchronous operation.</returns>
         public async Task DisableJobAsync(string jobName, CancellationToken cancellationToken)
         {
-            await PostAsync($"/job/{jobName}/disable", cancellationToken);
+            // ignore Forbidden, Jenkins returns forbidden because of link to get without crumb
+            await PostAsync($"/job/{jobName}/disable", HttpStatusCode.Forbidden, cancellationToken);
         }
 
         /// <summary>
@@ -515,7 +516,8 @@ namespace JenkinsWebApi
         /// <returns>The task object representing the asynchronous operation.</returns>
         public async Task EnableJobAsync(string jobName, CancellationToken cancellationToken)
         {
-            await PostAsync($"job/{jobName}/enable", cancellationToken);
+            // ignore Forbidden, Jenkins returns forbidden because of link to get without crumb
+            await PostAsync($"job/{jobName}/enable", HttpStatusCode.Forbidden, cancellationToken);
         }
 
         /// <summary>
