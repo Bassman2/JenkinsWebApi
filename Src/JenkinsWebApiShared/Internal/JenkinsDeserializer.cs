@@ -17,9 +17,10 @@ namespace JenkinsWebApi.Internal
             .Where(t => typeof(JenkinsModelView).IsAssignableFrom(t) && t.IsClass && !t.IsGenericType && !t.IsAbstract)
             .ToDictionary(t => SerializableClassAttribute.GetClassName(t), t => t);
 
+        // for "Folder" job use JenkinsModelAbstractItem instead of JenkinsModelJob
         private readonly static Dictionary<string, Type> jobTypes = AppDomain.CurrentDomain.GetAssemblies()
             .SelectMany(s => s.GetTypes())
-            .Where(t => typeof(JenkinsModelJob).IsAssignableFrom(t) && t.IsClass && !t.IsGenericType && !t.IsAbstract)
+            .Where(t => typeof(JenkinsModelAbstractItem).IsAssignableFrom(t) && t.IsClass && !t.IsGenericType && !t.IsAbstract)
             .ToDictionary(t => SerializableClassAttribute.GetClassName(t), t => t);
 
         private readonly static Dictionary<string, Type> buildTypes = AppDomain.CurrentDomain.GetAssemblies()
@@ -37,7 +38,7 @@ namespace JenkinsWebApi.Internal
             return Deserialize<T>(text, viewTypes);
         }
 
-        public static T DeserializeJob<T>(string text) where T : JenkinsModelJob
+        public static T DeserializeJob<T>(string text) where T : JenkinsModelAbstractItem
         {
             return Deserialize<T>(text, jobTypes);
         }

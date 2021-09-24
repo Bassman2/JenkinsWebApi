@@ -26,6 +26,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Jenkins.System.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Jenkins.User.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JenkinsException.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JenkinsForbiddenException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JenkinsNotFoundException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JenkinsUnauthorizedException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\JenkinsJenkinsciEnvInjectVarList.cs" />

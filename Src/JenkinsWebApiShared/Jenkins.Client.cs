@@ -61,13 +61,8 @@ namespace JenkinsWebApi
             }
             else
             {
-                // ignore Unauthorized for later login
-                try
-                {
-                    Crumb();
-                }
-                catch (JenkinsUnauthorizedException)
-                { }
+                // ignore Forbidden for later login
+                Crumb(true);
             }
         }
 
@@ -97,25 +92,38 @@ namespace JenkinsWebApi
             Crumb();
         }
 
-        private void Crumb()
+        private void Crumb(bool ignoreForbidden = false)
         {
-            // only on newer Jenkins versions
-            // handle CSRF Protection
-            //try
-            //{
-                JenkinsSecurityCsrfDefaultCrumbIssuer crumb = GetApiAsync<JenkinsSecurityCsrfDefaultCrumbIssuer>("crumbIssuer", CancellationToken.None).Result;
+            JenkinsSecurityCsrfDefaultCrumbIssuer crumb = GetApiAsync<JenkinsSecurityCsrfDefaultCrumbIssuer>("crumbIssuer", ignoreForbidden ? HttpStatusCode.Forbidden : 0, CancellationToken.None).Result;
+            if (crumb != null)
+            {
                 this.client.DefaultRequestHeaders.Add(crumb.CrumbRequestField, crumb.Crumb);
-            //}
-            //catch (Exception ex)
-            //{
-            //    Debug.WriteLine(ex.Message);
-            //}
+            }
         }
 
         private async Task<T> GetApiAsync<T>(string path, CancellationToken cancellationToken) where T : class
         {
             using (HttpResponseMessage response = await this.client.GetAsync(path + apiFormat, cancellationToken))
             {
+                response.EnsureSuccess();
+                string str = await response.Content.ReadAsStringAsync(
+#if NET
+                    cancellationToken
+#endif
+                    );
+                T value = JenkinsDeserializer.Deserialize<T>(str);
+                return value;
+            }
+        }
+
+        private async Task<T> GetApiAsync<T>(string path, HttpStatusCode ignoreStatusCode, CancellationToken cancellationToken) where T : class
+        {
+            using (HttpResponseMessage response = await this.client.GetAsync(path + apiFormat, cancellationToken))
+            {
+                if (response.StatusCode == ignoreStatusCode)
+                {
+                    return null;
+                }
                 response.EnsureSuccess();
                 string str = await response.Content.ReadAsStringAsync(
 #if NET

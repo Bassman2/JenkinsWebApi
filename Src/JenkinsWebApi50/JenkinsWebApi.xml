@@ -1735,6 +1735,17 @@
             Reason for HTTP status code.
             </summary>
         </member>
+        <member name="T:JenkinsWebApi.JenkinsForbiddenException">
+            <summary>
+            Jenkins exception for HTTP forbidden error
+            </summary>
+        </member>
+        <member name="M:JenkinsWebApi.JenkinsForbiddenException.#ctor(System.Net.Http.HttpResponseMessage)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="response">HTTP response message.</param>
+        </member>
         <member name="T:JenkinsWebApi.JenkinsNotFoundException">
             <summary>
             Jenkins exception for HTTP not found error

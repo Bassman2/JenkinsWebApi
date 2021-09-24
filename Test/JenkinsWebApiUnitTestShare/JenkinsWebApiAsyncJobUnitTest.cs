@@ -356,9 +356,9 @@ namespace JenkinsTest
             JenkinsModelExternalJob externalJob = null;
             JenkinsMatrixMatrixProject matrixJob = null;
             JenkinsJenkinsciWorkflowJob workflowJob = null;
-            //JenkinsJenkinsciWorkflowMultiBranchProject multiBranchJob = null;
-            //JenkinsCloudbeesFolder folderJob = null;
-            //JenkinsBranchOrganizationFolder organizationFolderJob = null;
+            JenkinsJenkinsciWorkflowMultiBranchProject multiBranchJob = null;
+            JenkinsCloudbeesFolder folderJob = null;
+            JenkinsBranchOrganizationFolder organizationFolderJob = null;
 
             // Act
             using (Jenkins jenkins = new Jenkins(this.host, this.login, this.password))
@@ -367,9 +367,9 @@ namespace JenkinsTest
                 externalJob = jenkins.GetJobAsync("ExternalJob").Result as JenkinsModelExternalJob;
                 matrixJob = jenkins.GetJobAsync("Multiconfiguration").Result as JenkinsMatrixMatrixProject;
                 workflowJob = jenkins.GetJobAsync("Pipeline").Result as JenkinsJenkinsciWorkflowJob;
-                //multiBranchJob = jenkins.GetJobAsync("MultibranchPipeline").Result as JenkinsJenkinsciWorkflowMultiBranchProject;
-                //folderJob = jenkins.GetJobAsync("Folder").Result as JenkinsCloudbeesFolder;
-                //organizationFolderJob = jenkins.GetJobAsync("GitHubOrganization").Result as JenkinsBranchOrganizationFolder;
+                multiBranchJob = jenkins.GetJobAsync("MultibranchPipeline").Result as JenkinsJenkinsciWorkflowMultiBranchProject;
+                folderJob = jenkins.GetJobAsync("Folder").Result as JenkinsCloudbeesFolder;
+                organizationFolderJob = jenkins.GetJobAsync("GitHubOrganization").Result as JenkinsBranchOrganizationFolder;
             }
 
             // Assert
@@ -377,9 +377,9 @@ namespace JenkinsTest
             Assert.IsNotNull(externalJob);
             Assert.IsNotNull(matrixJob);
             Assert.IsNotNull(workflowJob);
-            //Assert.IsNotNull(multiBranchJob);
-            //Assert.IsNotNull(folderJob);
-            //Assert.IsNotNull(organizationFolderJob);
+            Assert.IsNotNull(multiBranchJob);
+            Assert.IsNotNull(folderJob);
+            Assert.IsNotNull(organizationFolderJob);
 
 
 
@@ -424,9 +424,9 @@ namespace JenkinsTest
             JenkinsModelExternalJob externalJob = null;
             JenkinsMatrixMatrixProject matrixJob = null;
             JenkinsJenkinsciWorkflowJob workflowJob = null;
-            //JenkinsJenkinsciWorkflowMultiBranchProject multiBranchJob = null;
-            //JenkinsCloudbeesFolder folderJob = null;
-            //JenkinsBranchOrganizationFolder organizationFolderJob = null;
+            JenkinsJenkinsciWorkflowMultiBranchProject multiBranchJob = null;
+            JenkinsCloudbeesFolder folderJob = null;
+            JenkinsBranchOrganizationFolder organizationFolderJob = null;
 
             // Act
             using (Jenkins jenkins = new Jenkins(this.host, this.login, this.password))
@@ -435,9 +435,9 @@ namespace JenkinsTest
                 externalJob = jenkins.GetJobAsync<JenkinsModelExternalJob>("ExternalJob").Result;
                 matrixJob = jenkins.GetJobAsync<JenkinsMatrixMatrixProject>("Multiconfiguration").Result;
                 workflowJob = jenkins.GetJobAsync<JenkinsJenkinsciWorkflowJob>("Pipeline").Result;
-                //multiBranchJob = jenkins.GetJobAsync<JenkinsJenkinsciWorkflowMultiBranchProject>("MultibranchPipeline").Result;
-                //folderJob = jenkins.GetJobAsync<JenkinsCloudbeesFolder>("Folder").Result;
-                //organizationFolderJob = jenkins.GetJobAsync<JenkinsBranchOrganizationFolder>("GitHubOrganization").Result;
+                multiBranchJob = jenkins.GetJobAsync<JenkinsJenkinsciWorkflowMultiBranchProject>("MultibranchPipeline").Result;
+                folderJob = jenkins.GetJobAsync<JenkinsCloudbeesFolder>("Folder").Result;
+                organizationFolderJob = jenkins.GetJobAsync<JenkinsBranchOrganizationFolder>("GitHubOrganization").Result;
             }
 
             // Assert
@@ -445,9 +445,9 @@ namespace JenkinsTest
             Assert.IsNotNull(externalJob);
             Assert.IsNotNull(matrixJob);
             Assert.IsNotNull(workflowJob);
-            //Assert.IsNotNull(multiBranchJob);
-            //Assert.IsNotNull(folderJob);
-            //Assert.IsNotNull(organizationFolderJob);
+            Assert.IsNotNull(multiBranchJob);
+            Assert.IsNotNull(folderJob);
+            Assert.IsNotNull(organizationFolderJob);
         }
 
         

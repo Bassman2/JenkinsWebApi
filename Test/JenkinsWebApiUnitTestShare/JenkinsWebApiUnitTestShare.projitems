@@ -13,6 +13,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ExpectedJenkinsExceptionAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JenkinsWebApiAsyncBuildUnitTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JenkinsWebApiAsyncComputerUnitTest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JenkinsWebApiAsyncLoginUnitTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JenkinsWebApiAsyncReportUnitTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JenkinsWebApiAsyncUserUnitTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JenkinsWebApiAsyncViewUnitTest.cs" />

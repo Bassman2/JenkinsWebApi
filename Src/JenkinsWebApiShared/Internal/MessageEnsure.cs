@@ -13,9 +13,8 @@ namespace JenkinsWebApi.Internal
             }
             switch (response.StatusCode)
             {
-            //case HttpStatusCode.Forbidden:
-            //    // ignore, enable/disable job sends forbidden because of link to get without crumb
-            //    break;
+            case HttpStatusCode.Forbidden:
+                throw new JenkinsForbiddenException(response);
             case HttpStatusCode.Unauthorized:
                 throw new JenkinsUnauthorizedException(response);
             case HttpStatusCode.NotFound:
@@ -37,9 +36,8 @@ namespace JenkinsWebApi.Internal
             }
             switch (response.StatusCode)
             {
-            //case HttpStatusCode.Forbidden:
-            //    // ignore, enable/disable job sends forbidden because of link to get without crumb
-            //    break;
+            case HttpStatusCode.Forbidden:
+                throw new JenkinsForbiddenException(response);
             case HttpStatusCode.Unauthorized:
                 throw new JenkinsUnauthorizedException(response);
             case HttpStatusCode.NotFound:
