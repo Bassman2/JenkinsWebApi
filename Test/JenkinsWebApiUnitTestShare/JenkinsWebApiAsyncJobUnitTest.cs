@@ -254,48 +254,53 @@ namespace JenkinsTest
         {
             // Arrange
             string orgConfig = null;
-            //string updConfig = null;
-            //string cngConfig = null;
-            //string descOrg = null;
-            //string descCng = null;
+            string updConfig = null;
+            string cngConfig = null;
+            string descOrg = null;
+            string descCng = null;
 
             // Act
             using (Jenkins jenkins = new Jenkins(host, this.login, this.password))
             {
                 orgConfig = jenkins.GetJobConfigAsync("FreestyleConfig", CancellationToken.None).Result;
-                //descOrg = GetConfigDescription(orgConfig);
-                //cngConfig = SetConfigDescription(orgConfig, "Test Description");
-                //jenkins.SetJobConfigAsync("FreeStyleConfig", cngConfig, CancellationToken.None).Wait();
-                //updConfig = jenkins.GetJobConfigAsync("FreeStyleConfig", CancellationToken.None).Result;
-                //descCng = GetConfigDescription(updConfig);
-                //jenkins.SetJobConfigAsync("FreeStyleConfig", orgConfig, CancellationToken.None).Wait();
+                descOrg = GetConfigDescription(orgConfig);
 
+                cngConfig = SetConfigDescription(orgConfig, "Test Description");
+                jenkins.SetJobConfigAsync("FreeStyleConfig", cngConfig, CancellationToken.None).Wait();
+                updConfig = jenkins.GetJobConfigAsync("FreeStyleConfig", CancellationToken.None).Result;
+                descCng = GetConfigDescription(updConfig);
+                
+                jenkins.SetJobConfigAsync("FreeStyleConfig", orgConfig, CancellationToken.None).Wait();
             }
 
             // Assert
             Assert.IsNotNull(orgConfig);
-            //Assert.IsNotNull(updConfig);
-            //Assert.IsNotNull(cngConfig);
-            //Assert.AreEqual("Default Description", descOrg, nameof(descOrg));
-            //Assert.AreEqual("Test Description", descCng, nameof(descCng));
+            Assert.IsNotNull(updConfig);
+            Assert.IsNotNull(cngConfig);
+            Assert.AreEqual("Default Description", descOrg, nameof(descOrg));
+            Assert.AreEqual("Test Description", descCng, nameof(descCng));
 
         }
 
         private string GetConfigDescription(string config)
         {
+            // XmlDocument does not support XML version 1.1
+            config = config.Replace("<?xml version=\"1.1\"", "<?xml version=\"1.0\"");
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(config);
-            XmlElement elm = doc.SelectSingleNode("description") as XmlElement;
+            XmlNode elm = doc.DocumentElement.SelectSingleNode("description");
             return elm.InnerText; 
         }
 
         private string SetConfigDescription(string config, string description)
         {
+            // XmlDocument does not support XML version 1.1
+            config = config.Replace("<?xml version=\"1.1\"", "<?xml version=\"1.0\"");
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(config);
-            XmlElement elm = doc.SelectSingleNode("description") as XmlElement;
+            XmlElement elm = doc.DocumentElement.SelectSingleNode("description") as XmlElement;
             elm.InnerText = description;
-            return doc.ToString();
+            return doc.OuterXml;
         }
 
         [TestMethod]
@@ -343,10 +348,6 @@ namespace JenkinsTest
             Assert.IsNotNull(freeStyleJob, nameof(freeStyleJob));
             Assert.IsFalse(exists, nameof(exists));
         }
-
-        
-
-        
 
         [TestMethod]
         public void JobGetTest()
@@ -449,15 +450,5 @@ namespace JenkinsTest
             Assert.IsNotNull(folderJob);
             Assert.IsNotNull(organizationFolderJob);
         }
-
-        
-
-
-        
-
-       
-
-        
-        
     }
 }

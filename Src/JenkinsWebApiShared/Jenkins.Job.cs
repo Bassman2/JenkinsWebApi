@@ -400,7 +400,7 @@ namespace JenkinsWebApi
         /// <returns>The task object representing the asynchronous operation.</returns>
         public async Task SetJobConfigAsync(string jobName, string config, CancellationToken cancellationToken)
         {
-            await PostAsync($"job/{jobName}/config.xml", cancellationToken);
+            await PostAsync($"job/{jobName}/config.xml", new StringContent(config), cancellationToken);
         }
 
         /// <summary>
