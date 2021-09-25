@@ -106,12 +106,7 @@ namespace JenkinsWebApi
             using (HttpResponseMessage response = await this.client.GetAsync(path + apiFormat, cancellationToken))
             {
                 response.EnsureSuccess();
-                string str = await response.Content.ReadAsStringAsync(
-#if NET
-                    cancellationToken
-#endif
-                    );
-                T value = JenkinsDeserializer.Deserialize<T>(str);
+                T value = await response.Content.ReadAsAsync<T>(cancellationToken);
                 return value;
             }
         }
@@ -121,12 +116,7 @@ namespace JenkinsWebApi
             using (HttpResponseMessage response = await this.client.GetAsync(path + apiFormat, cancellationToken))
             {
                 response.EnsureSuccess();
-                string str = await response.Content.ReadAsStringAsync(
-#if NET
-                    cancellationToken
-#endif
-                    );
-                T value = JenkinsDeserializer.DeserializeView<T>(str);
+                T value = await response.Content.ReadAsViewAsync<T>(cancellationToken);
                 return value;
             }
         }
@@ -136,12 +126,7 @@ namespace JenkinsWebApi
             using (HttpResponseMessage response = await this.client.GetAsync(path + apiFormat, cancellationToken))
             {
                 response.EnsureSuccess();
-                string str = await response.Content.ReadAsStringAsync(
-#if NET
-                    cancellationToken
-#endif
-                    );
-                T value = JenkinsDeserializer.DeserializeJob<T>(str);
+                T value = await response.Content.ReadAsJobAsync<T>(cancellationToken);
                 return value;
             }
         }
@@ -151,12 +136,7 @@ namespace JenkinsWebApi
             using (HttpResponseMessage response = await this.client.GetAsync(path + apiFormat, cancellationToken))
             {
                 response.EnsureSuccess();
-                string str = await response.Content.ReadAsStringAsync(
-#if NET
-                    cancellationToken
-#endif
-                    );
-                T value = JenkinsDeserializer.DeserializeBuild<T>(str);
+                T value = await response.Content.ReadAsBuildAsync<T>(cancellationToken);
                 return value;
             }
         }
@@ -170,12 +150,7 @@ namespace JenkinsWebApi
                     return null;
                 }
                 response.EnsureSuccess();
-                string str = await response.Content.ReadAsStringAsync(
-#if NET
-                    cancellationToken
-#endif
-                    );
-                T value = JenkinsDeserializer.Deserialize<T>(str);
+                T value = await response.Content.ReadAsAsync<T>(cancellationToken);
                 return value;
             }
         }
