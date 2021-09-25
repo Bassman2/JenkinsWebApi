@@ -34,7 +34,6 @@ namespace JenkinsWebApi
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Jenkins job data</returns>
         /// <remarks><include file="Comments.xml" path="comments/comment[@id='job']/*"/></remarks>
-        //  
         public async Task<JenkinsModelAbstractItem> GetJobAsync(string jobName, CancellationToken cancellationToken)
         {
             if (string.IsNullOrEmpty(jobName))
@@ -42,8 +41,7 @@ namespace JenkinsWebApi
                 throw new ArgumentNullException(nameof(jobName));
             }
 
-            string str = await GetApiStringAsync($"job/{jobName}", cancellationToken);
-            JenkinsModelAbstractItem job = JenkinsDeserializer.DeserializeJob<JenkinsModelAbstractItem>(str);
+            JenkinsModelAbstractItem job = await GetApiJobAsync<JenkinsModelAbstractItem>($"job/{jobName}", cancellationToken);
             return job;
         }
 
@@ -74,8 +72,7 @@ namespace JenkinsWebApi
                 throw new ArgumentNullException(nameof(jobName));
             }
 
-            string str = await GetApiStringAsync($"job/{jobName}", cancellationToken);
-            var job = JenkinsDeserializer.DeserializeJob<T>(str);
+            var job = await GetApiJobAsync<T>($"job/{jobName}", cancellationToken);
             return job;
         }
 
@@ -221,8 +218,7 @@ namespace JenkinsWebApi
 
             while (!cancellationToken.IsCancellationRequested)
             {
-                string str = await GetApiStringAsync(buildUrl.ToString(), cancellationToken);
-                JenkinsModelRun run = JenkinsDeserializer.DeserializeBuild<JenkinsModelRun>(str);
+                JenkinsModelRun run = await GetApiBuildAsync<JenkinsModelRun>(buildUrl.ToString(), cancellationToken);
                 Debug.WriteLine($"modelRun: IsBuilding={run.IsBuilding} IsKeepLog ={run.IsKeepLog} Result={run.Result}");
                 UpdateProgress(ref last, progress, jobName, jobUrl, run);
                 Console.WriteLine($"IsBuilding: {run.IsBuilding}");

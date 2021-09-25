@@ -25,13 +25,13 @@ namespace JenkinsTest
             // Act
             using (Jenkins jenkins = new Jenkins(this.host, this.login, this.password))
             {
-                freeStyleBuild = jenkins.GetLastBuildAsync("Freestyle Test Pure").Result as JenkinsModelFreeStyleBuild;
-                //externalBuild = jenkins.GetBuildAsync("External Job", 1).Result as JenkinsBuildExternal;
+                freeStyleBuild = jenkins.GetLastBuildAsync("Freestyle").Result as JenkinsModelFreeStyleBuild;
+                //externalBuild = jenkins.GetBuildAsync("ExternalJob", 1).Result as JenkinsBuildExternal;
                 matrixBuild = jenkins.GetBuildAsync("Multiconfiguration", 1).Result as JenkinsMatrixMatrixBuild;
                 workflowBuild = jenkins.GetBuildAsync("Pipeline", 1).Result as JenkinsJenkinsciWorkflowRun;
-                //multiBranchBuild = jenkins.GetBuildAsync("Multibranch", 1).Result as JenkinsBuildWorkflowMultiBranch;
+                //multiBranchBuild = jenkins.GetBuildAsync("MultibranchPipeline", 1).Result as JenkinsBuildWorkflowMultiBranch;
                 //folderBuild = jenkins.GetBuildAsync("Folder", 1).Result as JenkinsBuildFolder;
-                //organizationFolderBuild = jenkins.GetBuildAsync("GitHub", 1).Result as JenkinsBuildOrganizationFolder;
+                //organizationFolderBuild = jenkins.GetBuildAsync("GitHubOrganization", 1).Result as JenkinsBuildOrganizationFolder;
             }
 
             // Assert
@@ -60,20 +60,20 @@ namespace JenkinsTest
             // Act
             using (Jenkins jenkins = new Jenkins(this.host, this.login, this.password))
             {
-                freeStyleBuild = jenkins.GetLastBuildAsync<JenkinsModelFreeStyleBuild>("Freestyle Test Pure").Result;
-                //externalBuild = jenkins.GetBuildAsync("External Job", 1).Result as JenkinsBuildExternal;
+                freeStyleBuild = jenkins.GetLastBuildAsync<JenkinsModelFreeStyleBuild>("Freestyle").Result;
+                //externalBuild = jenkins.GetBuildAsync("ExternalJob", 1).Result as JenkinsBuildExternal;
                 matrixBuild = jenkins.GetBuildAsync<JenkinsMatrixMatrixBuild>("Multiconfiguration", 1).Result;
                 workflowBuild = jenkins.GetBuildAsync<JenkinsJenkinsciWorkflowRun>("Pipeline", 1).Result;
-                //multiBranchBuild = jenkins.GetBuildAsync("Multibranch", 1).Result as JenkinsBuildWorkflowMultiBranch;
+                //multiBranchBuild = jenkins.GetBuildAsync("MultibranchPipeline", 1).Result as JenkinsBuildWorkflowMultiBranch;
                 //folderBuild = jenkins.GetBuildAsync("Folder", 1).Result as JenkinsBuildFolder;
-                //organizationFolderBuild = jenkins.GetBuildAsync("GitHub", 1).Result as JenkinsBuildOrganizationFolder;
+                //organizationFolderBuild = jenkins.GetBuildAsync("GitHubOrganization", 1).Result as JenkinsBuildOrganizationFolder;
             }
 
             // Assert
             Assert.IsNotNull(freeStyleBuild);
             //Assert.IsNotNull(externalBuild);
             Assert.IsNotNull(matrixBuild);
-            //Assert.IsNotNull(workflowBuild);
+            Assert.IsNotNull(workflowBuild);
             //Assert.IsNotNull(multiBranchBuild);
             //Assert.IsNotNull(folderBuild);
             //Assert.IsNotNull(organizationFolderBuild);

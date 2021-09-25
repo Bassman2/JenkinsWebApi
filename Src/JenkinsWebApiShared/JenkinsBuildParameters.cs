@@ -222,7 +222,5 @@ namespace JenkinsWebApi
             /// </summary>
             Stream
         }
-
-        
     }
 }

@@ -116,6 +116,51 @@ namespace JenkinsWebApi
             }
         }
 
+        private async Task<T> GetApiViewAsync<T>(string path, CancellationToken cancellationToken) where T : JenkinsModelView
+        {
+            using (HttpResponseMessage response = await this.client.GetAsync(path + apiFormat, cancellationToken))
+            {
+                response.EnsureSuccess();
+                string str = await response.Content.ReadAsStringAsync(
+#if NET
+                    cancellationToken
+#endif
+                    );
+                T value = JenkinsDeserializer.DeserializeView<T>(str);
+                return value;
+            }
+        }
+
+        private async Task<T> GetApiJobAsync<T>(string path, CancellationToken cancellationToken) where T : JenkinsModelAbstractItem
+        {
+            using (HttpResponseMessage response = await this.client.GetAsync(path + apiFormat, cancellationToken))
+            {
+                response.EnsureSuccess();
+                string str = await response.Content.ReadAsStringAsync(
+#if NET
+                    cancellationToken
+#endif
+                    );
+                T value = JenkinsDeserializer.DeserializeJob<T>(str);
+                return value;
+            }
+        }
+
+        private async Task<T> GetApiBuildAsync<T>(string path, CancellationToken cancellationToken) where T : JenkinsModelRun
+        {
+            using (HttpResponseMessage response = await this.client.GetAsync(path + apiFormat, cancellationToken))
+            {
+                response.EnsureSuccess();
+                string str = await response.Content.ReadAsStringAsync(
+#if NET
+                    cancellationToken
+#endif
+                    );
+                T value = JenkinsDeserializer.DeserializeBuild<T>(str);
+                return value;
+            }
+        }
+
         private async Task<T> GetApiAsync<T>(string path, HttpStatusCode ignoreStatusCode, CancellationToken cancellationToken) where T : class
         {
             using (HttpResponseMessage response = await this.client.GetAsync(path + apiFormat, cancellationToken))

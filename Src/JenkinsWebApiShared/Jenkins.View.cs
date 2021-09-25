@@ -34,8 +34,7 @@ namespace JenkinsWebApi
                 throw new ArgumentNullException(nameof(viewName));
             }
 
-            string str = await GetApiStringAsync($"view/{viewName}", cancellationToken);
-            JenkinsModelView view = JenkinsDeserializer.DeserializeView<JenkinsModelView>(str);
+            JenkinsModelView view = await GetApiViewAsync<JenkinsModelView>($"view/{viewName}", cancellationToken);
             return view;
         }
 
@@ -66,8 +65,7 @@ namespace JenkinsWebApi
                 throw new ArgumentNullException(nameof(viewName));
             }
 
-            string str = await GetApiStringAsync($"view/{viewName}", cancellationToken);
-            var view = JenkinsDeserializer.DeserializeView<T>(str);
+            T view = await GetApiViewAsync<T>($"view/{viewName}", cancellationToken);
             return view;
         }
 
@@ -161,8 +159,6 @@ namespace JenkinsWebApi
         public async Task SetViewConfigAsync(string viewName, string config, CancellationToken cancellationToken)
         {
             await PostAsync($"/view/{viewName}/config.xml", cancellationToken);
-
         }
-
     }
 }

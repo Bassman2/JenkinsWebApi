@@ -50,7 +50,6 @@ namespace JenkinsWebApi.Internal
 
         private static T Deserialize<T>(string text, Dictionary<string, Type> classTypes) where T : class
         {
-
             var xmlDocument = new XmlDocument();
             xmlDocument.LoadXml(text);
             var typeValue = xmlDocument.DocumentElement.GetAttribute("_class");
@@ -59,7 +58,7 @@ namespace JenkinsWebApi.Internal
             {
                 return new XmlSerializer(type).Deserialize(new StringReader(text)) as T;
             }
-            
+
             return default;
         }
     }
