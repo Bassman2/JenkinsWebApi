@@ -28,7 +28,7 @@
   </metadata>
   <files>
     <file src="JenkinsWebApiLicense.txt" target="content" />
-    <file src="..\Doc\JenkinsWebApiDoc\Help\JenkinsWebApiDoc.chm" target="content" />
+    <file src="..\Doc\JenkinsWebApiDoc\Help\JenkinsWebApi.chm" target="content" />
 	<file src="..\Src\JenkinsWebApi50\bin\Release\net5.0\**" target="lib/net5.0" />	
 	<file src="..\Src\JenkinsWebApiFwk45\bin\Release\**" target="lib/net45" />	
 	<file src="..\Src\JenkinsWebApiCore20\bin\Release\netcoreapp2.0\**" target="lib/netcoreapp2.0" />

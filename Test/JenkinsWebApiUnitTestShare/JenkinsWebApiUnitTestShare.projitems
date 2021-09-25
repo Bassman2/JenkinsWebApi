@@ -17,8 +17,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)JenkinsWebApiAsyncReportUnitTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JenkinsWebApiAsyncUserUnitTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JenkinsWebApiAsyncViewUnitTest.cs" />
-    <Compile Include="..\JenkinsWebApiUnitTestShare\JenkinsWebApiAsyncSystemUnitTest.cs" />
-    <Compile Include="..\JenkinsWebApiUnitTestShare\JenkinsWebApiAsyncJobUnitTest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JenkinsWebApiAsyncSystemUnitTest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JenkinsWebApiAsyncJobUnitTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JenkinsWebApiBaseUnitTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JenkinsWebApiDomUnitTest.cs" />
   </ItemGroup>
