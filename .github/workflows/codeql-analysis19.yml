@@ -1,4 +1,4 @@
-name: "CodeQL"
+name: CodeQL 2019
 
 on:
   push:
@@ -81,15 +81,11 @@ jobs:
 
     - name: restore
       working-directory: .
-      run: nuget restore JenkinsWebApi.sln
-           #$env:SHFBROOT="C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\"
-           
+      run: nuget restore JenkinsWebApi19.sln
 
     - name: MSBuild of solution
       working-directory: .
-      run: msbuild JenkinsWebApi.sln /p:configuration="Release" /verbosity:minimal
-           #$env:SHFBROOT = "C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\"
-           
+      run: msbuild JenkinsWebApi19.sln /p:configuration="Release" /verbosity:minimal
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v1
