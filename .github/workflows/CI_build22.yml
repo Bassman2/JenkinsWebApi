@@ -11,9 +11,13 @@ jobs:
         build_configuration: [Release, Debug]
     env:
       SHFBROOT: C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\
-      PATH: C:\Program Files\Microsoft Visual Studio\2022\Preview\MSBuild\Current\Bin;%PATH%
+#      PATH: C:\Program Files\Microsoft Visual Studio\2022\Preview\MSBuild\Current\Bin;%PATH%
 
     steps:
+    - name: Append Path
+      run: echo "C:\Program Files\Microsoft Visual Studio\2022\Preview\MSBuild\Current\Bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+      shell: pwsh
+
     - name: Show Path
       run: echo %PATH%
       shell: cmd
