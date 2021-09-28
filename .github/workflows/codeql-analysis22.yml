@@ -81,7 +81,8 @@ jobs:
            Copy-Item  DummySignKey.snk -Destination Src\JenkinsWebApi50\Bassman.snk
            Copy-Item  DummySignKey.snk -Destination Src\JenkinsWebApiCore31\Bassman.snk
            Copy-Item  DummySignKey.snk -Destination Src\JenkinsWebApiCore21\Bassman.snk
-           Copy-Item  DummySignKey.snk -Destination Src\JenkinsWebApiFramework45\Bassman.snk
+           Copy-Item  DummySignKey.snk -Destination Src\JenkinsWebApiFwk45\Bassman.snk
+           Copy-Item  DummySignKey.snk -Destination Src\JenkinsWebApiFwk48\Bassman.snk
 
     - name: restore
       working-directory: .
