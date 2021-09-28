@@ -12,15 +12,19 @@ namespace JenkinsTest
         {
             // Arrange
             JenkinsModelHudson server = null;
+            JenkinsModelUser user = null;
 
             // Act
             using (Jenkins jenkins = new Jenkins(this.host, this.login, this.password))
             {
                 server = jenkins.GetServerAsync().Result;
+                user = jenkins.GetCurrentUserAsync().Result;
             }
 
             // Assert
             Assert.IsNotNull(server);
+            Assert.IsNotNull(user);
+            Assert.AreEqual(login, user.FullName, nameof(user.FullName));
         }
 
         [TestMethod]
@@ -28,15 +32,19 @@ namespace JenkinsTest
         {
             // Arrange
             JenkinsModelHudson server = null;
+            JenkinsModelUser user = null;
 
             // Act
             using (Jenkins jenkins = new Jenkins(this.host, this.login, this.token))
             {
                 server = jenkins.GetServerAsync().Result;
+                user = jenkins.GetCurrentUserAsync().Result;
             }
 
             // Assert
             Assert.IsNotNull(server);
+            Assert.IsNotNull(user);
+            Assert.AreEqual(login, user.FullName, nameof(user.FullName));
         }
 
         [TestMethod]
@@ -44,16 +52,20 @@ namespace JenkinsTest
         {
             // Arrange
             JenkinsModelHudson server = null;
+            JenkinsModelUser user = null;
 
             // Act
             using (Jenkins jenkins = new Jenkins(this.host))
             {
                 jenkins.Login(this.login, this.password);
                 server = jenkins.GetServerAsync().Result;
+                user = jenkins.GetCurrentUserAsync().Result;
             }
 
             // Assert
             Assert.IsNotNull(server);
+            Assert.IsNotNull(user);
+            Assert.AreEqual(login, user.FullName, nameof(user.FullName));
         }
 
         [TestMethod]

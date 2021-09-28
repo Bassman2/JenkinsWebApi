@@ -1,4 +1,7 @@
-﻿using System.Net;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
 using System.Net.Http;
 
 namespace JenkinsWebApi.Internal
@@ -44,6 +47,29 @@ namespace JenkinsWebApi.Internal
                 throw new JenkinsNotFoundException(response);
             default:
                 throw new JenkinsException(response);
+            }
+        }
+
+        internal static void EnsureSuccess(this HttpResponseMessage response, IEnumerable<HttpStatusCode> ignoreStatusCodes)
+        {
+            if (response.IsSuccessStatusCode)
+            {
+                return;
+            }
+            if (ignoreStatusCodes.Contains(response.StatusCode))
+            {
+                return;
+            }
+            switch (response.StatusCode)
+            {
+                case HttpStatusCode.Forbidden:
+                    throw new JenkinsForbiddenException(response);
+                case HttpStatusCode.Unauthorized:
+                    throw new JenkinsUnauthorizedException(response);
+                case HttpStatusCode.NotFound:
+                    throw new JenkinsNotFoundException(response);
+                default:
+                    throw new JenkinsException(response);
             }
         }
     }

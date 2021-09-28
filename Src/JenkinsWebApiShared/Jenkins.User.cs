@@ -1,4 +1,5 @@
 ﻿using JenkinsWebApi.Model;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -86,7 +87,7 @@ namespace JenkinsWebApi
         /// <returns>Jenkins user data</returns>
         public async Task<JenkinsModelUser> GetCurrentUserAsync(CancellationToken cancellationToken)
         {
-            JenkinsModelUser user = await GetApiAsync<JenkinsModelUser>("me", cancellationToken);
+            JenkinsModelUser user = await GetApiAsync<JenkinsModelUser>("me", HttpStatusCode.Forbidden,  cancellationToken);
             return user;
         }
     }

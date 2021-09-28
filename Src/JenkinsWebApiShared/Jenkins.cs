@@ -75,8 +75,10 @@ namespace JenkinsWebApi
             // set authorization
             Authorize(login, passwordOrToken);
 
+            return GetServerAsync().Result != null;
             // check if login success            
-            return GetCurrentUserAsync().Result != null;
+            // 
+            //return GetCurrentUserAsync().Result != null;
         }
     }
 }

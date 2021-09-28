@@ -109,7 +109,7 @@ namespace JenkinsTest
             Assert.AreEqual(JenkinsRunStatus.Stuck, progress.Status, nameof(progress.Status));
         }
 
-        //[TestMethod]
+        [TestMethod]
         public void JobRunPeningTest()
         {
             // Arrange
@@ -119,7 +119,7 @@ namespace JenkinsTest
             // Act
             using (Jenkins jenkins = new Jenkins(host, this.login, this.password))
             {
-                longRun = jenkins.RunJobAsync("FreestyleRun1h", null, new JenkinsRunConfig() { RunMode = JenkinsRunMode.Started }, null, CancellationToken.None).Result;
+                longRun = jenkins.RunJobAsync("FreestyleRun1h", null, new JenkinsRunConfig() { RunMode = JenkinsRunMode.Started }, null).Result;
                 
                 progress = jenkins.RunJobAsync("Freestyle").Result;
 
@@ -213,9 +213,9 @@ namespace JenkinsTest
             // Act
             using (Jenkins jenkins = new Jenkins(host, this.login, this.password))
             {
-                jenkins.DisableJobAsync("FreestyleDisableEnable", CancellationToken.None).Wait();
+                jenkins.DisableJobAsync("FreestyleDisableEnable").Wait();
                 freeStyleJobDisabled = jenkins.GetJobAsync<JenkinsModelFreeStyleProject>("FreestyleDisableEnable").Result;
-                jenkins.EnableJobAsync("FreestyleDisableEnable", CancellationToken.None).Wait();
+                jenkins.EnableJobAsync("FreestyleDisableEnable").Wait();
                 freeStyleJobEnabled = jenkins.GetJobAsync<JenkinsModelFreeStyleProject>("FreestyleDisableEnable").Result;
             }
 
@@ -237,11 +237,11 @@ namespace JenkinsTest
             // Act
             using (Jenkins jenkins = new Jenkins(host, this.login, this.password))
             {
-                jenkins.SetJobDescriptionAsync("FreestyleDescription", "Default Description", CancellationToken.None).Wait();
-                descriptionDef = jenkins.GetJobDescriptionAsync("FreestyleDescription", CancellationToken.None).Result;
-                jenkins.SetJobDescriptionAsync("FreestyleDescription", "Test Description", CancellationToken.None).Wait();
-                descriptionTst = jenkins.GetJobDescriptionAsync("FreestyleDescription", CancellationToken.None).Result;
-                jenkins.SetJobDescriptionAsync("FreestyleDescription", "Default Description", CancellationToken.None).Wait();
+                jenkins.SetJobDescriptionAsync("FreestyleDescription", "Default Description").Wait();
+                descriptionDef = jenkins.GetJobDescriptionAsync("FreestyleDescription").Result;
+                jenkins.SetJobDescriptionAsync("FreestyleDescription", "Test Description").Wait();
+                descriptionTst = jenkins.GetJobDescriptionAsync("FreestyleDescription").Result;
+                jenkins.SetJobDescriptionAsync("FreestyleDescription", "Default Description").Wait();
             }
 
             // Assert
@@ -262,15 +262,15 @@ namespace JenkinsTest
             // Act
             using (Jenkins jenkins = new Jenkins(host, this.login, this.password))
             {
-                orgConfig = jenkins.GetJobConfigAsync("FreestyleConfig", CancellationToken.None).Result;
+                orgConfig = jenkins.GetJobConfigAsync("FreestyleConfig").Result;
                 descOrg = GetConfigDescription(orgConfig);
 
                 cngConfig = SetConfigDescription(orgConfig, "Test Description");
-                jenkins.SetJobConfigAsync("FreeStyleConfig", cngConfig, CancellationToken.None).Wait();
-                updConfig = jenkins.GetJobConfigAsync("FreeStyleConfig", CancellationToken.None).Result;
+                jenkins.SetJobConfigAsync("FreeStyleConfig", cngConfig).Wait();
+                updConfig = jenkins.GetJobConfigAsync("FreeStyleConfig").Result;
                 descCng = GetConfigDescription(updConfig);
                 
-                jenkins.SetJobConfigAsync("FreeStyleConfig", orgConfig, CancellationToken.None).Wait();
+                jenkins.SetJobConfigAsync("FreeStyleConfig", orgConfig).Wait();
             }
 
             // Assert

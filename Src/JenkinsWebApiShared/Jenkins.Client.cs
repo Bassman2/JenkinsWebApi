@@ -55,14 +55,39 @@ namespace JenkinsWebApi
             // set authorization
             if (!string.IsNullOrEmpty(login) && !string.IsNullOrEmpty(passwordOrToken))
             {
-                this.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.ASCII.GetBytes($"{login}:{passwordOrToken}")));
+                Authorize(login, passwordOrToken);
+                //this.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.ASCII.GetBytes($"{login}:{passwordOrToken}")));
 
-                Crumb();
+                //Crumb();
             }
             else
             {
-                // ignore Forbidden for later login
+                // needed for anonymus but ignore Forbidden for later login
                 Crumb(true);
+            }
+        }
+
+        private void Authorize(string login, string passwordOrToken)
+        {
+            // set authorization
+            this.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.ASCII.GetBytes($"{login}:{passwordOrToken}")));
+
+            // set crumb
+            Crumb();
+        }
+
+        private void Crumb(bool ignoreForbidden = false)
+        {
+            var ignoreList = new List<HttpStatusCode>();
+            ignoreList.Add(HttpStatusCode.NotFound); // 404 not found : for old Jenkins versionen without crumb
+            if (ignoreForbidden)
+            {
+                ignoreList.Add(HttpStatusCode.Forbidden);
+            }
+            JenkinsSecurityCsrfDefaultCrumbIssuer crumb = GetApiAsync<JenkinsSecurityCsrfDefaultCrumbIssuer>("crumbIssuer", ignoreList, CancellationToken.None).Result;
+            if (crumb != null)
+            {
+                this.client.DefaultRequestHeaders.Add(crumb.CrumbRequestField, crumb.Crumb);
             }
         }
 
@@ -80,24 +105,6 @@ namespace JenkinsWebApi
             {
                 this.handler.Dispose();
                 this.handler = null;
-            }
-        }
-
-        private void Authorize(string login, string passwordOrToken)
-        {
-            // set authorization
-            this.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.ASCII.GetBytes($"{login}:{passwordOrToken}")));
-
-            // set crumb
-            Crumb();
-        }
-
-        private void Crumb(bool ignoreForbidden = false)
-        {
-            JenkinsSecurityCsrfDefaultCrumbIssuer crumb = GetApiAsync<JenkinsSecurityCsrfDefaultCrumbIssuer>("crumbIssuer", ignoreForbidden ? HttpStatusCode.Forbidden : 0, CancellationToken.None).Result;
-            if (crumb != null)
-            {
-                this.client.DefaultRequestHeaders.Add(crumb.CrumbRequestField, crumb.Crumb);
             }
         }
 
@@ -145,12 +152,20 @@ namespace JenkinsWebApi
         {
             using (HttpResponseMessage response = await this.client.GetAsync(path + apiFormat, cancellationToken))
             {
-                if (response.StatusCode == ignoreStatusCode)
-                {
-                    return null;
-                }
-                response.EnsureSuccess();
+                response.EnsureSuccess(ignoreStatusCode);
                 T value = await response.Content.ReadAsAsync<T>(cancellationToken);
+                return value;
+            }
+        }
+
+        
+        private async Task<T> GetApiAsync<T>(string path, IEnumerable<HttpStatusCode> ignoreStatusCodes, CancellationToken cancellationToken) where T : class
+        {
+            using (HttpResponseMessage response = await this.client.GetAsync(path + apiFormat, cancellationToken))
+            {
+                
+                response.EnsureSuccess(ignoreStatusCodes);
+                T value = response.StatusCode == HttpStatusCode.OK ? await response.Content.ReadAsAsync<T>(cancellationToken) : null;
                 return value;
             }
         }
