@@ -54,7 +54,7 @@ jobs:
     #   make release
 
     - name: Add msbuild to PATH
-      uses: microsoft/setup-msbuild@v1
+      uses: microsoft/setup-msbuild@v1.1.3
 
     - name: "Download and install sandcastle"
       run: |
