@@ -16,7 +16,7 @@
   <Import Project="..\JenkinsWebApiShared\JenkinsWebApiShared.projitems" Label="Shared" />
 
   <ItemGroup>
-    <PackageReference Include="System.Net.Http.Json" Version="6.0.0" />
+    <PackageReference Include="System.Net.Http.Json" Version="7.0.0" />
   </ItemGroup>
 
 </Project>
