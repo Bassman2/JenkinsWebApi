@@ -75,10 +75,14 @@ jobs:
       run: |
            Copy-Item  DummySignKey.snk -Destination Src\JenkinsWebApi60\Bassman.snk
            Copy-Item  DummySignKey.snk -Destination Src\JenkinsWebApi50\Bassman.snk
-           Copy-Item  DummySignKey.snk -Destination Src\JenkinsWebApiCore31\Bassman.snk
+           Copy-Item  DummySignKey.snk -Destination Src\JenkinsWebApiCore20\Bassman.snk
            Copy-Item  DummySignKey.snk -Destination Src\JenkinsWebApiCore21\Bassman.snk
+           Copy-Item  DummySignKey.snk -Destination Src\JenkinsWebApiCore30\Bassman.snk
+           Copy-Item  DummySignKey.snk -Destination Src\JenkinsWebApiCore31\Bassman.snk
            Copy-Item  DummySignKey.snk -Destination Src\JenkinsWebApiFwk45\Bassman.snk
-           Copy-Item  DummySignKey.snk -Destination Src\JenkinsWebApiFwk48\Bassman.snk
+           Copy-Item  DummySignKey.snk -Destination Src\JenkinsWebApiStd20\Bassman.snk
+           Copy-Item  DummySignKey.snk -Destination Src\JenkinsWebApiStd21\Bassman.snk
+           Copy-Item  DummySignKey.snk -Destination Src\JenkinsWebApiUwp\Bassman.snk
 
     - name: restore
       working-directory: .
