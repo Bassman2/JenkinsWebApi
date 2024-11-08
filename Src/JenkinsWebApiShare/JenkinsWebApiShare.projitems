@@ -168,6 +168,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Model\JenkinsNodeMonitorsSwapSpaceMonitor.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\JenkinsNodeMonitorsTemporarySpaceMonitor.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\JenkinsResult.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Usings.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Jenkins.Plugins.cs" />
