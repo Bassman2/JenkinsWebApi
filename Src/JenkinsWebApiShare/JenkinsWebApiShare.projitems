@@ -11,6 +11,7 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Internal\JenkinsDeserializer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internal\JenkinsRun.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\JenkinsService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internal\JsonConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internal\PostRunRes.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internal\SerializableClassAttribute.cs" />
@@ -184,5 +185,8 @@
       <SubType>Designer</SubType>
     </None>
     <Compile Include="$(MSBuildThisFileDirectory)Jenkins.MyView.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Internal\Model\" />
   </ItemGroup>
 </Project>
