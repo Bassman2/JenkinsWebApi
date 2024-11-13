@@ -1,6 +1,6 @@
 @echo off
 
-set JENKINSURL=http://tiny:8080
+set JENKINSURL=http://Notebook
 set JENKINSUSER=Tester:tester 
 
 rem -----------------------------------------------------------------------------------------------

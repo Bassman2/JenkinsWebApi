@@ -9,22 +9,22 @@ namespace JenkinsWebApi.Model
     public partial class JenkinsModelJob : JenkinsModelAbstractItem
     {
         [XmlElement("allBuild")]
-        public JenkinsModelRun[] AllBuilds { get; set; }
+        public JenkinsModelRun[]? AllBuilds { get; set; }
 
         [XmlElement("buildable")]
         public bool IsBuildable { get; set; }
 
         [XmlElement("build")]
-        public JenkinsModelRun[] Builds { get; set; }
+        public JenkinsModelRun[]? Builds { get; set; }
 
         [XmlElement("color")]
         public JenkinsModelBallColor Color { get; set; }
 
         [XmlElement("firstBuild")]
-        public JenkinsModelRun FirstBuild { get; set; }
+        public JenkinsModelRun? FirstBuild { get; set; }
 
         [XmlElement("healthReport")]
-        public JenkinsModelHealthReport[] HealthReports { get; set; }
+        public JenkinsModelHealthReport[]? HealthReports { get; set; }
 
         [XmlElement("inQueue")]
         public bool IsInQueue { get; set; }
@@ -33,34 +33,34 @@ namespace JenkinsWebApi.Model
         public bool IsKeepDependencies { get; set; }
 
         [XmlElement("lastBuild")]
-        public JenkinsModelRun LastBuild { get; set; }
+        public JenkinsModelRun? LastBuild { get; set; }
 
         [XmlElement("lastCompletedBuild")]
-        public JenkinsModelRun LastCompletedBuild { get; set; }
+        public JenkinsModelRun? LastCompletedBuild { get; set; }
 
         [XmlElement("lastFailedBuild")]
-        public JenkinsModelRun LastFailedBuild { get; set; }
+        public JenkinsModelRun? LastFailedBuild { get; set; }
 
         [XmlElement("lastStableBuild")]
-        public JenkinsModelRun LastStableBuild { get; set; }
+        public JenkinsModelRun? LastStableBuild { get; set; }
 
         [XmlElement("lastSuccessfulBuild")]
-        public JenkinsModelRun LastSuccessfulBuild { get; set; }
+        public JenkinsModelRun? LastSuccessfulBuild { get; set; }
 
         [XmlElement("lastUnstableBuild")]
-        public JenkinsModelRun LastUnstableBuild { get; set; }
+        public JenkinsModelRun? LastUnstableBuild { get; set; }
 
         [XmlElement("lastUnsuccessfulBuild")]
-        public JenkinsModelRun LastUnsuccessfulBuild { get; set; }
+        public JenkinsModelRun? LastUnsuccessfulBuild { get; set; }
 
         [XmlElement("nextBuildNumber")]
         public int NextBuildNumber { get; set; }
 
         [XmlElement("property")]
-        public JenkinsModelJobProperty[] Propertys { get; set; }
+        public JenkinsModelJobProperty[]? Propertys { get; set; }
 
         [XmlElement("queueItem")]
-        public JenkinsModelQueueItem QueueItem { get; set; }
+        public JenkinsModelQueueItem? QueueItem { get; set; }
 
     }
 }

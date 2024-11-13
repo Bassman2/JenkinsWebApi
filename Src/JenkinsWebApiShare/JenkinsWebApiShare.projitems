@@ -9,15 +9,15 @@
     <Import_RootNamespace>JenkinsWebApi</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)Internal\JenkinsDeserializer.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Internal\JenkinsRun.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Internal\JenkinsService.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Internal\JsonConverter.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Internal\PostRunRes.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Internal\SerializableClassAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\JenkinsDeserializer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\JenkinsRun.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\JenkinsService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\JsonConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\PostRunRes.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\SerializableClassAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Jenkins.Client.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Internal\MessageEnsure.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Internal\XmlConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\MessageEnsure.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\XmlConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Jenkins.Build.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Jenkins.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Jenkins.Groovy.cs" />
@@ -187,6 +187,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Jenkins.MyView.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)Internal\Model\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Service\" />
   </ItemGroup>
 </Project>
