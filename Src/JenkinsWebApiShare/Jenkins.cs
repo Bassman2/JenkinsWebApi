@@ -1,84 +1,108 @@
-﻿using System;
+﻿namespace JenkinsWebApi;
 
-namespace JenkinsWebApi
+/// <summary>
+/// Main class of the Jenkins server API
+/// </summary>
+public sealed partial class Jenkins(Uri uri, string apiKey) : IDisposable
 {
-    /// <summary>
-    /// Main class of the Jenkins server API
-    /// </summary>
-    public sealed partial class Jenkins 
+    private JenkinsService? service = new(uri, apiKey);
+
+    public void Dispose()
     {
-        /// <summary>
-        /// JobRunAsync progress event.
-        /// </summary>
-        public event EventHandler<JenkinsRunProgress> RunProgress;
-
-        /// <summary>
-        /// JobRunAsync global configuration.
-        /// </summary>
-        public JenkinsRunConfig RunConfig { get; set; }
-
-        /// <summary>
-        /// Initializes a new instance of the Jenkins class.
-        /// </summary>
-        /// <param name="host">Host URL of the Jenkins server.</param>
-        public Jenkins(string host) : this(new Uri(host), null, null)
-        { }
-
-        /// <summary>
-        /// Initializes a new instance of the Jenkins class.
-        /// </summary>
-        /// <param name="host">Host URL of the Jenkins server.</param>
-        public Jenkins(Uri host) : this(host, null, null)
-        { }
-
-        /// <summary>
-        /// Initializes a new instance of the Jenkins class.
-        /// </summary>
-        /// <param name="host">Host URL of the Jenkins server.</param>
-        /// <param name="login">Login for the Jenkins server.</param>
-        /// <param name="passwordOrToken">Password or API token for the Jenkins server.</param>
-        public Jenkins(string host, string login, string passwordOrToken) : this(new Uri(host), login, passwordOrToken)
-        { }
-
-        /// <summary>
-        /// Initializes a new instance of the Jenkins class.
-        /// </summary>
-        /// <param name="host">Host URL of the Jenkins server.</param>
-        /// <param name="login">Login for the Jenkins server.</param>
-        /// <param name="passwordOrToken">Password or API token for the Jenkins server.</param>
-        public Jenkins(Uri host, string login, string passwordOrToken) 
+        if (this.service != null)
         {
-            Connect(host, login, passwordOrToken);
-
-            // init variables
-            this.RunConfig = new JenkinsRunConfig();
+            this.service.Dispose();
+            this.service = null;
         }
-
-        /// <summary>
-        /// Login to the Jenkins server.
-        /// </summary>
-        /// <param name="login">Login for the Jenkins server</param>
-        /// <param name="passwordOrToken">Password or API token for the Jenkins server</param>
-        /// <returns>true if login success; false if failed</returns>
-        public bool Login(string login, string passwordOrToken)
-        {
-            if (string.IsNullOrEmpty(login))
-            {
-                throw new ArgumentNullException(nameof(login));
-            }
-
-            if (string.IsNullOrEmpty(passwordOrToken))
-            {
-                throw new ArgumentNullException(nameof(passwordOrToken));
-            }
-
-            // set authorization
-            Authorize(login, passwordOrToken);
-
-            return GetServerAsync().Result != null;
-            // check if login success            
-            // 
-            //return GetCurrentUserAsync().Result != null;
-        }
+        GC.SuppressFinalize(this);
     }
+
+    /// <summary>
+    /// JobRunAsync global configuration.
+    /// </summary>
+    public JenkinsRunConfig? RunConfig { get; set; } = new JenkinsRunConfig();
+
+    /// <summary>
+    /// Run a Jenkins job.
+    /// </summary>
+    /// <param name="jobName">Name of the Jenkins job</param>
+    /// <returns>Result and number of the Jenkins build</returns>
+    public async Task<JenkinsRunProgress> RunJobAsync(string jobName)
+    {
+        WebServiceException.ThrowIfNullOrNotConnected(this.service);
+
+        return await service!.RunJobAsync(jobName, null, RunConfig, null, CancellationToken.None);
+    }
+
+    /// <summary>
+    /// Run a Jenkins job.
+    /// </summary>
+    /// <param name="jobName">Name of the Jenkins job</param>
+    /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+    /// <returns>Result and number of the Jenkins build</returns>
+    public async Task<JenkinsRunProgress> RunJobAsync(string jobName, CancellationToken cancellationToken = default)
+    {
+        WebServiceException.ThrowIfNullOrNotConnected(this.service);
+
+        return await service!.RunJobAsync(jobName, null, RunConfig, null, cancellationToken);
+    }
+
+    /// <summary>
+    /// Run a Jenkins job.
+    /// </summary>
+    /// <param name="jobName">Name of the Jenkins job</param>
+    /// <param name="parameters">Parameters for the Jenkins job</param>
+    /// <returns>Result and number of the Jenkins build</returns>
+    public async Task<JenkinsRunProgress> RunJobAsync(string jobName, JenkinsBuildParameters parameters)
+    {
+        WebServiceException.ThrowIfNullOrNotConnected(this.service);
+
+        return await service!.RunJobAsync(jobName, parameters, RunConfig, null, CancellationToken.None);
+    }
+
+    /// <summary>
+    /// Run a Jenkins job.
+    /// </summary>
+    /// <param name="jobName">Name of the Jenkins job</param>
+    /// <param name="parameters">Parameters for the Jenkins job</param>
+    /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+    /// <returns>Result and number of the Jenkins build</returns>
+    public async Task<JenkinsRunProgress> RunJobAsync(string jobName, JenkinsBuildParameters parameters, CancellationToken cancellationToken = default)
+    {
+        WebServiceException.ThrowIfNullOrNotConnected(this.service);
+
+        return await service!.RunJobAsync(jobName, parameters, RunConfig, null, cancellationToken);
+    }
+
+    /// <summary>
+    /// Run a Jenkins job.
+    /// </summary>
+    /// <param name="jobName">Name of the Jenkins job</param>
+    /// <param name="parameters">Parameters for the Jenkins job</param>
+    /// <param name="runConfig"></param>
+    /// <param name="progress"></param>
+    /// <returns>Result and number of the Jenkins build</returns>
+    public async Task<JenkinsRunProgress> RunJobAsync(string jobName, JenkinsBuildParameters parameters, JenkinsRunConfig? runConfig, IProgress<JenkinsRunProgress> progress)
+    {
+        WebServiceException.ThrowIfNullOrNotConnected(this.service);
+
+        return await service!.RunJobAsync(jobName, parameters, runConfig ?? RunConfig, progress, CancellationToken.None);
+    }
+
+    /// <summary>
+    /// Run a Jenkins job.
+    /// </summary>
+    /// <param name="jobName">Name of the Jenkins job</param>
+    /// <param name="parameters">Parameters for the Jenkins job</param>
+    /// <param name="runConfig"></param>
+    /// <param name="progress"></param>
+    /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+    /// <returns>Result and number of the Jenkins build</returns>
+    public async Task<JenkinsRunProgress> RunJobAsync(string jobName, JenkinsBuildParameters parameters, JenkinsRunConfig? runConfig, IProgress<JenkinsRunProgress> progress, CancellationToken cancellationToken = default)
+    {
+        WebServiceException.ThrowIfNullOrNotConnected(this.service);
+
+        return await service!.RunJobAsync(jobName, parameters, runConfig ?? RunConfig, progress, cancellationToken);
+    }
+
 }
