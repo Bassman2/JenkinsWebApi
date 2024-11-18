@@ -32,10 +32,6 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\Src\JenkinsWebApiCore31\JenkinsWebApiCore31.csproj" />
-  </ItemGroup>
-
   <Import Project="..\JenkinsWebApiUnitTestShare\JenkinsWebApiUnitTestShare.projitems" Label="Shared" />
 
 </Project>

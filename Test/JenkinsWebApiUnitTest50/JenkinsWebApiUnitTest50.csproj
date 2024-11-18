@@ -34,10 +34,6 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\Src\JenkinsWebApi50\JenkinsWebApi50.csproj" />
-  </ItemGroup>
-
   <Import Project="..\JenkinsWebApiUnitTestShare\JenkinsWebApiUnitTestShare.projitems" Label="Shared" />
 
 </Project>
