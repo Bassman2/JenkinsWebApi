@@ -5,35 +5,21 @@
 /// </summary>
 public class JenkinsBuildParameters
 {
-    private readonly List<JenkinsParameter> list;
+    private readonly List<Parameter> list = [];
 
-    /// <summary>
-    /// Constructor
-    /// </summary>
-    public JenkinsBuildParameters()
-    {
-        this.list = new List<JenkinsParameter>();
-    }
-    
     /// <summary>
     /// Add a string parameter.
     /// </summary>
     /// <param name="name">Name of the parameter</param>
     /// <param name="value">Value of the parameter</param>
-    public void Add(string name, string value)
-    {
-        this.list.Add(new JenkinsParameter(name, value));
-    }
+    public void Add(string name, string value) => this.list.Add(new Parameter(name, value));
 
     /// <summary>
     /// Add a boolean parameter.
     /// </summary>
     /// <param name="name">Name of the parameter</param>
     /// <param name="value">Value of the parameter</param>
-    public void Add(string name, bool value)
-    {
-        this.list.Add(new JenkinsParameter(name, value));
-    }
+    public void Add(string name, bool value) => this.list.Add(new Parameter(name, value));
 
     /// <summary>
     /// Add a stream parameter.
@@ -41,47 +27,50 @@ public class JenkinsBuildParameters
     /// <param name="name">Name of the parameter</param>
     /// <param name="stream">Stream of the file to commit</param>
     /// <param name="fileName">Name of the file</param>
-    public void Add(string name, Stream stream, string fileName)
-    {
-        this.list.Add(new JenkinsParameter(name, stream, fileName));
-    }
+    public void Add(string name, Stream stream, string fileName) => this.list.Add(new Parameter(name, stream, fileName));
 
-    private HttpContent GetContent()
+    private HttpContent? GetContent()
     {
-        if (this.list == null || !this.list.Any())
+        if (this.list.Count == 0)
         {
             return null;
         }
-        else if (this.list.Any(p => p.Type == JenkinsParameterType.Stream))
+
+        // create JSON parameter
+        int fileIndex = 0;
+        string values = this.list.Select(p => p.JsonText(ref fileIndex)).Aggregate("", (a,b) => $"{a},{b}");
+        string jsonParams = $"{{\"parameter\": [{values}]}}";
+
+        if (this.list.Any(p => p.Type == ParameterType.Stream))
         {
             // multipart/form-data
 
-            MultipartFormDataContent content = new MultipartFormDataContent();
+            var content = new MultipartFormDataContent();
 
-            StringBuilder json = new StringBuilder();
+            var json = new StringBuilder();
             json.Append("{\"parameter\": [");
 
-            int fileIndex = 0;
+            fileIndex = 0;
             foreach (var para in this.list)
             {
                 switch (para.Type)
                 {
-                case JenkinsParameterType.String:
+                case ParameterType.String:
                     content.Add(new StringContent(para.Name), "name");
-                    content.Add(new StringContent(para.StringValue), "value");
-                    json.Append($"{{\"name\": \"{para.Name}\", \"value\": \"{para.StringValue}\"}}, ");
+                    content.Add(new StringContent(para.Value!), "value");
+                    json.Append($"{{\"name\": \"{para.Name}\", \"value\": \"{para.Value}\"}}, ");
                     break;
 
-                case JenkinsParameterType.Stream:
+                case ParameterType.Stream:
                     content.Add(new StringContent(para.Name), "name");
-                    content.Add(new StreamContent(para.FileStream), $"file{fileIndex}", para.FileName);
+                    content.Add(new StreamContent(para.FileStream!), $"file{fileIndex}", para.Value!);
                     json.Append($"{{\"name\": \"{para.Name}\", \"file\": \"file{fileIndex}\"}}, ");
                     fileIndex++;
                     break;
 
-                case JenkinsParameterType.Boolean:
+                case ParameterType.Boolean:
                     content.Add(new StringContent(para.Name), "name");
-                    if (para.BooleanValue)
+                    if (para.Flag)
                     {
                         content.Add(new StringContent("on"), "value");
                         json.Append($"{{\"name\": \"{para.Name}\", \"value\": true}}, ");
@@ -106,24 +95,24 @@ public class JenkinsBuildParameters
         {
             // application/x-www-form-urlencoded
 
-            List<KeyValuePair<string, string>> param = new List<KeyValuePair<string, string>>();
+            var param = new List<KeyValuePair<string, string>>();
 
-            StringBuilder json = new StringBuilder();
+            var json = new StringBuilder();
             json.Append("{\"parameter\": [");
 
             foreach (var para in this.list)
             {
                 switch (para.Type)
                 {
-                case JenkinsParameterType.String:
+                case ParameterType.String:
                     param.Add(new KeyValuePair<string, string>("name", para.Name));
-                    param.Add(new KeyValuePair<string, string>("value", para.StringValue));
-                    json.Append($"{{\"name\": \"{para.Name}\", \"value\": \"{para.StringValue}\"}}, ");
+                    param.Add(new KeyValuePair<string, string>("value", para.Value!));
+                    json.Append($"{{\"name\": \"{para.Name}\", \"value\": \"{para.Value}\"}}, ");
 
                     break;
-                case JenkinsParameterType.Boolean:
+                case ParameterType.Boolean:
                     param.Add(new KeyValuePair<string, string>("name", para.Name));
-                    if (para.BooleanValue)
+                    if (para.Flag)
                     {
                         param.Add(new KeyValuePair<string, string>("value", "on"));
                         json.Append($"{{\"name\": \"{para.Name}\", \"value\": true}}, ");
@@ -155,50 +144,61 @@ public class JenkinsBuildParameters
     /// <returns>Cast to HttpContent.</returns>
     public static implicit operator HttpContent?(JenkinsBuildParameters param)
     {
-        return param?.GetContent();
+        return param.GetContent();
     }
 
-    private class JenkinsParameter
+    private class Parameter
     {
-        public JenkinsParameter(string name, string value) 
+        public Parameter(string name, string value)
         {
-            this.Type = JenkinsParameterType.String;
+            this.Type = ParameterType.String;
             this.Name = name;
-            this.StringValue = value;
+            this.Value = value;
         }
 
-        public JenkinsParameter(string name, bool value)
+        public Parameter(string name, bool value)
         {
-            this.Type = JenkinsParameterType.Boolean;
+            this.Type = ParameterType.Boolean;
             this.Name = name;
-            this.BooleanValue = value;
+            this.Value = value ? "true" : "false";  // for JSON string
+            this.Flag = value;
         }
 
-        public JenkinsParameter(string name, Stream stream, string fileName) 
+        public Parameter(string name, Stream stream, string fileName)
         {
-            this.Type = JenkinsParameterType.Stream;
+            this.Type = ParameterType.Stream;
             this.Name = name;
+            this.Value = fileName;
             this.FileStream = stream;
-            this.FileName = fileName; 
         }
 
-        internal JenkinsParameterType Type { get;  }
+        internal ParameterType Type { get; }
 
-        internal string Name { get;  }
+        internal string Name { get; }
 
-        internal string? StringValue { get; }
+        internal string Value { get; }
 
-        internal bool BooleanValue { get; }
+        internal bool Flag { get; }
 
         internal Stream? FileStream { get; }
 
-        internal string? FileName { get; }
+        internal string JsonText(ref int fileIndex)
+        {
+            return Type switch
+            {
+                ParameterType.String =>  $"{{\"name\": \"{Name}\", \"value\": \"{Value}\"}}",
+                ParameterType.Boolean => $"{{\"name\": \"{Name}\", \"value\": {Value}}}",
+                ParameterType.Stream =>  $"{{\"name\": \"{Name}\", \"file\": \"file{fileIndex++}\"}}",
+                _ => throw new NotSupportedException()
+            };
+        }
     }
+
 
     /// <summary>
     /// Type of the Jenkins start job parameter
     /// </summary>
-    private enum JenkinsParameterType
+    internal enum ParameterType
     {
         /// <summary>
         /// The parameter is a string.

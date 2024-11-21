@@ -22,7 +22,7 @@ internal class JenkinsService(Uri host, string apiKey) : JsonService(host, Sourc
 
         //Uri location =
         // store last progress info to compare for changes
-        string jobUrl = new Uri(host, $"/job/{jobName}").ToString();
+        string jobUrl = new Uri(Host, $"/job/{jobName}").ToString();
         JenkinsRunProgress last = new JenkinsRunProgress(jobName, jobUrl, res);
 
         // return if 
@@ -33,7 +33,7 @@ internal class JenkinsService(Uri host, string apiKey) : JsonService(host, Sourc
             return last;
         }
 
-        string? buildUrl = null;
+        //string? buildUrl = null;
         while (!cancellationToken.IsCancellationRequested)
         {
             string str = await GetApiStringAsync(res.Location.ToString(), cancellationToken);
