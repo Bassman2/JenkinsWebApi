@@ -1,12 +1,13 @@
-﻿
-
-
-
-namespace JenkinsWebApi.Service;
+﻿namespace JenkinsWebApi.Service;
 
 internal class JenkinsService(Uri host, string apiKey) : JsonService(host, SourceGenerationContext.Default, new BearerAuthenticator(apiKey))
 {
     private const string apiFormat = JenkinsDeserializer.ApiFormat;
+
+    protected override void TestAutentication()
+    {
+        //TODO
+    }
 
     public async Task<JenkinsRunProgress> RunJobAsync(string jobName, JenkinsBuildParameters? parameters, JenkinsRunConfig? runConfig, IProgress<JenkinsRunProgress>? progress, CancellationToken cancellationToken)
     {
