@@ -3,9 +3,22 @@
 /// <summary>
 /// Main class of the Jenkins server API
 /// </summary>
-public sealed partial class Jenkins(Uri uri, string apiKey) : IDisposable
+public sealed partial class Jenkins : IDisposable
 {
-    private JenkinsService? service = new(uri, apiKey);
+    private JenkinsService? service;
+
+    public Jenkins(string storeKey)
+    {
+        var key = WebServiceClient.Store.KeyStore.Key(storeKey)!;
+        string host = key.Host!;
+        string token = key.Token!;
+        service = new JenkinsService(new Uri(host), token);
+    }
+
+    public Jenkins(Uri uri, string apiKey)
+    {
+        service = new(uri, apiKey);
+    }
 
     public void Dispose()
     {
