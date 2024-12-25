@@ -4,7 +4,7 @@ internal class JenkinsService(Uri host, string apiKey) : JsonService(host, Sourc
 {
     private const string apiFormat = JenkinsDeserializer.ApiFormat;
 
-    protected override string? AuthenticationTestUrl => null;
+    protected override string? AuthenticationTestUrl => "/api/json";
 
 
     public async Task<JenkinsRunProgress> RunJobAsync(string jobName, JenkinsBuildParameters? parameters, JenkinsRunConfig? runConfig, IProgress<JenkinsRunProgress>? progress, CancellationToken cancellationToken)
