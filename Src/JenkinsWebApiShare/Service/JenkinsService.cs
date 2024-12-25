@@ -4,10 +4,8 @@ internal class JenkinsService(Uri host, string apiKey) : JsonService(host, Sourc
 {
     private const string apiFormat = JenkinsDeserializer.ApiFormat;
 
-    protected override void TestAutentication()
-    {
-        //TODO
-    }
+    protected override string? AuthenticationTestUrl => null;
+
 
     public async Task<JenkinsRunProgress> RunJobAsync(string jobName, JenkinsBuildParameters? parameters, JenkinsRunConfig? runConfig, IProgress<JenkinsRunProgress>? progress, CancellationToken cancellationToken)
     {
