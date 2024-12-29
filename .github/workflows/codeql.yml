@@ -1,0 +1,50 @@
+name: CodeQL
+
+on:
+  push:
+    branches: [main, ]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: '0 23 * * 6'
+
+jobs:
+  analyze:
+    name: Analyze
+    runs-on: windows-latest
+    environment: sign
+    env:
+      Solution: main/${{ github.event.repository.name }}.sln
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        path: main
+        
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        repository: Bassman2/WebServiceClient
+        path: WebServiceClient
+
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v3
+
+    - name: Add SignKeys
+      uses: Bassman2/SignKey@v1
+      with:
+        file: Bassman.snk
+        key: ${{ secrets.SIGNKEY }}
+
+    - name: Remove sandcastle projects   
+      run: dotnet sln ${{ env.Solution }} remove main/Doc/${{ github.event.repository.name }}Doc/${{ github.event.repository.name }}Doc.shfbproj
+
+    - name: Dotnet restore dependencies
+      run: dotnet restore ${{ env.Solution }}
+
+    - name: Build Release
+      run: dotnet build ${{ env.Solution }} -c Release --no-restore
+
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v3

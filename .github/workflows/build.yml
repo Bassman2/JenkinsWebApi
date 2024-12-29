@@ -1,0 +1,73 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches: [main,]
+  pull_request:
+    branches: [main]
+
+jobs:
+  buildWindows:
+    name: Windows Build
+    runs-on: windows-latest
+    environment: sign
+    env:
+      Solution: main/${{ github.event.repository.name }}.sln
+
+    steps:
+    - name: Checkout Main
+      uses: actions/checkout@v4
+      with:
+        path: main
+        
+    - name: Checkout WebServiceClient
+      uses: actions/checkout@v4
+      with:
+        repository: Bassman2/WebServiceClient
+        path: WebServiceClient
+
+    - name: Add SignKeys
+      uses: Bassman2/SignKey@v1
+      with:
+        file: Bassman.snk
+        key: ${{ secrets.SIGNKEY }}
+
+    - name: Install SHFB
+      uses: Bassman2/setup-SHFB@v1
+      if: ${{ hashFiles( 'main/Doc/*/*.shfbproj' ) != '' }}
+
+    - name: Cache packages
+      uses: actions/cache@v4
+      with:
+        path: ~/.nuget/packages
+        key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+        restore-keys: ${{ runner.os }}-nuget-
+
+    - name: Dotnet restore dependencies
+      run: dotnet restore ${{ env.Solution }}
+
+    - name: Build Debug
+      run: dotnet build ${{ env.Solution }} -c Debug --no-restore
+
+    - name: Build Release
+      run: dotnet build ${{ env.Solution }} -c Release --no-restore
+
+    - name: Nuget pack nuspec
+      working-directory: main/Nuget
+      run: nuget pack ${{ github.event.repository.name }}.nuspec -properties Configuration=Release
+      if: ${{ hashFiles( 'main/Nuget/*.nuspec' ) != '' }}
+
+    - name: Upload nuget pack artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ github.event.repository.name }}NugetPackage.zip
+        path: main/Nuget/*.nupkg
+      if: ${{ hashFiles( 'main/Nuget/*.nuspec' ) != '' }}
+
+    - name: Upload documentation artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ github.event.repository.name }}Doc.zip
+        path: main/Doc/${{ github.event.repository.name }}Doc/Help/${{ github.event.repository.name }}.chm
+      if: ${{ hashFiles( 'main/Doc/*/*.shfbproj' ) != '' }}
+ 
