@@ -1,16 +1,19 @@
 name: CodeQL
 
 permissions:
-  contents: read
   pull-requests: write
+  security-events: write
+  packages: read
+  actions: read
+  contents: read
 
 on:
   push:
     branches: [main, ]
   pull_request:
     branches: [main]
-#  schedule:
-#    - cron: '0 23 * * 6'
+  schedule:
+    - cron: '0 0 * * 5'
 
 jobs:
   analyze:
@@ -34,6 +37,8 @@ jobs:
 
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v3
+      with:
+        source-root: main
 
     - name: Add SignKeys
       uses: Bassman2/SignKey@v1
@@ -52,3 +57,5 @@ jobs:
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v3
+      with:
+        checkout_path: main
