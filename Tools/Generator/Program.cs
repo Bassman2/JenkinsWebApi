@@ -20,7 +20,7 @@ namespace Generator
             }
             else
             {
-                Console.WriteLine("Generator file.xsd outputFolder");
+                Debug.WriteLine("Generator file.xsd outputFolder");
             }
         }
 

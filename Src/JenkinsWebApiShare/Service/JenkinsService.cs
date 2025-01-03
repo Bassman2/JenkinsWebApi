@@ -86,7 +86,7 @@ internal class JenkinsService(Uri host, string apiKey) : JsonService(host, Sourc
             //JenkinsModelRun? run = await GetApiBuildAsync<JenkinsModelRun>(buildUrl!.ToString(), cancellationToken);
             ////Debug.WriteLine($"modelRun: IsBuilding={run.IsBuilding} IsKeepLog ={run.IsKeepLog} Result={run.Result}");
             //UpdateProgress(ref last, progress, jobName, jobUrl, run);
-            //Console.WriteLine($"IsBuilding: {run.IsBuilding}");
+            //Debug.WriteLine($"IsBuilding: {run.IsBuilding}");
             //if (runConfig.RunMode <= JenkinsRunMode.Started && run.IsBuilding)
             //{
             //    // build started

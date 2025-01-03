@@ -2,6 +2,7 @@
 using JenkinsWebApi.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -17,7 +18,7 @@ namespace JenkinsTest
 
         private void OnRunProgress(object sender, JenkinsRunProgress e)
         {
-            Console.WriteLine($"Progess: {e.Status} {e.ProblemDescription}");
+            Debug.WriteLine($"Progess: {e.Status} {e.ProblemDescription}");
         }
 
         [TestMethod]
