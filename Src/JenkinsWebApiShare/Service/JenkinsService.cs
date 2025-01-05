@@ -2,8 +2,6 @@
 
 internal class JenkinsService(Uri host, string apiKey) : JsonService(host, SourceGenerationContext.Default, new BearerAuthenticator(apiKey))
 {
-    private const string apiFormat = JenkinsDeserializer.ApiFormat;
-
     protected override string? AuthenticationTestUrl => "/api/json";
 
 

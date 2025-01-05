@@ -3,7 +3,7 @@
 /// <summary>
 /// Status of a run
 /// </summary>
-public enum JenkinsRunStatus
+public enum RunStatus
 {
     /// <summary>
     /// The build is queued.

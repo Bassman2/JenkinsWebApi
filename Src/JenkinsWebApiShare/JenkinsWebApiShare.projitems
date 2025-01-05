@@ -9,20 +9,14 @@
     <Import_RootNamespace>JenkinsWebApi</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)Enums\JenkinsResult.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Enums\JenkinsRunMode.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Enums\JenkinsRunStatus.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)JenkinsBuildParameters.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)JenkinsException.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)JenkinsForbiddenException.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)JenkinsNotFoundException.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Enums\Result.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Enums\RunMode.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Enums\RunStatus.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JenkinsRunConfig.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JenkinsRunProgress.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)JenkinsUnauthorizedException.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Service\JenkinsDeserializer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\JenkinsService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Jenkins.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Service\MessageEnsure.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\Model\HudsonModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\Model\JenkinsModelRun.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\Model\PostRunRes.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\Model\SourceGenerationContext.cs" />
