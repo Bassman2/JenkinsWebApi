@@ -1,9 +1,9 @@
 ﻿namespace JenkinsWebApi.Service;
 
-internal class JenkinsService(Uri host, string apiKey) : JsonService(host, SourceGenerationContext.Default, new BearerAuthenticator(apiKey))
+internal class JenkinsService(Uri host, IAuthenticator? authenticator, string appName)
+     : JsonService(host, authenticator, appName, SourceGenerationContext.Default)
 {
     protected override string? AuthenticationTestUrl => "/api/json";
-
 
     public async Task<JenkinsRunProgress> RunJobAsync(string jobName, JenkinsBuildParameters? parameters, JenkinsRunConfig? runConfig, IProgress<JenkinsRunProgress>? progress, CancellationToken cancellationToken)
     {
@@ -33,8 +33,8 @@ internal class JenkinsService(Uri host, string apiKey) : JsonService(host, Sourc
         //string? buildUrl = null;
         while (!cancellationToken.IsCancellationRequested)
         {
-            string str = await GetApiStringAsync(res.Location.ToString(), cancellationToken);
-            if (str.StartsWith("<buildableItem"))
+            string? str = await GetStringAsync(res.Location.ToString(), cancellationToken);
+            if (str!.StartsWith("<buildableItem"))
             {
                 //JenkinsModelQueueBuildableItem item = JenkinsDeserializer.Deserialize<JenkinsModelQueueBuildableItem>(str);
                 //Debug.WriteLine($"buildableItem: IsPending={item.IsPending} IsBlocked={item.IsBlocked} IsBuildable={item.IsBuildable} IsStuck={item.IsStuck} Why={item.Why}");
@@ -68,7 +68,7 @@ internal class JenkinsService(Uri host, string apiKey) : JsonService(host, Sourc
             }
             else
             {
-                string schema = await GetApiStringAsync(new Uri(res.Location, "api/schema").ToString(), cancellationToken);
+                string? schema = await GetStringAsync(new Uri(res.Location, "api/schema").ToString(), cancellationToken);
                 throw new Exception($"Unknown XML Schema!!!\r\n{schema}");
             }
             await Task.Delay(runConfig.PollingTime, cancellationToken);
@@ -106,20 +106,20 @@ internal class JenkinsService(Uri host, string apiKey) : JsonService(host, Sourc
         {
             if (response.StatusCode != HttpStatusCode.Conflict)
             {
-                response.EnsureSuccess();
+                response.EnsureSuccessStatusCode();
             }
 
             return new PostRunRes() { Location = response.Headers.Location, StatusCode = response.StatusCode };
         }
     }
 
-    private async Task<string> GetApiStringAsync(string path, CancellationToken cancellationToken)
-    {
-        using (HttpResponseMessage response = await this.client!.GetAsync(path + apiFormat, cancellationToken))
-        {
-            response.EnsureSuccess();
-            string str = await response.Content.ReadAsStringAsync(cancellationToken);
-            return str;
-        }
-    }
+    //private async Task<string> GetApiStringAsync(string path, CancellationToken cancellationToken)
+    //{
+    //    using (HttpResponseMessage response = await this.client!.GetAsync(path + apiFormat, cancellationToken))
+    //    {
+    //        response.EnsureSuccessStatusCode();
+    //        string str = await response.Content.ReadAsStringAsync(cancellationToken);
+    //        return str;
+    //    }
+    //}
 }

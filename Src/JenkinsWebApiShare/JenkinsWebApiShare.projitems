@@ -12,8 +12,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)Enums\Result.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Enums\RunMode.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Enums\RunStatus.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JenkinsBuildParameters.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JenkinsRunConfig.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JenkinsRunProgress.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JenkinsRunStatus.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\JenkinsService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Jenkins.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\Model\HudsonModel.cs" />
