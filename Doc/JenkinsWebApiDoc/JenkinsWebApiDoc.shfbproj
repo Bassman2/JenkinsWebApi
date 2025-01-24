@@ -27,7 +27,7 @@
       <Argument Key="maxVersionParts" Value="" xmlns="" />
     </TransformComponentArguments>
     <DocumentationSources>
-      <DocumentationSource sourceFile="..\..\Src\JenkinsWebApi50\JenkinsWebApi50.csproj" />
+      <DocumentationSource sourceFile="..\..\Src\JenkinsWebApi90\JenkinsWebApi90.csproj" />
     </DocumentationSources>
     <SaveComponentCacheCapacity>100</SaveComponentCacheCapacity>
     <BuildAssemblerVerbosity>OnlyWarningsAndErrors</BuildAssemblerVerbosity>
@@ -51,6 +51,8 @@
     <NamingMethod>Guid</NamingMethod>
     <HelpTitle>Jenkins Web API</HelpTitle>
     <ContentPlacement>AboveNamespaces</ContentPlacement>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <!-- There are no properties for these groups.  AnyCPU needs to appear in order for Visual Studio to perform
 			 the build.  The others are optional common platform types that may appear. -->
