@@ -15,6 +15,7 @@
     <AssemblyName>JenkinsWebApi</AssemblyName>
     <RootNamespace>JenkinsWebApi</RootNamespace>
     <Nullable>enable</Nullable>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

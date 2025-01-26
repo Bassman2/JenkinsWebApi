@@ -24,6 +24,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JenkinsWebApiUnitTest90", "Test\JenkinsWebApiUnitTest90\JenkinsWebApiUnitTest90.csproj", "{12976663-7F48-4F1E-B17D-25558AA616ED}"
 EndProject
 Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "JenkinsWebApiDoc", "Doc\JenkinsWebApiDoc\JenkinsWebApiDoc.shfbproj", "{E5B1175A-CC6F-4899-8496-9412C872F3CA}"
+	ProjectSection(ProjectDependencies) = postProject
+		{91F7ADC6-274F-4C6A-84A4-D3A6711E9D0A} = {91F7ADC6-274F-4C6A-84A4-D3A6711E9D0A}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
