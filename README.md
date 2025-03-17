@@ -10,7 +10,7 @@ Jenkins Web API is a API to interact with a Jenkins server.
 
 You are welcome to support this project. 
 
-[![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif)](https://www.paypal.me/GBassman)
+[![Donate](https://raw.githubusercontent.com/Bassman2/GraphWebApi/master/.github/images/donate.gif)](https://www.paypal.me/GBassman)
 
 
 # Supported Plugins
