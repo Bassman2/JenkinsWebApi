@@ -1,6 +1,4 @@
-﻿using System.Xml.Linq;
-
-namespace JenkinsWebApi;
+﻿namespace JenkinsWebApi;
 
 /// <summary>
 /// Represents a Jenkins client that can interact with a Jenkins server.
