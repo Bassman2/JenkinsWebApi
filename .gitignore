@@ -294,3 +294,5 @@ __pycache__/
 Generator/Model/
 JenkinsTest/FuncUnitTests.cs
 Tools/Model/
+
+*.chm
