@@ -1,4 +1,4 @@
-﻿namespace JenkinsWebApi.Service.Model;
+﻿namespace JenkinsWebApi.Model;
 
 [JsonSourceGenerationOptions]
 [JsonSerializable(typeof(int))]

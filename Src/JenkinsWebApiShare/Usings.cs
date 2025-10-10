@@ -9,5 +9,4 @@ global using System.Xml;
 
 global using WebServiceClient;
 
-global using JenkinsWebApi.Service;
-global using JenkinsWebApi.Service.Model;
+global using JenkinsWebApi.Model;

@@ -16,12 +16,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)JenkinsRunConfig.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JenkinsRunProgress.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JenkinsRunStatus.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Service\JenkinsService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Jenkins.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Service\Model\HudsonModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Service\Model\JenkinsModelRun.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Service\Model\PostRunRes.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Service\Model\SourceGenerationContext.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\HudsonModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\JenkinsModelRun.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\PostRunRes.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\SourceGenerationContext.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Usings.cs" />
   </ItemGroup>
 </Project>
