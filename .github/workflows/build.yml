@@ -16,7 +16,7 @@ jobs:
     runs-on: windows-latest
     environment: sign
     env:
-      Solution: main/${{ github.event.repository.name }}.sln
+      Solution: main/${{ github.event.repository.name }}.slnx
 
     steps:
     - name: Checkout Main
