@@ -6,6 +6,10 @@ Jenkins Web API is a API to interact with a Jenkins server.
 
 [NuGet Package](https://www.nuget.org/packages/JenkinsWebApi/)
 
+## Documentationz
+
+[Pages](https://bassman2.github.io/JenkinsWebApi/)
+
 ## Donate
 
 You are welcome to support this project. 
