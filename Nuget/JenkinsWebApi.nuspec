@@ -21,7 +21,6 @@
   </metadata>
   <files>
     <file src="JenkinsWebApiLicense.txt" target="content" />
-    <file src="..\Doc\JenkinsWebApiDoc\Help\JenkinsWebApi.chm" target="content" />
 	<file src="..\Src\JenkinsWebApi90\bin\Release\net9.0\**" target="lib/net9.0" />	
 	<file src="..\Src\JenkinsWebApi80\bin\Release\net8.0\**" target="lib/net8.0" />	
   </files>
