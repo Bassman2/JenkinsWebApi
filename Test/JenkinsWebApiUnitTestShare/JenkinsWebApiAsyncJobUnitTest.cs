@@ -1,4 +1,6 @@
-﻿namespace JenkinsTest;
+﻿using System.Globalization;
+
+namespace JenkinsTest;
 
 [TestClass]
 public class JenkinsWebApiAsyncJobUnitTest : JenkinsWebApiBaseUnitTest
@@ -17,7 +19,7 @@ public class JenkinsWebApiAsyncJobUnitTest : JenkinsWebApiBaseUnitTest
         JenkinsRunProgress progress;
 
         // Act
-        using (Jenkins jenkins = new Jenkins(host, this.login, this.password))
+        using (Jenkins jenkins = new Jenkins(storeKey, appName))
         {
             jenkins.RunConfig.RunMode = JenkinsRunMode.Immediately;
             progress = jenkins.RunJobAsync("FreeStyle").Result;
@@ -35,7 +37,7 @@ public class JenkinsWebApiAsyncJobUnitTest : JenkinsWebApiBaseUnitTest
         JenkinsRunProgress progress;
 
         // Act
-        using (Jenkins jenkins = new Jenkins(host, this.login, this.password))
+        using (Jenkins jenkins = new Jenkins(storeKey, appName))
         {
             jenkins.RunConfig.RunMode = JenkinsRunMode.Queued;
             progress = jenkins.RunJobAsync("FreeStyle").Result;
@@ -53,7 +55,7 @@ public class JenkinsWebApiAsyncJobUnitTest : JenkinsWebApiBaseUnitTest
         JenkinsRunProgress progress;
 
         // Act
-        using (Jenkins jenkins = new Jenkins(host, this.login, this.password))
+        using (Jenkins jenkins = new Jenkins(storeKey, appName))
         {
             jenkins.RunConfig.RunMode = JenkinsRunMode.Started;
             progress = jenkins.RunJobAsync("FreeStyle").Result;
@@ -70,7 +72,7 @@ public class JenkinsWebApiAsyncJobUnitTest : JenkinsWebApiBaseUnitTest
         JenkinsRunProgress progress;
 
         // Act
-        using (Jenkins jenkins = new Jenkins(host, this.login, this.password))
+        using (Jenkins jenkins = new Jenkins(storeKey, appName))
         {
             jenkins.RunConfig.RunMode = JenkinsRunMode.Finished;
             progress = jenkins.RunJobAsync("FreeStyle").Result;
@@ -129,7 +131,7 @@ public class JenkinsWebApiAsyncJobUnitTest : JenkinsWebApiBaseUnitTest
         JenkinsRunProgress progress;
         
         // Act
-        using (Jenkins jenkins = new Jenkins(host, this.login, this.password))
+        using (Jenkins jenkins = new Jenkins(storeKey, appName))
         {
             progress = jenkins.RunJobAsync("FreestyleDisabled").Result;
         }
