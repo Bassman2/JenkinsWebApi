@@ -6,12 +6,6 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Folder Name="/Doc/">
-    <Project Path="Doc/JenkinsWebApiDoc/JenkinsWebApiDoc.shfbproj" Type="7cf6df6d-3b04-46f8-a40b-537d21bca0b4" Id="e5b1175a-cc6f-4899-8496-9412c872f3ca">
-      <BuildDependency Project="Src/JenkinsWebApi90/JenkinsWebApi90.csproj" />
-      <Platform Project="AnyCPU" />
-    </Project>
-  </Folder>
   <Folder Name="/Src/">
     <Project Path="Src/JenkinsWebApi80/JenkinsWebApi80.csproj" />
     <Project Path="Src/JenkinsWebApi90/JenkinsWebApi90.csproj" />
