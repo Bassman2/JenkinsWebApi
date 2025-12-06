@@ -2,26 +2,31 @@
 <package >
   <metadata>
     <id>JenkinsWebApi</id>
-    <version>3.0</version>
+    <version>3.1.0</version>
     <title>JenkinsWebApi</title>
     <authors>Ralf Beckers</authors>
     <owners>Ralf Beckers</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
 	<license type="expression">MIT</license>
+	<licenseUrl>https://licenses.nuget.org/MIT</licenseUrl>
     <projectUrl>https://www.nuget.org/packages/JenkinsWebApi/</projectUrl>
     <description>API to communicate with Jenkins</description>
     <releaseNotes>New features</releaseNotes>
     <copyright>Copyright 2017 - 2025 (c) Ralf Beckers. All rights reserved.</copyright>
-	<repository type="Github" url="https://github.com/Bassman2/JenkinsWebApi" />
+	<repository type="git" url="https://github.com/Bassman2/JenkinsWebApi" />
     <tags>Jenkins API</tags>
+	<readme>docs\README.md</readme>
 	<dependencies>
+      <group targetFramework=".NET10.0" />
       <group targetFramework=".NET9.0" />
       <group targetFramework=".NET8.0" />
     </dependencies>
   </metadata>
   <files>
-    <file src="JenkinsWebApiLicense.txt" target="content" />
-	<file src="..\Src\JenkinsWebApi90\bin\Release\net9.0\**" target="lib/net9.0" />	
-	<file src="..\Src\JenkinsWebApi80\bin\Release\net8.0\**" target="lib/net8.0" />	
+	<file src="..\Src\JenkinsWebApi100\bin\Release\net10.0\**" target="lib/net10.0" />
+    <file src="..\Src\JenkinsWebApi90\bin\Release\net9.0\**" target="lib/net9.0" />
+    <file src="..\Src\JenkinsWebApi80\bin\Release\net8.0\**" target="lib/net8.0" />
+    <file src="..\README.md" target="docs\" />
+    <file src="..\LICENSE" target="content" />
   </files>
 </package>
