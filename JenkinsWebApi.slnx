@@ -7,12 +7,14 @@
     <Platform Name="x86" />
   </Configurations>
   <Folder Name="/Src/">
+    <Project Path="Src/JenkinsWebApi100/JenkinsWebApi100.csproj" />
     <Project Path="Src/JenkinsWebApi80/JenkinsWebApi80.csproj" />
     <Project Path="Src/JenkinsWebApi90/JenkinsWebApi90.csproj" />
     <Project Path="Src/JenkinsWebApiOldShare/JenkinsWebApiOldShare.shproj" />
     <Project Path="Src/JenkinsWebApiShare/JenkinsWebApiShare.shproj" />
   </Folder>
   <Folder Name="/Test/">
+    <Project Path="Test/JenkinsWebApiUnitTest100/JenkinsWebApiUnitTest100.csproj" />
     <Project Path="Test/JenkinsWebApiUnitTest80/JenkinsWebApiUnitTest80.csproj" />
     <Project Path="Test/JenkinsWebApiUnitTest90/JenkinsWebApiUnitTest90.csproj" />
     <Project Path="Test/JenkinsWebApiUnitTestShare/JenkinsWebApiUnitTestShare.shproj" />
